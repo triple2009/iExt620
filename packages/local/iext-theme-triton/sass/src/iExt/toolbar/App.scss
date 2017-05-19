@@ -7,3 +7,35 @@
 
     $text-color: $ix-app-tbr-text-color
 );
+
+@include extjs-button-small-ui(
+    $ui: 'ix-app-btn',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+        
+);
+
+@include extjs-button-medium-ui(
+    $ui: 'ix-app-btn',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+        
+);
+
+@include extjs-button-large-ui(
+    $ui: 'ix-app-btn',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+);

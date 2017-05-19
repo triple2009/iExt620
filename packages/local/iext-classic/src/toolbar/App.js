@@ -4,5 +4,9 @@ Ext.define('iExt.toolbar.App', {
 
     requires: [],
 
-    ui: 'ix-app-tbr'
+    ui: 'ix-app-tbr',
+    defaults: {
+        ui: 'ix-app-btn'
+    }
+
 });

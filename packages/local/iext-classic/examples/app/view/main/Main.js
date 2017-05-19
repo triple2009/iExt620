@@ -13,22 +13,30 @@ Ext.define('app.view.main.Main', {
 
     tbar: {
         xtype: 'ixapptbr',
-        defaults: {
-        },
         items: [{
             iconCls: 'x-fa fa-th',
-            scale: 'medium'
-        }, {
-            xtype: 'label',
             scale: 'medium',
-            text: 'CRM'
+            listeners: {
+                mouseover: function (item, e, eOpts) {
+                    item.setIconCls('x-fa fa-chevron-left');
+                },
+                mouseout: function (item, e, eOpts) {
+                    item.setIconCls('x-fa fa-th');
+                }
+            }
+        }, {
+            xtype: 'ixapptitle',
+            ixScale: 'medium',
+            html: '培训管理系统'
         }, '->', {
+            xtype: 'ixportrait'
+        }, {
             text: 'administrator'
         }]
     },
 
     items: [{
         title: 'Home',
-        iconCls: 'fa-home'
+        iconCls: 'x-fa fa-home'
     }]
 });
