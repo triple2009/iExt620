@@ -2,3 +2,14 @@ $ix-app-tbr-background-color: dynamic(#393939);
 $ix-app-tbr-vertical-spacing:dynamic(2px);
 $ix-app-tbr-horizontal-spacing:dynamic(6px);
 $ix-app-tbr-text-color:dynamic(#ffffff);
+
+$ix-app-menu-base-color: dynamic(#393939);
+$ix-app-menu-item-height: dynamic(40px);
+$ix-app-menu-item-font-size: dynamic(12px);
+
+$ix-app-menu-text-color: dynamic(#ffffff);
+$ix-app-menu-border-color: dynamic(lighten($ix-app-menu-base-color, 10%));
+$ix-app-menu-background-color: dynamic(lighten($ix-app-menu-base-color, 10%));
+
+$ix-app-menu-active-text-color: dynamic(#ffffff);
+$ix-app-menu-active-background-color: dynamic(lighten($ix-app-menu-base-color, 20%));

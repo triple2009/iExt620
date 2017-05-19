@@ -31,7 +31,15 @@ Ext.define('app.view.main.Main', {
         }, '->', {
             xtype: 'ixportrait'
         }, {
-            text: 'administrator'
+            text: 'administrator',
+            menu: {
+                ui: 'ix-app-menu',
+                items: [{
+                    text: '修改口令'
+                }, {
+                    text: '安全退出'
+                }]
+            }
         }]
     },
 

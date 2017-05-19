@@ -39,3 +39,19 @@
     $border-color-over: transparent,
     $border-color-focus: transparent
 );
+
+@include extjs-menu-ui(
+    $ui: 'ix-app-menu',
+
+    $ui-item-height: $ix-app-menu-item-height,
+    $ui-item-font-size: $ix-app-menu-item-font-size,
+
+    $ui-text-color: $ix-app-menu-text-color,
+    $ui-border-color: $ix-app-menu-border-color,
+    $ui-background-color: $ix-app-menu-background-color,
+    
+    $ui-item-active-text-color: $ix-app-menu-active-text-color,
+    $ui-item-active-border-color: transparent,
+    $ui-item-active-background-color: $ix-app-menu-active-background-color
+ 
+);
