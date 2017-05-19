@@ -1,0 +1,9 @@
+@include extjs-toolbar-ui(
+    $ui: 'ix-app-tbr',
+
+    $background-color: $ix-app-tbr-background-color,
+    $vertical-spacing: $ix-app-tbr-vertical-spacing,
+    $horizontal-spacing: $ix-app-tbr-horizontal-spacing,
+
+    $text-color: $ix-app-tbr-text-color
+);
