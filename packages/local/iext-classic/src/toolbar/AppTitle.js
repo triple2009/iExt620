@@ -1,4 +1,4 @@
-Ext.define('iExt.toolbar.Title', {
+Ext.define('iExt.toolbar.AppTitle', {
     extend: 'Ext.toolbar.TextItem',
     alias: 'widget.ixapptitle',
 
@@ -8,8 +8,11 @@ Ext.define('iExt.toolbar.Title', {
         ixScale: 'medium'
     },
 
+    margin: '0 20 0 0',
+
     initComponent: function () {
-        var me = this, scale = me.getIxScale();
+        var me = this,
+            scale = me.getIxScale();
         me.addCls('ix-app-title-' + scale);
         me.callParent();
     }

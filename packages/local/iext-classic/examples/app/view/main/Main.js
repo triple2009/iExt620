@@ -1,39 +1,29 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
 Ext.define('app.view.main.Main', {
     extend: 'Ext.panel.Panel',
     xtype: 'app-main',
 
     requires: [],
+    controller: 'main',
+    viewModel: 'main',
 
+    layout: 'border',
     tbar: {
         xtype: 'ixapptbr',
+        reference: 'tbrMain',
         items: [{
             iconCls: 'x-fa fa-th',
-            scale: 'medium',
+            scale: 'large',
+            hidden: true,
             listeners: {
-                mouseover: function (item, e, eOpts) {
-                    item.setIconCls('x-fa fa-chevron-left');
-                },
-                mouseout: function (item, e, eOpts) {
-                    item.setIconCls('x-fa fa-th');
-                }
+                click: 'onSelectApp'
             }
-        }, {
-            xtype: 'ixapptitle',
-            ixScale: 'medium',
-            html: '培训管理系统'
         }, '->', {
             xtype: 'ixportrait'
         }, {
             text: 'administrator',
+            menuAlign: 'tr-br',
             menu: {
-                ui: 'ix-app-menu',
+                ui: 'ix-app-menu-ui',
                 items: [{
                     text: '修改口令'
                 }, {
@@ -44,7 +34,23 @@ Ext.define('app.view.main.Main', {
     },
 
     items: [{
-        title: 'Home',
-        iconCls: 'x-fa fa-home'
+        xtype: 'ixquickview',
+        region: 'east',
+        hidden: true,
+        width: 240
+    }, {
+        xtype: 'container',
+        region: 'center',
+        reference: 'wsMain',
+        layout: 'fit',
+        items: [{
+            xtype: 'app-apps',
+            listeners: {
+                ixappchange: 'onAppChange'
+            }
+        }, {
+            xtype: 'app-home',
+            hidden: true
+        }]
     }]
 });
