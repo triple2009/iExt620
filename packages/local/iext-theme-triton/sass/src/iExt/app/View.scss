@@ -1,0 +1,49 @@
+.ix-apps-body {
+    padding: $ix-apps-body-padding-top;
+    background-color: $ix-apps-body-back-color;
+    .x-autocontainer-innerCt {
+        >* {
+            margin: auto;
+        }
+    }
+}
+
+.ix-apps-view {
+    .x-view-item-focused {
+        outline: none !important;
+    }
+}
+
+.ix-apps-item {
+    float: left;
+    text-align: center;
+    width: $ix-apps-item-width;
+    padding: $ix-apps-item-padding;
+    margin: $ix-apps-item-margin;
+    border: solid 1px transparent;
+    border-radius: $ix-apps-item-border-radius;
+}
+
+.ix-apps-item-over {
+    background-color: $ix-apps-item-over-back-color;
+}
+
+.ix-apps-item-selected {
+    outline: none !important;
+    border-color: $ix-apps-item-selected-border-color;
+    background-color: $ix-apps-item-selected-back-color;
+}
+
+.ix-apps-item h3 {
+    text-align: center;
+    font-weight: $ix-apps-item-title-font-weight;
+    font-size: $ix-apps-item-title-font-size;
+    color: $ix-apps-item-title-color;
+    padding-top: $ix-apps-item-title-padding-top;
+    margin: $ix-apps-item-title-margin;
+}
+
+.ix-apps-thumb {
+    border-radius: $ix-apps-thumb-border-radius;
+    width: 64px;
+}

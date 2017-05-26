@@ -1,0 +1,47 @@
+﻿{
+  "appCode": "app",
+  "appName": "iext name",
+  "appId": "appId",
+  "appUrl": "http://172.17.10.242:9010/huc",
+  "debug": true,
+  "mode": "DEV",
+  "auth_Identity": {
+    "url": "http://172.17.10.242:9010/huc",
+    "apis": {
+      "ixLogon": {
+        "enabled": true,
+        "method": "POST",
+        "name": "userSessions"
+      },
+      "ixLogoff": {
+        "enabled": true,
+        "method": "DELETE",
+        "name": "userSessions"
+      },
+      "ixChangePassword": {
+        "enabled": true
+      }
+    }
+  },
+  "auth_Authorization": {
+    "url": "http://huc.dev.howonder.com/api/huc/",
+    "apis": {
+      "ixGetUserApps": {
+        "enabled": true
+      },
+      "ixActionIsAuthed": {
+        "enabled": true
+      },
+      "ixGetUserAuth": {
+        "enabled": true
+      }
+    }
+  },
+  "apps": {
+    "huc": { "url": "http://172.17.10.242:9010/huc" },
+    "htc": { "url": "http://172.17.10.242:9010/huc" }
+  },
+  "logger": {
+    "ajax": true
+  }
+}

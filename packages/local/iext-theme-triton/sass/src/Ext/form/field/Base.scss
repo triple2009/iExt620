@@ -1,0 +1,20 @@
+﻿.x-form-invalid-field-default {
+    border-right: solid $ix-field-invalid-border-width $ix-field-invalid-border-color !important;
+}
+
+.x-form-required-field {
+    background-color: $ix-required-field-background-color !important;
+}
+
+.ix-label-required {
+    color: $ix-required-lable-color;
+    padding: $ix-required-lable-padding;
+    font-size: $ix-required-lable-font-size;
+    font-weight: bold;
+}
+
+/* 通过 afterLabelTextTpl 属性设置，不再需要该方法
+.ix-label-required:before {
+    content: "*";
+}
+*/

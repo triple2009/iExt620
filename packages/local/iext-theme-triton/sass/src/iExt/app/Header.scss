@@ -1,0 +1,57 @@
+@include extjs-toolbar-ui(
+    $ui: 'ix-app-header-ui',
+
+    $background-color: $ix-app-header-background-color,
+    $vertical-spacing: $ix-app-header-vertical-spacing,
+    $horizontal-spacing: $ix-app-header-horizontal-spacing,
+
+    $text-color: $ix-app-header-text-color
+);
+
+@include extjs-button-small-ui(
+    $ui: 'ix-app-btn-ui',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+        
+);
+
+@include extjs-button-medium-ui(
+    $ui: 'ix-app-btn-ui',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+        
+);
+
+@include extjs-button-large-ui(
+    $ui: 'ix-app-btn-ui',
+
+    $color:#fff,
+    $background-color: transparent,
+    $border-color: transparent,
+    $border-color-over: transparent,
+    $border-color-focus: transparent
+);
+
+@include extjs-menu-ui(
+    $ui: 'ix-app-menu-ui',
+
+    $ui-item-height: $ix-app-menu-item-height,
+    $ui-item-font-size: $ix-app-menu-item-font-size,
+
+    $ui-text-color: $ix-app-menu-text-color,
+    $ui-border-color: $ix-app-menu-border-color,
+    $ui-background-color: $ix-app-menu-background-color,
+    
+    $ui-item-active-text-color: $ix-app-menu-active-text-color,
+    $ui-item-active-border-color: transparent,
+    $ui-item-active-background-color: $ix-app-menu-active-background-color
+ 
+);

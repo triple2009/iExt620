@@ -1,4 +1,13 @@
 .ix-view-container-body {
     background-image: theme-background-image('iext/formbg');
+    //background-color: #8f8f8f;
     background-repeat: repeat;
+    border-top: solid 1px #d0d0d0 !important;
+
+    .x-autocontainer-innerCt {
+        //vertical-align: middle;
+        >* {
+            margin: auto;
+        }
+    }
 }

@@ -1,0 +1,17 @@
+.ix-grid .x-grid-row-checker:focus {
+    outline: none !important;
+}
+
+.ix-grid-no-focus .x-grid-row-checker:focus {
+    outline: none !important;
+}
+
+.ix-grid-no-focus .x-grid-item-focused .x-grid-cell-inner:before {
+    border: none !important;
+}
+
+.ix-grid {
+    .x-unselectable {
+        cursor: pointer !important;
+    }
+}

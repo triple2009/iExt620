@@ -1,0 +1,13 @@
+﻿@include extjs-window-ui(
+    $ui: 'ix-toast-ui',
+
+    $ui-border-width: $ix-toast-border-width,
+    $ui-border-radius: $ix-toast-border-radius
+
+);
+
+.ix-toast-body {
+    font-size: $ix-toast-font-size !important;
+    font-weight: $ix-toast-font-weight !important;
+    text-align: center;
+}

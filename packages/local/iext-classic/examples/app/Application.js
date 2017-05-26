@@ -4,7 +4,7 @@
  * initialization details.
  */
 Ext.define('app.Application', {
-    extend: 'Ext.app.Application',
+    extend: 'iExt.app.Application',
     
     name: 'app',
 
@@ -14,6 +14,7 @@ Ext.define('app.Application', {
     
     launch: function () {
         // TODO - Launch the application
+        Ext.ariaWarn = Ext.emptyFn;
     },
 
     onAppUpdate: function () {

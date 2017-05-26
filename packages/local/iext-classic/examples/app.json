@@ -42,6 +42,7 @@
      * The name of the theme for this application.
      */
     "theme": "iext-theme-triton",
+    "locale": "izh_CN",
     /**
      * The list of required packages (with optional versions; default is "latest").
      *
@@ -55,9 +56,9 @@
         "font-awesome",
         "ux",
         "charts",
-        //"iext-core",
+        "iext-core",
         "iext-classic",
-        //"iext-locale",
+        "iext-locale",
         "iext-theme-triton"
     ],
     /**

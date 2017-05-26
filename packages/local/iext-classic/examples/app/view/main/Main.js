@@ -24,6 +24,7 @@ Ext.define('app.view.main.Main', {
             menuAlign: 'tr-br',
             menu: {
                 ui: 'ix-app-menu-ui',
+                shadow: false,
                 items: [{
                     text: '修改口令'
                 }, {
@@ -34,23 +35,23 @@ Ext.define('app.view.main.Main', {
     },
 
     items: [{
-        xtype: 'ixquickview',
+        xtype: 'ixquickcontainer',
         region: 'east',
-        hidden: true,
+        hidden: false,
         width: 240
     }, {
         xtype: 'container',
         region: 'center',
         reference: 'wsMain',
-        layout: 'fit',
+        layout: 'auto',
         items: [{
             xtype: 'app-apps',
             listeners: {
                 ixappchange: 'onAppChange'
-            }
-        }, {
-            xtype: 'app-home',
+            },
             hidden: true
+        }, {
+            xtype: 'app-user'
         }]
     }]
 });
