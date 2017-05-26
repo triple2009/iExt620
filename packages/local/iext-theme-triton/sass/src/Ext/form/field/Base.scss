@@ -1,11 +1,23 @@
-﻿.x-form-invalid-field-default {
-    border-right: solid $ix-field-invalid-border-width $ix-field-invalid-border-color !important;
-}
-
-.x-form-required-field {
+﻿.x-form-required-field {
     background-color: $ix-required-field-background-color !important;
 }
 
+/* 设置边框样式 */
+.x-form-trigger-wrap-default {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+
+/* 设置焦点边框样式 */
+.x-form-trigger-wrap-default.x-form-trigger-wrap-focus {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: $form-field-focus-border-color;
+}
+
+/* 通过 afterLabelTextTpl 属性设置，不再需要该方法
 .ix-label-required {
     color: $ix-required-lable-color;
     padding: $ix-required-lable-padding;
@@ -13,7 +25,6 @@
     font-weight: bold;
 }
 
-/* 通过 afterLabelTextTpl 属性设置，不再需要该方法
 .ix-label-required:before {
     content: "*";
 }

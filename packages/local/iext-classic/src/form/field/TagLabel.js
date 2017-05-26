@@ -11,7 +11,8 @@ Ext.define('iExt.form.field.TagLabel', {
     hideTrigger: false,
     editable: false,
     selectOnFocus: false,
-    triggerCls: 'x-form-search-trigger',
+    triggerOnClick:false,
+    triggerCls: 'x-fa fa-close',
 
     /*
     tagItemCls: 'ix-taglabel-item',
@@ -21,24 +22,14 @@ Ext.define('iExt.form.field.TagLabel', {
     tagItemSelector: '.ix-taglabel-item',
     tagItemCloseSelector: '.ix-taglabel-item-close',
     tagSelectedCls: 'ix-taglabel-item-selected',
-
-    triggers: {
-        clear: {
-            cls: 'x-form-clear-trigger',
-            handler: function () {
-                this.ixClearTag();
-            }
-        }
-    },
     */
 
     /**
-     * 重载初始化控件。创建标签的数据源，隐藏下拉选择按钮（Trigger）。
+     * 重载初始化控件。创建标签的数据源。
      * @memberOf iExt.form.field.TagLabel#
      */
     initComponent: function () {
         var me = this;
-        /*
         var store = Ext.create('Ext.data.Store', {
             proxy: {
                 type: 'memory',
@@ -46,12 +37,6 @@ Ext.define('iExt.form.field.TagLabel', {
             }
         });
         me.store = store;
-
-        var trigger = me.getTrigger('picker');
-        if (trigger) {
-            trigger.hide();
-        }
-        */
         me.callParent(arguments);
     },
 
@@ -59,10 +44,11 @@ Ext.define('iExt.form.field.TagLabel', {
      * 重载点击下拉按钮的事件处理。禁用下拉选择。
      * @memberOf iExt.form.field.TagLabel#
      * @return {Boolean} 返回false，禁用下拉选择。
+     */
     onTriggerClick: function () {
+        this.ixClearTag();
         return false;
     },
-     */
 
     /**
      * 重载关闭Tag时触发的处理过程，删除Store中的记录。

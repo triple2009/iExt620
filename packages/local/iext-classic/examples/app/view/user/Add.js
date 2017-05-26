@@ -15,17 +15,21 @@ Ext.define('app.view.user.Add', {
         bodyPadding: '5 10 0 10',
         defaultType: 'textfield',
         defaults: {
-            columnWidth: 0.5
+            columnWidth: 0.5,
+            margin: 10
         },
         defaultFocus: 'field:focusable:not([hidden]):not([disabled]):not([readOnly])',
 
         items: [{
+            xtype: 'ixtext',
+            ixScale: 'large',
             fieldLabel: '代码',
             bind: '{user.code}',
             reference: 'code',
             allowBlank: false
         },
         {
+            xtype: 'ixtext',
             fieldLabel: '姓名',
             bind: '{user.name}',
             reference: 'name'

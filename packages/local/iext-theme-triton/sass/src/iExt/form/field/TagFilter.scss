@@ -1,0 +1,12 @@
+.ix-tagfilter {
+    .x-tagfield-item {
+        padding-left: $ix-tag-filter-item-padding-left;
+        background-image: $ix-tag-filter-item-bgimage;
+        background-repeat: no-repeat;
+    }
+
+    .x-tagfield-item.x-tagfield-item-selected {
+        border: $ix-tag-filter-item-selected-border;
+        background-color: $ix-tag-filter-item-selected-bgcolor;
+    }
+}

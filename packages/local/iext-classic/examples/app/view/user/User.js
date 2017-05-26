@@ -5,6 +5,7 @@ Ext.define('app.view.user.User', {
     requires: [
         'iExt.toolbar.Indexer',
         'iExt.form.field.TagLabel',
+        'iExt.form.field.TagFilter',
         'iExt.meta.Types'
     ],
     controller: 'user',
@@ -17,7 +18,7 @@ Ext.define('app.view.user.User', {
             html: '用户',
             flex: 1
         }, {
-            xtype: 'ixtaglabel',
+            xtype: 'ixtagfilter',
             flex: 1,
             store: {
                 type: 'ixenumsstore',
