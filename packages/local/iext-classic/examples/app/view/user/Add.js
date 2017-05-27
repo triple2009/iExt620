@@ -82,6 +82,10 @@ Ext.define('app.view.user.Add', {
             items: [{
                 xtype: 'tbfill'
             }, {
+                xtype: 'ixkpibtn',
+                ixIconCls: 'x-fa fa-plus',
+                ixKpi: 'Activities'
+            }, {
                 text: 'Kpi1',
                 iconCls: 'x-fa fa-plus'
             }, {

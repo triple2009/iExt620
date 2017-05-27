@@ -15,7 +15,7 @@ Ext.define('iExt.form.Header', {
 
     defaults: {
         //ui: 'ix-form-btn-ui',
-        width: 140,
+        minWidth: 140,
         scale: 'medium'
     }
 
