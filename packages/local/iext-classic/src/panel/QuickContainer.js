@@ -11,52 +11,37 @@ Ext.define('iExt.panel.QuickContainer', {
 
     cls: 'ix-quick-container',
     bodyCls: 'ix-quick-container-body',
-    title: '快速查看',
 
+    title: '快速查看',
+    layout: 'fit',
+    header: false,
+    border: false,
     viewModel: {
         data: {
-            title: '',
-            subTitle: ''
+            title: ''
         }
     },
 
     initComponent: function () {
         var me = this;
-        me.dockedItems = [];
-
-        me.dockedItems.push({
-            xtype: 'ixviewheader',
+        me.tbar = {
+            xtype: 'toolbar',
             items: [{
-                xtype: 'ixviewtitle',
+                xtype: 'ixtbrtitle',
                 bind: {
                     html: '{title}'
                 }
             }, '->', {
                 iconCls: 'x-fa fa-chevron-right',
                 listeners: {
-                    click: function (item, e, opts) {
-                        item.up('panel').hide();
-                    }
+                    click: { fn: me._ixOnHide, scope: me }
                 }
             }]
-        });
-
-        me.dockedItems.push({
-            xtype: 'ixviewheader',
-            items: [{
-                xtype: 'ixviewtitle',
-                flex: 1,
-                bind: {
-                    html: '{subTitle}'
-                }
-            }, {
-                xtype: 'ixtbrholder'
-            }]
-        });
-
+        };
         me.on('add', me._ixOnAdd);
         me.callParent();
     },
+
 
     setTitle: function (title) {
         var me = this,
@@ -67,12 +52,15 @@ Ext.define('iExt.panel.QuickContainer', {
 
     privates: {
 
+        _ixOnHide: function (item, e, eOpts) {
+            this.hide();
+        },
+
         _ixOnAdd: function (panel, component, index, eOpts) {
             if (component.isComponent === true && component.getTitle) {
                 var me = this,
-                    vm = me.getViewModel(),
                     title = component.getTitle();
-                vm.set({ subTitle: title });
+                me.setTitle(title);
             }
         }
     }

@@ -1,24 +1,96 @@
 Ext.define('app.view.user.Add', {
-    extend: 'Ext.panel.Panel',
+    extend: 'iExt.panel.FormContainer',
     xtype: 'app-user-add',
 
     requires: [],
 
-    width: 400,
-    title: '用户',
+    title: '新建用户',
+
+    tbar: {
+        xtype: 'toolbar',
+        items: [{
+            text: '保存',
+            iconCls: 'x-fa fa-save',
+            listeners: {
+                click: function () {
+                    var win = Ext.create({
+                        xtype: 'ixwin',
+                        title: '常规',
+                        modal: true,
+                        maximizable: true,
+                        width: 600,
+                        height: 400,
+                        viewModel: true,
+                        buttons: [{
+                            text: '确定',
+                            listeners: {
+                                click: function (item, e, eOpts) {
+                                    var vm = this.ownerCt.ownerCt.getViewModel();
+                                }
+                            }
+                        }]
+                    });
+                    win.show();
+                }
+            }
+        }, {
+            text: '取消',
+            iconCls: 'x-fa fa-close',
+            listeners: {
+                click: function () {
+                    Ext.Msg.confirm('系统更新', '系统存在新的版本，是否重新加载？',
+                        function (choice) {
+                            if (choice === 'yes') {
+
+                            }
+                        }
+                    );
+                }
+            }
+        }, '->', {
+            text: '操作',
+            menuAlign: 'tc-bc',
+            menu: {
+                xtype: 'menu',
+                shadow: false,
+                items: [{
+                    text: '启用'
+                }, {
+                    text: '停用'
+                }, {
+                    text: '审批'
+                }]
+            }
+        }, '->'
+        ]
+    },
+
     items: [{
-        xtype: 'form',
-        //layout: 'column',
+        xtype: 'ixform',
+        layout: 'column',
         header: false,
-        margin: 30,
-        border: true,
+        width: 750,
         bodyPadding: '5 10 0 10',
         defaultType: 'textfield',
         defaults: {
             columnWidth: 0.5,
             margin: 10
         },
-        defaultFocus: 'field:focusable:not([hidden]):not([disabled]):not([readOnly])',
+
+        tbar: {
+            xtype: 'ixformheader',
+            items: [{
+                xtype: 'tbfill'
+            }, {
+                text: 'Kpi1',
+                iconCls: 'x-fa fa-plus'
+            }, {
+                text: 'Active'
+            }, {
+                text: '中文测试',
+                iconCls: 'x-fa fa-search'
+            }]
+        },
 
         items: [{
             xtype: 'ixtext',
@@ -53,6 +125,16 @@ Ext.define('app.view.user.Add', {
         {
             fieldLabel: '确认',
             reference: 'repwd'
+        }]
+    }, {
+        xtype: 'tabpanel',
+        margin: '20 0 0 0',
+        items: [{
+            xtype: 'panel',
+            title: 'internal messages'
+        }, {
+            xtype: 'panel',
+            title: 'others'
         }]
     }]
 

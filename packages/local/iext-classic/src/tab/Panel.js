@@ -18,7 +18,7 @@ Ext.define('iExt.tab.Panel', {
     cls: 'ix-tab-panel',
     bodyCls: 'ix-tab-body',
 
-    plain: true,
+    //plain: true,
     header: false,
     layout: 'fit',
 

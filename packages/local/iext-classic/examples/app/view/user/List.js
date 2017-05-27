@@ -3,10 +3,7 @@ Ext.define('app.view.user.List', {
     xtype: 'app-user-list',
 
     requires: [],
-    tbar:{
-        xtype:'ixindexer'
-    },
-
+    layout: 'fit',
 
     store: { type: 'user' },
     columns: [{

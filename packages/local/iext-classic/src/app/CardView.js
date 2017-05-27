@@ -1,21 +1,23 @@
 /**
- * @class iExt.app.Card
+ * @class iExt.app.CardView
  * @extends {Ext.container.Viewport} 
- * @classdesc 应用程序的工具栏。
+ * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.Card', {
+Ext.define('iExt.app.CardView', {
     extend: 'Ext.container.Viewport',
     xtype: 'widget.ixappcard',
-
-    requires: [],
+    requires: [
+        'iExt.app.Title'
+    ],
 
     mixins: [
         'iExt.app.view.Workspace'
     ],
 
+    cls: 'ix-app-card',
     layout: 'border',
     referenceHolder: true,
-    
+
     config: {
         ixHeaderItems: [],
         ixHomeView: undefined,
@@ -45,27 +47,40 @@ Ext.define('iExt.app.Card', {
 
         tbrItems.push({
             xtype: 'ixportrait'
-        }, {
-                bind: {
-                    text: '{ixa.user.code}-{ixa.user.name}'
-                },
-                menuAlign: 'tr-br',
-                menu: {
-                    ui: 'ix-app-menu-ui',
-                    shadow: false,
-                    items: [{
-                        text: '修改口令'
-                    }, {
-                        text: '安全退出'
-                    }]
-                }
-            });
+        });
+
+        tbrItems.push({
+            bind: {
+                text: '{ixa.user.code}-{ixa.user.name}'
+            },
+            menuAlign: 'tr-br',
+            menu: {
+                shadow: false,
+                items: [{
+                    text: '修改口令'
+                }, {
+                    text: '安全退出'
+                }]
+            }
+        });
 
         items.push({
-            xtype: 'ixappheader',
+            xtype: 'container',
             region: 'north',
-            reference: 'ixAppHeader',
-            items: tbrItems
+            items: [{
+                xtype: 'ixappheader',
+                reference: 'ixAppHeader',
+                items: tbrItems
+            }, {
+                xtype: 'toolbar',
+                reference: 'ixAppNav',
+                items: [{
+                    xtype: 'ixtbrtitle',
+                    html: '用户'
+                }, '->', {
+                    xtype: 'ixtbrholder'
+                }]
+            }]
         });
 
         items.push({
@@ -114,11 +129,13 @@ Ext.define('iExt.app.Card', {
     privates: {
 
         _ixOnSelectApp: function (item, e, opts) {
-            var me = this;
-            var tbr = me.lookupReference('ixAppHeader');
-            var ws = me.lookupReference('ixAppMain');
-            var qv = me.lookupReference('ixAppQuick');
-            var apps = me.lookupReference('ixAppList');
+            var me = this,
+                refs = me.getReferences(),
+                tbr = refs.ixAppHeader,
+                nav = refs.ixAppNav,
+                ws = refs.ixAppMain,
+                qv = refs.ixAppQuick,
+                apps = refs.ixAppList;
 
             var isApps = tbr._ixApps === true;
 
@@ -143,22 +160,26 @@ Ext.define('iExt.app.Card', {
                 me._ixLastActiveItem = layout.getActiveItem();
                 layout.setActiveItem(apps);
             }
+            nav.setVisible(isApps);
             Ext.resumeLayouts(true);
 
             tbr._ixApps = !isApps;
         },
 
         _ixOnSelectionChange: function (selmodel, selected, eOpts) {
-            var me = this;
+            var me = this,
+                refs = me.getReferences(),
+                tbr = refs.ixAppHeader,
+                nav = refs.ixAppNav,
+                ws = refs.ixAppMain,
+                qv = refs.ixAppQuick,
+                apps = refs.ixAppList;
 
-            var ws = me.lookupReference('ixAppMain');
-            var apps = me.lookupReference('ixAppList');
             var layout = ws.getLayout();
             layout.setActiveItem(me._ixLastActiveItem);
 
             var app = selected[0];
             var code = app.get('code');
-            var tbr = me.lookupReference('ixAppHeader');
             tbr.items.getAt(0).setVisible(true);
             tbr.items.getAt(0).setIconCls('x-fa fa-th');
             tbr.items.each(function (item, index) {
@@ -191,9 +212,10 @@ Ext.define('iExt.app.Card', {
                 });
             }
 
-            var qv = me.lookupReference('ixAppQuick');
             qv.removeAll();
             qv.setVisible(false);
+
+            nav.setVisible(true);
 
             tbr._ixApps = false;
         }

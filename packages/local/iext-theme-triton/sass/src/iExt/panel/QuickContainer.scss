@@ -1,15 +1,15 @@
-.ix-quick-container {
-    border-left: solid 1px #d0d0d0 !important;
- 
-    .x-btn {
-        border-color: transparent !important;
-        background-color: transparent !important;
-    }
-    .x-btn-over {
-        background-color: #ececec !important;
+.ix-app-card {
+    .ix-quick-container-body {
+        border-left: solid 1px #d0d0d0 !important;
+        border-top: solid 1px #d0d0d0 !important;
     }
 }
 
-.ix-quick-container-body{
-    border-top: solid 1px #d0d0d0 !important;
+.ix-app-tab {
+    .ix-quick-container {
+        border-left: solid 1px #d0d0d0 !important;
+    }
+    .ix-quick-container-body {
+        border-top: solid 1px #d0d0d0 !important;
+    }
 }

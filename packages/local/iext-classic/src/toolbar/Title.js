@@ -1,11 +1,11 @@
 /**
- * @class iExt.app.Title
+ * @class iExt.toolbar.Title
  * @extends {Ext.toolbar.TextItem} 
  * @classdesc 标题控件。对于只有标题的工具栏，高度会有影响，可以配合iExt.toolbar.Holder使用。
  */
-Ext.define('iExt.app.Title', {
+Ext.define('iExt.toolbar.Title', {
     extend: 'Ext.toolbar.TextItem',
-    alias: 'widget.ixapptitle',
+    alias: 'widget.ixtbrtitle',
 
     requires: [],
 
@@ -18,7 +18,7 @@ Ext.define('iExt.app.Title', {
     initComponent: function () {
         var me = this,
             scale = me.getIxScale();
-        me.addCls('ix-app-title-' + scale);
+        me.addCls('ix-tbr-title-' + scale);
         me.callParent();
     }
 

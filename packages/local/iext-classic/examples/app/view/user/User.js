@@ -1,5 +1,5 @@
 Ext.define('app.view.user.User', {
-    extend: 'iExt.panel.ViewContainer',
+    extend: 'iExt.panel.ListContainer',
     xtype: 'app-user',
 
     requires: [
@@ -10,26 +10,13 @@ Ext.define('app.view.user.User', {
     ],
     controller: 'user',
     viewModel: 'user',
+    title: '用户',
 
-    dockedItems: [{
-        xtype: 'ixviewheader',
-        items: [{
-            xtype: 'ixviewtitle',
-            html: '用户',
-            flex: 1
-        }, {
-            xtype: 'ixtagfilter',
-            flex: 1,
-            store: {
-                type: 'ixenumsstore',
-                ixEnumType: 'iExt.meta.Types'
-            }
-        }]
-    }, {
+    tbar: {
         xtype: 'container',
         layout: 'column',
         items: [{
-            xtype: 'ixviewheader',
+            xtype: 'toolbar',
             columnWidth: 0.5,
             items: [{
                 text: '新建',
@@ -70,8 +57,18 @@ Ext.define('app.view.user.User', {
                             xtype: 'ixwin',
                             title: '常规',
                             modal: true,
+                            maximizable: true,
                             width: 600,
-                            height: 400
+                            height: 400,
+                            viewModel: true,
+                            buttons: [{
+                                text: '确定',
+                                listeners: {
+                                    click: function (item, e, eOpts) {
+                                        var vm = this.ownerCt.ownerCt.getViewModel();
+                                    }
+                                }
+                            }]
                         });
                         win.show();
                     }
@@ -95,7 +92,6 @@ Ext.define('app.view.user.User', {
                 menuAlign: 'tc-bc',
                 menu: {
                     xtype: 'menu',
-                    ui: 'ix-view-menu-ui',
                     shadow: false,
                     items: [{
                         text: '启用'
@@ -105,11 +101,7 @@ Ext.define('app.view.user.User', {
                         text: '审批'
                     }]
                 }
-            }]
-        }, {
-            xtype: 'ixviewheader',
-            columnWidth: 0.5,
-            items: ['->', {
+            }, '->', {
                 xtype: 'segmentedbutton',
                 items: [{
                     iconCls: 'x-fa fa-line-chart'
@@ -121,8 +113,19 @@ Ext.define('app.view.user.User', {
                     iconCls: 'x-fa fa-list'
                 }]
             }]
+        }, {
+            xtype: 'toolbar',
+            columnWidth: 0.5,
+            items: [{
+                xtype: 'ixtagfilter',
+                flex: 1,
+                store: {
+                    type: 'ixenumsstore',
+                    ixEnumType: 'iExt.meta.Types'
+                }
+            }]
         }]
-    }],
+    },
 
     items: [{
         xtype: 'app-user-list',

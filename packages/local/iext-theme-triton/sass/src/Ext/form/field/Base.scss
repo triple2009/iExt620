@@ -17,7 +17,7 @@
     border-bottom-color: $form-field-focus-border-color;
 }
 
-/* 通过 afterLabelTextTpl 属性设置，不再需要该方法
+/* 因为在 classic 中重载，所以在此处定义 */
 .ix-label-required {
     color: $ix-required-lable-color;
     padding: $ix-required-lable-padding;
@@ -25,6 +25,7 @@
     font-weight: bold;
 }
 
+/* 通过 beforeLabelTextTpl 属性设置，不再需要该方法
 .ix-label-required:before {
     content: "*";
 }
