@@ -17,12 +17,40 @@ Ext.define('iExt.button.Button', {
     cls: 'ix-btn',
     textAlign: 'left',
 
-    _ixInjectTpl: '<tpl if="badgeText">' +
-    '<span class="ix-btn-badge"' +
-    '<tpl if="badgeStyle"> style="{badgeStyle}"</tpl>' +
-    '>{badgeText}</span>' +
-    '</tpl>',
-    _ixInjectAt: '</span></span>',
+    renderTpl:
+        '<span id="{id}-btnWrap" data-ref="btnWrap" role="presentation" unselectable="on" style="{btnWrapStyle}" ' +
+                'class="{btnWrapCls} {btnWrapCls}-{ui} {splitCls}{childElCls}">' +
+            '<span id="{id}-btnEl" data-ref="btnEl" role="presentation" unselectable="on" style="{btnElStyle}" ' +
+                    'class="{btnCls} {btnCls}-{ui} {textCls} {noTextCls} {hasIconCls} ' +
+                    '{iconAlignCls} {textAlignCls} {btnElAutoHeightCls}{childElCls}">' +
+                '<tpl if="iconBeforeText">{[values.$comp.renderIcon(values)]}</tpl>' +
+                '<span id="{id}-btnInnerEl" data-ref="btnInnerEl" unselectable="on" ' +
+                    'class="{innerCls} {innerCls}-{ui}{childElCls}">{text}</span>' +
+                '<tpl if="!iconBeforeText">{[values.$comp.renderIcon(values)]}</tpl>' +
+                // badge text
+                '<tpl if="badgeText"><span class="ix-btn-badge"' +
+                    '<tpl if="badgeStyle"> style="{badgeStyle}"</tpl>' +
+                '>{badgeText}</span></tpl>' +
+            '</span>' +
+        '</span>' +
+        '{[values.$comp.getAfterMarkup ? values.$comp.getAfterMarkup(values) : ""]}' +
+        // if "closable" (tab) add a close element icon 
+        '<tpl if="closable">' +
+            '<span id="{id}-closeEl" data-ref="closeEl" class="{baseCls}-close-btn">' +
+                '<tpl if="closeText">' +
+                    ' {closeText}' +
+                '</tpl>' +
+            '</span>' +
+        '</tpl>' +
+        // Split buttons have additional tab stop for the arrow element 
+        '<tpl if="split">' +
+            '<span id="{id}-arrowEl" class="{arrowElCls}" data-ref="arrowEl" ' +
+                'role="button" hidefocus="on" unselectable="on"' +
+                '<tpl if="tabIndex != null"> tabindex="{tabIndex}"</tpl>' +
+                '<tpl foreach="arrowElAttributes"> {$}="{.}"</tpl>' +
+                ' style="{arrowElStyle}"' +
+            '>{arrowElText}</span>' +
+        '</tpl>',
 
     updateIxBadgeText: function (text, oldText) {
         text = text == null ? '' : String(text);
@@ -48,22 +76,6 @@ Ext.define('iExt.button.Button', {
             spanText.setStyle(style);
             me.updateLayout();
         }
-    },
-
-    initComponent: function () {
-        var me = this;
-
-        if (!me.ixInjected) {
-            if (Ext.isString(me.renderTpl)) {
-                var tpls = me.renderTpl.split(me._ixInjectAt);
-                me.renderTpl = tpls.join(me._ixInjectTpl);
-            } else {
-                var tpls = me.renderTpl.html.split(me._ixInjectAt);
-                me.renderTpl.html = tpls.join(me._ixInjectTpl);
-            }
-            me.ixInjected = true;
-        }
-        me.callParent();
     },
 
     getTemplateArgs: function () {
