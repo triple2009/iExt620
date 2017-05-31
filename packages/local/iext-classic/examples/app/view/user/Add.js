@@ -9,6 +9,30 @@ Ext.define('app.view.user.Add', {
     tbar: {
         xtype: 'toolbar',
         items: [{
+                text: '编辑',
+                iconCls: 'x-fa fa-edit',
+                listeners: {
+                    click: function () {
+                        var win = Ext.create({
+                            xtype: 'ixwin',
+                            title: {
+                                xtype: 'toolbar',
+                                items: [{
+                                    xtype: 'tbtext',
+                                    text: '文本'
+                                }, '->', {
+                                    xtype: 'button',
+                                    iconCls: 'x-fa fa-search',
+                                    text: '按钮'
+                                }]
+                            },
+                            width: 600,
+                            height: 450
+                        });
+                        win.show();
+                    }
+                }
+            }, {
             text: '保存',
             iconCls: 'x-fa fa-save',
             listeners: {
@@ -82,12 +106,15 @@ Ext.define('app.view.user.Add', {
             items: [{
                 xtype: 'tbfill'
             }, {
-                xtype: 'ixkpibtn',
-                ixIconCls: 'x-fa fa-plus',
-                ixKpi: 'Activities'
+                xtype: 'ixstatbtn',
+                iconCls: 'x-fa fa-plus',
+                text: 'Activities',
+                value: 1000
             }, {
-                text: 'Kpi1',
-                iconCls: 'x-fa fa-plus'
+                xtype: 'ixbtn',
+                text: 'Inactivated',
+                iconCls: 'x-fa fa-plus',
+                ixBadgeText: 1000
             }, {
                 text: 'Active'
             }, {
@@ -133,6 +160,7 @@ Ext.define('app.view.user.Add', {
     }, {
         xtype: 'tabpanel',
         margin: '20 0 0 0',
+        minHeight: 200,
         items: [{
             xtype: 'panel',
             title: 'internal messages'

@@ -12,6 +12,14 @@
     "output": "${package.dir}/build",
     "local": true,
     "theme": "iext-theme-triton",
+    "slicer": {
+        "js": [
+            {
+                "path": "${package.dir}/sass/example/custom.js",
+                "isWidgetManifest": true
+            }
+        ]
+    },
     "sass": {
         "namespace": "",
         "etc": [
@@ -35,6 +43,8 @@
         "${package.dir}/overrides",
         "${package.dir}/${toolkit.name}/overrides"
     ],
+    "framework": "ext",
+    "toolkit": "classic",
     "requires": [
         "font-awesome"
     ]

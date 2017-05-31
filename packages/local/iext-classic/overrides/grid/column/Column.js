@@ -7,6 +7,9 @@ Ext.define('Ext.overrides.grid.column.Column', {
     override: 'Ext.grid.column.Column',
 
     sortable: false,
+    align: 'left',
+    textAlign: 'left',
+    tooltipType: 'title',
 
     initComponent: function () {
         var me = this, align = me.align;

@@ -13,5 +13,7 @@
     "overrides": [
         "${package.dir}/overrides"
     ],
+    "framework": "ext",
+    "toolkit": "classic",
     "requires": []
 }

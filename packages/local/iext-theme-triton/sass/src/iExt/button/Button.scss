@@ -1,0 +1,34 @@
+.ix-btn {
+    .ix-btn-badge {
+        cursor: default;
+        color: $ix-btn-badge-color;
+        font-weight: bold;
+        border: $ix-btn-badge-border;
+        display: inline-block;
+        line-height: 1.0;
+    }
+}
+
+.ix-btn.x-btn-default-toolbar-large {
+    .ix-btn-badge {
+        border-radius: $ix-btn-badge-large-radius;
+        font-size: $ix-btn-badge-large-font-size;
+        padding: $ix-btn-badge-large-padding;
+    }
+}
+
+.ix-btn.x-btn-default-toolbar-medium {
+    .ix-btn-badge {
+        border-radius: $ix-btn-badge-medium-radius;
+        font-size: $ix-btn-badge-medium-font-size;
+        padding: $ix-btn-badge-medium-padding;
+    }
+}
+
+.ix-btn.x-btn-default-toolbar-small {
+    .ix-btn-badge {
+        border-radius: $ix-btn-badge-small-radius;
+        font-size: $ix-btn-badge-small-font-size;
+        padding: $ix-btn-badge-small-padding;
+    }
+}

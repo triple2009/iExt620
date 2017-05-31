@@ -95,7 +95,9 @@ Ext.define('iExt.app.CardView', {
             xtype: 'container',
             region: 'center',
             reference: 'ixAppMain',
-            layout: 'card',
+            layout: {
+                type: 'card'
+            },
             items: [{
                 xtype: 'panel',
                 reference: 'ixAppList',

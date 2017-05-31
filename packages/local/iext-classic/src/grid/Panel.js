@@ -7,9 +7,9 @@ Ext.define('iExt.grid.Panel', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.ixgrid',
 
-    requires: [],
-
-    columnLines: true,
+    requires: [
+        'iExt.grid.column.Column'
+    ],
 
     config: {
         // 缺省使用复选，如果不想使用选择器，可以设置为 undefined
@@ -17,6 +17,16 @@ Ext.define('iExt.grid.Panel', {
         // 缺省不使用单元格焦点样式。
         // 但是对于有些情况，例如：可以选择单元格时则需要使用。
         ixFocus: false
+    },
+
+    columnLines: true,
+    headerBorders: true,
+    viewConfig: {
+        enableTextSelection: true
+    },
+    
+    defaults: {
+        xtype: 'ixcol'
     },
 
     applyIxMulti: function (multi) {

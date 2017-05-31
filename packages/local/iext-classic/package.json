@@ -27,6 +27,8 @@
             "${package.dir}/examples"
         ]
     },
+    "framework": "ext",
+    "toolkit": "classic",
     "requires": [
         "ux",
         "charts",
