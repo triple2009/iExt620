@@ -20,13 +20,19 @@ Ext.define('iExt.button.Statistics', {
 
     _ixInjectTpl: '<span class="ix-stat-btn-value">{value}</span>' +
     '<span class="ix-stat-btn-text">{text}</span>',
+    _ixInjectAt: '{text}',
 
     initComponent: function () {
         var me = this;
 
         if (!me.ixInjected) {
-            var tpls = me.renderTpl.split('{text}');
-            me.renderTpl = tpls.join(me._ixInjectTpl);
+            if (Ext.isString(me.renderTpl)) {
+                var tpls = me.renderTpl.split(me._ixInjectAt);
+                me.renderTpl = tpls.join(me._ixInjectTpl);
+            } else {
+                var tpls = me.renderTpl.html.split(me._ixInjectAt);
+                me.renderTpl.html = tpls.join(me._ixInjectTpl);
+            }
             me.ixInjected = true;
         }
         me.callParent();

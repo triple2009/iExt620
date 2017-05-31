@@ -17,11 +17,12 @@ Ext.define('iExt.button.Button', {
     cls: 'ix-btn',
     textAlign: 'left',
 
-    _ixBadgeTpl: '<tpl if="badgeText">' +
-        '<span class="ix-btn-badge"' +
-        '<tpl if="badgeStyle"> style="{badgeStyle}"</tpl>' +
-        '>{badgeText}</span>' +
-        '</tpl>',
+    _ixInjectTpl: '<tpl if="badgeText">' +
+    '<span class="ix-btn-badge"' +
+    '<tpl if="badgeStyle"> style="{badgeStyle}"</tpl>' +
+    '>{badgeText}</span>' +
+    '</tpl>',
+    _ixInjectAt: '</span></span>',
 
     updateIxBadgeText: function (text, oldText) {
         text = text == null ? '' : String(text);
@@ -53,8 +54,13 @@ Ext.define('iExt.button.Button', {
         var me = this;
 
         if (!me.ixInjected) {
-            var tpls = me.renderTpl.split('</span></span>');
-            me.renderTpl = tpls.join(me._ixBadgeTpl);
+            if (Ext.isString(me.renderTpl)) {
+                var tpls = me.renderTpl.split(me._ixInjectAt);
+                me.renderTpl = tpls.join(me._ixInjectTpl);
+            } else {
+                var tpls = me.renderTpl.html.split(me._ixInjectAt);
+                me.renderTpl.html = tpls.join(me._ixInjectTpl);
+            }
             me.ixInjected = true;
         }
         me.callParent();
