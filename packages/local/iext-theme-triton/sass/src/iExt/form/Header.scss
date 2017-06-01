@@ -1,0 +1,22 @@
+@include extjs-toolbar-ui(
+    $ui: 'ix-form-header-ui',
+
+    $background-color: $ix-form-header-background-color,
+    $vertical-spacing: $ix-form-header-vertical-spacing,
+    $horizontal-spacing: $ix-form-header-horizontal-spacing,
+
+    $text-color: $ix-form-header-text-color
+);
+
+.ix-form-header{
+    .x-toolbar-item {
+        background-color: $ix-form-header-background-color;
+        border-left: $ix-form-header-item-border-left;
+    }
+    .x-btn-inner {
+        color: #333 !important;
+    }
+    .x-btn-over{
+        background-color: $ix-form-header-background-color-over;
+    }
+}

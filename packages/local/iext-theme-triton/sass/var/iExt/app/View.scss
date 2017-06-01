@@ -1,0 +1,19 @@
+$ix-apps-body-back-color: dynamic(#847686);
+$ix-apps-body-padding-top: dynamic(30px);
+
+$ix-apps-item-width: dynamic(120px);
+$ix-apps-item-padding: dynamic(10px);
+$ix-apps-item-margin: dynamic(10px 5px 10px 5px);
+$ix-apps-item-border-radius: dynamic(5px);
+
+$ix-apps-item-over-back-color: dynamic(lighten($ix-apps-body-back-color, 5%));
+$ix-apps-item-selected-border-color: dynamic(#fff);
+$ix-apps-item-selected-back-color: dynamic(lighten($ix-apps-body-back-color, 3%));
+
+$ix-apps-item-title-font-size: dynamic(14px);
+$ix-apps-item-title-font-weight: dynamic(normal);
+$ix-apps-item-title-color: dynamic(#fff);
+$ix-apps-item-title-padding-top: dynamic(15px);
+$ix-apps-item-title-margin: dynamic(0);
+
+$ix-apps-thumb-border-radius: dynamic(5px);

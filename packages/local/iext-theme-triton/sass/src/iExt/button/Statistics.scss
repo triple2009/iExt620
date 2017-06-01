@@ -1,0 +1,47 @@
+.ix-stat-btn {
+    // border-left: solid 1px #1d1d1d;
+    .ix-stat-btn-value {
+        color: $ix-stat-btn-value-color;
+        font-weight: bold;
+        line-height: 1.0;
+        display: block;
+    }
+    .ix-stat-btn-text {
+        color: $ix-stat-btn-text-color;
+        line-height: 1.0;
+        display: block;
+    }
+}
+
+.ix-stat-btn.x-btn-default-toolbar-large {
+    padding: $ix-stat-btn-value-large-padding !important;
+    .ix-stat-btn-value {
+        font-size: $ix-stat-btn-value-large-font-size;
+        margin-bottom: $ix-stat-btn-value-large-margin-bottom;
+    }
+    .ix-stat-btn-text {
+        font-size: $ix-stat-btn-text-large-font-size;
+    }
+}
+
+.ix-stat-btn.x-btn-default-toolbar-medium {
+    padding: $ix-stat-btn-value-medium-padding !important;
+    .ix-stat-btn-value {
+        font-size: $ix-stat-btn-value-medium-font-size;
+        margin-bottom: $ix-stat-btn-value-medium-margin-bottom;
+    }
+    .ix-stat-btn-text {
+        font-size: $ix-stat-btn-text-medium-font-size;
+    }
+}
+
+.ix-stat-btn.x-btn-default-toolbar-small {
+    padding: $ix-stat-btn-value-small-padding !important;
+    .ix-stat-btn-value {
+        font-size: $ix-stat-btn-value-small-font-size;
+        margin-bottom: $ix-stat-btn-value-small-margin-bottom;
+    }
+    .ix-stat-btn-text {
+        font-size: $ix-stat-btn-text-small-font-size;
+    }
+}

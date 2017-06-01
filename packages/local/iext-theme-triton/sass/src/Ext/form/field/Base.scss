@@ -1,0 +1,32 @@
+﻿.x-form-required-field {
+    background-color: $ix-required-field-background-color !important;
+}
+
+/* 设置边框样式 */
+.x-form-trigger-wrap-default {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+}
+
+/* 设置焦点边框样式 */
+.x-form-trigger-wrap-default.x-form-trigger-wrap-focus {
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-bottom-color: $form-field-focus-border-color;
+}
+
+/* 因为在 classic 中重载，所以在此处定义 */
+.ix-label-required {
+    color: $ix-required-lable-color;
+    padding: $ix-required-lable-padding;
+    font-size: $ix-required-lable-font-size;
+    font-weight: bold;
+}
+
+/* 通过 beforeLabelTextTpl 属性设置，不再需要该方法
+.ix-label-required:before {
+    content: "*";
+}
+*/

@@ -1,0 +1,8 @@
+/* 去掉 Tab 的焦点边框 */
+.x-tab-focus.x-tab-default {
+    outline: none !important;
+}
+
+.x-tab-active {
+    cursor: default;
+}
