@@ -13,19 +13,10 @@
     "local": true,
     "theme": "iext-theme-triton",
     "slicer": {
-<<<<<<< HEAD
         "js": [{
             "path": "${package.dir}/sass/example/custom.js",
             "isWidgetManifest": true
         }]
-=======
-        "js": [
-            {
-                "path": "${package.dir}/sass/example/custom.js",
-                "isWidgetManifest": true
-            }
-        ]
->>>>>>> 0c319e67d178a0175758faae42a0910839b8f5d0
     },
     "sass": {
         "namespace": "",
