@@ -11,11 +11,10 @@ Ext.define('iExt.panel.FormContainer', {
 
     cls: 'ix-form-container',
     bodyCls: 'ix-form-container-body',
-    
-    layout: 'auto',
-    header: false,
-    border: false,
+
+    layout: 'auto',   
     scrollable: 'y',
+    ixDefaultTitle: '表单',
 
     // view:
     config: {

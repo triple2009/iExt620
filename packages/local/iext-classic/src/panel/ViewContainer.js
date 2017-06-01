@@ -10,12 +10,54 @@ Ext.define('iExt.panel.ViewContainer', {
     requires: [],
 
     header: false,
+    border: false,
+    layout: 'fit',
+
+    config: {
+        // 缺省标题
+        ixDefaultTitle: null
+    },
+
+    bind: {
+        title: '{_ixvc_title}'
+    },
+
+    // view container viewmodel
+    viewModel: {
+        data: {
+            _ixvc: {
+                title: '',
+                ixtitle: ''
+            }
+        },
+
+        formulas: {
+            _ixvc_title: function (get) {
+                return get('_ixvc.title') || get('_ixvc.ixtitle');
+            }
+        }
+    },
+
 
     initComponent: function () {
         var me = this;
-        //    scale = me.getIxScale();
-        // me.addCls('ix-app-title-' + scale);
+
         me.callParent();
+    },
+
+    applyIxDefaultTitle: function (title) {
+        title = title || '&#160;';
+        return title;
+    },
+
+    updateIxDefaultTitle: function (title, oldTitle) {
+        title = title || '&#160;';
+        var vm = this.getViewModel();
+        vm.setData({
+            _ixvc: {
+                ixtitle: title
+            }
+        });
     }
 
 });

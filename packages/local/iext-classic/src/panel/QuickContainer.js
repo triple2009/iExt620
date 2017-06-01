@@ -4,7 +4,7 @@
  * @classdesc 快速查看视图容器。
  */
 Ext.define('iExt.panel.QuickContainer', {
-    extend: 'Ext.panel.Panel',
+    extend: 'iExt.panel.ViewContainer',
     alias: 'widget.ixquickcontainer',
 
     requires: [],
@@ -12,15 +12,7 @@ Ext.define('iExt.panel.QuickContainer', {
     cls: 'ix-quick-container',
     bodyCls: 'ix-quick-container-body',
 
-    title: '快速查看',
-    layout: 'fit',
-    header: false,
-    border: false,
-    viewModel: {
-        data: {
-            title: ''
-        }
-    },
+    ixDefaultTitle: '快速查看',
 
     initComponent: function () {
         var me = this;

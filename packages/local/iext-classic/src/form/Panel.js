@@ -11,7 +11,7 @@ Ext.define('iExt.form.Panel', {
     layout: 'column',
     header: false,
     border: false,
-    minWidth: '750',
+    minWidth: '765',
     minHeight: 400,
     bodyPadding: '5 10 0 10',
     defaultType: 'ixtextfield',

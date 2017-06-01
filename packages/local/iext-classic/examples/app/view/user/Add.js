@@ -4,7 +4,10 @@ Ext.define('app.view.user.Add', {
 
     requires: [],
 
-    title: '新建用户',
+    title: '{ixv.title}',
+
+    viewModel: {
+    },
 
     tbar: {
         xtype: 'toolbar',
@@ -139,7 +142,7 @@ Ext.define('app.view.user.Add', {
             xtype: 'ixtext',
             ixScale: 'large',
             fieldLabel: '代码',
-            bind: '{user.code}',
+            bind: '{ixv.title}',
             reference: 'code',
             allowBlank: false
         },

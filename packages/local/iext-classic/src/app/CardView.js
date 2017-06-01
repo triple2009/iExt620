@@ -43,7 +43,9 @@ Ext.define('iExt.app.CardView', {
             }
         }, '->');
 
-        tbrItems.push(headerItems);
+        if (headerItems.length > 0) {
+            tbrItems.push(headerItems);
+        }
 
         tbrItems.push({
             xtype: 'ixportrait'

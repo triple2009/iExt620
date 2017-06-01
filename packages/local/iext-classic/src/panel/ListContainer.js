@@ -11,10 +11,7 @@ Ext.define('iExt.panel.ListContainer', {
 
     cls: 'ix-list-container',
     bodyCls: 'ix-list-container-body',
-
-    layout: 'fit',
-    header: false,
-    border: false,
+    ixDefaultTitle: '列表',
 
     // view:
     config: {

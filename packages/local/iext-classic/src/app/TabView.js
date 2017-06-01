@@ -46,8 +46,10 @@ Ext.define('iExt.app.TabView', {
             }
         }, '->');
 
-        tbrItems.push(headerItems);
-
+        if (headerItems.length > 0) {
+            tbrItems.push(headerItems);
+        }
+        
         tbrItems.push({
             xtype: 'ixportrait'
         });
