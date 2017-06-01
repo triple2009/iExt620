@@ -9,30 +9,30 @@ Ext.define('app.view.user.Add', {
     tbar: {
         xtype: 'toolbar',
         items: [{
-                text: '编辑',
-                iconCls: 'x-fa fa-edit',
-                listeners: {
-                    click: function () {
-                        var win = Ext.create({
-                            xtype: 'ixwin',
-                            title: {
-                                xtype: 'toolbar',
-                                items: [{
-                                    xtype: 'tbtext',
-                                    text: '文本'
-                                }, '->', {
-                                    xtype: 'button',
-                                    iconCls: 'x-fa fa-search',
-                                    text: '按钮'
-                                }]
-                            },
-                            width: 600,
-                            height: 450
-                        });
-                        win.show();
-                    }
+            text: '编辑',
+            iconCls: 'x-fa fa-edit',
+            listeners: {
+                click: function () {
+                    var win = Ext.create({
+                        xtype: 'ixwin',
+                        title: {
+                            xtype: 'toolbar',
+                            items: [{
+                                xtype: 'tbtext',
+                                text: '文本'
+                            }, '->', {
+                                xtype: 'button',
+                                iconCls: 'x-fa fa-search',
+                                text: '按钮'
+                            }]
+                        },
+                        width: 600,
+                        height: 450
+                    });
+                    win.show();
                 }
-            }, {
+            }
+        }, {
             text: '保存',
             iconCls: 'x-fa fa-save',
             listeners: {
@@ -109,12 +109,24 @@ Ext.define('app.view.user.Add', {
                 xtype: 'ixstatbtn',
                 iconCls: 'x-fa fa-plus',
                 text: 'Activities',
-                value: 1000
+                value: 1000,
+                listeners: {
+                    click: function (item, e, eOpts) {
+                        item.setText('new text');
+                        item.setValue(200);
+                    }
+                }
             }, {
                 xtype: 'ixbtn',
                 text: 'Inactivated',
+                ixBadgeText: '9000',
                 iconCls: 'x-fa fa-plus',
-                ixBadgeText: 1000
+                listeners: {
+                    click: function (item, e, eOpts) {
+                        item.setIxBadgeText('888');
+                        item.setText('new text');
+                    }
+                }
             }, {
                 text: 'Active'
             }, {

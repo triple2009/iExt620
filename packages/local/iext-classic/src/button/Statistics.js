@@ -14,45 +14,7 @@ Ext.define('iExt.button.Statistics', {
     },
 
     cls: 'ix-stat-btn',
-    scale: 'large',
-    minWidth: 140,
     textAlign: 'left',
-
-    renderTpl:
-        '<span id="{id}-btnWrap" data-ref="btnWrap" role="presentation" unselectable="on" style="{btnWrapStyle}" ' +
-                'class="{btnWrapCls} {btnWrapCls}-{ui} {splitCls}{childElCls}">' +
-            '<span id="{id}-btnEl" data-ref="btnEl" role="presentation" unselectable="on" style="{btnElStyle}" ' +
-                    'class="{btnCls} {btnCls}-{ui} {textCls} {noTextCls} {hasIconCls} ' +
-                    '{iconAlignCls} {textAlignCls} {btnElAutoHeightCls}{childElCls}">' +
-                '<tpl if="iconBeforeText">{[values.$comp.renderIcon(values)]}</tpl>' +
-                '<span id="{id}-btnInnerEl" data-ref="btnInnerEl" unselectable="on" ' +
-                    'class="{innerCls} {innerCls}-{ui}{childElCls}">' + 
-                    // statics value
-                    '<span class="ix-stat-btn-value">{value}</span>' +
-                    // statics text
-                    '<span class="ix-stat-btn-text">{text}</span>' +
-                '</span>' +
-                '<tpl if="!iconBeforeText">{[values.$comp.renderIcon(values)]}</tpl>' +
-            '</span>' +
-        '</span>' +
-        '{[values.$comp.getAfterMarkup ? values.$comp.getAfterMarkup(values) : ""]}' +
-        // if "closable" (tab) add a close element icon 
-        '<tpl if="closable">' +
-            '<span id="{id}-closeEl" data-ref="closeEl" class="{baseCls}-close-btn">' +
-                '<tpl if="closeText">' +
-                    ' {closeText}' +
-                '</tpl>' +
-            '</span>' +
-        '</tpl>' +
-        // Split buttons have additional tab stop for the arrow element 
-        '<tpl if="split">' +
-            '<span id="{id}-arrowEl" class="{arrowElCls}" data-ref="arrowEl" ' +
-                'role="button" hidefocus="on" unselectable="on"' +
-                '<tpl if="tabIndex != null"> tabindex="{tabIndex}"</tpl>' +
-                '<tpl foreach="arrowElAttributes"> {$}="{.}"</tpl>' +
-                ' style="{arrowElStyle}"' +
-            '>{arrowElText}</span>' +
-        '</tpl>',
 
     getTemplateArgs: function () {
         var me = this;
@@ -91,5 +53,18 @@ Ext.define('iExt.button.Statistics', {
         }
         me.fireEvent('ixvaluechange', me, oldValue, value);
     }
+
+}, function (btnClass) {
+
+    var _ixInjectTpl = '<span class="ix-stat-btn-value">{value}</span>' +
+        '<span class="ix-stat-btn-text">{text}</span>',
+        _ixInjectAt = '{text}';
+
+    var superTpl = btnClass.superclass.renderTpl;
+    var tpls = superTpl.split(_ixInjectAt);
+    var myTpl = tpls.join(_ixInjectTpl);
+    btnClass.addConfig({
+        renderTpl: myTpl
+    });
 
 });

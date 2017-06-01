@@ -13,7 +13,6 @@ Ext.define('iExt.form.Header', {
     cls: 'ix-form-header',
     
     defaults: {
-        minWidth: 140,
         scale: 'medium'
     }
 
