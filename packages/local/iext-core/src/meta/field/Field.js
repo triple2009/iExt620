@@ -28,6 +28,11 @@ Ext.define('iExt.meta.field.Field', {
     },
 
     /**
+     * 序号，例如：10
+     */
+    ixNo: 0,
+
+    /**
      * 属性名称，例如：code
      */
     ixName: null,
@@ -50,7 +55,7 @@ Ext.define('iExt.meta.field.Field', {
     /**
      * 最大长度，可以根据validator自动设置？
      */
-    ixMaxLen: 10,
+    ixMaxLen: 16,
 
     /**
      * 导航实体模型 (可用于快速查看或自动导航)
@@ -59,6 +64,26 @@ Ext.define('iExt.meta.field.Field', {
      * {ixModel:'User', ixProperty:'createdById'}
      */
     ixNavigator: null,
+
+    /**
+     * 缺省排序方式 (ASC/DESC)
+     */
+    ixSort: null,
+
+    /**
+     * 仓储标识(true/false)
+     */
+    ixIsRepoId: false,
+
+    /**
+     * 实体标识 (true/false)
+     */
+    ixIsEntityId: false,
+
+    /**
+     * 实体描述 (true/false)
+     */
+    ixIsEntityDesc: false,
 
     /**
      * 构造函数
