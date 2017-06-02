@@ -11,24 +11,37 @@ Ext.define('iExt.aop.AOP', {
 
     ixIsAOP: true,
 
+    /**
+     * 调试模式
+     */
     ixDebug: false,
 
-    // 配置项名称
-    ixConfigName: undefined,
+    /**
+     * 配置项名称
+     */
+    ixConfigName: null,
 
-    // 服务地址
-    ixUrl: undefined,
+    /**
+     * 服务地址
+     */
+    ixUrl: '',
 
-    // 接口方法
-    ixApis: undefined,
+    /**
+     * 接口对象，例如：
+     * {getUser:{}, resetPwd:{}}
+     */
+    ixApis: null,
 
-    // 初始化服务
+    /**
+     * 初始化服务
+     */
     ixInit: function (appConfig) {
         var aopConfig;
         if (this.ixConfigName) {
             aopConfig = appConfig[this.ixConfigName];
         } else {
             var names = this.$className.split('.');
+            // 移除前两个命名空间
             names.shift();
             names.shift();
             aopConfig = appConfig[names.join('_')];
@@ -54,23 +67,38 @@ Ext.define('iExt.aop.AOP', {
         this.ixInited();
     },
 
-    // 由于接口方法存在依赖关系，可以重载该方法设置相关API的可用性
+    /**
+     * 由于接口方法存在依赖关系，可以重载该方法设置相关API的可用性
+     */
     ixInited: Ext.emptyFn,
 
-    // 服务是否可用
+    /**
+     * 服务是否可用
+     */
     ixAopEnabled: function () {
-        return this.ixApis !== undefined;
+        return this.ixApis !== null;
     },
 
-    // 方法是否可用
+    /**
+     * 方法是否可用
+     */
     ixApiEnabled: function (name) {
         var b = this.ixAopEnabled();
-        if (b !== true) { return false; }
-        if (!this.ixApis) { return false; }
-        var api = this.ixApis[name] || { enabled: false };
+        if (b !== true) {
+            return false;
+        }
+        if (!this.ixApis) {
+            return false;
+        }
+        var api = this.ixApis[name] || {
+            enabled: false
+        };
         return api.enabled === true;
     },
 
+    /**
+     * 调用API
+     */
     ixApiCall: function () {
         if (!arguments) {
             Ext.raise('未指定要调用的服务名称！');
@@ -85,6 +113,9 @@ Ext.define('iExt.aop.AOP', {
 
     privates: {
 
+        /**
+         * 调用 Ajax 请求
+         */
         _ixAjaxCall: function (name, data) {
             if (this.ixApiEnabled(name)) {
                 var api = this.ixApis[name];

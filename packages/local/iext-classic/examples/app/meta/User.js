@@ -6,7 +6,7 @@
     ixFields: [{
         ixName: 'code',
         ixTitle: '代码',
-        ixSort: 'ASC',
+        ixSortDir: 'ASC',
         ixIsEntityId: true,
         ixSubType: iExt.meta.ixtype.String.STRING
     }, {

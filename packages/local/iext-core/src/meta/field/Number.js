@@ -5,11 +5,12 @@
 Ext.define('iExt.meta.field.Number', {
     extend: 'iExt.meta.field.Field',
     alias: [
-        'ixmeta.number',
-        'ixmeta.num'
+        'ixmeta.field.number',
+        'ixmeta.field.num'
     ],
 
     config: {
+        ixDataType: iExt.meta.Types.NUMBER,
         ixSubType: 'qty'
     },
 

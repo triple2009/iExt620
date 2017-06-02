@@ -5,10 +5,11 @@
 Ext.define('iExt.meta.field.Date', {
     extend: 'iExt.meta.field.Field',
     alias: [
-        'ixmeta.date'
+        'ixmeta.field.date'
     ],
 
     config: {
+        ixDataType: iExt.meta.Types.DATE,
         ixSubType: 'date'
     },
 

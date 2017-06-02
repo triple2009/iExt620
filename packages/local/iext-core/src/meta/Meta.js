@@ -129,10 +129,10 @@ Ext.define('iExt.meta.Meta', {
                     delete data.ixSorters;
                     for (i = 0, length = fieldDefs.length; i < length; ++i) {
                         field = fieldDefs[i];
-                        if (field.ixSort) {
+                        if (field.ixSortDir) {
                             sorters.push({
                                 ixName: field.ixName,
-                                ixSortDir: field.ixSort
+                                ixSortDir: field.ixSortDir
                             });
                         }
                         ixField = Field.create(field);

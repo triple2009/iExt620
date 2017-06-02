@@ -1,7 +1,7 @@
 ﻿/**
  * @class iExt.meta.Entity
  * @extends {iExt.meta.Meta} 
- * @classdesc 元数据基础类。
+ * @classdesc 实体元数据类。
  */
 Ext.define('iExt.meta.Entity', {
     extend: 'iExt.meta.Meta',

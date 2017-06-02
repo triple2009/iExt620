@@ -8,16 +8,28 @@ Ext.define('iExt.app.container.ViewModel', {
     alias: 'viewmodel.ixviewcontainer',
 
     data: {
-        // 视图容器数据
+        /**
+         * 视图容器数据
+         */
         _ixvc: {
+            /**
+             * 标题
+             */
             title: '',
+
+            /**
+             * 缺省标题
+             */
             ixtitle: ''
         }
     },
 
     formulas: {
 
-        // 视图容器标题
+        /**
+         * 视图容器标题。
+         * 如果指定了标题则使用该标题，否则使用缺省标题。
+         */
         _ixvc_title: function (get) {
             return get('_ixvc.title') ||
                 get('_ixvc.ixtitle');

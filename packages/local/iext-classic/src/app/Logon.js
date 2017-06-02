@@ -14,8 +14,11 @@ Ext.define('iExt.app.Logon', {
 
     cls: 'ix-app-logon',
 
-    config: {
-        ixUser: undefined
+    viewModel: {
+        data: {
+            code: '',
+            pwd: ''
+        }
     },
 
     layout: {
@@ -63,10 +66,10 @@ Ext.define('iExt.app.Logon', {
                 titleAlign: 'center'
             },
 
-            items: [
-                {
-                    fieldLabel: '系统号',
+            items: [{
+                    fieldLabel: '帐号',
                     name: 'code',
+                    bind: '{code}',
                     allowBlank: false,
                     triggers: {
                         user: {
@@ -78,6 +81,7 @@ Ext.define('iExt.app.Logon', {
                     fieldLabel: '密码',
                     allowBlank: false,
                     name: 'password',
+                    bind: '{pwd}',
                     inputType: 'password',
                     triggers: {
                         lock: {
@@ -92,7 +96,10 @@ Ext.define('iExt.app.Logon', {
                     margin: '30 0 0 0',
                     minWidth: iExt.Theme.Logon.ixMinWidth,
                     listeners: {
-                        click: { fn: me.ixOnLogon, scope: me }
+                        click: {
+                            fn: me.ixOnLogon,
+                            scope: me
+                        }
                     }
                 }
             ]

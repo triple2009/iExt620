@@ -5,11 +5,12 @@
 Ext.define('iExt.meta.field.Integer', {
     extend: 'iExt.meta.field.Field',
     alias: [
-        'ixmeta.integer',
-        'ixmeta.int'
+        'ixmeta.field.integer',
+        'ixmeta.field.int'
     ],
 
     config: {
+        ixDataType: iExt.meta.Types.INTEGER,
         ixSubType: 'int'
     },
 

@@ -18,10 +18,30 @@ Ext.define('iExt.app.Application', {
     ixIsApp: true,
 
     config: {
+        /**
+         * 配置文件地址
+         */
         ixConfigFile: 'resources/config.json',
+
+        /**
+         * 启用的AOP
+         */
         ixAops: null,
+
+        /**
+         * 登录视图，例如：'app.view.Logon'
+         */
         ixLogonView: null,
-        ixMainView: null
+
+        /**
+         * 主视图，例如：'app.view.Home'
+         */
+        ixMainView: null,
+
+        /**
+         * 控制台视图
+         */
+        ixConsoleView: null
     },
 
     /**
@@ -47,15 +67,17 @@ Ext.define('iExt.app.Application', {
         var me = this;
         me.callParent(arguments);
 
-        // 设置查看控制面板快捷键 ctrl + shift + l
-        var keyMap = new Ext.util.KeyMap({
-            target: Ext.getBody(),
-            key: "l",
-            ctrl: true,
-            shift: true,
-            fn: me._ixDiagnose.bind(me)
-        });
-
+        var console = me.getIxConsoleView();
+        if (console) {
+            // 设置查看控制台快捷键 ctrl + shift + l
+            var keyMap = new Ext.util.KeyMap({
+                target: Ext.getBody(),
+                key: "l",
+                ctrl: true,
+                shift: true,
+                fn: me._ixShowConsole.bind(me)
+            });
+        }
     },
 
     /**
@@ -121,41 +143,23 @@ Ext.define('iExt.app.Application', {
     privates: {
 
         /**
-         * 显示控制面板。
+         * 显示控制台。
          * @memberOf iExt.app.Application#
          */
-        _ixDiagnose: function () {
+        _ixShowConsole: function () {
             var me = this;
-            if (!me._ixWinDiagnosis) {
-                me._ixWinDiagnosis = Ext.create({
-                    xtype: 'window',
-                    title: '控制面板',
-                    layout: 'fit',
-                    modal: true,
-                    width: 800,
-                    height: 600,
-                    closeAction: 'hide',
-                    maximizable: true,
-                    items: [{
-                        xtype: 'tabpanel',
-                        items: [{
-                            xtype: 'ixtool'
-                        }]
-                    }],
-                    buttons: [{
-                        text: '取消',
-                        minWidth: 120,
-                        listeners: {
-                            click: function () {
-                                this.up('window').hide();
-                            }
-                        }
-                    }]
-                });
+            if (!me._ixWinConsole) {
+                var console = me.getIxConsoleView();
+                if (console) {
+                    me._ixWinConsole = Ext.create({
+                        xtype: console
+                    });
+                }
             }
-            me._ixWinDiagnosis.show();
+            if (me._ixWinConsole) {
+                me._ixWinConsole.show();
+            }
         }
-
     }
 
 });

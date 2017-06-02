@@ -1,4 +1,9 @@
-﻿Ext.define('iExt.meta.ixtype.Integer', {
+﻿/**
+ * @class iExt.meta.ixtype.Integer
+ * @extends {iExt.enums.Base} 
+ * @classdesc 整型元数据子类型枚举。
+ */
+Ext.define('iExt.meta.ixtype.Integer', {
     extend: 'iExt.enums.Base',
     singleton: true,
 

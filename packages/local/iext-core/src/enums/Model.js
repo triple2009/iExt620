@@ -1,7 +1,7 @@
 ﻿/**
  * @class iExt.enums.Model
  * @extends {Ext.data.Model}
- * @classdesc 枚举数据模型的基础类。
+ * @classdesc 枚举数据模型的基础类。用于枚举Store的数据模型。
  */
 Ext.define('iExt.enums.Model', {
     extend: 'Ext.data.Model',

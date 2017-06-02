@@ -7,6 +7,7 @@ Ext.define('app.Application', {
     extend: 'iExt.app.Application',
 
     name: 'app',
+    ixConsoleView: 'ixconsole',
 
     stores: [
         // TODO: add global / shared stores here

@@ -5,11 +5,12 @@
 Ext.define('iExt.meta.field.String', {
     extend: 'iExt.meta.field.Field',
     alias: [
-        'ixmeta.string',
-        'ixmeta.str'
+        'ixmeta.field.string',
+        'ixmeta.field.str'
     ],
 
     config: {
+        ixDataType: iExt.meta.Types.STRING,
         ixSubType: 'string'
     },
 

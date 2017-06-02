@@ -1,4 +1,6 @@
-﻿// @define iExt
+﻿/**
+ * iExt
+ */ 
 var iExt = iExt || {}; // jshint ignore:line
 
 (function () {

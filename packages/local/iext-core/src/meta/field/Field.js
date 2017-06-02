@@ -4,14 +4,15 @@
  */
 Ext.define('iExt.meta.field.Field', {
     alternateClassName: 'iExt.meta.Field',
+    alias: 'ixmeta.field.auto', 
+    aliasPrefix: 'ixmeta.field.',
 
     mixins: [
         'Ext.mixin.Factoryable'
     ],
 
     factoryConfig: {
-        defaultType: 'string',
-        type: 'ixmeta'
+        defaultType: 'string'
     },
 
     ixIsMetaField: true,
@@ -68,7 +69,7 @@ Ext.define('iExt.meta.field.Field', {
     /**
      * 缺省排序方式 (ASC/DESC)
      */
-    ixSort: null,
+    ixSortDir: null,
 
     /**
      * 仓储标识(true/false)

@@ -12,23 +12,55 @@ Ext.define('iExt.app.Runtime', {
     ],
 
     config: {
-        // 用户会话标识
+        /**
+         * 用户会话标识
+         */
         ixSessionKey: 'ix-session',
-        // 当前应用程序Application对象
+
+        /**
+         * 当前应用程序Application对象
+         */
         ixApp: null,
+
+        /**
+         * 当前应用配置信息
+         */
         ixAppConfig: null,
 
-        // 应用程序标识，采用id是为了区分同一个系统的多个应用
-        // 例如：培训系统，可以有北京、大连等多个应用
+        /**
+         * 应用程序标识，采用id是为了区分同一个系统的多个应用
+         * 例如：培训系统，可以有北京、大连等多个应用
+         */
         ixAppId: null,
+
+        /**
+         * 应用代码
+         */
         ixAppCode: '',
+
+        /**
+         * 应用名称
+         */
         ixAppName: '',
+
+        /**
+         * 应用服务地址
+         */
         ixAppUrl: '',
 
+        /**
+         * 是否调试
+         */
         ixDebug: false,
+
+        /**
+         * 运行模式
+         */
         ixMode: 'DEV',
 
-        // 当前登录用户
+        /**
+         * 当前登录用户
+         */
         ixUser: null
     },
 
@@ -36,8 +68,13 @@ Ext.define('iExt.app.Runtime', {
         this.initConfig(config);
     },
 
+    /**
+     * 加载配置信息。
+     * @param {String} 配置文件地址。
+     */
     ixLoadConfig: function (url) {
-        var me = this, d = new Ext.Deferred();
+        var me = this,
+            d = new Ext.Deferred();
 
         iExt.Ajax.ixCall(url, 'GET').then(
             function (response, opts) {
@@ -51,10 +88,17 @@ Ext.define('iExt.app.Runtime', {
         return d.promise;
     },
 
+    /**
+     * 是否是开发模式。
+     */
     ixIsDevelop: function () {
         return this.getIxMode() === 'DEV';
     },
 
+    /**
+     * 根据应用标识获取服务地址。
+     * @param {String} 应用标识。
+     */
     ixGetAppUrl: function (appId) {
         var url = this.getIxAppUrl();
         if (appId) {
@@ -73,6 +117,9 @@ Ext.define('iExt.app.Runtime', {
         return url;
     },
 
+    /**
+     * 设置应用配置。
+     */
     applyIxAppConfig: function (appConfig) {
         if (Ext.isObject(appConfig)) {
             appConfig = Ext.clone(appConfig);
@@ -90,6 +137,9 @@ Ext.define('iExt.app.Runtime', {
         return appConfig;
     },
 
+    /**
+     * 设置应用代码。
+     */
     applyIxAppCode: function (code) {
         if (!code) {
             code = 'iExt';
@@ -97,6 +147,9 @@ Ext.define('iExt.app.Runtime', {
         return code;
     },
 
+    /**
+     * 设置应用名称。
+     */
     applyIxAppName: function (name) {
         if (!name) {
             name = 'iExt';
@@ -104,6 +157,9 @@ Ext.define('iExt.app.Runtime', {
         return name;
     },
 
+    /**
+     * 更新当前用户。
+     */
     updateIxUser: function (user) {
         if (user) {
             sessionStorage.setItem(this.getIxSessionKey(), Ext.encode(user));
@@ -112,6 +168,9 @@ Ext.define('iExt.app.Runtime', {
         }
     },
 
+    /**
+     * 获取当前用户。
+     */
     getIxUser: function () {
         var user = sessionStorage.getItem(this.getIxSessionKey());
         if (user) {

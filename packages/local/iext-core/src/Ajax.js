@@ -1,4 +1,7 @@
-﻿Ext.define('iExt.Ajax', {
+﻿/**
+ * iExt Ajax请求类
+ */
+Ext.define('iExt.Ajax', {
 
     requires: [
         'Ext.Ajax'
@@ -34,6 +37,11 @@
             return Ext.Ajax.request(options);
         },
 
+        /**
+         * 异步Get请求。
+         * @param {String} 请求地址
+         * @param {Object} 参数对象
+         */
         ixGet: function (url, data) {
             return this.ixCallAsync(url, 'GET', data);
         }

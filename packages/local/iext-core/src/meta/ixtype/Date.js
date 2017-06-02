@@ -1,4 +1,9 @@
-﻿Ext.define('iExt.meta.ixtype.Date', {
+﻿/**
+ * @class iExt.meta.ixtype.Date
+ * @extends {iExt.enums.Base} 
+ * @classdesc 日期元数据子类型枚举。
+ */
+Ext.define('iExt.meta.ixtype.Date', {
     extend: 'iExt.enums.Base',
     singleton: true,
 

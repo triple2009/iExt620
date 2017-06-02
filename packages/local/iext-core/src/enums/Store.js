@@ -13,8 +13,10 @@ Ext.define('iExt.enums.Store', {
 
     model: 'iExt.enums.Model',
 
-    // proxy 需要在Store中设置，需要与Store的实例相关。
-    // model 中的Proxy是静态的，与实例无关。
+    /**
+     * proxy 需要在Store中设置，需要与Store的实例相关。
+     * model 中的Proxy是静态的，与实例无关。
+     */
     proxy: {
         type: 'memory',
         reader: 'json'

@@ -1,4 +1,9 @@
-﻿Ext.define('iExt.meta.Aggregate', {
+﻿/**
+ * @class iExt.meta.Entity
+ * @extends {iExt.meta.Meta} 
+ * @classdesc 聚合根元数据类。
+ */
+Ext.define('iExt.meta.Aggregate', {
     extend: 'iExt.meta.Entity',
 
     ixFields: [{

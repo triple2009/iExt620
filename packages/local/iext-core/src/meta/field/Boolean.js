@@ -6,11 +6,12 @@
 Ext.define('iExt.meta.field.Boolean', {
     extend: 'iExt.meta.field.Field',
     alias: [
-        'ixmeta.boolean',
-        'ixmeta.bool'
+        'ixmeta.field.boolean',
+        'ixmeta.field.bool'
     ],
 
     config: {
+        ixDataType: iExt.meta.Types.BOOLEAN,
         ixSubType: 'dual'
     },
 

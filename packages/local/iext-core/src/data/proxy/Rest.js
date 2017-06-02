@@ -20,7 +20,9 @@ Ext.define('iExt.data.proxy.Rest', {
     },
 
     config: {
-        // 应用程序标识
+        /**
+         * 应用程序标识
+         */
         ixAppId: undefined
     },
 
@@ -87,7 +89,11 @@ Ext.define('iExt.data.proxy.Rest', {
         return baseUrl + url;
     },
 
-
+    /**
+     * 对搜索条件进行编码。
+     * @param {Object|Object[]} 搜索条件。
+     * @return {String} 编码后的搜索条件。
+     */
     encodeFilters: function (filters) {
         if (filters && filters.length === 1 && filters[0].type) {
             return Ext.encode(filters[0].serialize());

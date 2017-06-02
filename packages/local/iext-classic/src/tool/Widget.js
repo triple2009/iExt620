@@ -1,11 +1,11 @@
 /**
- * @class iExt.app.tool.Widget
+ * @class iExt.tool.Widget
  * @extends {Ext.container.Container} 
  * @classdesc 控件调试。
  */
-Ext.define('iExt.app.tool.Widget', {
+Ext.define('iExt.tool.Widget', {
     extend: 'Ext.container.Container',
-    alias: 'widget.ixapptool',
+    alias: 'widget.ixwidget',
 
     title: '控件调试',
     layout: 'border',
@@ -26,7 +26,9 @@ Ext.define('iExt.app.tool.Widget', {
             xtype: 'panel',
             title: '代码',
             header: false,
-            split: true,
+            split: {
+                size: 5
+            },
             weight: 20,
             height: 240,
             region: 'south',
@@ -36,12 +38,18 @@ Ext.define('iExt.app.tool.Widget', {
                 items: [{
                     text: '清除',
                     listeners: {
-                        click: { fn: me._ixClear, scope: me }
+                        click: {
+                            fn: me._ixClear,
+                            scope: me
+                        }
                     }
                 }, {
                     text: '创建',
                     listeners: {
-                        click: { fn: me._ixAdd, scope: me }
+                        click: {
+                            fn: me._ixAdd,
+                            scope: me
+                        }
                     }
                 }, {
                     xtype: 'label',
@@ -53,17 +61,19 @@ Ext.define('iExt.app.tool.Widget', {
                 reference: 'txtCode',
                 inputAttrTpl: 'spellcheck=false',
                 value: '{xtype:"toolbar",items:[' +
-                        '{xtype:"textfield",value:"hello world"},' +
-                        '{xtype:"button",text:"ok"}' +
-                        ']}'
+                    '{xtype:"textfield",value:"hello world"},' +
+                    '{xtype:"button",text:"ok"}' +
+                    ']}'
             }]
-        }
-        ];
+        }];
         me.callParent(arguments);
     },
 
     privates: {
 
+        /**
+         * 添加组件
+         */
         _ixAdd: function () {
             var me = this,
                 refs = me.getReferences();
@@ -88,6 +98,9 @@ Ext.define('iExt.app.tool.Widget', {
             }
         },
 
+        /**
+         * 清除所有组件
+         */
         _ixClear: function () {
             var me = this,
                 refs = me.getReferences();
