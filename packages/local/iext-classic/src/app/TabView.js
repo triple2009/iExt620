@@ -1,30 +1,17 @@
 /**
  * @class iExt.app.TabView
- * @extends {Ext.container.Viewport} 
+ * @extends {iExt.app.Workspace} 
  * @classdesc 应用程序工作区。
  */
 Ext.define('iExt.app.TabView', {
-    extend: 'Ext.container.Viewport',
+    extend: 'iExt.app.Workspace',
     xtype: 'widget.ixapptab',
 
     requires: [
-        'iExt.app.Title'
-    ],
 
-    mixins: [
-        'iExt.app.view.Workspace'
     ],
 
     cls: 'ix-app-tab',
-    layout: 'border',
-    referenceHolder: true,
-
-    config: {
-        ixHeaderItems: [],
-        ixHomeView: undefined,
-        ixFormView: undefined,
-        ixAppsStore: undefined
-    },
 
     initComponent: function () {
         var me = this, items = [],
@@ -56,7 +43,7 @@ Ext.define('iExt.app.TabView', {
 
         tbrItems.push({
             bind: {
-                text: '{ixa.user.code}-{ixa.user.name}'
+                text: '{_ixa.user.code}-{_ixa.user.name}'
             },
             menuAlign: 'tr-br',
             menu: {

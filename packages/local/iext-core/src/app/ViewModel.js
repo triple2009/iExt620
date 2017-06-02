@@ -8,7 +8,8 @@ Ext.define('iExt.app.ViewModel', {
     alias: 'viewmodel.ixapp',
 
     data: {
-        ixa: {
+        // 应用程序数据
+        _ixa: {
             user: {
                 code: 'Administrator',
                 name: '管理员'

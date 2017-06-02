@@ -4,7 +4,6 @@ Ext.define('app.view.main.Main', {
 
     requires: [],
     controller: 'main',
-    viewModel: 'main',
 
     layout: 'border',
     tbar: {

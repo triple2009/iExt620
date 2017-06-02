@@ -23,21 +23,7 @@ Ext.define('iExt.panel.ViewContainer', {
     },
 
     // view container viewmodel
-    viewModel: {
-        data: {
-            _ixvc: {
-                title: '',
-                ixtitle: ''
-            }
-        },
-
-        formulas: {
-            _ixvc_title: function (get) {
-                return get('_ixvc.title') || get('_ixvc.ixtitle');
-            }
-        }
-    },
-
+    viewModel: 'ixviewcontainer',
 
     initComponent: function () {
         var me = this;

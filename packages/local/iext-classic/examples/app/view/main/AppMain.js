@@ -3,8 +3,7 @@ Ext.define('app.view.main.AppMain', {
     xtype: 'app-appmain',
 
     requires: [],
-    viewModel: 'appmain',
-
+    
     ixHomeView: 'app-user',
     ixFormView: 'app-user-add',
     ixAppsStore: { type: 'apps' }
