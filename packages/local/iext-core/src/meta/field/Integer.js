@@ -1,4 +1,8 @@
-﻿Ext.define('iExt.meta.field.Integer', {
+﻿/**
+ * @class iExt.meta.field.Integer
+ * @classdesc 整型字段类。
+ */
+Ext.define('iExt.meta.field.Integer', {
     extend: 'iExt.meta.field.Field',
     alias: [
         'ixmeta.integer',
@@ -10,7 +14,7 @@
     },
 
     applyIxDataType: function (datatype) {
-        return iExt.meta.DataType.INTEGER;
+        return iExt.meta.Types.INTEGER;
     },
 
     applyIxSubType: function (subtype) {
@@ -20,19 +24,13 @@
         return subtype;
     },
 
-    ixGetColumn: function () {
-        var me = this, subType = me.getIxSubType();
-        var col = {
-            xtype: 'ix-numcol',
-            text: me.ixTitle,
-            dataIndex: me.ixName,
-            sortable: true,
-            ixWeight: me.ixWeight,
-            ixLen: me.ixLen,
-            // 数据子类型
-            ixSubType: subType
-        };
-        return col;
+    /**
+     * 根据字段属性信息格式化数据。
+     * @param {Object} 值。
+     * @return {String} 格式化后的字符串。
+     */
+    ixFormat: function (value) {
+        return value;
     }
 
 });

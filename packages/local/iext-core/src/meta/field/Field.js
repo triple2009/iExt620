@@ -17,33 +17,52 @@ Ext.define('iExt.meta.field.Field', {
     ixIsMetaField: true,
 
     config: {
-        // 数据类型
-        ixDataType: undefined,
-        // 数据子类型
-        ixSubType: undefined
+        /**
+         * 数据类型
+         */
+        ixDataType: null,
+        /**
+         * 数据子类型
+         */
+        ixSubType: null
     },
 
-    // 名称
-    ixName: undefined,
+    /**
+     * 属性名称，例如：code
+     */
+    ixName: null,
 
-    // 列标题
-    ixTitle: undefined,
+    /**
+     * 标题，例如：代码
+     */
+    ixTitle: null,
 
-    // 标签
-    ixLabel: undefined,
+    /**
+     * 标签，例如：用户代码
+     */
+    ixLabel: null,
 
-    // 缺省值
-    ixDefault: undefined,
+    /**
+     * 缺省值
+     */
+    ixDefault: null,
 
-    // 最大长度，可以根据validator自动设置
+    /**
+     * 最大长度，可以根据validator自动设置？
+     */
     ixMaxLen: 10,
-    
-    // 导航实体模型 (可用于快速查看或自动导航)
-    // {Object} {ixModel:数据模型, ixProperty:仓储标识属性}
-    // 例如: 修改用户代码字段可以设置为
-    // {ixModel:'User', ixProperty:'createdById'}
-    ixNavigator: undefined,
 
+    /**
+     * 导航实体模型 (可用于快速查看或自动导航)
+     * {Object} {ixModel:数据模型, ixProperty:仓储标识属性}
+     * 例如: 修改用户代码字段可以设置为
+     * {ixModel:'User', ixProperty:'createdById'}
+     */
+    ixNavigator: null,
+
+    /**
+     * 构造函数
+     */
     constructor: function (config) {
         this.initialConfig = config;
         this.initConfig(config);

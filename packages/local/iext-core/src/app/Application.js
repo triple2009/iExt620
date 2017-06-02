@@ -19,9 +19,9 @@ Ext.define('iExt.app.Application', {
 
     config: {
         ixConfigFile: 'resources/config.json',
-        ixAops: undefined,
-        ixLogonView: undefined,
-        ixMainView: undefined
+        ixAops: null,
+        ixLogonView: null,
+        ixMainView: null
     },
 
     /**
@@ -47,7 +47,7 @@ Ext.define('iExt.app.Application', {
         var me = this;
         me.callParent(arguments);
 
-        // 设置查看控制面板快捷键
+        // 设置查看控制面板快捷键 ctrl + shift + l
         var keyMap = new Ext.util.KeyMap({
             target: Ext.getBody(),
             key: "l",
@@ -120,6 +120,10 @@ Ext.define('iExt.app.Application', {
 
     privates: {
 
+        /**
+         * 显示控制面板。
+         * @memberOf iExt.app.Application#
+         */
         _ixDiagnose: function () {
             var me = this;
             if (!me._ixWinDiagnosis) {

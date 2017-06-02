@@ -1,4 +1,9 @@
-﻿Ext.define('iExt.meta.Meta', {
+﻿/**
+ * @class iExt.meta.Meta
+ * @extends {Ext.Base} 
+ * @classdesc 元数据基础类。
+ */
+Ext.define('iExt.meta.Meta', {
     alternateClassName: 'iExt.Meta',
 
     requires: [

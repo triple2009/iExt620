@@ -15,7 +15,7 @@ Ext.define('iExt.meta.field.Boolean', {
     },
 
     applyIxDataType: function (datatype) {
-        return iExt.meta.DataType.BOOLEAN;
+        return iExt.meta.Types.BOOLEAN;
     },
 
     applyIxSubType: function (subtype) {
@@ -25,31 +25,17 @@ Ext.define('iExt.meta.field.Boolean', {
         return subtype;
     },
 
-    ixGetColumn: function () {
-        var me = this, subType = me.getIxSubType();
-        var col = {
-            xtype: 'ix-boolcol',
-            text: me.ixTitle,
-            dataIndex: me.ixName,
-            sortable: true,
-            ixWeight: me.ixWeight,
-            ixLen: me.ixLen,
-            // 数据子类型
-            ixSubType: subType
-        };
-        return col;
-    },
-
-    // 格式化
+    /**
+     * 根据字段属性信息格式化数据。
+     * @param {Object} 值。
+     * @return {String} 格式化后的字符串。
+     */
     ixFormat: function (value) {
-        var subtype = this.getIxSubType();
-
         if (subtype === iExt.meta.ixtype.Boolean.DUAL) {
-            value = Ext.util.Format.date(value, 'Y-m-d');
+            value = iExt.util.Format.ixDual(value);
         } else if (subtype === iExt.meta.ixtype.Boolean.TRIPLET) {
-            value = Ext.util.Format.date(value, 'Y-m-d H:i:s');
+            value = Ext.util.Format.ixTriplet(value);
         }
-
         return value;
     }
 

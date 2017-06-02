@@ -1,4 +1,8 @@
-﻿Ext.define('iExt.meta.field.Date', {
+﻿/**
+ * @class iExt.meta.field.Date
+ * @classdesc 日期时间字段类。
+ */
+Ext.define('iExt.meta.field.Date', {
     extend: 'iExt.meta.field.Field',
     alias: [
         'ixmeta.date'
@@ -9,7 +13,7 @@
     },
 
     applyIxDataType: function (datatype) {
-        return iExt.meta.DataType.DATE;
+        return iExt.meta.Types.DATE;
     },
 
     applyIxSubType: function (subtype) {
@@ -19,22 +23,11 @@
         return subtype;
     },
 
-    ixGetColumn: function () {
-        var me = this, subType = me.getIxSubType();
-        var col = {
-            xtype: 'ix-datecol',
-            text: me.ixTitle,
-            dataIndex: me.ixName,
-            sortable: true,
-            ixWeight: me.ixWeight,
-            ixLen: me.ixLen,
-            // 数据子类型
-            ixSubType: subType
-        };
-        return col;
-    },
-
-    // 格式化
+    /**
+     * 根据字段属性信息格式化数据。
+     * @param {Object} 值。
+     * @return {String} 格式化后的字符串。
+     */
     ixFormat: function (value) {
         var subtype = this.getIxSubType();
 

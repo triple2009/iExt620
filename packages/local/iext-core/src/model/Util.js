@@ -6,20 +6,26 @@ Ext.define('iExt.model.Util', {
     alternateClassName: 'iExt.Model',
     singleton: true,
 
-    // 
-    ixGetModel: function (model) {
-        if (model) {
-            var modelClass = Ext.ClassManager.get(model);
-            if (!modelClass) {
-                Ext.raise('未找到指定的实体类 [' + model + '] !');
-            }
-            model = modelClass;
+    /**
+     * 根据实体的类名获取实体类。
+     * @param {String} 实体类名称。
+     * @return {Object} 实体类。
+     */
+    ixGetModel: function (className) {
+        var modelClass = Ext.ClassManager.get(className);
+        if (!modelClass) {
+            Ext.raise('未找到指定的实体类 [' + className + '] !');
         }
-        return model;
+        return modelClass;
     },
 
-    ixGetService: function (model) {
-        var names = model.$className.split('.');
+    /**
+     * 根据实体的类名获取服务名称。
+     * @param {String} 实体类名称。
+     * @return {String} 服务名称。
+     */
+    ixGetService: function (className) {
+        var names = className.$className.split('.');
         var service = names[names.length - 1].toLowerCase();
         return service;
     }

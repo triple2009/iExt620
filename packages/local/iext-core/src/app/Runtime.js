@@ -1,4 +1,9 @@
-﻿Ext.define('iExt.app.Runtime', {
+﻿/**
+ * @class iExt.app.Runtime
+ * @extends {Ext.Base} 
+ * @classdesc 应用程序运行时类。
+ */
+Ext.define('iExt.app.Runtime', {
     alternateClassName: 'iExt.Runtime',
     singleton: true,
 
@@ -7,14 +12,15 @@
     ],
 
     config: {
-        ixSessionKey: 'ix-user',
+        // 用户会话标识
+        ixSessionKey: 'ix-session',
         // 当前应用程序Application对象
-        ixApp: undefined,
-        ixAppConfig: undefined,
+        ixApp: null,
+        ixAppConfig: null,
 
         // 应用程序标识，采用id是为了区分同一个系统的多个应用
         // 例如：培训系统，可以有北京、大连等多个应用
-        ixAppId: undefined,
+        ixAppId: null,
         ixAppCode: '',
         ixAppName: '',
         ixAppUrl: '',
@@ -22,10 +28,8 @@
         ixDebug: false,
         ixMode: 'DEV',
 
-        // 扩展应用集合配置？
-        ixApps: undefined,
         // 当前登录用户
-        ixUser: undefined
+        ixUser: null
     },
 
     constructor: function (config) {

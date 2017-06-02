@@ -11,9 +11,21 @@ Ext.define('iExt.data.Model', {
     ],
 
     ixApiConfig: {
-        ixAppId: undefined,
-        ixService: undefined,
-        ixApis: undefined
+        /**
+         * app 标识
+         */
+        ixAppId: null,
+        /**
+         * 服务标识，例如：user、menu
+         */
+        ixService: null,
+        /**
+         * 操作集合，例如：
+         * { ixCode: 'resetPassword', ixMethod: 'PUT' },
+         * { ixCode: 'active', ixMethod: 'PUT' },
+         * { ixCode: 'inactive', ixMethod: 'PUT' }
+         */
+        ixApis: []
     },
 
     statics: {

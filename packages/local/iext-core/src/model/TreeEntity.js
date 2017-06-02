@@ -8,7 +8,9 @@ Ext.define('iExt.model.TreeEntity', {
 
     idProperty: 'id',
 
-    // 框架实体
+    /**
+     * 框架实体
+     */
     ixIsTreeModel: true,
 
     fields: [{
