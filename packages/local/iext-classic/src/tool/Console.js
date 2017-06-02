@@ -4,7 +4,7 @@
  * @classdesc GridPanel基础类。
  */
 Ext.define('iExt.tool.Console', {
-    extend: 'Ext.window.Window',
+    extend: 'iExt.window.Window',
     alias: 'widget.ixconsole',
 
     requires: [
@@ -22,6 +22,8 @@ Ext.define('iExt.tool.Console', {
         xtype: 'ixtabpanel',
         items: [{
             xtype: 'ixwidget'
+        }, {
+            xtype: 'ixruntimegrid'
         }]
     }],
     buttons: [{
@@ -32,6 +34,12 @@ Ext.define('iExt.tool.Console', {
                 item.up('window').hide();
             }
         }
-    }]
+    }],
+
+    initComponent: function () {
+        var me = this;
+        me.addCls('x-selectable');
+        me.callParent();
+    }
 
 });

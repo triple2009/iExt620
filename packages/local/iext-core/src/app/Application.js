@@ -156,7 +156,8 @@ Ext.define('iExt.app.Application', {
                     });
                 }
             }
-            if (me._ixWinConsole) {
+            if (me._ixWinConsole && me._ixWinConsole.isWindow === true) {
+                me._ixWinConsole.center();
                 me._ixWinConsole.show();
             }
         }

@@ -20,8 +20,12 @@ Ext.define('iExt.tool.Widget', {
             region: 'center',
             header: false,
             reference: 'pnlView',
-            bodyPadding: 5,
-            scrollable: 'y'
+            scrollable: 'y',
+            listeners: {
+                afterRender: function (panle) {
+                    prettyPrint();
+                }
+            }
         }, {
             xtype: 'panel',
             title: '代码',
@@ -29,14 +33,17 @@ Ext.define('iExt.tool.Widget', {
             split: {
                 size: 5
             },
+            reference: 'pnlCode',
             weight: 20,
             height: 240,
             region: 'south',
             layout: 'fit',
+            bodyCls: 'ix-code-editor',
             tbar: {
                 xtype: 'toolbar',
                 items: [{
                     text: '清除',
+                    iconCls: 'x-fa fa-eject',
                     listeners: {
                         click: {
                             fn: me._ixClear,
@@ -44,42 +51,56 @@ Ext.define('iExt.tool.Widget', {
                         }
                     }
                 }, {
-                    text: '创建',
+                    xtype: 'label',
+                    reference: 'lblInfo'
+                }, '->', {
+                    text: '代码美化',
+                    iconCls: 'x-fa fa-bars',
+                    listeners: {
+                        click: {
+                            fn: me._ixPrettyPrint,
+                            scope: me
+                        }
+                    }
+                }, {
+                    text: '运行',
+                    iconCls: 'x-fa fa-play',
                     listeners: {
                         click: {
                             fn: me._ixAdd,
                             scope: me
                         }
                     }
-                }, {
-                    xtype: 'label',
-                    reference: 'lblInfo'
                 }]
             },
-            items: [{
-                xtype: 'textarea',
-                reference: 'txtCode',
-                inputAttrTpl: 'spellcheck=false',
-                value: '{xtype:"toolbar",items:[' +
-                    '{xtype:"textfield",value:"hello world"},' +
-                    '{xtype:"button",text:"ok"}' +
-                    ']}'
-            }]
+            html: me._ixPreTag +
+                '{xtype:"toolbar",items:[' +
+                '{xtype:"textfield",value:"hello world"},' +
+                '{xtype:"button",text:"ok"}]}' +
+                '</pre>',
+            listeners: {
+                afterRender: function () {
+                    prettyPrint();
+                }
+            }
         }];
         me.callParent(arguments);
     },
 
     privates: {
 
+        _ixPreTag: '<pre contenteditable="true" spellcheck="false" class="prettyprint">',
+
         /**
          * 添加组件
          */
-        _ixAdd: function () {
+        _ixAdd: function (item, e, eOpts) {
             var me = this,
                 refs = me.getReferences();
             try {
                 me._ixClear();
-                var code = refs.txtCode.getValue();
+                var codeEl = refs.pnlCode.body.down('pre:first-child');
+                var code = codeEl.dom.innerText;
                 var cmpCode = Ext.decode(code);
                 var cmp = refs.pnlView.add(cmpCode);
                 var info;
@@ -101,12 +122,25 @@ Ext.define('iExt.tool.Widget', {
         /**
          * 清除所有组件
          */
-        _ixClear: function () {
+        _ixClear: function (item, e, eOpts) {
             var me = this,
                 refs = me.getReferences();
             refs.pnlView.removeAll();
             refs.pnlView.setHtml('');
             refs.lblInfo.setText('');
+        },
+
+        /**
+         * 美化代码
+         */
+        _ixPrettyPrint: function (item, e, eOpts) {
+            var me = this,
+                refs = me.getReferences();
+            var body = refs.pnlCode.body;
+            var codeEl = body.down('pre:first-child');
+            var code = codeEl.dom.innerText;
+            body.setHtml(me._ixPreTag + code + '</pre>');
+            prettyPrint();
         }
 
     }

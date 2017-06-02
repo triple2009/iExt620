@@ -10,6 +10,22 @@
     "format": "1",
     "output": "${package.dir}/build",
     "local": true,
+
+    /**
+     * prettify js
+     */
+    "js": [{
+        "path": "resources/prettify/prettify.js",
+        "bundle": true
+    }],
+    
+    /**
+     * prettify css
+     */
+    "css": [{
+        "path": "resources/prettify/prettify.css"
+    }],
+
     "sass": {
         "namespace": "iExt",
         "etc": [
