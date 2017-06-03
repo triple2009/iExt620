@@ -2,6 +2,7 @@
  * @class iExt.meta.Meta
  * @extends {Ext.Base} 
  * @classdesc 元数据基础类。
+ * 元数据用于描述实体模型的信息，不应该包括UI方面的内容。
  */
 Ext.define('iExt.meta.Meta', {
     alternateClassName: 'iExt.Meta',
@@ -11,20 +12,10 @@ Ext.define('iExt.meta.Meta', {
         'iExt.meta.ixtype.*'
     ],
 
-    config: {
-        /**
-         * 缺省排序列集合
-         */
-        ixSorters: [],
-        /**
-         * 元数据字段集合
-         */
-        ixFields: [],
-        /**
-         * 实体模型类名称
-         */
-        ixModelClass: null
-    },
+    /**
+     * 实体模型类名称
+     */
+    ixModelClass: null,
 
     /**
      * 服务代码，例如：user
@@ -35,12 +26,6 @@ Ext.define('iExt.meta.Meta', {
      * 服务名称，例如：用户
      */
     ixName: '',
-
-    /**
-     * 操作集合对象，例如：新建、修改、审核等
-     * {add: '新建', edit: '编辑', ...}
-     */
-    ixActions: null,
 
     /**
      * 缺省排序列集合
@@ -115,7 +100,8 @@ Ext.define('iExt.meta.Meta', {
                 var fieldDefs = data.ixFields;
                 var superFields = proto.ixFields;
                 var i, length, field, ixField;
-                var fields = [], sorters = [];
+                var fields = [],
+                    sorters = [];
 
                 if (superFields) {
                     for (i = 0, length = superFields.length; i < length; ++i) {
@@ -153,41 +139,8 @@ Ext.define('iExt.meta.Meta', {
                 fields.sort(iExt.Meta.ixSortByNo);
                 cls.ixFields = proto.ixFields = fields;
                 cls.ixSorters = proto.ixSorters = sorters;
-            },
-
-            _ixInitActions: function (data, cls, proto) {
-                var actionsDefs = data.ixActions;
-                var superActions = proto.ixActions;
-                var i, length, actionProp, action;
-
-                var actions = {};
-                if (superActions) {
-                    for (actionProp in superActions) {
-                        if (superActions.hasOwnProperty(actionProp)) {
-                            action = Ext.clone(superActions[actionProp]);
-                            if (action!==false){
-                                actions[actionProp] = action;
-                            }
-                         }
-                    }
-                }
-
-                if (actionsDefs) {
-                    delete data.ixActions;
-                    for (actionProp in actionsDefs) {
-                        if (actionsDefs.hasOwnProperty(actionProp)) {
-                            action = Ext.clone(actionsDefs[actionProp]);
-                            if (action!==false){
-                                actions[actionProp] = action;
-                            }
-                         }
-                    }
-                }
-                cls.ixActions = proto.ixActions = actions;
             }
-
         }
-
     }
 
 }, function () {
@@ -196,6 +149,5 @@ Ext.define('iExt.meta.Meta', {
         var proto = cls.prototype;
         var superCls = proto.superclass.self;
         Meta._ixInitFields(data, cls, proto);
-        Meta._ixInitActions(data, cls, proto);
     });
 });

@@ -43,15 +43,6 @@ Ext.define('iExt.meta.Aggregate', {
         ixName: 'modifiedOn',
         ixTitle: '修改时间',
         ixSubType: iExt.meta.ixtype.Date.DATETIME
-    }],
-
-    ixActions: {
-        _search: {
-            type: 'view',
-            ixName: '搜索',
-            //ixTarget: iExt.app.view.ViewTarget.SEARCH,
-            ixIconCls: 'x-fa fa-search'
-        }
-    }
+    }]
 
 });
