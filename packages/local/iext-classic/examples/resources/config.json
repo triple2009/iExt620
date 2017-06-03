@@ -1,12 +1,39 @@
 ﻿{
-  "appCode": "app",
-  "appName": "iext name",
+  /** 
+   * 应用程序标识
+   */
   "appId": "appId",
+  /** 
+   * 应用程序代码
+   */
+  "appCode": "app",
+  /** 
+   * 应用程序名称
+   */
+  "appName": "iext name",
+  /** 
+   * 应用程序服务地址
+   */
   "appUrl": "http://172.17.10.242:9010/huc",
+  /** 
+   * 调试开关
+   */
   "debug": true,
+  /** 
+   * 应用运行模式
+   */
   "mode": "DEV",
+  /** 
+   * 授权服务接口
+   */
   "auth_Identity": {
+    /** 
+     * 服务地址
+     */
     "url": "http://172.17.10.242:9010/huc",
+    /** 
+     * api定义
+     */
     "apis": {
       "ixLogon": {
         "enabled": true,
@@ -23,8 +50,17 @@
       }
     }
   },
+  /** 
+   * 身份认证服务
+   */
   "auth_Authorization": {
-    "url": "http://huc.dev.howonder.com/api/huc/",
+    /** 
+     * 服务地址
+     */
+    "url": "http://172.17.10.242:9010/huc",
+    /** 
+     * api定义
+     */
     "apis": {
       "ixGetUserApps": {
         "enabled": true
@@ -37,10 +73,20 @@
       }
     }
   },
+  /** 
+   * 应用集合
+   */
   "apps": {
-    "huc": { "url": "http://172.17.10.242:9010/huc" },
-    "htc": { "url": "http://172.17.10.242:9010/huc" }
+    "huc": {
+      "url": "http://172.17.10.242:9010/huc"
+    },
+    "htc": {
+      "url": "http://172.17.10.242:9010/huc"
+    }
   },
+  /** 
+   * 日志接口？
+   */
   "logger": {
     "ajax": true
   }
