@@ -4,12 +4,35 @@
  */
 Ext.define('iExt.enums.Base', {
 
-    ixBit: false,
+    /**
+     * 是否是位值枚举
+     * 缺省都是位值枚举
+     */
+    ixBit: true,
+
+    /**
+     * 枚举值
+     */
     ixItems: [],
 
+    /**
+     * 分隔符
+     */
     ixDelimiter: ',',
+
+    /**
+     * 名称属性名
+     */
     ixNameProperty: 'name',
+
+    /**
+     * 值属性名
+     */
     ixValueProperty: 'value',
+
+    /**
+     * 文本属性名
+     */
     ixTextProperty: 'text',
 
     /**

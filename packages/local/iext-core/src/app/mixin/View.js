@@ -1,8 +1,8 @@
 /**
- * @mixin iExt.app.view.View
+ * @mixin iExt.app.mixin.View
  * @classdesc iExt视图 MIXIN。
  */
-Ext.define('iExt.app.view.View', {
+Ext.define('iExt.app.mixin.View', {
     extend: 'Ext.Mixin',
 
     mixinConfig: {

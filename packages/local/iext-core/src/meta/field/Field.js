@@ -12,6 +12,9 @@ Ext.define('iExt.meta.field.Field', {
     ],
 
     factoryConfig: {
+        /**
+         * 缺省是文本字段
+         */
         defaultType: 'string'
     },
 

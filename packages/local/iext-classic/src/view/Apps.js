@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.View
+ * @class iExt.view.Apps
  * @extends {Ext.view.View} 
  * @classdesc 应用程序列表。
  */
-Ext.define('iExt.app.View', {
+Ext.define('iExt.view.Apps', {
     extend: 'Ext.view.View',
     alias: 'widget.ixappsview',
 

@@ -1,10 +1,10 @@
 /**
- * @class iExt.panel.QuickContainer
- * @extends {Ext.panel.Panel} 
+ * @class iExt.app.view.container.Quick
+ * @extends {iExt.app.view.container.Base} 
  * @classdesc 快速查看视图容器。
  */
-Ext.define('iExt.panel.QuickContainer', {
-    extend: 'iExt.panel.ViewContainer',
+Ext.define('iExt.app.view.container.Quick', {
+    extend: 'iExt.app.view.container.Base',
     alias: 'widget.ixquickcontainer',
 
     requires: [],

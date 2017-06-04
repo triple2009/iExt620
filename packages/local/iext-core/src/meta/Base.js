@@ -1,10 +1,10 @@
 ﻿/**
- * @class iExt.meta.Meta
+ * @class iExt.meta.Base
  * @extends {Ext.Base} 
  * @classdesc 元数据基础类。
  * 元数据用于描述实体模型的信息，不应该包括UI方面的内容。
  */
-Ext.define('iExt.meta.Meta', {
+Ext.define('iExt.meta.Base', {
     alternateClassName: 'iExt.Meta',
 
     requires: [
@@ -15,15 +15,15 @@ Ext.define('iExt.meta.Meta', {
     /**
      * 实体模型类名称
      */
-    ixModelClass: null,
+    ixModelName: null,
 
     /**
-     * 服务代码，例如：user
+     * 实体代码，例如：user
      */
     ixCode: '',
 
     /**
-     * 服务名称，例如：用户
+     * 实体名称，例如：用户
      */
     ixName: '',
 
@@ -55,20 +55,6 @@ Ext.define('iExt.meta.Meta', {
     constructor: function (config) {
         this.initialConfig = config;
         this.initConfig(config);
-    },
-
-    applyIxFields: function (fields) {
-        if (fields) {
-            this.ixFields = fields;
-        }
-        return fields;
-    },
-
-    applyIxSorters: function (sorters) {
-        if (sorters) {
-            this.ixSorters = sorters;
-        }
-        return sorters;
     },
 
     statics: {

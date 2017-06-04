@@ -1,15 +1,15 @@
 /**
- * @class iExt.app.Portrait
+ * @class iExt.form.Avatar
  * @extends {Ext.Img} 
  * @classdesc 用户头像控件，只是提供了缺省的图片。
  */
-Ext.define('iExt.app.Portrait', {
+Ext.define('iExt.form.Avatar', {
     extend: 'Ext.Img',
-    alias: 'widget.ixportrait',
+    alias: 'widget.ixavatar',
 
     requires: [],
 
-    imgCls: 'ix-portrait',
+    imgCls: 'ix-avatar',
     alt: '头像'
 
 });

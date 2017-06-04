@@ -1,23 +1,21 @@
 /**
- * @class iExt.app.TabView
- * @extends {iExt.app.Workspace} 
+ * @class iExt.app.view.CardView
+ * @extends {iExt.app.view.Workspace} 
  * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.TabView', {
-    extend: 'iExt.app.Workspace',
-    xtype: 'widget.ixapptab',
-
+Ext.define('iExt.app.view.CardView', {
+    extend: 'iExt.app.view.Workspace',
+    xtype: 'widget.ixappcard',
     requires: [
 
     ],
 
-    cls: 'ix-app-tab',
+    cls: 'ix-app-card',
 
     initComponent: function () {
         var me = this, items = [],
             headerItems = me.getIxHeaderItems() || [],
             home = me.getIxHomeView(),
-            form = me.getIxFormView(),
             store = me.getIxAppsStore();
 
         if (!home) {
@@ -36,9 +34,9 @@ Ext.define('iExt.app.TabView', {
         if (headerItems.length > 0) {
             tbrItems.push(headerItems);
         }
-        
+
         tbrItems.push({
-            xtype: 'ixportrait'
+            xtype: 'ixavatar'
         });
 
         tbrItems.push({
@@ -57,10 +55,22 @@ Ext.define('iExt.app.TabView', {
         });
 
         items.push({
-            xtype: 'ixappheader',
+            xtype: 'container',
             region: 'north',
-            reference: 'ixAppHeader',
-            items: tbrItems
+            items: [{
+                xtype: 'ixappheader',
+                reference: 'ixAppHeader',
+                items: tbrItems
+            }, {
+                xtype: 'toolbar',
+                reference: 'ixAppNav',
+                items: [{
+                    xtype: 'ixtbrtitle',
+                    html: '用户'
+                }, '->', {
+                    xtype: 'ixtbrholder'
+                }]
+            }]
         });
 
         items.push({
@@ -72,16 +82,16 @@ Ext.define('iExt.app.TabView', {
         });
 
         items.push({
-            xtype: 'ixtabpanel',
+            xtype: 'container',
             region: 'center',
-            //plain: true,
             reference: 'ixAppMain',
+            layout: {
+                type: 'card'
+            },
             items: [{
                 xtype: 'panel',
                 reference: 'ixAppList',
                 layout: 'auto',
-                title: '应用程序',
-                hidden: true,
                 bodyCls: 'ix-apps-body',
                 items: [{
                     xtype: 'ixappsview',
@@ -93,8 +103,6 @@ Ext.define('iExt.app.TabView', {
                 }]
             }, {
                 xtype: home
-            }, {
-                xtype: form
             }]
         });
 
@@ -116,8 +124,8 @@ Ext.define('iExt.app.TabView', {
             var me = this,
                 refs = me.getReferences(),
                 tbr = refs.ixAppHeader,
+                nav = refs.ixAppNav,
                 ws = refs.ixAppMain,
-                nav = ws.getTabBar(),
                 qv = refs.ixAppQuick,
                 apps = refs.ixAppList;
 
@@ -154,8 +162,8 @@ Ext.define('iExt.app.TabView', {
             var me = this,
                 refs = me.getReferences(),
                 tbr = refs.ixAppHeader,
+                nav = refs.ixAppNav,
                 ws = refs.ixAppMain,
-                nav = ws.getTabBar(),
                 qv = refs.ixAppQuick,
                 apps = refs.ixAppList;
 

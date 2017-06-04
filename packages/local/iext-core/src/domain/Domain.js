@@ -1,10 +1,10 @@
 ﻿/**
- * @class iExt.meta.Domain
+ * @class iExt.domain.Domain
  * @extends {Ext.Base} 
  * @classdesc 领域类。
  * 用于定义领域的模型、元数据、领域服务、领域视图信息。
  */
-Ext.define('iExt.meta.Domain', {
+Ext.define('iExt.domain.Domain', {
     alternateClassName: 'iExt.Domain',
 
     requires: [],
@@ -20,46 +20,64 @@ Ext.define('iExt.meta.Domain', {
     ixName: null,
 
     /**
+     * 聚合根数据模型类名称
+     */
+    ixModelName: null,
+
+    /**
      * 聚合根元数据类名称
      */
-    ixMetaClass: null,
+    ixMetaName: null,
+
+    /**
+     * 是否允许导入
+     */
+    ixImportable: false,
 
     /**
      * 操作集合对象，例如：新建、修改、审核等
      * {add: '新建', edit: '编辑', ...}
+     * 使用下划线用于区分系统定义的动作和用户定义的动作。
      */
     ixActions: {
-        _add: {
+        add: {
             type: 'view',
+            ixCode: 'add',
             ixName: '新建',
-            //ixTarget: iExt.app.view.ViewTarget.FORM,
             ixIconCls: 'x-fa fa-plus'
         },
-        _edit: {
+        edit: {
             type: 'view',
+            ixName: 'edit',
             ixName: '修改',
-            //ixTarget: iExt.app.view.ViewTarget.FORM,
             ixIconCls: 'x-fa fa-edit'
         },
-        _detail: {
+        detail: {
             type: 'view',
+            ixCode: 'detail',
             ixName: '详细',
-            //ixTarget: iExt.app.view.ViewTarget.DETAIL,
             ixIconCls: 'x-fa fa-file-o'
         },
-        _remove: {
+        remove: {
             type: 'api',
-            ixApi: 'erase',
+            ixCode: 'remove',
             ixName: '删除',
+            ixApiCode: 'erase',
             ixIconCls: 'x-fa fa-trash'
         },
-        _search: {
+        search: {
             type: 'view',
+            ixCode: 'search',
             ixName: '搜索',
-            //ixTarget: iExt.app.view.ViewTarget.SEARCH,
             ixIconCls: 'x-fa fa-search'
         }
     },
+
+    /**
+     * 列表视图集合，例如：列表页、看板页、日历页、图表页、报表页等
+     * [{ixLisType:'list',...},{ixListType: 'kanban', ...}]
+     */
+    ixListViews: [],
 
     privates: {
 

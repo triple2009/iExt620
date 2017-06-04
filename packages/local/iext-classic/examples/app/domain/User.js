@@ -1,5 +1,5 @@
 ﻿Ext.define('app.domain.User', {
-    extend: 'iExt.meta.Domain',
+    extend: 'iExt.domain.Domain',
 
     ixName: '用户',
 
@@ -8,7 +8,7 @@
             type: 'view',
             ixName: '测试'
         },
-        _add: {
+        add: {
             ixName: '新增'
         },
         active: {
@@ -27,6 +27,27 @@
             type: 'view',
             ixName: '变更口令'
         }
-    }
+    },
+
+    ixListViews: [{
+        ixListType: 'list',
+        xtype: 'app-user-list'
+    }, {
+        ixListType: 'kanban',
+        xtype: 'panel',
+        title: 'kanban'
+    }, {
+        ixListType: 'graph',
+        xtype: 'panel',
+        title: 'graph'
+    }, {
+        ixListType: 'calendar',
+        xtype: 'panel',
+        title: 'calendar'
+    }, {
+        ixListType: 'report',
+        xtype: 'panel',
+        title: 'report'
+    }]
 
 });

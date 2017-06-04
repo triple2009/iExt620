@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.Workspace
+ * @class iExt.app.view.Workspace
  * @extends {Ext.container.Viewport} 
  * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.Workspace', {
+Ext.define('iExt.app.view.Workspace', {
     extend: 'Ext.container.Viewport',
     xtype: 'widget.ixappws',
 
@@ -12,7 +12,7 @@ Ext.define('iExt.app.Workspace', {
     ],
 
     mixins: [
-        'iExt.app.view.Workspace'
+        'iExt.app.mixin.Workspace'
     ],
 
     viewModel: 'ixapp',

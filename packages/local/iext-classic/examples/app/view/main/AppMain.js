@@ -1,5 +1,5 @@
 Ext.define('app.view.main.AppMain', {
-    extend: 'iExt.app.TabView',
+    extend: 'iExt.app.view.TabView',
     xtype: 'app-appmain',
 
     requires: [

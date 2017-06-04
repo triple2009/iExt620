@@ -1,10 +1,10 @@
 ﻿/**
  * @class iExt.meta.Entity
- * @extends {iExt.meta.Meta} 
+ * @extends {iExt.meta.Base} 
  * @classdesc 实体元数据类。
  */
 Ext.define('iExt.meta.Entity', {
-    extend: 'iExt.meta.Meta',
+    extend: 'iExt.meta.Base',
 
     ixFields: [{
         ixNo: 0,
@@ -14,7 +14,7 @@ Ext.define('iExt.meta.Entity', {
         ixIsRepoId: true,
         ixSubType: iExt.meta.ixtype.String.GUID
     }, {
-        ixNo: 9999,
+        ixNo: 999,
         type: 'int',
         ixName: 'version',
         ixTitle: '数据版本',

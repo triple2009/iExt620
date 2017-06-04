@@ -1,21 +1,24 @@
 /**
- * @class iExt.app.CardView
- * @extends {iExt.app.Workspace} 
+ * @class iExt.app.view.TabView
+ * @extends {iExt.app.view.Workspace} 
  * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.CardView', {
-    extend: 'iExt.app.Workspace',
-    xtype: 'widget.ixappcard',
+Ext.define('iExt.app.view.TabView', {
+    extend: 'iExt.app.view.Workspace',
+    xtype: 'widget.ixapptab',
+
     requires: [
 
     ],
 
-    cls: 'ix-app-card',
+    cls: 'ix-app-tab',
 
     initComponent: function () {
-        var me = this, items = [],
+        var me = this,
+            items = [],
             headerItems = me.getIxHeaderItems() || [],
             home = me.getIxHomeView(),
+            form = me.getIxFormView(),
             store = me.getIxAppsStore();
 
         if (!home) {
@@ -27,7 +30,10 @@ Ext.define('iExt.app.CardView', {
             iconCls: 'x-fa fa-th',
             scale: 'large',
             listeners: {
-                click: { fn: me._ixOnSelectApp, scope: me }
+                click: {
+                    fn: me._ixOnSelectApp,
+                    scope: me
+                }
             }
         }, '->');
 
@@ -35,14 +41,11 @@ Ext.define('iExt.app.CardView', {
             tbrItems.push(headerItems);
         }
 
-        tbrItems.push({
-            xtype: 'ixportrait'
-        });
-
-        tbrItems.push({
+       tbrItems.push({
             bind: {
                 text: '{_ixa.user.code}-{_ixa.user.name}'
             },
+            iconCls: 'x-fa fa-user',
             menuAlign: 'tr-br',
             menu: {
                 shadow: false,
@@ -55,22 +58,10 @@ Ext.define('iExt.app.CardView', {
         });
 
         items.push({
-            xtype: 'container',
+            xtype: 'ixappheader',
             region: 'north',
-            items: [{
-                xtype: 'ixappheader',
-                reference: 'ixAppHeader',
-                items: tbrItems
-            }, {
-                xtype: 'toolbar',
-                reference: 'ixAppNav',
-                items: [{
-                    xtype: 'ixtbrtitle',
-                    html: '用户'
-                }, '->', {
-                    xtype: 'ixtbrholder'
-                }]
-            }]
+            reference: 'ixAppHeader',
+            items: tbrItems
         });
 
         items.push({
@@ -82,27 +73,32 @@ Ext.define('iExt.app.CardView', {
         });
 
         items.push({
-            xtype: 'container',
+            xtype: 'ixtabpanel',
             region: 'center',
+            //plain: true,
             reference: 'ixAppMain',
-            layout: {
-                type: 'card'
-            },
             items: [{
                 xtype: 'panel',
                 reference: 'ixAppList',
                 layout: 'auto',
+                title: '应用程序',
+                hidden: true,
                 bodyCls: 'ix-apps-body',
                 items: [{
                     xtype: 'ixappsview',
                     width: 780,
                     store: store,
                     listeners: {
-                        selectionchange: { fn: me._ixOnSelectionChange, scope: me }
+                        selectionchange: {
+                            fn: me._ixOnSelectionChange,
+                            scope: me
+                        }
                     }
                 }]
             }, {
                 xtype: home
+            }, {
+                xtype: form
             }]
         });
 
@@ -124,8 +120,8 @@ Ext.define('iExt.app.CardView', {
             var me = this,
                 refs = me.getReferences(),
                 tbr = refs.ixAppHeader,
-                nav = refs.ixAppNav,
                 ws = refs.ixAppMain,
+                nav = ws.getTabBar(),
                 qv = refs.ixAppQuick,
                 apps = refs.ixAppList;
 
@@ -162,8 +158,8 @@ Ext.define('iExt.app.CardView', {
             var me = this,
                 refs = me.getReferences(),
                 tbr = refs.ixAppHeader,
-                nav = refs.ixAppNav,
                 ws = refs.ixAppMain,
+                nav = ws.getTabBar(),
                 qv = refs.ixAppQuick,
                 apps = refs.ixAppList;
 

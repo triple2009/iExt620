@@ -1,5 +1,5 @@
 /**
- * @class iExt.app.ViewModel
+ * @class iExt.app.view.container.ViewModel
  * @extends {Ext.app.ViewModel} 
  * @classdesc iExt 视图容器ViewModel。
  */

@@ -1,5 +1,5 @@
 Ext.define('app.view.user.Add', {
-    extend: 'iExt.panel.FormContainer',
+    extend: 'iExt.app.view.container.Form',
     xtype: 'app-user-add',
 
     requires: [],
@@ -78,15 +78,19 @@ Ext.define('app.view.user.Add', {
                 xtype: 'menu',
                 shadow: false,
                 items: [{
-                    text: '启用'
+                    text: '启用',
+                    listeners: {
+                        click: function () {
+                            iExt.Toast.ixInfo('hello ' + Ext.Number.randomInt(0, 100) + ' !');
+                        }
+                    }
                 }, {
                     text: '停用'
                 }, {
                     text: '审批'
                 }]
             }
-        }, '->'
-        ]
+        }, '->']
     },
 
     items: [{
@@ -136,39 +140,40 @@ Ext.define('app.view.user.Add', {
         },
 
         items: [{
-            xtype: 'ixtext',
-            ixScale: 'large',
-            fieldLabel: '代码',
-            bind: '{_ixvc.title}',
-            reference: 'code',
-            allowBlank: false
-        },
-        {
-            xtype: 'ixtext',
-            fieldLabel: '姓名',
-            bind: '{user.name}',
-            reference: 'name'
-        },
-        {
-            fieldLabel: '电话',
-            bind: '{user.mobilePhone}',
-            reference: 'mobilePhone'
-        },
-        {
-            fieldLabel: '名称',
-            labelAlign: 'right',
-            bind: '{user.userName}',
-            reference: 'userName'
-        },
-        {
-            fieldLabel: '密码',
-            bind: '{user.password}',
-            reference: 'password'
-        },
-        {
-            fieldLabel: '确认',
-            reference: 'repwd'
-        }]
+                xtype: 'ixtext',
+                ixScale: 'large',
+                fieldLabel: '代码',
+                bind: '{_ixvc.title}',
+                reference: 'code',
+                allowBlank: false
+            },
+            {
+                xtype: 'ixtext',
+                fieldLabel: '姓名',
+                bind: '{user.name}',
+                reference: 'name'
+            },
+            {
+                fieldLabel: '电话',
+                bind: '{user.mobilePhone}',
+                reference: 'mobilePhone'
+            },
+            {
+                fieldLabel: '名称',
+                labelAlign: 'right',
+                bind: '{user.userName}',
+                reference: 'userName'
+            },
+            {
+                fieldLabel: '密码',
+                bind: '{user.password}',
+                reference: 'password'
+            },
+            {
+                fieldLabel: '确认',
+                reference: 'repwd'
+            }
+        ]
     }, {
         xtype: 'tabpanel',
         margin: '20 0 0 0',

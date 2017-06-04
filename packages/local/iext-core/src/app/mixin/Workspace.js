@@ -1,9 +1,9 @@
 /**
- * @mixin iExt.app.view.Workspace
+ * @mixin iExt.app.mixin.Workspace
  * @classdesc 工作区 MIXIN。
  */
-Ext.define('iExt.app.view.Workspace', {
-    extend: 'iExt.app.view.View',
+Ext.define('iExt.app.mixin.Workspace', {
+    extend: 'iExt.app.mixin.View',
 
     mixinConfig: {
         id: 'iext-view-ws'

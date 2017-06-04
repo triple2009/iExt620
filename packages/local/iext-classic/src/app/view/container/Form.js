@@ -1,10 +1,10 @@
 /**
- * @class iExt.panel.FormContainer
- * @extends {iExt.panel.ViewContainer} 
+ * @class iExt.app.view.container.Form
+ * @extends {iExt.app.view.container.Base} 
  * @classdesc 表单视图容器。
  */
-Ext.define('iExt.panel.FormContainer', {
-    extend: 'iExt.panel.ViewContainer',
+Ext.define('iExt.app.view.container.Form', {
+    extend: 'iExt.app.view.container.Base',
     alias: 'widget.ixformcontainer',
 
     requires: [],
