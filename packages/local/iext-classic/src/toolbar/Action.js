@@ -42,6 +42,7 @@ Ext.define('iExt.toolbar.Action', {
         if (service !== null) {
             me.on('beforeadd', me._ixBeforeAdd, me);
         }
+        
         me.callParent();
     },
 
