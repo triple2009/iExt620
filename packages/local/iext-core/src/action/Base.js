@@ -43,6 +43,12 @@ Ext.define('iExt.action.Base', {
     ixMulti: false,
 
     /**
+     * 允许未通过合法性验证进行操作
+     * 缺省是 false
+     */
+    ixValid: false,
+
+    /**
      * 允许指定该动作的限制条件
      */
     ixEnableWhen: null,
@@ -53,29 +59,29 @@ Ext.define('iExt.action.Base', {
      */
     ixParams: null,
 
-    /**
-     * 自动关闭当前的视图
-     */
-    ixClose: null,
-
-    /**
-     * 回调函数
-     * {fn: function(item, success), scope: me}
-     */
-    ixCallback: null,
-
     constructor: function (config) {
         this.initialConfig = config;
         this.initConfig(config);
     },
 
     /**
-     * 操作是否可用 function ()
+     * 操作是否可用
+     * @param {Object} data 数据
+     * function (data)
      */
     ixIsEnabled: iExt.unimplFn,
 
     /**
      * 执行动作
+     * @param {Object} item 调用该方法的组件
+     * @param {Object} data 数据
+     * @param {Object} option 选项
+     * function (item, data, options)
+     * 
+     * options
+     *  ixClose:    自动关闭当前的视图
+     *  ixCallback: 回调函数
+     *      {fn: function(item, success), scope: me}
      */
     ixDo: iExt.unimplFn
 

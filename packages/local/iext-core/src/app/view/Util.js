@@ -63,6 +63,26 @@ Ext.define('iExt.app.view.Util', {
             Ext.raise('指定的视图 [' + name + '] 不存在！');
         }
         return viewClass;
+    },
+
+    /**
+     * 
+     * @param {Object} form 表单对象。
+     */
+    ixClearValues: function (form) {
+        var clear = function (items) {
+            if (items && items.length > 0) {
+                items.each(function (item) {
+                    // 对于某些输入项可能不允许清除
+                    // 例如：隐含的搜索条件
+                    if (item.setValue && item.ixClearable !== false) {
+                        item.setValue(null);
+                    }
+                    clear(item.items);
+                });
+            }
+        };
+        clear(form.items);
     }
 
 });

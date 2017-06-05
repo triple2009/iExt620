@@ -1,4 +1,4 @@
-.ix-btn {
+.ix-act-btn {
     .ix-btn-badge {
         cursor: default;
         color: $ix-btn-badge-color;
@@ -10,7 +10,7 @@
     }
 }
 
-.ix-btn.x-btn-default-toolbar-large {
+.ix-act-btn.x-btn-default-toolbar-large {
     .ix-btn-badge {
         border-radius: $ix-btn-badge-large-radius;
         font-size: $ix-btn-badge-large-font-size;
@@ -18,7 +18,7 @@
     }
 }
 
-.ix-btn.x-btn-default-toolbar-medium {
+.ix-act-btn.x-btn-default-toolbar-medium {
     .ix-btn-badge {
         border-radius: $ix-btn-badge-medium-radius;
         font-size: $ix-btn-badge-medium-font-size;
@@ -26,7 +26,7 @@
     }
 }
 
-.ix-btn.x-btn-default-toolbar-small {
+.ix-act-btn.x-btn-default-toolbar-small {
     .ix-btn-badge {
         border-radius: $ix-btn-badge-small-radius;
         font-size: $ix-btn-badge-small-font-size;

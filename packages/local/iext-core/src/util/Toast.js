@@ -18,30 +18,13 @@ Ext.define('iExt.util.Toast', {
     ixInfo: function (msg) {
         var me = this;
 
-        // singleton toast window
-        if (me._ixToastWin) {
-            me._ixToastWin.setHtml(msg);
-            me._ixToastWin.show();
-        } else {
-            me._ixToastWin = Ext.toast({
-                html: msg,
-                closable: false,
-                align: 't',
-                slideInDuration: 100,
-                renderTo: Ext.getBody(),
-                listeners: {
-                    destroy: function () {
-                        me._ixToastWin = undefined;
-                    }
-                }
-            });
-        }
-    },
-
-    privates: {
-
-        _ixToastWin: undefined
-
+        Ext.toast({
+            html: msg,
+            closable: false,
+            align: 't',
+            slideInDuration: 100,
+            renderTo: Ext.getBody()
+        });
     }
 
 });

@@ -9,8 +9,9 @@ Ext.define('app.view.main.AppMain', {
 
     viewModel: 'appmain',
     
-    ixHomeView: 'app-user',
-    ixFormView: 'app-user-add',
+    //ixHomeView: 'app-user',
+    ixHomeView: 'mainlist',
+    //ixFormView: 'app-user-add',
     ixAppsStore: { type: 'apps' }
 
 });

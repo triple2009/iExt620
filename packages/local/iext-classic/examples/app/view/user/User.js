@@ -12,16 +12,6 @@ Ext.define('app.view.user.User', {
     viewModel: 'user',
     title: '用户',
 
-    ixDomain: 'app.domain.User',
-
-    items: [{
-        xtype: 'app-user-list',
-        ixMulti: false,
-        listeners: {
-            selectionchange: 'onSelectionChange',
-            itemdblclick: 'onItemClick'
-        }
-
-    }]
+    ixDomain: 'app.domain.User'
 
 });

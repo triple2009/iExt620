@@ -35,6 +35,11 @@ Ext.define('iExt.domain.Domain', {
     ixImportable: false,
 
     /**
+     * 是否允许复制
+     */
+    ixDuplicatable: false,
+
+    /**
      * 操作集合对象，例如：新建、修改、审核等
      * {add: '新建', edit: '编辑', ...}
      * 使用下划线用于区分系统定义的动作和用户定义的动作。
@@ -106,7 +111,11 @@ Ext.define('iExt.domain.Domain', {
                         if (actionsDefs.hasOwnProperty(actionProp)) {
                             action = Ext.clone(actionsDefs[actionProp]);
                             if (action !== false) {
-                                actions[actionProp] = action;
+                                if (actions[actionProp]) {
+                                    Ext.apply(actions[actionProp], action);
+                                } else {
+                                    actions[actionProp] = action;
+                                }
                             }
                         }
                     }

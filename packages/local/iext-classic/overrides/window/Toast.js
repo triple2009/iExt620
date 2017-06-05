@@ -9,6 +9,7 @@ Ext.define('Ext.overrides.window.Toast', {
     minWidth: 400,
     minHeight: 30,
     paddingY: 4,
+    shadow: false,
 
     ui: 'ix-toast-ui',
     bodyCls: 'ix-toast-body'

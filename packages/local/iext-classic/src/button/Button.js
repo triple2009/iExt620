@@ -1,26 +1,53 @@
 /**
  * @class iExt.button.Button
  * @extends {Ext.button.Button} 
- * @classdesc 按钮控件。
+ * @classdesc 按钮控件，扩展了 badge 功能。
  */
 Ext.define('iExt.button.Button', {
     extend: 'Ext.button.Button',
-    alias: 'widget.ixbtn',
+    alias: 'widget.ixactbtn',
 
     requires: [],
 
+    mixins: [
+        'iExt.app.mixin.Action'
+    ],
+
     config: {
+
+        /**
+         * badge 文本
+         */
         ixBadgeText: null,
+
+        /**
+         * badge 样式
+         * 与 Ext 的组件样式设置方法一致
+         * {color: '', border: ''}
+         */
         ixBadgeStyle: null
     },
 
-    cls: 'ix-btn',
+    cls: 'ix-act-btn',
+    menuAlign: 'tc-bc',
 
     initComponent: function () {
         var me = this;
         me.callParent();
     },
 
+    /**
+     * 统一获取文本操作方法
+     * Ext.menu.Item 未提供获取文本的方法
+     * 为了统一操作，统一使用 ixGetText 方法
+     */
+    ixGetText: function () {
+        return this.getText();
+    },
+
+    /**
+     * 重载获取模板参数方法，添加 badge 信息
+     */
     getTemplateArgs: function () {
         var me = this;
         var args = me.callParent();
@@ -34,6 +61,9 @@ Ext.define('iExt.button.Button', {
         });
     },
 
+    /**
+     * 更新 badge 文本
+     */
     updateIxBadgeText: function (text, oldText) {
         text = text == null ? '' : String(text);
         oldText = oldText || '';
@@ -49,6 +79,9 @@ Ext.define('iExt.button.Button', {
         me.fireEvent('ixbadgechange', me, oldText, text);
     },
 
+    /**
+     * 更新 badge 样式
+     */
     updateIxBadgeStyle: function (style, oldStyle) {
         var me = this,
             btnEl = me.btnEl;
@@ -62,6 +95,7 @@ Ext.define('iExt.button.Button', {
 
 }, function (btnClass) {
 
+    // 注入 badge 模板信息
     var _ixInjectTpl = '{text}</span><tpl if="badgeText"><span class="ix-btn-badge"' +
         '<tpl if="badgeStyle"> style="{badgeStyle}"</tpl>>{badgeText}</span></tpl>',
         _ixInjectAt = '{text}</span>';

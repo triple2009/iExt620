@@ -38,6 +38,14 @@ Ext.define('iExt.app.view.container.List', {
         me.callParent();
     },
 
+    afterRender: function () {
+        var me = this;
+        if (me.getIxViews() !== null) {
+            me._ixSetView(0);
+        }
+        me.callParent();
+    },
+
     statics: {
 
         ixViewIconCls: {
@@ -52,8 +60,6 @@ Ext.define('iExt.app.view.container.List', {
 
     privates: {
 
-        _ixCurrentView: null,
-
         _ixSetTopBar: function () {
             var me = this;
 
@@ -62,6 +68,49 @@ Ext.define('iExt.app.view.container.List', {
                 layout: 'column',
                 items: []
             };
+
+            var tbrAction = {
+                xtype: 'toolbar',
+                reference: 'tbrAction',
+                columnWidth: 0.5,
+                items: []
+            };
+
+            var domain = me.getIxDomain();
+            if (domain.ixActions) {
+                var acts = domain.ixActions;
+                if (acts.add) {
+                    tbrAction.items.push({
+                        text: acts.add.ixName,
+                        iconCls: acts.add.ixIconCls
+                    });
+                }
+
+                var btnOthers = {
+                    text: '操作',
+                    iconCls: 'x-fa fa-bars',
+                    menuAlign: 'tc-bc',
+                    menu: {
+                        xtype: 'ixactmenu',
+                        items: []
+                    }
+                };
+
+                for (var name in acts) {
+                    if (acts.hasOwnProperty(name)) {
+                        var action = acts[name];
+                        btnOthers.menu.items.push({
+                            text: action.ixName,
+                            iconCls: action.ixIconCls
+                        });
+                    }
+                }
+
+                if (btnOthers.menu.items.length > 0) {
+                    tbrAction.items.push('->', btnOthers);
+                }
+
+            }
 
             var btnTypes = {
                 xtype: 'segmentedbutton',
@@ -74,12 +123,13 @@ Ext.define('iExt.app.view.container.List', {
                 },
                 items: []
             };
+
             var listType, iconCls, name;
             if (Ext.isArray(me.getIxViews())) {
                 Ext.each(me.getIxViews(), function (item, index) {
                     listType = item.ixListType || 'list';
                     if (Ext.isString(listType)) {
-                        listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase())
+                        listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase());
                     }
                     name = iExt.app.view.ListTypes.ixGetName(listType);
                     iconCls = iExt.app.view.container.List.ixViewIconCls[name];
@@ -91,12 +141,11 @@ Ext.define('iExt.app.view.container.List', {
                 });
             }
 
-            var tbrAction = {
-                xtype: 'toolbar',
-                reference: 'tbrAction',
-                columnWidth: 0.5,
-                items: ['->', btnTypes]
-            };
+            // 缺省设置第一个视图
+            if (btnTypes.items.length > 1) {
+                btnTypes.items[0].pressed = true;
+                tbrAction.items.push('->', btnTypes);
+            }
 
             var tbrSearch = {
                 xtype: 'toolbar',
@@ -118,10 +167,35 @@ Ext.define('iExt.app.view.container.List', {
         _ixChangeView: function (item, button, isPressed, eOpts) {
             var me = this,
                 idx = button.getValue();
+            me._ixSetView(idx);
+        },
 
+        _ixSetView: function (idx) {
+            var me = this;
             Ext.suspendLayouts();
             me.removeAll();
-            me.add(me.ixViews[idx]);
+            var view = me.add(me.ixViews[idx]);
+            var listType = view.ixListType || 'list';
+            if (Ext.isString(listType)) {
+                listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase());
+            }
+            switch (listType) {
+                case iExt.app.view.ListTypes.KANBAN:
+                    me._ixSetKanbanAction();
+                    break;
+                case iExt.app.view.ListTypes.GRAPH:
+                    me._ixSetGraphAction();
+                    break;
+                case iExt.app.view.ListTypes.CALENDAR:
+                    me._ixSetCalendarAction();
+                    break;
+                case iExt.app.view.ListTypes.REPORT:
+                    me._ixSetReportAction();
+                    break;
+                default:
+                    me._ixSetListAction();
+                    break;
+            }
             Ext.resumeLayouts(true);
         },
 

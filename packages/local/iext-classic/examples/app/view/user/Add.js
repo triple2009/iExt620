@@ -121,7 +121,7 @@ Ext.define('app.view.user.Add', {
                     }
                 }
             }, {
-                xtype: 'ixbtn',
+                xtype: 'ixactbtn',
                 text: 'Inactivated',
                 ixBadgeText: '9000',
                 iconCls: 'x-fa fa-plus',

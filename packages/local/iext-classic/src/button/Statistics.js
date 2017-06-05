@@ -10,12 +10,19 @@ Ext.define('iExt.button.Statistics', {
     requires: [],
 
     config: {
+        /**
+         * 扩展值信息
+         * 为了保持访问的一致性，使用了 value 的命名方式
+         */
         value: null
     },
 
     cls: 'ix-stat-btn',
     textAlign: 'left',
 
+    /**
+     * 重载获取模板参数方法，添加 badge 信息
+     */
     getTemplateArgs: function () {
         var me = this;
         var args = me.callParent();
@@ -24,6 +31,9 @@ Ext.define('iExt.button.Statistics', {
         });
     },
 
+    /**
+     * 重载更新文本
+     */
     updateText: function (text, oldText) {
         text = text == null ? '' : String(text);
         oldText = oldText || '';
@@ -39,6 +49,9 @@ Ext.define('iExt.button.Statistics', {
         me.fireEvent('textchange', me, oldText, text);
     },
 
+    /**
+     * 重载更新值
+     */
     updateValue: function (value, oldValue) {
         value = value == null ? '' : value;
         oldValue = oldValue || '';
@@ -56,6 +69,7 @@ Ext.define('iExt.button.Statistics', {
 
 }, function (btnClass) {
 
+    // 注入模板信息
     var _ixInjectTpl = '<span class="ix-stat-btn-value">{value}</span>' +
         '<span class="ix-stat-btn-text">{text}</span>',
         _ixInjectAt = '{text}';
