@@ -21,6 +21,11 @@ Ext.define('iExt.action.Api', {
     ixConfirm: true,
 
     /**
+     * 提示信息模板
+     */
+    ixTipTpl: null,
+
+    /**
      * 操作是否可用
      */
     ixIsEnabled: function () {
