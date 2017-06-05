@@ -7,11 +7,15 @@ Ext.define('iExt.action.Page', {
     extend: 'iExt.action.Base',
     alias: 'ixaction.page',
 
+    requires: [
+        'iExt.action.PageTarget'
+    ],
+
     config: {
         /**
          * 打开页面目标
          */
-        ixTarget: iExt.app.view.PageTarget.BROWSER
+        ixTarget: iExt.action.PageTarget.BROWSER
     },
 
     /**
@@ -29,7 +33,7 @@ Ext.define('iExt.action.Page', {
      */
     applyIxTarget: function (target) {
         if (Ext.isString(target)) {
-            target = iExt.app.view.PageTarget.ixGetValue(target);
+            target = iExt.action.PageTarget.ixGetValue(target);
         }
         return target;
     },

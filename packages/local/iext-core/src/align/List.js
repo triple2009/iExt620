@@ -15,7 +15,7 @@ Ext.define('iExt.align.List', {
         var me = this, enabled = true, mode = me.getIxMode();
 
         // 如果未指定对齐方式直接返回true
-        if (multi === null) {
+        if (mode === null) {
             return true;
         }
 
@@ -34,7 +34,7 @@ Ext.define('iExt.align.List', {
         }
 
         // 如果设置了对齐函数，返回函数的处理结果
-        var fn = me.getIxEnableWhen();
+        var fn = me.getIxEnabledWhen();
         if (fn) {
             for (var i = 0; i < data.length; i++) {
                 enabled = fn(data[i]);

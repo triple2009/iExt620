@@ -11,13 +11,17 @@ Ext.define('iExt.grid.Panel', {
         'iExt.grid.column.Column'
     ],
 
+    mixins: [
+        'iExt.app.mixin.List'
+    ],
+
     config: {
-        
+
         /**
          * 缺省使用复选，如果不想使用选择器，可以设置为 undefined
          */
         ixMulti: true,
-        
+
         /**
          * 缺省不使用单元格焦点样式。
          * 但是对于有些情况，例如：可以选择单元格时则需要使用。
@@ -30,7 +34,7 @@ Ext.define('iExt.grid.Panel', {
     viewConfig: {
         enableTextSelection: true
     },
-    
+
     defaults: {
         xtype: 'ixcol'
     },
@@ -41,7 +45,13 @@ Ext.define('iExt.grid.Panel', {
             me.selModel = {
                 type: 'checkboxmodel',
                 mode: multi === true ? 'MULTI' : 'SINGLE',
-                checkOnly: true
+                checkOnly: true,
+                listeners: {
+                    selectionchange: {
+                        fn: me.ixOnSelectionChange,
+                        scope: me
+                    }
+                }
             };
         }
         return multi;
@@ -60,6 +70,12 @@ Ext.define('iExt.grid.Panel', {
     initComponent: function () {
         var me = this;
         me.callParent();
+    },
+
+    ixOnSelectionChange: function (sm, selections) {
+        if (this.hasListeners.ixselection) {
+            this.fireEvent('ixselection', this, selections);
+        }
     }
 
 });

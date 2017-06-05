@@ -9,7 +9,8 @@ Ext.define('iExt.app.mixin.View', {
         id: 'iext-view',
         on: {
             initComponent: 'ixOnInitComponent',
-            destroy: 'ixOnDestroy'
+            destroy: 'ixOnDestroy',
+            afterRender: 'ixOnAfterRender'
         }
     },
 
@@ -25,7 +26,7 @@ Ext.define('iExt.app.mixin.View', {
      */
     ixOnInitComponent: function () {
         // <debug>
-        Ext.log('init view... ' + this.$className + '...' + this.getId());
+        this._ixLog('init view... ');
         // </debug>
     },
 
@@ -34,7 +35,25 @@ Ext.define('iExt.app.mixin.View', {
      */
     ixOnDestroy: function () {
         // <debug>
-        Ext.log('destroy view... ' + this.$className + '...' + this.getId());
+        this._ixLog('destroy view... ');
+        // </debug>
+    },
+
+    /**
+     * 渲染后处理
+     */
+    ixOnAfterRender: function () {
+        // <debug>
+        this._ixLog('after render view... ');
+        // </debug>
+    },
+
+    privates: {
+
+        // <debug>
+        _ixLog: function (msg) {
+            Ext.log(msg + this.$className + '...' + this.getId());
+        }
         // </debug>
     }
 

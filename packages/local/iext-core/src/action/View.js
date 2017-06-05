@@ -1,18 +1,21 @@
 ﻿/**
  * @class iExt.action.View
  * @extends {iExt.action.Base}
- * @classdesc 打开页面操作动作类。
+ * @classdesc 打开操作操作动作类。
  */
 Ext.define('iExt.action.View', {
     extend: 'iExt.action.Base',
     alias: 'ixaction.view',
 
     requires: [
-        'iExt.app.view.ViewTarget'
+        'iExt.action.ViewTarget'
     ],
 
     config: {
-        ixTarget: null
+        /**
+         * 打开视图目标
+         */
+        ixTarget: iExt.action.ViewTarget.MAIN
     },
 
     /**
@@ -31,7 +34,7 @@ Ext.define('iExt.action.View', {
      */
     applyIxTarget: function (target) {
         if (Ext.isString(target)) {
-            target = iExt.app.view.ViewTarget.ixGetValue(target);
+            target = iExt.action.ViewTarget.ixGetValue(target);
         }
         return target;
     },

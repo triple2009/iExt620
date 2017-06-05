@@ -10,10 +10,13 @@ Ext.define('app.view.main.List', {
     ],
 
     title: 'Personnel',
-
+    controller: {
+        type: 'ixlist'
+    },
     store: {
         type: 'personnel'
     },
+    ixIsList: true,
 
     tbar: {
         xtype: 'ixacttbr',
@@ -22,6 +25,10 @@ Ext.define('app.view.main.List', {
             text: '新建',
             iconCls: 'x-fa fa-plus',
             ixAuth: 'add',
+            ixAlign: {
+                type: 'list',
+                ixMode: null
+            },
             listeners: {
                 click: function (item, e, eOpts) {
                     iExt.Toast.ixInfo(item.getIxAuth().ixService);
@@ -30,7 +37,14 @@ Ext.define('app.view.main.List', {
         }, {
             text: '编辑',
             iconCls: 'x-fa fa-edit',
-            ixAuth: { ixService: 'menu', ixOperation: 'edit' },
+            ixAuth: {
+                ixService: 'menu',
+                ixOperation: 'edit'
+            },
+            ixAlign: {
+                type: 'list',
+                ixMode: true
+            },
             listeners: {
                 click: function (item, e, eOpts) {
                     iExt.Toast.ixInfo(item.getIxAuth().ixService);
@@ -39,13 +53,19 @@ Ext.define('app.view.main.List', {
         }]
     },
 
-    columns: [
-        { text: 'Name', dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
-    ],
-
-    listeners: {
-        select: 'onItemSelected'
-    }
+    columns: [{
+            text: 'Name',
+            dataIndex: 'name'
+        },
+        {
+            text: 'Email',
+            dataIndex: 'email',
+            flex: 1
+        },
+        {
+            text: 'Phone',
+            dataIndex: 'phone',
+            flex: 1
+        }
+    ]
 });

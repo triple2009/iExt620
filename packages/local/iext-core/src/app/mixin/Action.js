@@ -45,6 +45,7 @@ Ext.define('iExt.app.mixin.Action', {
     applyIxAlign: function (align) {
         if (align) {
             align = Ext.clone(align);
+            // 生成 align 实例
             align = iExt.Align.create(align);
         }
         return align;
