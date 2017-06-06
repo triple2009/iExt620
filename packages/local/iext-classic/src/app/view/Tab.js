@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.view.TabView
+ * @class iExt.app.view.Tab
  * @extends {iExt.app.view.Workspace} 
  * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.view.TabView', {
+Ext.define('iExt.app.view.Tab', {
     extend: 'iExt.app.view.Workspace',
     xtype: 'widget.ixapptab',
 
@@ -41,7 +41,7 @@ Ext.define('iExt.app.view.TabView', {
             tbrItems.push(headerItems);
         }
 
-       tbrItems.push({
+        tbrItems.push({
             bind: {
                 text: '{_ixa.user.code}-{_ixa.user.name}'
             },
@@ -68,6 +68,10 @@ Ext.define('iExt.app.view.TabView', {
             xtype: 'ixquickcontainer',
             region: 'east',
             reference: 'ixAppQuick',
+            items: [{
+                xtype: 'ixqvform',
+                ixModelName: 'app.model.User'
+            }],
             hidden: false,
             width: 240
         });

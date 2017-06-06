@@ -134,6 +134,13 @@ Ext.define('iExt.meta.Base', {
     Meta.onExtended(function (cls, data) {
         var proto = cls.prototype;
         var superCls = proto.superclass.self;
+
+        // 注册元数据与模型映射
+        if (data.ixModelName) {
+            iExt.meta.Manager.ixRegister(data.$className,
+                data.ixModelName);
+        }
+
         Meta._ixInitFields(data, cls, proto);
     });
 });

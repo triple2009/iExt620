@@ -34,6 +34,12 @@ Ext.define('iExt.align.Base', {
         ixTarget: null,
 
         /**
+         * 对齐的目标控件标识
+         * 在视图加载中会自动设置该值
+         */
+        ixTargetId: null,
+
+        /**
          * 对齐验证函数
          */
         ixEnabledWhen: null
@@ -50,12 +56,19 @@ Ext.define('iExt.align.Base', {
      */
     ixIsEnabled: iExt.unimplFn,
 
+    /**
+     * 获取需要处理的数据
+     * 需要根据对齐的组件标识获取相应的数据
+     * @return {Object[]} 
+     */
+    ixGetAlignData: iExt.unimplFn,
+
     applyIxEnabledWhen: function (fn) {
         if (Ext.isString(fn)) {
             var me = this;
             var exp = fn;
             fn = function (data) {
-                return me._ixEnabledWhen(exp, data);
+                return me._ixEvalEnabledWhen(exp, data);
             };
         }
         return fn;
@@ -66,7 +79,7 @@ Ext.define('iExt.align.Base', {
         /**
          * 字符串验证方法
          */
-        _ixEnabledWhen: function (expression, data) {
+        _ixEvalEnabledWhen: function (expression, data) {
             var exp = iExt.Format.ixFormat(expression, data);
             if (exp === expression) {
                 return true;

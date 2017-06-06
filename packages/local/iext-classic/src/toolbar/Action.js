@@ -40,9 +40,9 @@ Ext.define('iExt.toolbar.Action', {
         // 如果授权服务不为空，监听添加组件事件
         // 对于未指定服务的操作组件设置授权服务
         if (service !== null) {
-            me.on('beforeadd', me._ixBeforeAdd, me);
+            me.on('beforeadd', me._ixOnBeforeAdd, me);
         }
-        
+
         me.callParent();
     },
 
@@ -63,7 +63,10 @@ Ext.define('iExt.toolbar.Action', {
 
     privates: {
 
-        _ixBeforeAdd: function (toolbar, component, index, eOpts) {
+        /**
+         * 为添加的操作组件设置ixAuthService属性。
+         */
+        _ixOnBeforeAdd: function (toolbar, component, index, eOpts) {
             if (component.ixIsAction === true) {
                 var service = toolbar.getIxAuthService();
                 var auth = component.getIxAuth();
@@ -93,7 +96,7 @@ Ext.define('iExt.toolbar.Action', {
                 }
                 item.ixSetUserAuth(auths);
                 if (item.menu) {
-                    me._ixInnerSetUserAuth(item.menu.items, auths);
+                    me._ixSetUserAuth(item.menu.items, auths);
                 }
             });
         }

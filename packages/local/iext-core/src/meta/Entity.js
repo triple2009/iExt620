@@ -6,6 +6,8 @@
 Ext.define('iExt.meta.Entity', {
     extend: 'iExt.meta.Base',
 
+    ixModelName: 'iExt.model.Entity',
+
     ixFields: [{
         ixNo: 0,
         type: 'string',

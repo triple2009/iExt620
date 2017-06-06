@@ -13,7 +13,8 @@ Ext.define('iExt.app.mixin.List', {
 
     config: {
         /**
-         * 缺省使用复选，如果不想使用选择器，可以设置为 undefined
+         * 缺省使用复选，如果不想使用选择器，
+         * 可以设置为 undefined
          */
         ixMulti: true,
         /**

@@ -1,4 +1,10 @@
 # iext-core/src
 
-This folder contains source code that will automatically be added to the classpath when
-the package is used.
+该目录下定义iExt与UI无关的核心组件。
+组件的编码规范：
+
+* 完全自定义组件的属性和方法可以按照常规的属性和方法命名；
+* 扩展Ext的组件如果添加新的属性和方法，必须以ix做为前缀，用以区分原组件的功能；
+
+## iExt.js
+文件的第一行必须是 `// @define iExt`

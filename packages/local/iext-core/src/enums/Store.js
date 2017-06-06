@@ -23,7 +23,7 @@ Ext.define('iExt.enums.Store', {
     },
 
     config: {
-        ixEnumType: '',
+        ixEnumType: null,
         ixAllowBlank: false
     },
 

@@ -67,9 +67,9 @@ Ext.define('iExt.app.view.Util', {
 
     /**
      * 
-     * @param {Object} form 表单对象。
+     * @param {Object} component 组件。
      */
-    ixClearValues: function (form) {
+    ixClearValues: function (component) {
         var clear = function (items) {
             if (items && items.length > 0) {
                 items.each(function (item) {
@@ -82,7 +82,7 @@ Ext.define('iExt.app.view.Util', {
                 });
             }
         };
-        clear(form.items);
+        clear(component.items);
     }
 
 });

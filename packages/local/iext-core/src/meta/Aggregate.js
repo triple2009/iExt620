@@ -6,6 +6,8 @@
 Ext.define('iExt.meta.Aggregate', {
     extend: 'iExt.meta.Entity',
 
+    ixModelName: 'iExt.model.Aggregate',
+
     ixFields: [{
         type: 'string',
         ixNo: 991,

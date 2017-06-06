@@ -151,13 +151,12 @@ Ext.define('iExt.app.controller.Base', {
             me._ixActionItems = [];
             Ext.each(actItems, function (item, index) {
                 var itemId = item.getId(),
-                    ref = '',
-                    refCmp,
                     align = item.getIxAlign();
                 // 如果设置了对齐信息
                 if (align !== null) {
                     // 获取组件的对齐引用
-                    ref = align.getIxTarget() || '';
+                    var ref = align.getIxTarget() || '',
+                        refId = '', refCmp;
                     if (ref === '') {
                         refCmp = view;
                     } else {
@@ -170,13 +169,18 @@ Ext.define('iExt.app.controller.Base', {
                         }
                         // </debug>
                     }
+                    refId = refCmp.getId();
                     me._ixActionItems.push({
                         itemId: itemId,
-                        targetId: refCmp.getId()
+                        targetId: refId
                     });
+
                     // 为组件添加与之对齐的操作组件标识
                     refCmp.ixAlignItemIds = refCmp.ixAlignItemIds || [];
                     refCmp.ixAlignItemIds.push(itemId);
+
+                    // 为操作组件设置其对齐的组件标识
+                    align.setIxTargetId(refId);
                 }
             });
         },
@@ -208,7 +212,7 @@ Ext.define('iExt.app.controller.Base', {
                     },
                     Ext.emptyFn,
                     me
-                ).done();
+                    ).done();
             } else {
                 me.ixOnViewInited(view, null);
             }

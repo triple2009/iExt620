@@ -14,12 +14,18 @@ Ext.define('iExt.app.mixin.View', {
         }
     },
 
+    ixIsView: true,
+
     /**
      * 视图的hash值，用于路由
      */
     ixHashCode: 0,
 
-    ixIsView: true,
+    /**
+     * 与该视图对齐的操作组件标识集合
+     * 在视图控制器加载时会自动设置
+     */
+    ixAlignItemIds: null,
 
     /**
      * 初始化视图处理。

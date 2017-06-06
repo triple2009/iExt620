@@ -42,6 +42,34 @@ Ext.define('iExt.align.List', {
             }
         }
         return enabled;
+    },
+
+    /**
+     * 获取需要处理的数据
+     * 需要根据对齐的组件标识获取相应的数据
+     * @return {Object[]} 
+     */
+    ixGetAlignData: function () {
+        var me = this, id = me.getIxTargetId();
+        // <debug>
+        if (!id) {
+            Ext.log('action list get data... target id is undefined !');
+            return null;
+        }
+        // </debug>
+        var mode = me.getIxMode(),
+            view = Ext.getCmp(id);
+        if (view.ixIsList === true) {
+            if (mode !== null) {
+                var data = view.ixGetSelectedData();
+                if (!data || data.length === 0) {
+                    Ext.raise('请选择要处理的数据！');
+                    return null;
+                }
+            }
+            return data;
+        }
+        return null;
     }
-    
+
 });

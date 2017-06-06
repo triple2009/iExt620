@@ -13,7 +13,11 @@ Ext.define('iExt.app.controller.List', {
                 /**
                  * 搜索事件
                  */
-                ixsearch: 'ixOnSearch'
+                ixsearch: 'ixOnSearch',
+                /**
+                 * 快速搜索事件
+                 */
+                ixquicksearch: 'ixOnSearch'
             }
         }
     },
@@ -35,12 +39,16 @@ Ext.define('iExt.app.controller.List', {
         // 处理引用的组件
         for (var ref in refs) {
             if (refs.hasOwnProperty(ref)) {
-                if (ref.ixIsList === true &&
-                    !ref.hasListeners.ixselection) {
-                    // 添加List控件数据选择事件处理
-                    // 列表控件的对齐操作组件已经在
-                    // Base._ixInitActionItems() 方法中设置
-                    ref.addListener('ixselection', me.ixOnSelection, me);
+                if (ref.ixIsList === true) {
+                    // 列表控件的对齐操作组件已经由
+                    // Base._ixInitActionItems() 方法设置
+                    if (ref.hasListeners.ixselection) {
+                        // 如果存在事件监听，在事件处理前插入处理
+                        ref.onBefore('ixselection', me.ixOnSelection, me);
+                    } else {
+                        // 添加选择事件处理
+                        ref.addListener('ixselection', me.ixOnSelection, me);
+                    }
                     // 初始设置对齐组件
                     me.ixOnSelection(ref, []);
                 }
@@ -48,9 +56,15 @@ Ext.define('iExt.app.controller.List', {
         }
 
         // 处理当前视图
-        if (view.ixIsList === true &&
-            !view.hasListeners.ixselection) {
+        if (view.ixIsList === true) {
             view.addListener('ixselection', me.ixOnSelection, me);
+            if (view.hasListeners.ixselection) {
+                // 如果存在事件监听，在事件处理前插入处理
+                view.onBefore('ixselection', me.ixOnSelection, me);
+            } else {
+                // 添加选择事件处理
+                view.addListener('ixselection', me.ixOnSelection, me);
+            }
             // 初始设置对齐组件
             me.ixOnSelection(view, []);
         }
@@ -87,6 +101,8 @@ Ext.define('iExt.app.controller.List', {
     ixOnSearch: function (item, filters) {
         var me = this,
             id = item.getId();
+
+        // 获取搜索组件对齐的列表组件
         var actItems = me._ixActionItems.filter(function (element, index) {
             return element.itemId === id;
         });

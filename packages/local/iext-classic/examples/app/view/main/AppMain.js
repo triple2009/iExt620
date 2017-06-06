@@ -1,10 +1,11 @@
 Ext.define('app.view.main.AppMain', {
-    extend: 'iExt.app.view.TabView',
+    extend: 'iExt.app.view.Tab',
     xtype: 'app-appmain',
 
     requires: [
         'iExt.meta.field.*',
-        'app.meta.*'
+        'app.meta.*',
+        'iExt.*'
     ],
 
     viewModel: 'appmain',

@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.view.CardView
+ * @class iExt.app.view.Card
  * @extends {iExt.app.view.Workspace} 
  * @classdesc 应用程序工作区。
  */
-Ext.define('iExt.app.view.CardView', {
+Ext.define('iExt.app.view.Card', {
     extend: 'iExt.app.view.Workspace',
     xtype: 'widget.ixappcard',
     requires: [

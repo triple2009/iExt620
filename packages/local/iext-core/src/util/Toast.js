@@ -19,7 +19,7 @@ Ext.define('iExt.util.Toast', {
         var me = this;
 
         Ext.toast({
-            html: msg,
+            html: msg || '&#160;',
             closable: false,
             align: 't',
             slideInDuration: 100,

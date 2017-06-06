@@ -1,6 +1,7 @@
 ﻿Ext.define('app.meta.User', {
     extend: 'iExt.meta.Aggregate',
 
+    ixModelName: 'app.model.User',
     ixName: '用户',
 
     ixFields: [{

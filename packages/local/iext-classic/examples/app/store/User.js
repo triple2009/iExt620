@@ -3,9 +3,7 @@ Ext.define('app.store.User', {
 
     alias: 'store.user',
 
-    fields: [
-        'name', 'email', 'phone'
-    ],
+    model: 'app.model.User',
 
     data: { items: [
         { name: 'Jean Luc', email: "jeanluc.picard@enterprise.com", phone: "555-111-1111" },
