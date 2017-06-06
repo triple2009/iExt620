@@ -164,7 +164,9 @@ Ext.define('app.view.main.List', {
 
     listeners: {
         ixselection: function (item, selection) {
-            iExt.Toast.ixInfo(selection[0].get('email'));
+            if (selection.length > 0) {
+                iExt.Toast.ixInfo(selection[0].get('email'));
+            }
         }
     }
 });
