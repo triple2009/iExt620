@@ -15,6 +15,10 @@ Ext.define('iExt.app.Application', {
         'iExt.app.Runtime'
     ],
 
+    controllers:[
+        'iExt.app.Controller'
+    ],
+
     ixIsApp: true,
 
     config: {
@@ -52,7 +56,7 @@ Ext.define('iExt.app.Application', {
             "*": {
                 //ixlogon: 'ixOnLogon',
                 //ixlogoff: 'ixOnLogoff',
-                ixopenview: 'ixOnOpenView'
+                //ixopenview: 'ixOnOpenView'
                 //ixopenpage: 'ixOnOpenPage'
             }
         }
@@ -64,7 +68,7 @@ Ext.define('iExt.app.Application', {
      * @param {Exp.app.Application} app 应用程序
      */
     init: function (app) {
-        Ext.Error.handle = this.ixOnError;
+        //Ext.Error.handle = this.ixOnError;
         Ext.tip.QuickTipManager.init();
     },
 
@@ -74,6 +78,7 @@ Ext.define('iExt.app.Application', {
      * @memberOf iExt.app.Application#
      */
     onBeforeLaunch: function () {
+        Ext.log('app launching ... ');
         Ext.JSON.encodeDate = function (d) {
             return Ext.Date.format(d, '"C"');
         };
@@ -106,50 +111,6 @@ Ext.define('iExt.app.Application', {
                 }
             }
         );
-    },
-
-    /**
-     * 打开视图
-     */
-    ixOnOpenView: function () {
-        var ws = this.getMainView();
-        if (ws && ws.ixIsWorkspace === true) {
-            return ws.ixOpenView.apply(ws, arguments);
-        }
-    },
-
-    /**
-     * 自定义全局例外处理。
-     * @memberOf iExt.app.Application#
-     * @param {Object} err 异常信息对象。
-     * @returns {Boolean} 是否处理了异常。
-     */
-    ixOnError: function (err) {
-        var msg = [];
-        if (Ext.isArray(err)) {
-            msg = err;
-        } else if (Ext.isObject(err)) {
-            // <debug>
-            if (err.sourceClass) {
-                msg.push('对象：' + err.sourceClass);
-            }
-            if (err.sourceMethod) {
-                msg.push('方法：' + err.sourceMethod);
-            }
-            // </debug>
-            msg.push('信息：' + err.msg);
-        } else {
-            msg.push('信息：' + err);
-        }
-        msg = msg.join('<br/>');
-        Ext.MessageBox.alert({
-            title: '异常信息',
-            message: msg,
-            icon: Ext.MessageBox.WARNING,
-            buttons: Ext.MessageBox.OK
-        });
-        // 返回true表示异常已经捕获并且进行了处理。
-        return true;
     },
 
     /**
