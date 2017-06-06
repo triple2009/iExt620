@@ -20,7 +20,7 @@ Ext.define('iExt.app.container.ViewModel', {
             /**
              * 缺省标题
              */
-            ixtitle: ''
+            defaultTitle: ''
         }
     },
 
@@ -30,9 +30,9 @@ Ext.define('iExt.app.container.ViewModel', {
          * 视图容器标题。
          * 如果指定了标题则使用该标题，否则使用缺省标题。
          */
-        _ixvc_title: function (get) {
+        _ixvcTitle: function (get) {
             return get('_ixvc.title') ||
-                get('_ixvc.ixtitle');
+                get('_ixvc.defaultTitle');
         }
 
     }

@@ -12,6 +12,9 @@ Ext.define('iExt.app.view.container.Quick', {
     cls: 'ix-quick-container',
     bodyCls: 'ix-quick-container-body',
 
+    /**
+     * 缺省标题
+     */
     ixDefaultTitle: '快速查看',
 
     initComponent: function () {
@@ -21,12 +24,16 @@ Ext.define('iExt.app.view.container.Quick', {
             items: [{
                 xtype: 'ixtbrtitle',
                 bind: {
-                    html: '{title}'
+                    html: '{_ixvcTitle}'
                 }
             }, '->', {
                 iconCls: 'x-fa fa-chevron-right',
+                tooltip: '隐藏',
                 listeners: {
-                    click: { fn: me._ixOnHide, scope: me }
+                    click: {
+                        fn: me._ixHideMe,
+                        scope: me
+                    }
                 }
             }]
         };
@@ -34,17 +41,9 @@ Ext.define('iExt.app.view.container.Quick', {
         me.callParent();
     },
 
-
-    setTitle: function (title) {
-        var me = this,
-            vm = me.getViewModel();
-        vm.set({ title: title });
-        me.callParent();
-    },
-
     privates: {
 
-        _ixOnHide: function (item, e, eOpts) {
+        _ixHideMe: function (item, e, eOpts) {
             this.hide();
         },
 
@@ -52,7 +51,12 @@ Ext.define('iExt.app.view.container.Quick', {
             if (component.isComponent === true && component.getTitle) {
                 var me = this,
                     title = component.getTitle();
-                me.setTitle(title);
+                var vm = this.getViewModel();
+                vm.setData({
+                    _ixvc: {
+                        title: title
+                    }
+                });
             }
         }
     }

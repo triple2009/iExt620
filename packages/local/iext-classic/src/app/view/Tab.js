@@ -68,10 +68,6 @@ Ext.define('iExt.app.view.Tab', {
             xtype: 'ixquickcontainer',
             region: 'east',
             reference: 'ixAppQuick',
-            items: [{
-                xtype: 'ixqvform',
-                ixModelName: 'app.model.User'
-            }],
             hidden: false,
             width: 240
         });
@@ -116,6 +112,34 @@ Ext.define('iExt.app.view.Tab', {
         var ws = me.lookupReference('ixAppMain');
         var layout = ws.getLayout();
         layout.setActiveItem(1);
+    },
+
+    /**
+     * 打开视图
+     * @param {Stirng|Ext.Component} view 视图名称或组件
+     * @param {Object} options 选项
+     */
+    ixOpenView: function (item, view, options) {
+        var me = this,
+            options = options || {};
+        var target = options.target || iExt.action.ViewTarget.MAIN;
+
+        switch (target) {
+            case iExt.action.ViewTarget.MAIN:
+                me._ixMain(item, view, options);
+                break;
+            case iExt.action.ViewTarget.QUICK:
+                me._ixQuick(item, view, options);
+                break;
+            case iExt.action.ViewTarget.FORM:
+                me._ixForm(item, view, options);
+                break;
+            case iExt.action.ViewTarget.SELF:
+                //me._ixSelf(item, view, options);
+                break;
+            default:
+                break;
+        }
     },
 
     privates: {
@@ -210,6 +234,23 @@ Ext.define('iExt.app.view.Tab', {
             nav.setVisible(true);
 
             tbr._ixApps = false;
+        },
+
+        _ixQuick: function (item, view, options) {
+            var me = this,
+                refs = me.getReferences(),
+                qv = refs.ixAppQuick;
+
+            Ext.suspendLayouts();
+            if (Ext.isString(view)) {
+                view = iExt.View.ixCreate(view, options.viewConfig);
+            }
+            if (view) {
+                qv.removeAll(true);
+                qv.add(view);
+            }
+            qv.setVisible(true);
+            Ext.resumeLayouts(true);
         }
 
     }

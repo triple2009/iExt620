@@ -36,7 +36,7 @@ Ext.define('iExt.meta.Manager', {
         var me = this, meta = null;
         Ext.each(me.ixMaps, function (map, index) {
             if (map.model === modelName) {
-                meta = map.metaName;
+                meta = map.meta;
                 return false;
             }
         });

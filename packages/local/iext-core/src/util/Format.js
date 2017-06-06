@@ -9,21 +9,27 @@ Ext.define('iExt.util.Format', {
     /**
      * 根据对象属性格式化字符串。
      * @memberOf iExt.util.Util#
-     * @param {String} value 要格式化的字符串。
-     * @param {Object} data 数据对象。
+     * @param {String} expression 要格式化的字符串。
+     * @param {Ext.data.Model} record 数据对象。
      * @return {String} 根据数据对象格式化后的字符串。
      */
-    ixFormat: function (value, data) {
-        if (!value || !data) {
-            return value;
+    ixFormat: function (expression, record) {
+        if (!expression || !record) {
+            return expression;
         }
-        var s = value, reg = new RegExp('\\{(.+?)\\}', 'g');
+        var s = expression,
+            reg = new RegExp('\\{(.+?)\\}', 'g');
         var matched = s.match(reg);
         if (matched) {
             for (var i = 0; i < matched.length; i++) {
                 var prop = matched[i];
                 prop = prop.substr(1, prop.length - 2);
-                var val = data.data[prop];
+                var val = record.get(prop);
+                //<debug>
+                if (!val) {
+                    Ext.raise('未能获取属性 [' + prop + '] 值！');
+                }
+                //</debug>
                 s = s.replace(matched[i], val);
             }
         }

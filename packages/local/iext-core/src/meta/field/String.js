@@ -25,6 +25,15 @@ Ext.define('iExt.meta.field.String', {
         return subtype;
     },
 
+    updateIxSubType: function (subtype, oldSubType) {
+        // GUID 型数据是无意义的
+        if (subtype == iExt.meta.ixtype.String.GUID) {
+            if (this.ixMeaningful === null) {
+                this.ixMeaningful = false;
+            }
+        }
+    },
+
     /**
      * 根据字段属性信息格式化数据。
      * @param {Object} 值。

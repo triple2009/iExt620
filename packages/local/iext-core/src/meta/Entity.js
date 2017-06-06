@@ -20,6 +20,7 @@ Ext.define('iExt.meta.Entity', {
         type: 'int',
         ixName: 'version',
         ixTitle: '数据版本',
+        ixMeaningful: false,
         ixSubType: iExt.meta.ixtype.Integer.INT
     }]
 

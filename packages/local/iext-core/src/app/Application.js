@@ -45,6 +45,20 @@ Ext.define('iExt.app.Application', {
     },
 
     /**
+     * 监听应用程序事件
+     */
+    listen: {
+        component: {
+            "*": {
+                //ixlogon: 'ixOnLogon',
+                //ixlogoff: 'ixOnLogoff',
+                ixopenview: 'ixOnOpenView'
+                //ixopenpage: 'ixOnOpenPage'
+            }
+        }
+    },
+
+    /**
      * 重载初始化处理，绑定异常处理，初始化全局控件。
      * @memberOf iExt.app.Application#
      * @param {Exp.app.Application} app 应用程序
@@ -92,6 +106,16 @@ Ext.define('iExt.app.Application', {
                 }
             }
         );
+    },
+
+    /**
+     * 打开视图
+     */
+    ixOnOpenView: function () {
+        var ws = this.getMainView();
+        if (ws && ws.ixIsWorkspace === true) {
+            return ws.ixOpenView.apply(ws, arguments);
+        }
     },
 
     /**

@@ -23,6 +23,7 @@
         type: 'int',
         ixName: 'status',
         ixTitle: '状态',
+        ixMeaningful: false,
         ixSubType: iExt.meta.ixtype.Integer.INT
     }, {
         ixName: 'statusName',

@@ -97,6 +97,7 @@ Ext.define('iExt.button.Segmented', {
                     }
                 });
                 if (btn) {
+                    // 设置按钮的pressed属性会触发 toggle 事件
                     btn.setPressed(true);
                 }
             }

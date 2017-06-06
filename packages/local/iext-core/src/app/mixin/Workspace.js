@@ -11,10 +11,14 @@ Ext.define('iExt.app.mixin.Workspace', {
 
     ixIsWorkspace: true,
 
-    // 打开视图
+    /**
+     * 打开视图
+     */
     ixOpenView: iExt.unimplFn,
 
-    // 打开页面
+    /**
+     * 打开页面
+     */
     ixOpenPage: iExt.unimplFn
 
 });

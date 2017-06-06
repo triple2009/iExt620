@@ -30,7 +30,10 @@ Ext.define('iExt.app.view.container.Base', {
     },
 
     bind: {
-        title: '{_ixvc_title}'
+        /**
+         * 绑定标题 _ixvcTitle
+         */
+        title: '{_ixvc.title ? _ixvc.title : _ixvc.defaultTitle}'
     },
 
     /**
@@ -55,13 +58,13 @@ Ext.define('iExt.app.view.container.Base', {
 
     /**
      * 更新缺省标题
+     * 
      */
     updateIxDefaultTitle: function (title, oldTitle) {
-        title = title || '&#160;';
         var vm = this.getViewModel();
         vm.setData({
             _ixvc: {
-                ixtitle: title
+                defaultTitle: title
             }
         });
     }

@@ -4,7 +4,7 @@
  */
 Ext.define('iExt.meta.field.Field', {
     alternateClassName: 'iExt.meta.Field',
-    alias: 'ixmeta.field.auto', 
+    alias: 'ixmeta.field.auto',
     aliasPrefix: 'ixmeta.field.',
 
     mixins: [
@@ -57,6 +57,14 @@ Ext.define('iExt.meta.field.Field', {
     ixDefault: null,
 
     /**
+     * 是否有意义的，可以设置为：
+     * null：根据数据类型和子类型自动设置
+     * true：有意义的，可以显示给用户
+     * false：无意义的，用户是无法理解的数据
+     */
+    ixMeaningful: null,
+
+    /**
      * 最大长度，可以根据validator自动设置？
      */
     ixMaxLen: 16,
@@ -88,6 +96,11 @@ Ext.define('iExt.meta.field.Field', {
      * 实体描述 (true/false)
      */
     ixIsEntityDesc: false,
+
+    /**
+     * 格式化值
+     */
+    ixFormat: iExt.unimplFn,
 
     /**
      * 构造函数

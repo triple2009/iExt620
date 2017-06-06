@@ -64,7 +64,12 @@ Ext.define('app.view.main.List', {
             listeners: {
                 click: function (item, e, eOpts) {
                     var data = item.getIxAlign().ixGetAlignData();
-                    iExt.Toast.ixInfo(data[0].get('name'));
+                    item.fireEvent('ixopenview', item, {
+                        xtype: 'ixqvform',
+                        ixRecord: data[0]
+                    }, {
+                        target: iExt.action.ViewTarget.QUICK
+                    });
                 }
             }
         }, {
@@ -87,7 +92,8 @@ Ext.define('app.view.main.List', {
         }, {
             xtype: 'ixactsbtn',
             ixEnumType: 'iExt.app.view.ListTypes',
-            ixValue: iExt.app.view.ListTypes.LIST,
+            // 设置初始值将触发toggle事件
+            //ixValue: iExt.app.view.ListTypes.LIST,
             allowToggle: true,
             listeners: {
                 toggle: function (item, button, isPressed, eOpts) {
@@ -165,7 +171,7 @@ Ext.define('app.view.main.List', {
     listeners: {
         ixselection: function (item, selection) {
             if (selection.length > 0) {
-                iExt.Toast.ixInfo(selection[0].get('email'));
+                //iExt.Toast.ixInfo(selection[0].get('email'));
             }
         }
     }
