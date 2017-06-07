@@ -1,9 +1,9 @@
 ﻿/**
- * @mixin iExt.app.mixin.List
+ * @mixin iExt.mixin.List
  * @classdesc iExt 列表视图 MIXIN。
  */
-Ext.define('iExt.app.mixin.List', {
-    extend: 'iExt.app.mixin.View',
+Ext.define('iExt.mixin.List', {
+    extend: 'iExt.mixin.View',
 
     mixinConfig: {
         id: 'iext-view-list'
@@ -33,9 +33,9 @@ Ext.define('iExt.app.mixin.List', {
 
     /**
      * 数据选择事件。
-     * @memberOf iExt.app.mixin.List#
+     * @memberOf iExt.mixin.List#
      * @event ixselection
-     * @param {iExt.app.mixin.List} this iExt.app.mixin.List控件。
+     * @param {iExt.mixin.List} this iExt.mixin.List控件。
      * @param {Object[]} data 当前选择的数据。
      */
 

@@ -8,7 +8,7 @@ Ext.define('iExt.toolbar.Search', {
     alias: 'widget.ixsearchtbr',
 
     mixins: [
-        'iExt.app.mixin.Filter'
+        'iExt.mixin.Filter'
     ],
 
     cls: 'ix-search-tbr',

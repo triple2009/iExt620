@@ -52,7 +52,12 @@ Ext.define('iExt.app.view.Tab', {
                 items: [{
                     text: '修改口令'
                 }, {
-                    text: '安全退出'
+                    text: '安全退出',
+                    listeners: {
+                        click: function (item, e, eOpts) {
+                            item.fireEvent('ixlogoff');
+                        }
+                    }
                 }]
             }
         });

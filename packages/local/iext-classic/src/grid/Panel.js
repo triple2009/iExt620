@@ -12,7 +12,7 @@ Ext.define('iExt.grid.Panel', {
     ],
 
     mixins: [
-        'iExt.app.mixin.List'
+        'iExt.mixin.List'
     ],
 
     config: {

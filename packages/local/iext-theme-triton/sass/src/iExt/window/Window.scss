@@ -18,7 +18,7 @@
         color: $ix-win-tool-el-color
     }
     .x-toolbar-text-default{
-        font-size: 16px;
+        font-size: $ix-win-header-font-size;
         color: $ix-win-header-color;
     }
 }

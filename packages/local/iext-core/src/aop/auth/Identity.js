@@ -8,7 +8,7 @@ Ext.define('iExt.aop.auth.Identity', {
     requires: [],
 
     mixins: [
-        'iExt.aop.AOP'
+        'iExt.aop.Aop'
     ],
 
     /**

@@ -48,7 +48,7 @@ Ext.define('app.view.main.List', {
             },
             listeners: {
                 click: function (item, e, eOpts) {
-                    iExt.Toast.ixInfo(item.getIxAuth().ixService);
+                    item.fireEvent('ixshowtip', item.getIxAuth().ixService);
                 }
             }
         }, {
@@ -68,8 +68,8 @@ Ext.define('app.view.main.List', {
                         xtype: 'ixqvform',
                         ixRecord: data[0]
                     }, {
-                        target: iExt.action.ViewTarget.QUICK
-                    });
+                            target: iExt.action.ViewTarget.QUICK
+                        });
                 }
             }
         }, {

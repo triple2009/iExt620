@@ -90,6 +90,7 @@ Ext.define('iExt.meta.Base', {
                     sorters = [];
 
                 if (superFields) {
+                    // 获取父类的字段定义
                     for (i = 0, length = superFields.length; i < length; ++i) {
                         field = Ext.Object.chain(superFields[i]);
                         field.owner = cls;
@@ -99,6 +100,8 @@ Ext.define('iExt.meta.Base', {
                 if (fieldDefs) {
                     delete data.ixFields;
                     delete data.ixSorters;
+                    // 仓储标识为1，其他从2开始
+                    var ixNo = 2;
                     for (i = 0, length = fieldDefs.length; i < length; ++i) {
                         field = fieldDefs[i];
                         if (field.ixSortDir) {
@@ -107,6 +110,16 @@ Ext.define('iExt.meta.Base', {
                                 ixSortDir: field.ixSortDir
                             });
                         }
+
+                        // 处理序号，按照定义的顺序设置No
+                        if (field.ixNo > 0) {
+                            // 后续的从此开始排
+                            ixNo = field.ixNo
+                        } else {
+                            field.ixNo = ixNo;
+                        }
+                        ixNo++;
+
                         ixField = Field.create(field);
                         if (field.ixIsRepoId === true) {
                             cls.ixRepoId = proto.ixRepoId = ixField;

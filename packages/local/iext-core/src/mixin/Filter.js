@@ -1,8 +1,8 @@
 ﻿/**
- * @mixin iExt.app.mixin.Filter
+ * @mixin iExt.mixin.Filter
  * @classdesc iExt 筛选条件 MIXIN。
  */
-Ext.define('iExt.app.mixin.Filter', {
+Ext.define('iExt.mixin.Filter', {
     extend: 'Ext.Mixin',
 
     requires: [

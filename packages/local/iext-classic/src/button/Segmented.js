@@ -8,7 +8,7 @@ Ext.define('iExt.button.Segmented', {
     alias: 'widget.ixactsbtn',
 
     mixins: [
-        'iExt.app.mixin.Action'
+        'iExt.mixin.Action'
     ],
 
     defaults: {

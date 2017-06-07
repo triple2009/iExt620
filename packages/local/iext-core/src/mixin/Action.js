@@ -1,9 +1,9 @@
 /**
- * @mixin iExt.app.mixin.Action
+ * @mixin iExt.mixin.Action
  * @classdesc iExt 用户操作 MIXIN。
  * 用于设置操作组件的授权和对齐信息。
  */
-Ext.define('iExt.app.mixin.Action', {
+Ext.define('iExt.mixin.Action', {
     extend: 'Ext.Mixin',
 
     mixinConfig: {

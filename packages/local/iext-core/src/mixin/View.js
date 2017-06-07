@@ -1,8 +1,8 @@
 /**
- * @mixin iExt.app.mixin.View
+ * @mixin iExt.mixin.View
  * @classdesc iExt视图 MIXIN。
  */
-Ext.define('iExt.app.mixin.View', {
+Ext.define('iExt.mixin.View', {
     extend: 'Ext.Mixin',
 
     mixinConfig: {
@@ -32,7 +32,7 @@ Ext.define('iExt.app.mixin.View', {
      */
     ixOnInitComponent: function () {
         // <debug>
-        this._ixLog('init view... ');
+        iExt.log('初始化视图', this.$className, this.getId());
         // </debug>
     },
 
@@ -41,7 +41,7 @@ Ext.define('iExt.app.mixin.View', {
      */
     ixOnDestroy: function () {
         // <debug>
-        this._ixLog('destroy view... ');
+        iExt.log('销毁视图', this.$className, this.getId());
         // </debug>
     },
 
@@ -50,16 +50,7 @@ Ext.define('iExt.app.mixin.View', {
      */
     ixOnAfterRender: function () {
         // <debug>
-        this._ixLog('after render view... ');
-        // </debug>
-    },
-
-    privates: {
-
-        // <debug>
-        _ixLog: function (msg) {
-            Ext.log(msg + this.$className + '...' + this.getId());
-        }
+        iExt.log('视图已渲染', this.$className, this.getId());
         // </debug>
     }
 

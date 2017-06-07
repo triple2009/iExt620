@@ -8,7 +8,7 @@ Ext.define('iExt.menu.Item', {
     alias: 'widget.ixactitem',
 
     mixins: [
-        'iExt.app.mixin.Action'
+        'iExt.mixin.Action'
     ],
 
     autoRender: true,

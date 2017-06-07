@@ -9,6 +9,12 @@ Ext.define('app.Application', {
     name: 'app',
     ixConsoleView: 'ixconsole',
 
+    /* 可以重载基类的设置，取消其他的控制器
+    controllers: [
+        'iExt.app.controller.Main'
+    ],
+    */
+
     stores: [
         // TODO: add global / shared stores here
     ],
@@ -16,15 +22,6 @@ Ext.define('app.Application', {
     launch: function () {
         // TODO - Launch the application
         Ext.ariaWarn = Ext.emptyFn;
-    },
-
-    onAppUpdate: function () {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
-                if (choice === 'yes') {
-                    window.location.reload();
-                }
-            }
-        );
     }
+
 });

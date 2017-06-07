@@ -12,10 +12,11 @@ Ext.define('iExt.app.view.Workspace', {
     ],
 
     mixins: [
-        'iExt.app.mixin.Workspace'
+        'iExt.mixin.Workspace'
     ],
 
     viewModel: 'ixapp',
+    controller: 'ixws',
 
     layout: 'border',
     referenceHolder: true,

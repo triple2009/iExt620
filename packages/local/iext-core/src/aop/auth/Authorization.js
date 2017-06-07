@@ -6,7 +6,7 @@ Ext.define('iExt.aop.auth.Authorization', {
     singleton: true,
 
     mixins: [
-        'iExt.aop.AOP'
+        'iExt.aop.Aop'
     ],
 
     requires: [

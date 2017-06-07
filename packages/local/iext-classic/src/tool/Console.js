@@ -8,7 +8,8 @@ Ext.define('iExt.tool.Console', {
     alias: 'widget.ixconsole',
 
     requires: [
-        'iExt.tool.Widget'
+        'iExt.tool.Widget',
+        'iExt.tool.Runtime'
     ],
 
     title: '应用控制台',
@@ -18,6 +19,7 @@ Ext.define('iExt.tool.Console', {
     height: 600,
     closeAction: 'hide',
     maximizable: true,
+
     items: [{
         xtype: 'ixtabpanel',
         items: [{
@@ -26,6 +28,7 @@ Ext.define('iExt.tool.Console', {
             xtype: 'ixruntimegrid'
         }]
     }],
+    
     buttons: [{
         text: '取消',
         minWidth: 120,

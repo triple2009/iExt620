@@ -10,7 +10,7 @@ Ext.define('iExt.button.Button', {
     requires: [],
 
     mixins: [
-        'iExt.app.mixin.Action'
+        'iExt.mixin.Action'
     ],
 
     config: {

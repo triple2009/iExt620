@@ -1,34 +1,34 @@
 /**
- * @class iExt.app.Controller
+ * @class iExt.app.controller.Main
  * @extends {Ext.app.Controller} 
- * @classdesc iExt 应用控制器。
+ * @classdesc iExt 应用程序主控制器。
  */
-Ext.define('iExt.app.Controller', {
+Ext.define('iExt.app.controller.Main', {
     extend: 'Ext.app.Controller',
 
     /**
-     * 初始化处理，绑定异常处理，初始化全局配置。
-     * @memberOf iExt.app.Controller#
+     * 初始化处理。
+     * @memberOf iExt.app.controller.Main#
      * @param {Exp.app.Application} app 应用程序
      */
     init: function (app) {
         //<debug>
-        Ext.log('初始化应用程序 [' + app.getName() + '] ...');
+        iExt.log('初始化应用程序', app.getName());
         //</debug>
 
+        // 关闭 aria 警告信息
+        Ext.ariaWarn = Ext.emptyFn;
+
         Ext.Error.handle = this.ixOnError;
+        Ext.tip.QuickTipManager.init();
+
+        Ext.JSON.encodeDate = function (d) {
+            return Ext.Date.format(d, '"C"');
+        };
 
         this.listen({
             global: {
                 idle: this.ixOnIdle
-            },
-            component: {
-                "*": {
-                    //ixlogon: 'ixOnLogon',
-                    //ixlogoff: 'ixOnLogoff',
-                    ixopenview: this.ixOnOpenView
-                    //ixopenpage: 'ixOnOpenPage'
-                }
             }
         });
 
@@ -36,23 +36,13 @@ Ext.define('iExt.app.Controller', {
 
     ixOnIdle: function () {
         //<debug>
-        // Ext.log('应用程序处于空闲 ...');
+        //iExt.log('应用程序处于空闲');
         //</debug>
     },
 
     /**
-     * 打开视图
-     */
-    ixOnOpenView: function () {
-        var ws = this.getApplication().getMainView();
-        if (ws && ws.ixIsWorkspace === true) {
-            return ws.ixOpenView.apply(ws, arguments);
-        }
-    },
-    
-    /**
      * 自定义全局例外处理。
-     * @memberOf iExt.app.Application#
+     * @memberOf iExt.app.controller.Main#
      * @param {Object} err 异常信息对象。
      * @returns {Boolean} 是否处理了异常。
      */

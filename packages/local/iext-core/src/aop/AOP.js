@@ -1,15 +1,15 @@
 /**
- * @mixin iExt.aop.AOP
+ * @mixin iExt.aop.Aop
  * @classdesc 面向方面扩展接口。
  */
-Ext.define('iExt.aop.AOP', {
+Ext.define('iExt.aop.Aop', {
     extend: 'Ext.Mixin',
 
     mixinConfig: {
         id: 'iext-aop'
     },
 
-    ixIsAOP: true,
+    ixIsAop: true,
 
     /**
      * 调试模式

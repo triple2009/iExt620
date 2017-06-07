@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.controller.Base
+ * @class iExt.app.view.controller.Base
  * @extends {Ext.app.ViewController} 
  * @classdesc iExt 视图控制器基础类。
  */
-Ext.define('iExt.app.controller.Base', {
+Ext.define('iExt.app.view.controller.Base', {
     extend: 'Ext.app.ViewController',
 
     alias: 'controller.ixbase',
@@ -100,7 +100,7 @@ Ext.define('iExt.app.controller.Base', {
     destroy: function () {
         var me = this;
         // <debug>
-        this._ixLog('destroy controller... ');
+        iExt.log('销毁控制器', this.$className, this.getId());
         // </debug>
         me.callParent();
     },
@@ -193,7 +193,7 @@ Ext.define('iExt.app.controller.Base', {
          */
         _ixInitUserAuth: function (view) {
             // <debug>
-            Ext.log('controller init auth... ' + this.$className + '...' + this.getId());
+            iExt.log('初始化用户授权', this.$className, this.getId());
             // </debug>
 
             var me = this,
@@ -216,13 +216,7 @@ Ext.define('iExt.app.controller.Base', {
             } else {
                 me.ixOnViewInited(view, null);
             }
-        },
-
-        // <debug>
-        _ixLog: function (msg) {
-            Ext.log(msg + this.$className + '...' + this.getId());
         }
-        // </debug>
 
     }
 
