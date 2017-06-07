@@ -6,17 +6,14 @@
 Ext.application({
     name: 'app',
 
-    extend: 'app.Application',
-
-    requires: [
-        'app.view.main.Main'
-    ],
+    extend: 'app.Application'
 
     // The name of the initial view to create. With the classic toolkit this class
     // will gain a "viewport" plugin if it does not extend Ext.Viewport. With the
     // modern toolkit, the main view will be added to the Viewport.
     //
-    mainView: 'app.view.main.AppMain'
+    //mainView: 'app.view.main.AppMain'
+    //mainView: 'iExt.app.view.Logon'
 	
     //-------------------------------------------------------------------------
     // Most customizations should be made to app.Application. If you need to

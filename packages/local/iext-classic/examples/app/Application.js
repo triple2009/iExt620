@@ -6,7 +6,15 @@
 Ext.define('app.Application', {
     extend: 'iExt.app.Application',
 
+    requires: [
+        'app.view.main.AppMain',
+        'iExt.*'
+    ],
+
     name: 'app',
+
+    ixMainView: 'app.view.main.AppMain',
+    //ixLogonView: 'iExt.app.view.Logon',
     ixConsoleView: 'ixconsole',
 
     /* 可以重载基类的设置，取消其他的控制器

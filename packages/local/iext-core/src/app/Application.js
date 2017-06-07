@@ -37,6 +37,8 @@ Ext.define('iExt.app.Application', {
 
         /**
          * 登录视图，例如：'app.view.Logon'
+         * 如果使用框架视图组件，要指定完全限定名，不能使用别名
+         * 例如：iExt.app.view.Logon
          */
         ixLogonView: null,
 
@@ -58,10 +60,18 @@ Ext.define('iExt.app.Application', {
      */
     onBeforeLaunch: function () {
         //<debug>
-        iExt.log('准备加载应用程序');
+        iExt.log('准备加载应用程序', this.getName());
         //</debug>
 
         var me = this;
+
+        //TODO: 根据用户保存的登录信息，自动选择不同的视图？
+        var viewName = me.getIxLogonView();
+        if (!viewName) {
+            viewName = me.getIxMainView();
+        }
+        me.ixChangeView(viewName);
+
         me.callParent(arguments);
     },
 
@@ -77,6 +87,20 @@ Ext.define('iExt.app.Application', {
                 }
             }
         );
+    },
+
+    ixChangeView: function (viewName, viewConfig) {
+        Ext.WindowManager.each(function (win) {
+            win.destroy();
+        });
+
+        var view = this.getView(viewName);
+        if (view) {
+            if (this._ixCurrentView) {
+                this._ixCurrentView.destroy();
+            }
+            this._ixCurrentView = view.create(viewConfig);
+        }
     }
 
 });

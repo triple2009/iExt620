@@ -1,0 +1,11 @@
+.ix-logon {
+
+    .ix-logon-header{
+       background-color: $ix-logon-header-background-color !important;
+    }
+
+    .ix-logon-copyright{
+        text-align: center;
+        padding: $ix-logon-copyright-padding;
+    }
+}

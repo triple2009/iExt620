@@ -1,12 +1,12 @@
 /**
- * @class iExt.app.view.model.Workspace
+ * @class iExt.app.view.model.Main
  * @extends {Ext.app.ViewModel} 
- * @classdesc iExt 应用工作区ViewModel。
+ * @classdesc iExt 应用程序ViewModel。
  * 可以共享该ViewModel的数据
  */
-Ext.define('iExt.app.view.model.Workspace', {
+Ext.define('iExt.app.view.model.Main', {
     extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.ixws',
+    alias: 'viewmodel.ixmain',
 
     data: {
         /**

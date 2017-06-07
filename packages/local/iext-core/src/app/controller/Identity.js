@@ -46,6 +46,20 @@ Ext.define('iExt.app.controller.Identity', {
         //</debug>
 
         var me = this;
+
+        var app = me.getApplication();
+        var viewName = app.getIxMainView();
+        if (viewName) {
+            app.ixChangeView(viewName, {
+                ixUser: {
+                    code: code,
+                    name: code + '\'s name'
+                }
+            });
+        } else {
+            Ext.raise('未配置应用的主视图！');
+        }
+
         /*
         if (iExt.aop.auth.Identity.ixApiEnabled('ixLogon') === false) {
             Ext.raise('未提供身份认证服务！');
@@ -73,13 +87,18 @@ Ext.define('iExt.app.controller.Identity', {
         var me = this;
         iExt.Msg.ixConfirm('是否退出系统？', function (btn) {
             if (btn === 'yes') {
-                /*
-                iExt.app.Runtime.setIxUser(null);
-                me._ixLoadView(me.getIxLogonView());
-                if (iExt.aop.auth.Identity.ixApiEnabled('ixLogoff') === true) {
-                    iExt.aop.auth.Identity.ixApiCall('ixLogoff');
+                var app = me.getApplication();
+                var viewName = app.getIxLogonView();
+                if (viewName) {
+                    /*
+                    if (iExt.aop.auth.Identity.ixApiEnabled('ixLogoff') === true) {
+                        iExt.aop.auth.Identity.ixApiCall('ixLogoff');
+                    }
+                    */
+                    app.ixChangeView(viewName);
+                } else {
+                    Ext.raise('未配置应用的登录视图！');
                 }
-                */
             }
         });
     },

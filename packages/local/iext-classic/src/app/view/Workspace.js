@@ -15,22 +15,45 @@ Ext.define('iExt.app.view.Workspace', {
         'iExt.mixin.Workspace'
     ],
 
-    viewModel: 'ixws',
+    viewModel: 'ixmain',
     controller: 'ixws',
 
     layout: 'border',
     referenceHolder: true,
 
     config: {
+        /**
+         * 标题行扩展组件集合
+         */
         ixHeaderItems: [],
-        ixHomeView: undefined,
-        ixFormView: undefined,
-        ixAppsStore: undefined
+        
+        /**
+         * 主视图
+         */
+        ixHomeView: null,
+                
+        /**
+         * 
+         */
+        ixFormView: null,
+        
+        /**
+         * 
+         */
+        ixAppsStore: null
+    },
+
+    applyIxUser: function (user) {
+        var vm = this.getViewModel();
+        vm.setData({
+            _ixa: {
+                user: user
+            }
+        });
     },
 
     initComponent: function () {
         var me = this;
-
 
         me.callParent(arguments);
     }

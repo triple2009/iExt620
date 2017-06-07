@@ -1,5 +1,5 @@
 Ext.define('app.view.main.AppMainModel', {
-    extend: 'iExt.app.view.model.Workspace',
+    extend: 'iExt.app.view.model.Main',
 
     alias: 'viewmodel.appmain',
 

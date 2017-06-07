@@ -18,6 +18,11 @@ Ext.define('iExt.app.Runtime', {
         ixSessionKey: 'ix-session',
 
         /**
+         * 运行模式
+         */
+        ixCopyright: '&copy;版权所有，保留所有权利！',
+
+        /**
          * 当前应用程序Application对象
          */
         ixApp: null,
@@ -41,7 +46,7 @@ Ext.define('iExt.app.Runtime', {
         /**
          * 应用名称
          */
-        ixAppName: '',
+        ixAppName: 'iExt',
 
         /**
          * 应用服务地址

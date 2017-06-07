@@ -7,7 +7,7 @@ Ext.define('app.view.main.Main', {
 
     layout: 'border',
     tbar: {
-        xtype: 'ixapptbr',
+        xtype: 'ixappheader',
         reference: 'tbrMain',
         items: [{
             iconCls: 'x-fa fa-th',

@@ -13,6 +13,14 @@ Ext.define('iExt.mixin.Workspace', {
 
     ixIsWorkspace: true,
 
+    config: {
+        /**
+         * 用户信息，可以通过外部配置设置
+         * {code: '', password: ''}
+         */
+        ixUser: null
+    },
+
     /**
      * 打开视图
      */
