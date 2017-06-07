@@ -62,6 +62,18 @@ Ext.define('iExt.app.view.Tab', {
             }
         });
 
+        var nohelp = me.fireEvent('ixnohelp');
+        if (nohelp === false) {
+            tbrItems.push({
+                iconCls: 'x-fa fa-question-circle',
+                listeners: {
+                    click: function (item, e, eOpts) {
+                        item.fireEvent('ixhelp');
+                    }
+                }
+            });
+        }
+
         items.push({
             xtype: 'ixappheader',
             region: 'north',

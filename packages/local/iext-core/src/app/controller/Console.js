@@ -8,7 +8,7 @@ Ext.define('iExt.app.controller.Console', {
 
     /**
      * 初始化处理。
-     * @memberOf iExt.app.Console#
+     * @memberOf iExt.app.controller.Console#
      * @param {Exp.app.Application} app 应用程序
      */
     init: function (app) {

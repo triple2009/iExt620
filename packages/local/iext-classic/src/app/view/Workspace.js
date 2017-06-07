@@ -15,7 +15,7 @@ Ext.define('iExt.app.view.Workspace', {
         'iExt.mixin.Workspace'
     ],
 
-    viewModel: 'ixapp',
+    viewModel: 'ixws',
     controller: 'ixws',
 
     layout: 'border',

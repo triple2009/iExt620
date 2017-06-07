@@ -18,6 +18,7 @@ Ext.define('iExt.app.Application', {
     controllers: [
         'iExt.app.controller.Main',
         'iExt.app.controller.Identity',
+        'iExt.app.controller.Help',
         'iExt.app.controller.Console'
     ],
 
