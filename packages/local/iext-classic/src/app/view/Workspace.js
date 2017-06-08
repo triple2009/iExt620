@@ -8,7 +8,7 @@ Ext.define('iExt.app.view.Workspace', {
     xtype: 'widget.ixappws',
 
     requires: [
-        'iExt.app.Title'
+        'iExt.toolbar.AppTitle'
     ],
 
     mixins: [

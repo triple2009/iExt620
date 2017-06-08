@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.Header
+ * @class iExt.toolbar.AppHeader
  * @extends {Ext.toolbar.Toolbar} 
  * @classdesc 应用程序的工具栏。
  */
-Ext.define('iExt.app.Header', {
+Ext.define('iExt.toolbar.AppHeader', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.ixappheader',
 

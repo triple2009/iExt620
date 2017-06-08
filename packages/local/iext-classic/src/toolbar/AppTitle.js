@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.Title
+ * @class iExt.toolbar.AppTitle
  * @extends {Ext.toolbar.TextItem} 
  * @classdesc 标题控件。对于只有标题的工具栏，高度会有影响，可以配合iExt.toolbar.Holder使用。
  */
-Ext.define('iExt.app.Title', {
+Ext.define('iExt.toolbar.AppTitle', {
     extend: 'Ext.toolbar.TextItem',
     alias: 'widget.ixapptitle',
 

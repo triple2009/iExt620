@@ -1,7 +1,7 @@
 ﻿/**
  * @class iExt.toolbar.Search
  * @extends {Ext.toolbar.List} 
- * @classdesc HFX前端框架工具栏控件。
+ * @classdesc 搜索工具栏控件。
  */
 Ext.define('iExt.toolbar.Search', {
     extend: 'Ext.toolbar.Toolbar',
@@ -13,13 +13,13 @@ Ext.define('iExt.toolbar.Search', {
 
     cls: 'ix-search-tbr',
 
+    ixTheme: {
+        labelWidth: 50
+    },
+
     layout: 'hbox',
     defaultType: 'ixtext',
     referenceHolder: true,
-
-    defaults: {
-        labelWidth: 60
-    },
 
     /**
      * 快速搜索事件。
@@ -35,6 +35,11 @@ Ext.define('iExt.toolbar.Search', {
      */
     initComponent: function () {
         var me = this;
+
+        me.defaults = {
+            labelWidth: me.ixTheme.labelWidth
+        };
+
         if (me.ixAutoSearch === true) {
             me.ixSetAutoSearch(me.items);
         }

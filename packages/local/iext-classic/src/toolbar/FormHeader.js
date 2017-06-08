@@ -1,9 +1,9 @@
 /**
- * @class iExt.form.Header
+ * @class iExt.toolbar.FormHeader
  * @extends {Ext.toolbar.Toolbar} 
  * @classdesc 表单工具栏控件。
  */
-Ext.define('iExt.form.Header', {
+Ext.define('iExt.toolbar.FormHeader', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.ixformheader',
 
