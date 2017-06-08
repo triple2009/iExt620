@@ -136,7 +136,38 @@ Ext.define('app.view.user.List', {
     dockedItems: [{
         xtype: 'ixsearchtbr',
         items: [{
-            fieldLabel: '代码',
+            xtype: 'ixsearchct',
+            fieldLabel: 'SearchContainer',
+            labelWidth: 100,
+            items: [{
+                xtype: 'ixtext',
+                width: 200,
+                reference: 'txtNewName'
+            }],
+            ixFilters: {
+                ixConnector: iExt.filter.Connectors.AND,
+                ixItems: [{
+                    ixProperty: 'name',
+                    ixOperator: iExt.filter.Operators.CT,
+                    ixAlignTarget: 'txtNewName',
+                    type: 'string'
+                }]
+            }
+        }, {
+            xtype: 'ixsearchfield',
+            fieldLabel: 'SearchField',
+            labelWidth: 100,
+            ixFilters: {
+                ixConnector: iExt.filter.Connectors.AND,
+                ixItems: [{
+                    ixProperty: 'name',
+                    ixOperator: iExt.filter.Operators.CT,
+                    type: 'string'
+                }]
+            }
+        }, {
+            labelWidth: 100,
+            fieldLabel: 'SearchBar',
             reference: 'txtName'
         }],
         ixFilters: {

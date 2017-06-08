@@ -1,9 +1,9 @@
 ﻿/**
- * @class iExt.form.field.SearchContainer
+ * @class iExt.form.SearchContainer
  * @extends {Ext.form.FieldContainer}
  * @classdesc 搜索容器组件。
  */
-Ext.define('iExt.form.search.Container', {
+Ext.define('iExt.form.SearchContainer', {
     extend: 'Ext.form.FieldContainer',
     alias: 'widget.ixsearchct',
 
@@ -15,13 +15,19 @@ Ext.define('iExt.form.search.Container', {
     layout: 'hbox',
     referenceHolder: true,
 
-    defaults: {
+    ixTheme: {
         labelWidth: 50,
         margin: '0 5 0 0'
     },
 
     initComponent: function () {
         var me = this;
+
+        me.defaults = {
+            labelWidth: me.ixTheme.labelWidth,
+            margin: me.ixTheme.margin
+        };
+
         if (me.ixAutoSearch === true) {
             me.ixSetAutoSearch(me.items);
         }
@@ -29,11 +35,20 @@ Ext.define('iExt.form.search.Container', {
     },
 
     afterRender: function () {
-        var me = this;
+        var me = this,
+            target = me.getIxAlignTarget();
+
+        var align = {
+            type: 'list',
+            ixMode: null,
+            ixTarget: target
+        };
+
         me.add({
-            xtype: 'ix-actbtn',
+            xtype: 'ixactbtn',
             iconCls: 'x-fa fa-search',
             tooltip: '快速搜索',
+            ixAlign: align,
             listeners: {
                 click: { fn: me.ixOnQuickSearch, scope: me }
             }
