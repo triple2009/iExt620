@@ -1,8 +1,8 @@
 ﻿/**
- * @mixin iExt.mixin.Filter
- * @classdesc iExt 筛选条件 MIXIN。
+ * @mixin iExt.mixin.Search
+ * @classdesc iExt 搜索 MIXIN。
  */
-Ext.define('iExt.mixin.Filter', {
+Ext.define('iExt.mixin.Search', {
     extend: 'Ext.Mixin',
 
     requires: [
@@ -10,10 +10,10 @@ Ext.define('iExt.mixin.Filter', {
     ],
 
     mixinConfig: {
-        id: 'iext-filter'
+        id: 'iext-search'
     },
 
-    ixIsFilter: true,
+    ixIsSearch: true,
 
     config: {
         /**
@@ -36,7 +36,7 @@ Ext.define('iExt.mixin.Filter', {
     applyIxFilters: function (filters) {
         if (filters) {
             filters = Ext.clone(filters);
-            //filters = iExt.Filters.create(filters);
+            filters = iExt.Filters.create(filters);
         }
         return filters;
     },
@@ -45,8 +45,10 @@ Ext.define('iExt.mixin.Filter', {
         var me = this, ixFilters = me.getIxFilters();
         var filters = [];
         if (ixFilters) {
-            //filters = ixFilters.ixGetFilter(me.getReferences());
+            filters = ixFilters.ixGetFilter(me.getReferences());
         }
+        // 触发搜索事件
+        // 列表的视图控制器会监听该事件，并进行相应的处理
         this.fireEvent('ixquicksearch', item, filters);
     },
 

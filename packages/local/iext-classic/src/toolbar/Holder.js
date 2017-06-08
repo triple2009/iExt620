@@ -15,7 +15,7 @@ Ext.define('iExt.toolbar.Holder', {
     initComponent: function () {
         var me = this;
         me.setDisabled(true);
-        me.callParent();
+        me.callParent(arguments);
     }
 
 });

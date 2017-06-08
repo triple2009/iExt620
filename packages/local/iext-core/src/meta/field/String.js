@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.meta.field.String
+ * @extends {iExt.meta.field.Field} 
  * @classdesc 文本字段类。
  */
 Ext.define('iExt.meta.field.String', {
@@ -10,7 +11,13 @@ Ext.define('iExt.meta.field.String', {
     ],
 
     config: {
+        /**
+         * 数据类型
+         */
         ixDataType: iExt.meta.Types.STRING,
+        /**
+         * 数据子类型
+         */
         ixSubType: 'string'
     },
 

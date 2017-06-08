@@ -39,7 +39,7 @@ Ext.define('iExt.app.view.controller.List', {
         // 处理引用的组件
         for (var ref in refs) {
             if (refs.hasOwnProperty(ref)) {
-                if (ref.ixIsList === true) {
+                if (ref.ixIsListView === true) {
                     // 列表控件的对齐操作组件已经由
                     // Base._ixInitActionItems() 方法设置
                     if (ref.hasListeners.ixselection) {
@@ -56,7 +56,7 @@ Ext.define('iExt.app.view.controller.List', {
         }
 
         // 处理当前视图
-        if (view.ixIsList === true) {
+        if (view.ixIsListView === true) {
             view.addListener('ixselection', me.ixOnSelection, me);
             if (view.hasListeners.ixselection) {
                 // 如果存在事件监听，在事件处理前插入处理
@@ -109,7 +109,7 @@ Ext.define('iExt.app.view.controller.List', {
         if (actItems.length > 0) {
             Ext.each(actItems, function (actitem, index) {
                 var targetCmp = Ext.getCmp(actitem.targetId);
-                if (targetCmp && targetCmp.ixIsList === true) {
+                if (targetCmp && targetCmp.ixIsListView === true) {
                     targetCmp.ixSearch(filters);
                 }
             });

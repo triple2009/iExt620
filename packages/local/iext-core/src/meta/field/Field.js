@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.meta.field.Field
+ * @extends {Ext.Base} 
  * @classdesc 元数据字段基础类。
  */
 Ext.define('iExt.meta.field.Field', {

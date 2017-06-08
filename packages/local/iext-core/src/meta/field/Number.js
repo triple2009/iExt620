@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.meta.field.Number
+ * @extends {iExt.meta.field.Field} 
  * @classdesc 数值字段类。
  */
 Ext.define('iExt.meta.field.Number', {
@@ -10,7 +11,13 @@ Ext.define('iExt.meta.field.Number', {
     ],
 
     config: {
+        /**
+         * 数据类型
+         */
         ixDataType: iExt.meta.Types.NUMBER,
+        /**
+         * 数据子类型
+         */
         ixSubType: 'qty'
     },
 

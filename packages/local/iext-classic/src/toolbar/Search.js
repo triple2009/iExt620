@@ -8,7 +8,7 @@ Ext.define('iExt.toolbar.Search', {
     alias: 'widget.ixsearchtbr',
 
     mixins: [
-        'iExt.mixin.Filter'
+        'iExt.mixin.Search'
     ],
 
     cls: 'ix-search-tbr',
@@ -38,7 +38,7 @@ Ext.define('iExt.toolbar.Search', {
         if (me.ixAutoSearch === true) {
             me.ixSetAutoSearch(me.items);
         }
-        me.callParent();
+        me.callParent(arguments);
     },
 
     afterRender: function () {
@@ -50,32 +50,34 @@ Ext.define('iExt.toolbar.Search', {
             ixMode: null,
             ixTarget: target
         };
-
-        me.add('->');
-        this.__ixSearch = me.add({
-            xtype: 'ixactbtn',
-            iconCls: 'x-fa fa-search',
-            tooltip: '快速搜索',
-            ixAlign: align,
-            listeners: {
-                click: { fn: me.ixOnQuickSearch, scope: me }
-            }
-        });
-        this.__ixClear = me.add({
-            xtype: 'ixactbtn',
-            iconCls: 'x-fa fa-clipboard',
-            tooltip: '清空快速搜索条件',
-            ixAlign: align,
-            listeners: {
-                click: { fn: me.ixOnClear, scope: me }
-            }
-        });
+        var btns = {
+            xtype: 'ixactsbtn',
+            allowToggle: false,
+            items: [{
+                xtype: 'ixactbtn',
+                iconCls: 'x-fa fa-search',
+                tooltip: '快速搜索',
+                ixAlign: align,
+                listeners: {
+                    click: { fn: me.ixOnQuickSearch, scope: me }
+                }
+            }, {
+                xtype: 'ixactbtn',
+                iconCls: 'x-fa fa-clipboard',
+                tooltip: '清空快速搜索条件',
+                ixAlign: align,
+                listeners: {
+                    click: { fn: me.ixOnClear, scope: me }
+                }
+            }]
+        };
+        this.__ixSearch = me.add(btns);
         me.callParent(arguments);
     },
 
     onDestroy: function () {
         this.callParent();
-        Ext.destroyMembers(this, '__ixClear', '__ixSearch');
+        Ext.destroyMembers(this, '__ixSearch');
     }
 
 });

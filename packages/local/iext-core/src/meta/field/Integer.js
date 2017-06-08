@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.meta.field.Integer
+ * @extends {iExt.meta.field.Field} 
  * @classdesc 整型字段类。
  */
 Ext.define('iExt.meta.field.Integer', {
@@ -10,7 +11,13 @@ Ext.define('iExt.meta.field.Integer', {
     ],
 
     config: {
+        /**
+         * 数据类型
+         */
         ixDataType: iExt.meta.Types.INTEGER,
+        /**
+         * 数据子类型
+         */
         ixSubType: 'int'
     },
 

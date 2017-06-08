@@ -1,7 +1,7 @@
-Ext.define('app.view.user.UserController', {
+Ext.define('app.view.odoo.UserController', {
     extend: 'Ext.app.ViewController',
 
-    alias: 'controller.user',
+    alias: 'controller.odoo',
 
     onSelectionChange: function (selModel, selected, eOpts) {
 
@@ -16,6 +16,6 @@ Ext.define('app.view.user.UserController', {
         view.items.each(function(item,index){
             item.setVisible(false);
         });
-        var add = view.add(Ext.create('app.view.user.Add', { title: 'test' }));
+        var add = view.add(Ext.create('app.view.odoo.Add', { title: 'test' }));
     }
 });

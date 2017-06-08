@@ -1,15 +1,15 @@
 ﻿/**
- * @mixin iExt.mixin.List
+ * @mixin iExt.mixin.ListView
  * @classdesc iExt 列表视图 MIXIN。
  */
-Ext.define('iExt.mixin.List', {
+Ext.define('iExt.mixin.ListView', {
     extend: 'iExt.mixin.View',
 
     mixinConfig: {
         id: 'iext-view-list'
     },
 
-    ixIsList: true,
+    ixIsListView: true,
 
     config: {
         /**
@@ -20,7 +20,7 @@ Ext.define('iExt.mixin.List', {
         /**
          * 
          */
-        ixPageSize: 15,
+        ixPageSize: null,
         /**
          * 
          */

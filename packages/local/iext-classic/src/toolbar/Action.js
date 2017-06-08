@@ -43,7 +43,7 @@ Ext.define('iExt.toolbar.Action', {
             me.on('beforeadd', me._ixOnBeforeAdd, me);
         }
 
-        me.callParent();
+        me.callParent(arguments);
     },
 
     /**

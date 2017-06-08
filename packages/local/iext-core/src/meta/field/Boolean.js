@@ -1,6 +1,6 @@
 ﻿/**
- * @class iExt.meta.Base
- * @extends {iExt.meta.Meta} 
+ * @class iExt.meta.field.Boolean
+ * @extends {iExt.meta.field.Field} 
  * @classdesc 元数据基础类。
  */
 Ext.define('iExt.meta.field.Boolean', {
@@ -11,7 +11,13 @@ Ext.define('iExt.meta.field.Boolean', {
     ],
 
     config: {
+        /**
+         * 数据类型
+         */
         ixDataType: iExt.meta.Types.BOOLEAN,
+        /**
+         * 数据子类型
+         */
         ixSubType: 'dual'
     },
 

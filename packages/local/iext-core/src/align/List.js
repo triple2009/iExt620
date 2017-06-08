@@ -59,7 +59,7 @@ Ext.define('iExt.align.List', {
         // </debug>
         var mode = me.getIxMode(),
             view = Ext.getCmp(id);
-        if (view.ixIsList === true) {
+        if (view.ixIsListView === true) {
             if (mode !== null) {
                 var data = view.ixGetSelectedData();
                 if (!data || data.length === 0) {

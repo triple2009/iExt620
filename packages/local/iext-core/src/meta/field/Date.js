@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.meta.field.Date
+ * @extends {iExt.meta.field.Field} 
  * @classdesc 日期时间字段类。
  */
 Ext.define('iExt.meta.field.Date', {
@@ -9,7 +10,13 @@ Ext.define('iExt.meta.field.Date', {
     ],
 
     config: {
+        /**
+         * 数据类型
+         */
         ixDataType: iExt.meta.Types.DATE,
+        /**
+         * 数据子类型
+         */
         ixSubType: 'date'
     },
 
