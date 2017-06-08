@@ -26,17 +26,17 @@ Ext.define('iExt.app.view.Workspace', {
          * 标题行扩展组件集合
          */
         ixHeaderItems: [],
-        
+
         /**
          * 主视图
          */
         ixHomeView: null,
-                
+
         /**
          * 
          */
         ixFormView: null,
-        
+
         /**
          * 
          */
@@ -45,11 +45,8 @@ Ext.define('iExt.app.view.Workspace', {
 
     applyIxUser: function (user) {
         var vm = this.getViewModel();
-        vm.setData({
-            _ixa: {
-                user: user
-            }
-        });
+        vm.ixSetUser(user);
+        return user;
     },
 
     initComponent: function () {

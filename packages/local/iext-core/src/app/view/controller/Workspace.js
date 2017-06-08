@@ -44,6 +44,7 @@ Ext.define('iExt.app.view.controller.Workspace', {
 
     /**
      * 打开视图
+     * 每种布局方案可以有不同的打开方式
      */
     ixOnOpenView: function () {
         var ws = this.getView();
@@ -52,6 +53,7 @@ Ext.define('iExt.app.view.controller.Workspace', {
 
     /**
      * 打开页面
+     * 每种布局方案可以有不同的打开方式
      */
     ixOpenPage: function () {
         var ws = this.getView();

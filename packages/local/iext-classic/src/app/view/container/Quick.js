@@ -24,7 +24,7 @@ Ext.define('iExt.app.view.container.Quick', {
             items: [{
                 xtype: 'ixtbrtitle',
                 bind: {
-                    html: '{_ixvcTitle}'
+                    html: '{ixvcTitle}'
                 }
             }, '->', {
                 iconCls: 'x-fa fa-chevron-right',
@@ -52,11 +52,7 @@ Ext.define('iExt.app.view.container.Quick', {
                 var me = this,
                     title = component.getTitle();
                 var vm = this.getViewModel();
-                vm.setData({
-                    _ixvc: {
-                        title: title
-                    }
-                });
+                vm.ixSetTitle(title);
             }
         }
     }

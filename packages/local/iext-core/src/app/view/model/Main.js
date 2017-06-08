@@ -8,11 +8,14 @@ Ext.define('iExt.app.view.model.Main', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.ixmain',
 
+    ixIsAppViewModel: true,
+
     data: {
         /**
          * 应用程序数据
+         * 其他视图定义的数据不能以ix开头
          */
-        _ixa: {
+        ixa: {
             /**
              * 当前用户信息
              */
@@ -29,6 +32,17 @@ Ext.define('iExt.app.view.model.Main', {
                 name: ''
             }
         }
+    },
+
+    /**
+     * 设置用户的快捷方式
+     */
+    ixSetUser: function (user) {
+        this.setData({
+            ixa: {
+                user: user
+            }
+        });
     }
 
 });

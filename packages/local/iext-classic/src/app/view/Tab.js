@@ -43,7 +43,7 @@ Ext.define('iExt.app.view.Tab', {
 
         tbrItems.push({
             bind: {
-                text: '{_ixa.user.code}-{_ixa.user.name}'
+                text: '{ixa.user.code}-{ixa.user.name}'
             },
             iconCls: 'x-fa fa-user',
             menuAlign: 'tr-br',

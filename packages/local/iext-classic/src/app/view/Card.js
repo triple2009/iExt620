@@ -13,7 +13,8 @@ Ext.define('iExt.app.view.Card', {
     cls: 'ix-app-card',
 
     initComponent: function () {
-        var me = this, items = [],
+        var me = this,
+            items = [],
             headerItems = me.getIxHeaderItems() || [],
             home = me.getIxHomeView(),
             store = me.getIxAppsStore();
@@ -27,7 +28,10 @@ Ext.define('iExt.app.view.Card', {
             iconCls: 'x-fa fa-th',
             scale: 'large',
             listeners: {
-                click: { fn: me._ixOnSelectApp, scope: me }
+                click: {
+                    fn: me._ixOnSelectApp,
+                    scope: me
+                }
             }
         }, '->');
 
@@ -36,13 +40,10 @@ Ext.define('iExt.app.view.Card', {
         }
 
         tbrItems.push({
-            xtype: 'ixavatar'
-        });
-
-        tbrItems.push({
             bind: {
-                text: '{_ixa.user.code}-{_ixa.user.name}'
+                text: '{ixa.user.code}-{ixa.user.name}'
             },
+            iconCls: 'x-fa fa-user',
             menuAlign: 'tr-br',
             menu: {
                 shadow: false,
@@ -98,7 +99,10 @@ Ext.define('iExt.app.view.Card', {
                     width: 780,
                     store: store,
                     listeners: {
-                        selectionchange: { fn: me._ixOnSelectionChange, scope: me }
+                        selectionchange: {
+                            fn: me._ixOnSelectionChange,
+                            scope: me
+                        }
                     }
                 }]
             }, {
