@@ -45,6 +45,7 @@ Ext.define('iExt.form.field.SearchField', {
         var me = this, ixFilters = me.getIxFilters();
         var filters = [];
         if (ixFilters) {
+            // 设置输入框为对齐的组件
             ixFilters.setIxAlignTarget(me);
             filters = ixFilters.ixGetFilter();
             me.fireEvent('ixquicksearch', me, filters);

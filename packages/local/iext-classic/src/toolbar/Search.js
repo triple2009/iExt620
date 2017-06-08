@@ -64,7 +64,10 @@ Ext.define('iExt.toolbar.Search', {
                 tooltip: '快速搜索',
                 ixAlign: align,
                 listeners: {
-                    click: { fn: me.ixOnQuickSearch, scope: me }
+                    click: {
+                        fn: me.ixOnQuickSearch,
+                        scope: me
+                    }
                 }
             }, {
                 xtype: 'ixactbtn',
@@ -72,17 +75,15 @@ Ext.define('iExt.toolbar.Search', {
                 tooltip: '清空快速搜索条件',
                 ixAlign: align,
                 listeners: {
-                    click: { fn: me.ixOnClear, scope: me }
+                    click: {
+                        fn: me.ixOnClear,
+                        scope: me
+                    }
                 }
             }]
         };
-        this.__ixSearch = me.add(btns);
+        this.ixEventItem = me.add(btns).items.getAt(0);
         me.callParent(arguments);
-    },
-
-    onDestroy: function () {
-        this.callParent();
-        Ext.destroyMembers(this, '__ixSearch');
     }
 
 });

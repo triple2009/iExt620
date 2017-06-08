@@ -17,7 +17,8 @@ Ext.define('iExt.form.SearchContainer', {
 
     ixTheme: {
         labelWidth: 50,
-        margin: '0 5 0 0'
+        margin: '0 5 0 0',
+        minWidth: 300
     },
 
     initComponent: function () {
@@ -27,6 +28,7 @@ Ext.define('iExt.form.SearchContainer', {
             labelWidth: me.ixTheme.labelWidth,
             margin: me.ixTheme.margin
         };
+        me.minWidth = me.minWidth || me.ixTheme.minWidth;
 
         if (me.ixAutoSearch === true) {
             me.ixSetAutoSearch(me.items);
@@ -44,13 +46,18 @@ Ext.define('iExt.form.SearchContainer', {
             ixTarget: target
         };
 
-        me.add({
+        me.ixEventItem = me.add({
             xtype: 'ixactbtn',
             iconCls: 'x-fa fa-search',
+            // 使用工具栏按钮样式
+            ui: 'default-toolbar',
             tooltip: '快速搜索',
             ixAlign: align,
             listeners: {
-                click: { fn: me.ixOnQuickSearch, scope: me }
+                click: {
+                    fn: me.ixOnQuickSearch,
+                    scope: me
+                }
             }
         });
         me.callParent(arguments);

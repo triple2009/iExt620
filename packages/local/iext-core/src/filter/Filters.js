@@ -33,11 +33,11 @@ Ext.define('iExt.filter.Filters', {
         this.initConfig(config);
     },
 
-    updateIxAlignTarget: function (to) {
-        if (to) {
+    updateIxAlignTarget: function (target) {
+        if (target) {
             Ext.each(this.getIxItems(), function (item) {
                 if (!item.getIxAlignTarget()) {
-                    item.setIxAlignTarget(to);
+                    item.setIxAlignTarget(target);
                 }
             });
         }

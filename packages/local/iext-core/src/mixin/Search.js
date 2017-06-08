@@ -10,7 +10,10 @@ Ext.define('iExt.mixin.Search', {
     ],
 
     mixinConfig: {
-        id: 'iext-search'
+        id: 'iext-search',
+        on: {
+            destroy: 'ixOnDestroy'
+        }
     },
 
     ixIsSearch: true,
@@ -33,6 +36,20 @@ Ext.define('iExt.mixin.Search', {
      */
     ixAutoSearch: true,
 
+    /**
+     * 对于文本框等回车触发搜索的情况
+     * 需要传递实际的搜索按钮组件
+     * 通过该属性来设置需要触发的实际组件
+     */
+    ixEventItem: null,
+
+    /**
+     * 析构视图处理。
+     */
+    ixOnDestroy: function () {
+        Ext.destroyMembers(this, 'ixEventItem');
+    },
+
     applyIxFilters: function (filters) {
         if (filters) {
             filters = Ext.clone(filters);
@@ -41,15 +58,19 @@ Ext.define('iExt.mixin.Search', {
         return filters;
     },
 
+    /**
+     * 触发搜索事件
+     */
     ixOnQuickSearch: function (item, e, eOpts) {
-        var me = this, ixFilters = me.getIxFilters();
+        var me = this,
+            ixFilters = me.getIxFilters();
         var filters = [];
         if (ixFilters) {
             filters = ixFilters.ixGetFilter(me.getReferences());
         }
         // 触发搜索事件
         // 列表的视图控制器会监听该事件，并进行相应的处理
-        this.fireEvent('ixquicksearch', item, filters);
+        this.fireEvent('ixquicksearch', me.ixEventItem || item, filters);
     },
 
     /**
@@ -88,13 +109,19 @@ Ext.define('iExt.mixin.Search', {
                     Ext.applyIf(item, {
                         enableKeyEvents: true,
                         listeners: {
-                            keypress: { fn: me._ixOnKeyPress, scope: me }
+                            keypress: {
+                                fn: me._ixOnKeyPress,
+                                scope: me
+                            }
                         }
                     });
                 } else if (item.xtype === 'ixsearchbtn') {
                     Ext.applyIf(item, {
                         listeners: {
-                            change: { fn: me._ixOnChange, scope: me }
+                            change: {
+                                fn: me._ixOnChange,
+                                scope: me
+                            }
                         }
                     });
                 }
@@ -103,6 +130,10 @@ Ext.define('iExt.mixin.Search', {
 
         /**
          * 回车自动搜索
+         * @param {Ext.Component} item 触发事件的组件
+         * 对于文本框等输入控件需要进行转换为搜索的动作按钮
+         * 因为在列表控制器的搜索事件监听处理中需要根据item
+         * 去搜索与之对齐的列表组件
          */
         _ixOnKeyPress: function (item, e, eOpts) {
             if (e.getCharCode() === Ext.EventObject.ENTER) {
@@ -114,8 +145,7 @@ Ext.define('iExt.mixin.Search', {
          * 搜索条件变更处理
          */
         _ixOnChange: function (item) {
-            Ext.defer(this.ixOnQuickSearch, 100, this,
-                [item, null, null]);
+            Ext.defer(this.ixOnQuickSearch, 100, this, [item, null, null]);
         }
 
     }

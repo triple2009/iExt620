@@ -138,10 +138,10 @@ Ext.define('app.view.user.List', {
         items: [{
             xtype: 'ixsearchct',
             fieldLabel: 'SearchContainer',
-            labelWidth: 100,
+            labelWidth: 120,
             items: [{
                 xtype: 'ixtext',
-                width: 200,
+                flex: 1,
                 reference: 'txtNewName'
             }],
             ixFilters: {
