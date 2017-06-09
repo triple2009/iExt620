@@ -35,11 +35,6 @@ Ext.define('iExt.app.view.Workspace', {
         /**
          * 
          */
-        ixFormView: null,
-
-        /**
-         * 
-         */
         ixAppsStore: null
     },
 

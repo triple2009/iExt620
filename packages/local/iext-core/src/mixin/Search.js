@@ -1,5 +1,6 @@
 ﻿/**
  * @mixin iExt.mixin.Search
+ * @extends {Ext.Mixin} 
  * @classdesc iExt 搜索 MIXIN。
  */
 Ext.define('iExt.mixin.Search', {

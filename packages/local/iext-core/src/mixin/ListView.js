@@ -1,5 +1,6 @@
 ﻿/**
  * @mixin iExt.mixin.ListView
+ * @extends {iExt.mixin.View} 
  * @classdesc iExt 列表视图 MIXIN。
  */
 Ext.define('iExt.mixin.ListView', {
@@ -33,9 +34,9 @@ Ext.define('iExt.mixin.ListView', {
 
     /**
      * 数据选择事件。
-     * @memberOf iExt.mixin.List#
+     * @memberOf iExt.mixin.ListView#
      * @event ixselection
-     * @param {iExt.mixin.List} this iExt.mixin.List控件。
+     * @param {iExt.mixin.ListView} this iExt.mixin.ListView 组件
      * @param {Object[]} data 当前选择的数据。
      */
 

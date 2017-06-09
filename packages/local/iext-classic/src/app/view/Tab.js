@@ -18,7 +18,6 @@ Ext.define('iExt.app.view.Tab', {
             items = [],
             headerItems = me.getIxHeaderItems() || [],
             home = me.getIxHomeView(),
-            form = me.getIxFormView(),
             store = me.getIxAppsStore();
 
         if (!home) {
@@ -114,8 +113,6 @@ Ext.define('iExt.app.view.Tab', {
                 }]
             }, {
                 xtype: home
-            }, {
-                xtype: form
             }]
         });
 
@@ -251,6 +248,21 @@ Ext.define('iExt.app.view.Tab', {
             nav.setVisible(true);
 
             tbr._ixApps = false;
+        },
+
+        _ixMain: function (item, view, options) {
+            var me = this,
+                refs = me.getReferences(),
+                main = refs.ixAppMain;
+
+            if (Ext.isString(view)) {
+                view = iExt.View.ixCreate(view, options.viewConfig);
+            } else if (view.isComponent !== true) {
+                view = Ext.create(view, options.viewConfig);
+            }
+            if (view) {
+                main.ixAddView(view);
+            }
         },
 
         _ixQuick: function (item, view, options) {

@@ -48,6 +48,12 @@ Ext.define('iExt.tab.Panel', {
      * @return {Ext.Component} 新建的或已经存在的视图对象。
      */
     ixAddView: function (view, config) {
+        //<debug>
+        if (view.isComponent !== true) {
+            Ext.raise('指定的参数 [view] 不是有效的组件！');
+        }
+        //</debug>
+
         var me = this, layout = me.getLayout(), hash;
 
         hash = view.ixHashCode;

@@ -1,5 +1,6 @@
 /**
  * @mixin iExt.mixin.View
+ * @extends {Ext.Mixin} 
  * @classdesc iExt视图 MIXIN。
  */
 Ext.define('iExt.mixin.View', {

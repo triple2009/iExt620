@@ -14,53 +14,56 @@ Ext.define('iExt.app.view.Util', {
     /**
      * 创建视图对象。
      * @memberOf iExt.app.view.Util#
-     * @param {String} name 视图名称。
+     * @param {String} viewName 视图名称。
      * @param {Object} config 视图的配置信息。
      * @return {Ext.Component} 创建的视图对象。
      */
-    ixCreate: function (name, config) {
-        if (!name) {
-            Ext.raise('请指定要创建的视图名称！');
+    ixCreate: function (viewName, config) {
+        if (!viewName) {
+            Ext.raise('请指定要创建的视图！');
             return null;
         }
         var view = null;
-        if (name.indexOf('.') < 0) {
+
+        if (viewName.indexOf('.') < 0) {
             // 使用的是别名
-            var alias = 'widget.' + name;
+            var alias = 'widget.' + viewName;
             var className = Ext.ClassManager.getNameByAlias(alias);
             if (!className) {
-                Ext.raise('指定的视图 [' + name + '] 不存在！');
+                Ext.raise('指定的视图 [' + viewName + '] 不存在！');
             } else {
-                view = Ext.widget(name, config);
+                view = Ext.widget(viewName, config);
             }
         } else {
-            var viewClass = Ext.ClassManager.get(name);
+            // 使用的是完整类名
+            var viewClass = Ext.ClassManager.get(viewName);
             if (!viewClass) {
-                Ext.raise('指定的视图 [' + name + '] 不存在！');
+                Ext.raise('指定的视图 [' + viewName + '] 不存在！');
             } else {
-                view = Ext.create(name, config);
+                view = Ext.create(viewName, config);
             }
         }
+
         return view;
     },
 
     /**
      * 根据名称获取视图的完整类名称。
      * @memberOf iExt.app.view.Util#
-     * @param {String} name 视图名称。
+     * @param {String} viewName 视图名称。
      * @return {String} 完整类名称。
      */
-    ixGetViewClass: function (name) {
+    ixGetViewClass: function (viewName) {
         var viewClass;
-        if (name.indexOf('.') < 0) {
+        if (viewName.indexOf('.') < 0) {
             // 使用的是别名
-            var alias = 'widget.' + name;
+            var alias = 'widget.' + viewName;
             viewClass = Ext.ClassManager.getNameByAlias(alias);
         } else {
-            viewClass = Ext.ClassManager.get(name);
+            viewClass = Ext.ClassManager.get(viewName);
         }
         if (!viewClass) {
-            Ext.raise('指定的视图 [' + name + '] 不存在！');
+            Ext.raise('指定的视图 [' + viewName + '] 不存在！');
         }
         return viewClass;
     },

@@ -1,5 +1,6 @@
 /**
  * @mixin iExt.mixin.Action
+ * @extends {Ext.Mixin} 
  * @classdesc iExt 用户操作 MIXIN。
  * 用于设置操作组件的授权和对齐信息。
  */

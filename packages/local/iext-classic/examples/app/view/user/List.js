@@ -33,9 +33,13 @@ Ext.define('app.view.user.List', {
             },
             listeners: {
                 click: function (item, e, eOpts) {
-                    iExt.Toast.ixInfo(item.getIxAuth().ixService);
+                    //var data = item.getIxAlign().ixGetAlignData();
+                    item.fireEvent('ixopenview', item, 'app-user-add', {
+                        target: iExt.action.ViewTarget.MAIN
+                    });
                 }
-            }
+            },
+            ixViewName: 'app-user-add'
         }, {
             text: '编辑',
             iconCls: 'x-fa fa-edit',

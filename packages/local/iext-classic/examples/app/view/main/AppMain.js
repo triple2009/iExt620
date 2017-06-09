@@ -12,7 +12,6 @@ Ext.define('app.view.main.AppMain', {
     
     //ixHomeView: 'app-user',
     ixHomeView: 'app-user-list',
-    //ixFormView: 'app-user-add',
     ixAppsStore: { type: 'apps' }
 
 });
