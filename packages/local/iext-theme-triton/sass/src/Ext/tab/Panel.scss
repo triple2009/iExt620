@@ -1,8 +1,14 @@
 /* 去掉 Tab 的焦点边框 */
+
 .x-tab-focus.x-tab-default {
     outline: none !important;
 }
 
 .x-tab-active {
+    /* 当前的Tab页，光标应该是缺省光标 */
     cursor: default;
+    .x-tab-close-btn {
+        /* 当前的Tab页，关闭按钮光标应该是手势 */
+        cursor: pointer;
+    }
 }

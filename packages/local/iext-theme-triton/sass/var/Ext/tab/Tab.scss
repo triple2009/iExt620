@@ -1,11 +1,20 @@
-$tab-font-size: 16px;
+/* 下列变量都是 Ext tab theme variables */
+
+$tab-font-size: 14px;
 $tab-color: $base-color;
 $tab-color-active: #333;
-$tab-body-outline-width-focus: 0;
 
+/* 关闭焦点边框 */
+
+$tab-body-outline-width-focus: 0;
 $tab-border-color: #fff;
 $tab-border-color-active: #fff;
 $tab-border-color-focus: #fff;
 $tab-border-color-focus-active: #fff;
 $tab-border-color-focus-over: #fff;
 $tab-border-color-over: #fff;
+$tab-closable-icon-glyph-color-active: #ccc;
+$tab-closable-icon-glyph-color-focus: #aaa;
+$tab-closable-icon-glyph-color-focus-active: #aaa;
+$tab-closable-icon-glyph-color-focus-over: #aaa;
+$tab-closable-icon-glyph-color-over: #aaa;
