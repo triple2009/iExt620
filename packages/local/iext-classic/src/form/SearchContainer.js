@@ -2,13 +2,15 @@
  * @class iExt.form.SearchContainer
  * @extends {Ext.form.FieldContainer}
  * @classdesc 搜索容器组件。
+ * 适用于将少量的搜索条件放在操作工具栏中的场景，
+ * 可以减少视图的工具栏数量，简化和紧凑布局。
  */
 Ext.define('iExt.form.SearchContainer', {
     extend: 'Ext.form.FieldContainer',
     alias: 'widget.ixsearchct',
 
     mixins: [
-        'iExt.mixin.Search'
+        'iExt.mixin.QuickSearch'
     ],
 
     cls: 'ix-search-ct',
@@ -20,6 +22,8 @@ Ext.define('iExt.form.SearchContainer', {
         margin: '0 5 0 0',
         minWidth: 300
     },
+
+    ixEventName: 'ixquicksearch',
 
     initComponent: function () {
         var me = this;

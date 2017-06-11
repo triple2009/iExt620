@@ -14,7 +14,7 @@ Ext.define('iExt.form.Panel', {
     minWidth: '765',
     minHeight: 400,
     bodyPadding: '5 10 0 10',
-    defaultType: 'ixtextfield',
+    defaultType: 'ixtext',
     defaultFocus: 'field:focusable:not([hidden]):not([disabled]):not([readOnly])',
     trackResetOnLoad: true
 

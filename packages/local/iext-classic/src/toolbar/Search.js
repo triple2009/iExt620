@@ -2,13 +2,15 @@
  * @class iExt.toolbar.Search
  * @extends {Ext.toolbar.List} 
  * @classdesc 搜索工具栏控件。
+ * 适用于提供一个相对完整的搜索条件，
+ * 并且利用独立的工具栏进行布局的场景。
  */
 Ext.define('iExt.toolbar.Search', {
     extend: 'Ext.toolbar.Toolbar',
     alias: 'widget.ixsearchtbr',
 
     mixins: [
-        'iExt.mixin.Search'
+        'iExt.mixin.QuickSearch'
     ],
 
     cls: 'ix-search-tbr',
@@ -28,6 +30,8 @@ Ext.define('iExt.toolbar.Search', {
      * @param {iExt.toolbar.Search} this iExt.toolbar.Search控件。
      * @param {Object[]} filters 快速搜索条件集合。
      */
+
+    ixEventName: 'ixquicksearch',
 
     /**
      * 重载初始化控件。主要是根据HFX配置项创建搜索项目和搜索按钮。

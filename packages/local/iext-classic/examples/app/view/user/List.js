@@ -69,12 +69,10 @@ Ext.define('app.view.user.List', {
             listeners: {
                 click: function (item, e, eOpts) {
                     var data = item.getIxAlign().ixGetAlignData();
-                    item.fireEvent('ixopenview', item, {
+                    iExt.View.ixOpenView(item, {
                         xtype: 'ixqvform',
                         ixRecord: data[0]
-                    }, {
-                            target: iExt.action.ViewTarget.QUICK
-                        });
+                    }, 'quick');
                 }
             }
         }, {
@@ -92,6 +90,22 @@ Ext.define('app.view.user.List', {
                 click: function (item, e, eOpts) {
                     var data = item.getIxAlign().ixGetAlignData();
                     iExt.Toast.ixInfo(data.length);
+                }
+            }
+        }, {
+            text: '搜索',
+            iconCls: 'x-fa fa-search',
+            ixAuth: {
+                ixService: 'menu',
+                ixOperation: 'edit'
+            },
+            ixAlign: {
+                type: 'list',
+                ixMode: null
+            },
+            listeners: {
+                click: function (item, e, eOpts) {
+                    iExt.View.ixOpenView(item, 'app-user-search', 'ixwin');
                 }
             }
         }, {

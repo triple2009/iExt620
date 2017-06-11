@@ -1,7 +1,9 @@
 ﻿/**
  * @class iExt.form.field.SearchField
  * @extends {Ext.form.field.Text}
- * @classdesc 搜索容器组件。
+ * @classdesc 搜索框组件。
+ * 适用于快速模糊搜索的场景，
+ * 例如：提供一个文本框和一个搜索图标，进行模糊搜索。
  */
 Ext.define('iExt.form.field.SearchField', {
     extend: 'Ext.form.field.Text',
@@ -10,9 +12,11 @@ Ext.define('iExt.form.field.SearchField', {
     cls: 'ix-search-field',
 
     mixins: [
-        'iExt.mixin.Search',
+        'iExt.mixin.QuickSearch',
         'iExt.mixin.Action'
     ],
+
+    ixEventName: 'ixquicksearch',
 
     /**
      * 允许回车直接搜索

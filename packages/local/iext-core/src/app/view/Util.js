@@ -69,6 +69,27 @@ Ext.define('iExt.app.view.Util', {
     },
 
     /**
+     * 打开视图
+     * @param {Ext.Component} item 打开视图的组件
+     * @param {String|Object} 视图类名称或者视图组件配置。
+     * @param {String|iExt.action.ViewTarget} target 在哪里打开。
+     * @param {Object} options 可选的参数。
+     * 
+     */
+    ixOpenView: function (item, view, target, options) {
+        // 根据字符串解析目标枚举值
+        if (Ext.isString(target)) {
+            target = iExt.action.ViewTarget.ixGetValue(target.toUpperCase());
+        }
+        target = target || iExt.action.ViewTarget.MAIN;
+        options = options || {};
+        options = Ext.applyIf(options, {
+            target: target
+        });
+        item.fireEvent('ixopenview', item, view, options);
+    },
+
+    /**
      * 
      * @param {Object} component 组件。
      */
@@ -77,7 +98,7 @@ Ext.define('iExt.app.view.Util', {
             if (items && items.length > 0) {
                 items.each(function (item) {
                     // 对于某些输入项可能不允许清除
-                    // 例如：隐含的搜索条件
+                    // 例如：隐含的搜索条件。可以设置 ixClearable = false
                     if (item.setValue && item.ixClearable !== false) {
                         item.setValue(null);
                     }

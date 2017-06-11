@@ -1,9 +1,9 @@
 ﻿/**
- * @mixin iExt.mixin.Search
+ * @mixin iExt.mixin.QuickSearch
  * @extends {Ext.Mixin} 
- * @classdesc iExt 搜索 MIXIN。
+ * @classdesc iExt 快速搜索 MIXIN。
  */
-Ext.define('iExt.mixin.Search', {
+Ext.define('iExt.mixin.QuickSearch', {
     extend: 'Ext.Mixin',
 
     requires: [
@@ -11,13 +11,13 @@ Ext.define('iExt.mixin.Search', {
     ],
 
     mixinConfig: {
-        id: 'iext-search',
+        id: 'iext-quick-search',
         on: {
-            destroy: 'ixOnDestroy'
+            destroy: '_ixOnDestroy'
         }
     },
 
-    ixIsSearch: true,
+    ixIsQuickSearch: true,
 
     config: {
         /**
@@ -45,11 +45,10 @@ Ext.define('iExt.mixin.Search', {
     ixEventItem: null,
 
     /**
-     * 析构视图处理。
+     * 事件名称：ixsearch / ixquicksearch
+     * 缺省使用：ixsearch
      */
-    ixOnDestroy: function () {
-        Ext.destroyMembers(this, 'ixEventItem');
-    },
+    ixEventName: 'ixquicksearch',
 
     applyIxFilters: function (filters) {
         if (filters) {
@@ -60,7 +59,7 @@ Ext.define('iExt.mixin.Search', {
     },
 
     /**
-     * 触发搜索事件
+     * 触发快速搜索事件
      */
     ixOnQuickSearch: function (item, e, eOpts) {
         var me = this,
@@ -71,7 +70,7 @@ Ext.define('iExt.mixin.Search', {
         }
         // 触发搜索事件
         // 列表的视图控制器会监听该事件，并进行相应的处理
-        this.fireEvent('ixquicksearch', me.ixEventItem || item, filters);
+        this.fireEvent(me.ixEventName || 'ixquicksearch', me.ixEventItem || item, filters);
     },
 
     /**
@@ -83,7 +82,7 @@ Ext.define('iExt.mixin.Search', {
      */
     ixOnClear: function (item, e, eOpts) {
         var me = this;
-        iExt.app.view.Util.ixClearValues(me);
+        iExt.View.ixClearValues(me);
         if (me.ixAutoSearch === true) {
             me.ixOnQuickSearch(item, e, eOpts);
         }
@@ -94,7 +93,7 @@ Ext.define('iExt.mixin.Search', {
      */
     ixSetAutoSearch: function (items) {
         var me = this;
-        me._ixSetAutoQuickSearch(items);
+        me._ixSetAutoSearch(items);
     },
 
     privates: {
@@ -102,7 +101,7 @@ Ext.define('iExt.mixin.Search', {
         /**
          * 设置自动快速搜索
          */
-        _ixSetAutoQuickSearch: function (items) {
+        _ixSetAutoSearch: function (items) {
             var me = this;
             Ext.each(items, function (item) {
                 if (!item.xtype || item.xtype === 'textfield' ||
@@ -147,6 +146,13 @@ Ext.define('iExt.mixin.Search', {
          */
         _ixOnChange: function (item) {
             Ext.defer(this.ixOnQuickSearch, 100, this, [item, null, null]);
+        },
+
+        /**
+         * 析构视图处理。
+         */
+        _ixOnDestroy: function () {
+            Ext.destroyMembers(this, 'ixEventItem');
         }
 
     }
