@@ -71,7 +71,7 @@ Ext.define('iExt.app.view.window.Base', {
     },
 
     /**
-     * 设置缺省标题
+     * 设置视图
      */
     applyIxView: function (view) {
         var me = this;

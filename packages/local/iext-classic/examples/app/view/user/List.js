@@ -109,6 +109,10 @@ Ext.define('app.view.user.List', {
                 }
             }
         }, {
+            text: '搜索',
+            xtype: 'ixsearchbtn',
+            ixView: 'app-user-search'
+        }, {
             text: '操作',
             menu: {
                 xtype: 'ixactmenu',
