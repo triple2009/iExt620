@@ -118,9 +118,9 @@ Ext.define('iExt.app.view.Util', {
         'detail': {},
         'search': {
             small: { width: 240, maxHeight: 320 },
-            normal: { width: 300, maxHeight: 400 },
-            medium: { width: 360, maxHeight: 480 },
-            large: { width: 420, maxHeight: 560 }
+            normal: { width: 560, maxHeight: 420 },
+            medium: { width: 640, maxHeight: 480 },
+            large: { width: 720, maxHeight: 520 }
         },
         'lookup': {}
     },

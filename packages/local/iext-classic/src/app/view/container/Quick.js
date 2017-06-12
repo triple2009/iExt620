@@ -19,32 +19,20 @@ Ext.define('iExt.app.view.container.Quick', {
 
     initComponent: function () {
         var me = this;
-        me.tbar = {
-            xtype: 'toolbar',
-            items: [{
-                xtype: 'ixtbrtitle',
-                bind: {
-                    html: '{ixvcTitle}'
-                }
-            }, '->', {
-                iconCls: 'x-fa fa-chevron-right',
-                tooltip: '隐藏',
-                listeners: {
-                    click: {
-                        fn: me._ixHideMe,
-                        scope: me
-                    }
-                }
-            }]
-        };
+
+        me.tools = [{
+            iconCls: 'x-fa fa-chevron-right',
+            tooltip: '隐藏',
+            callback: me._ixHideMe
+        }];
         me.on('add', me._ixOnAdd);
         me.callParent();
     },
 
     privates: {
 
-        _ixHideMe: function (item, e, eOpts) {
-            this.hide();
+        _ixHideMe: function (owner, tool, e) {
+            owner.hide();
         },
 
         _ixOnAdd: function (panel, component, index, eOpts) {

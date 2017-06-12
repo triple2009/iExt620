@@ -13,7 +13,8 @@ Ext.define('Ext.overrides.form.field.Base', {
     initComponent: function () {
         var me = this;
         if (me.allowBlank === false && me.hasVisibleLabel() === true) {
-            me.beforeLabelTextTpl = '<span class="' + me.ixLabelRequiredCls + '">*</span>';
+            me.labelSeparator = '<span class="' + me.ixLabelRequiredCls + '"></span>:';
+            //me.beforeLabelTextTpl = '<span class="' + me.ixLabelRequiredCls + '">*</span>';
         }
         me.callParent(arguments);
     }

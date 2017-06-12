@@ -299,7 +299,8 @@ Ext.define('iExt.app.view.Tab', {
                     closeAction: 'hide',
                     modal: true,
                     ixEventItemId: itemId,
-                    ixView: view
+                    ixView: view,
+                    animateTarget: item
                 };
 
                 // 获取尺寸

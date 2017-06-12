@@ -22,7 +22,7 @@ Ext.define('iExt.button.Search', {
         ixScale: 'normal'
     },
 
-    menuAlign: 'tr-br?',
+    menuAlign: 'tc-bc?',
     text: '搜索',
     iconCls: 'x-fa fa-search',
 
@@ -41,7 +41,6 @@ Ext.define('iExt.button.Search', {
             ixMode: null
         });
         me.menu = {
-            // shadow: false,
             items: [{
                 xtype: 'ixsearchcontainer',
                 ixView: me.getIxView(),
@@ -53,7 +52,12 @@ Ext.define('iExt.button.Search', {
                         scope: me
                     }
                 }
-            }]
+            }],
+            listeners: {
+                beforehide: function (memu) {
+                    //return false;
+                }
+            }
         };
         me.callParent();
     },

@@ -36,8 +36,7 @@
     font-weight: bold;
 }
 
-/* 通过 beforeLabelTextTpl 属性设置，不再需要该方法
+/* 如果通过 beforeLabelTextTpl 属性设置，应该不需要该方法*/
 .ix-label-required:before {
     content: "*";
 }
-*/

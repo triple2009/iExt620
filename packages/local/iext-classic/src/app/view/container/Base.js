@@ -9,7 +9,6 @@ Ext.define('iExt.app.view.container.Base', {
 
     requires: [],
 
-    header: false,
     border: false,
     layout: 'fit',
 

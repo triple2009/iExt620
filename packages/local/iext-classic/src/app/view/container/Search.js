@@ -54,7 +54,9 @@ Ext.define('iExt.app.view.container.Search', {
                 me.add(view);
             } else {
                 if (Ext.isString(view)) {
-                    view = { xtype: view };
+                    view = {
+                        xtype: view
+                    };
                 }
                 me.items = [];
                 me.items.push(view);
@@ -143,21 +145,6 @@ Ext.define('iExt.app.view.container.Search', {
                     click: {
                         fn: me._ixOnCancel,
                         scope: me
-                    }
-                }
-            }, {
-                xtype: 'button',
-                text: '取消',
-                iconCls: 'x-fa fa-close',
-                listeners: {
-                    click: function () {
-                        var win = iExt.View.ixCreate('window', {
-                            width: 300,
-                            height: 400,
-                            title: 'new window',
-                            modal: true
-                        });
-                        win.show();
                     }
                 }
             }];

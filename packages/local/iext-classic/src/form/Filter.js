@@ -12,15 +12,18 @@ Ext.define('iExt.form.Filter', {
     ],
 
     cls: 'ix-filter-form',
+    bodyPadding: '5 0 5 0',
     border: false,
     header: false,
     title: '详细搜索',
     referenceHolder: true,
     defaultType: 'ixtext',
     scrollable: 'y',
+    layout: 'column',
 
     defaults: {
         anchor: '100%',
+        columnWidth: 0.5,
         labelAlign: 'left',
         labelWidth: 80,
         msgTarget: 'title',
