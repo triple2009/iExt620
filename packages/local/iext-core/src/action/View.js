@@ -30,6 +30,12 @@ Ext.define('iExt.action.View', {
     ixConfig: null,
 
     /**
+     * 动态缓存的视图标识
+     * 对于参照、搜索等操作，可以缓存其视图
+     * ixViewId: null,
+     */
+
+    /**
      * 根据字符串解析枚举值
      */
     applyIxTarget: function (target) {

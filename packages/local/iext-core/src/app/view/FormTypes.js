@@ -23,6 +23,10 @@ Ext.define('iExt.app.view.FormTypes', {
         name: 'SEARCH',
         text: '搜索',
         value: 8
+    }, {
+        name: 'LOOKUP',
+        text: '参照',
+        value: 16
     }]
 
 });

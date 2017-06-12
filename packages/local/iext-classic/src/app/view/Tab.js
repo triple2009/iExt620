@@ -145,8 +145,8 @@ Ext.define('iExt.app.view.Tab', {
             case iExt.action.ViewTarget.QUICK:
                 me._ixQuick(item, view, options);
                 break;
-            case iExt.action.ViewTarget.FORM:
-                me._ixForm(item, view, options);
+            case iExt.action.ViewTarget.IXWIN:
+                me._ixWin(item, view, options);
                 break;
             case iExt.action.ViewTarget.SELF:
                 //me._ixSelf(item, view, options);
@@ -280,6 +280,38 @@ Ext.define('iExt.app.view.Tab', {
             }
             qv.setVisible(true);
             Ext.resumeLayouts(true);
+        },
+
+        _ixWin: function (item, view, options) {
+            var winId = item.ixViewId;
+            var win = Ext.getCmp(winId);
+            if (!win) {
+                var me = this,
+                    itemId = item.getId(),
+                    options = options || {},
+                    formType = options.formType || 'search',
+                    scale = options.scale || 'normal',
+                    xtype = 'ix' + formType.toLowerCase() + 'win';
+
+                var winConfig = {
+                    xtype: xtype,
+                    closable: false,
+                    closeAction: 'hide',
+                    modal: true,
+                    ixEventItemId: itemId,
+                    ixView: view
+                };
+
+                // 获取尺寸
+                var size = iExt.View.ixGetScaleSize(formType, scale);
+                if (size) {
+                    winConfig = Ext.apply(winConfig, size);
+                }
+
+                win = Ext.create(winConfig);
+                item.ixViewId = win.getId();
+            }
+            win.show();
         }
 
     }

@@ -1,4 +1,10 @@
-﻿.x-form-required-field {
+﻿.x-form-invalid-field-default {
+    background-image: theme-background-image('iext/invalid');
+    background-position: -1px -1px !important;
+    background-repeat: no-repeat;
+}
+
+.x-form-required-field {
     background-color: $ix-required-field-background-color !important;
 }
 

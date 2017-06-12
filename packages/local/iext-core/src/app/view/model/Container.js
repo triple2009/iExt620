@@ -1,9 +1,9 @@
 /**
- * @class iExt.app.view.container.ViewModel
+ * @class iExt.app.view.model.Container
  * @extends {Ext.app.ViewModel} 
  * @classdesc iExt 视图容器ViewModel。
  */
-Ext.define('iExt.app.container.ViewModel', {
+Ext.define('iExt.app.view.model.Container', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.ixviewcontainer',
 

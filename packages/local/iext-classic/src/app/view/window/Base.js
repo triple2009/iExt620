@@ -9,8 +9,21 @@ Ext.define('iExt.app.view.window.Base', {
 
     config: {
         /**
-         * 视图类名称或视图组件配置或组件
-         * {String|Object|Component}
+         * 调用该窗口的组件
+         * {String}
+         */
+        ixEventItemId: null,
+
+        /**
+         * 缺省标题
+         * 由于title属性用于绑定，不能直接设置标题？
+         * 需要验证绑定属性的赋值操作？
+         */
+        ixDefaultTitle: null,
+
+        /**
+         * 视图类名称或视图组件配置
+         * {String|Object}
          */
         ixView: null,
 
@@ -25,9 +38,69 @@ Ext.define('iExt.app.view.window.Base', {
         ixDirtyCheck: false
     },
 
+    /**
+     * 视图数据模型
+     * 缺省值使用 {iExt.app.view.model.Container}
+     */
+    viewModel: 'ixviewcontainer',
+    layout: 'fit',
+    referenceHolder: true,
+
+    bind: {
+        /**
+         * 绑定标题 ixvcTitle
+         */
+        title: '{ixvcTitle}'
+    },
+
+    /**
+     * 设置缺省标题
+     */
+    applyIxDefaultTitle: function (title) {
+        title = title || '&#160;';
+        return title;
+    },
+
+    /**
+     * 更新缺省标题
+     * 
+     */
+    updateIxDefaultTitle: function (title, oldTitle) {
+        var vm = this.getViewModel();
+        vm.ixSetDefaultTitle(title);
+    },
+
+    /**
+     * 设置缺省标题
+     */
+    applyIxView: function (view) {
+        var me = this;
+        if (view) {
+            if (this.rendered) {
+                if (Ext.isString(view)) {
+                    view = iExt.View.ixCreate(view);
+                }
+                me.removeAll();
+                me.add(view);
+            } else {
+                if (Ext.isString(view)) {
+                    view = { xtype: view };
+                }
+                me.items = [];
+                me.items.push(view);
+            }
+        }
+        return view;
+    },
+
     initComponent: function () {
         var me = this;
-        me.buttons = me._ixGetButtons();
+        me.bbar = {
+            xtype: 'toolbar',
+            items: me._ixGetButtons()
+        };
+        me.on('add', me._ixOnAdd);
+        me.on('show', me._ixOnShow, me);
         me.on('beforeclose', me._ixOnBeforeClose, me);
         me.callParent(arguments);
     },
@@ -38,8 +111,7 @@ Ext.define('iExt.app.view.window.Base', {
      */
     afterRender: function () {
         var me = this;
-        me.__ixView = me.items.getAt(0);
-        me._ixOnAfterRender();
+
         me.callParent(arguments);
     },
 
@@ -54,10 +126,24 @@ Ext.define('iExt.app.view.window.Base', {
     privates: {
 
         /**
-         * 渲染事件处理
+         * 设置视图信息，例如绑定视图的事件等
          */
-        _ixOnAfterRender: function () {
+        _ixSetView: function () {
 
+        },
+
+        /**
+         * 处理组件标题
+         */
+        _ixOnAdd: function (panel, component, index, eOpts) {
+            if (component.isComponent === true && component.getTitle) {
+                var me = this,
+                    title = component.getTitle();
+                var vm = this.getViewModel();
+                vm.ixSetTitle(title);
+                me.__ixView = component;
+                me._ixSetView();
+            }
         },
 
         /**
@@ -93,27 +179,6 @@ Ext.define('iExt.app.view.window.Base', {
             if (me.hasListeners.ixwinclose) {
                 me.fireEvent('ixwinclose', me, Ext.clone(me.getIxReturn()));
             }
-        },
-
-        /**
-         * 确定按钮的默认处理，可以被重载
-         * @param {Ext.Compomnent} item 触发事件的组件
-         * @param {Event} e 事件
-         * @param {Object} eOpts 事件选项
-         */
-        _ixOnOk: function (item, e, eOpts) {
-            var me = this;
-            me.close();
-        },
-
-        /**
-         * 清除窗口内容的事件处理
-         * @param {Ext.Compomnent} item 触发事件的组件
-         * @param {Event} e 事件
-         * @param {Object} eOpts 事件选项
-         */
-        _ixOnClear: function (item, e, eOpts) {
-            iExt.view.Util.ixClearValues(this);
         },
 
         /**

@@ -107,6 +107,35 @@ Ext.define('iExt.app.view.Util', {
             }
         };
         clear(component.items);
+    },
+
+
+    ixScaleSizes: {
+        'add': {
+
+        },
+        'edit': {},
+        'detail': {},
+        'search': {
+            small: { width: 240, maxHeight: 320 },
+            normal: { width: 300, maxHeight: 400 },
+            medium: { width: 360, maxHeight: 480 },
+            large: { width: 420, maxHeight: 560 }
+        },
+        'lookup': {}
+    },
+
+    /**
+     * 根据表单类型和规格获取尺寸配置
+     * @param {iExt.app.view.FormTypes} formType 表单类型
+     * @param {iExt.app.view.Scales} scale 规格
+     */
+    ixGetScaleSize: function (formType, scale) {
+        var type = formType.toLowerCase();
+        scale = scale || 'normal';
+        var size = scale.toLowerCase();
+
+        return this.ixScaleSizes[type][size];
     }
 
 });
