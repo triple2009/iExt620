@@ -8,10 +8,13 @@ $include-rtl: false;
 $font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
 
 /* ix 全局变量定义 */
-$ix-app-base-color: dynamic(#875a7b);
-$ix-app-over-color: dynamic(#68465f);
+// $ix-app-base-color: dynamic(#875a7b);
+// $ix-app-over-color: dynamic(#68465f);
+// $ix-menu-item-active-background-color: dynamic(#d1d1d1);
+$ix-app-base-color: dynamic(#7c7bad);
+$ix-app-over-color: dynamic(#5f5e97);
 $ix-menu-item-active-text-color: dynamic(#000);
-$ix-menu-item-active-background-color: dynamic(#d1d1d1);
+$ix-menu-item-active-background-color: dynamic(#f5f5f5);
 
 $ix-toolbar-text-color: dynamic(#333);
 $ix-toolbar-background-color: dynamic(#fff);

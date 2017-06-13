@@ -11,7 +11,7 @@ Ext.define('app.view.main.AppMain', {
     viewModel: 'appmain',
     
     //ixHomeView: 'app-user',
-    ixHomeView: 'app-user-list',
+    ixHomeView: 'app-user-kanban',
     ixAppsStore: { type: 'apps' }
 
 });

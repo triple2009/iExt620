@@ -54,27 +54,32 @@ Ext.define('iExt.tab.Panel', {
         }
         //</debug>
 
-        var me = this, layout = me.getLayout(), hash;
+        var me = this,
+            layout = me.getLayout(),
+            hash;
 
         hash = view.ixHashCode;
         if (!hash) {
             hash = iExt.Util.ixGetHashCode(view.$className);
         }
-        Ext.apply(view, { ixHashCode: hash });
+        Ext.apply(view, {
+            ixHashCode: hash
+        });
 
         var item = me.child('component[ixHashCode=' + hash + ']');
 
-        if (item) {
-            layout.setActiveItem(item);
-        } else {
+        Ext.suspendLayouts();
+        if (!item) {
             config = Ext.clone(config) || {};
-            Ext.applyIf(config, { title: view.title, closable: true });
+            Ext.applyIf(config, {
+                title: view.title,
+                closable: true
+            });
             Ext.apply(view, config);
-            Ext.suspendLayouts();
             item = me.add(view);
-            layout.setActiveItem(item);
-            Ext.resumeLayouts(true);
         }
+        layout.setActiveItem(item);
+        Ext.resumeLayouts(true);
         return item;
     }
 
