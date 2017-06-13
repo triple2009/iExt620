@@ -5,7 +5,7 @@ Ext.define('app.view.user.Back', {
     requires: [
         'iExt.toolbar.Indexer',
         'iExt.form.field.TagLabel',
-        'iExt.form.field.TagFilter',
+        'iExt.form.field.TagSearch',
         'iExt.meta.Types'
     ],
     controller: 'user',
@@ -117,7 +117,7 @@ Ext.define('app.view.user.Back', {
             xtype: 'toolbar',
             columnWidth: 0.5,
             items: [{
-                xtype: 'ixtagfilter',
+                xtype: 'ixtagsearch',
                 flex: 1,
                 store: {
                     type: 'ixenumsstore',

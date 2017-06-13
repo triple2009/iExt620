@@ -5,7 +5,7 @@ Ext.define('app.view.odoo.Back', {
     requires: [
         'iExt.toolbar.Indexer',
         'iExt.form.field.TagLabel',
-        'iExt.form.field.TagFilter',
+        'iExt.form.field.TagSearch',
         'iExt.meta.Types'
     ],
     controller: 'odoo',
@@ -117,7 +117,7 @@ Ext.define('app.view.odoo.Back', {
             xtype: 'toolbar',
             columnWidth: 0.5,
             items: [{
-                xtype: 'ixtagfilter',
+                xtype: 'ixtagsearch',
                 flex: 1,
                 store: {
                     type: 'ixenumsstore',

@@ -146,7 +146,8 @@ Ext.define('app.view.user.List', {
                 }]
             }
         }, {
-            xtype: 'ixtagfilter',
+            xtype: 'ixtagsearch',
+            ixView: 'app-user-search',
             flex: 1,
             store: {
                 type: 'ixenumsstore',

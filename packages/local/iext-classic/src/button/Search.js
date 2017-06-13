@@ -26,13 +26,6 @@ Ext.define('iExt.button.Search', {
     text: '搜索',
     iconCls: 'x-fa fa-search',
 
-    /**
-     * 重载隐藏菜单
-     */
-    onFocusLeave: function (e) {
-        //this.super.callParent([e]);
-    },
-
     initComponent: function () {
         var me = this;
 
@@ -43,6 +36,7 @@ Ext.define('iExt.button.Search', {
         me.menu = {
             items: [{
                 xtype: 'ixsearchcontainer',
+                header: false,
                 ixView: me.getIxView(),
                 ixEventItemId: me.getId(),
                 ixScale: me.getIxScale(),
@@ -64,8 +58,11 @@ Ext.define('iExt.button.Search', {
 
     privates: {
 
-        _ixOnClose: function () {
+        _ixOnClose: function (item, filters) {
             var me = this;
+            if (filters) {
+                me.fireEvent('ixsearch', me, filters);
+            }
             me.hideMenu();
         }
     }

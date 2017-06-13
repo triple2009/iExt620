@@ -47,9 +47,15 @@ Ext.define('iExt.filter.Base', {
     },
 
     /**
-     * 对应的实体属性名称
+     * 实体属性名称
      */
     ixProperty: '',
+
+    /**
+     * 显示的属性名称
+     */
+    ixText: '',
+
     /**
      * 筛选条件值
      */
@@ -93,13 +99,15 @@ Ext.define('iExt.filter.Base', {
      * @param {Obect} references 组件引用对象
      */
     ixGetFilter: function (references) {
-        var me = this, filter, value,
-            ref = me.getIxAlignTarget();
+        var me = this, filter, value, text,
+            ref = me.getIxAlignTarget(),
+            removable = true;
 
         if (!ref) {
             // 未指定 ref 表示固定条件
             // 直接使用 ixValue 的值
             value = me.ixValue;
+            text = me.ixText || me.ixProperty;
             // <debug>
             iExt.log('该搜索条件未指定值控件引用，直接使用值', value);
             // </debug>
@@ -119,19 +127,61 @@ Ext.define('iExt.filter.Base', {
                 } else {
                     value = cmp.getValue();
                 }
+
+                // 获取标签
+                if (cmp.getFieldLabel) {
+                    text = me.ixText || cmp.getFieldLabel();
+                }
+
+                // 是否可以删除？
+                if (cmp.allowBlank === false) {
+                    removable = false;
+                }
+                if (cmp.ixClearable === false) {
+                    removable = false;
+                }
             }
         }
         value = me._ixGetValue(value);
         if (!Ext.isEmpty(value)) {
-            var opName = iExt.filter.Operators.ixGetName(me.getIxOperator());
+            var op = me.getIxOperator();
+            var opName = iExt.filter.Operators.ixGetName(op);
+            var opText = iExt.filter.Operators.ixGetText(op);
+            text = text + ' ' + opText + '【' + value + '】';
+
             filter = {
                 dataType: me._ixGetDataType(),
                 operator: iExt.filter.Operators.ixOperators[opName],
                 property: me.ixProperty,
-                value: value
+                value: value,
+                extra: {
+                    removable: removable,
+                    text: text,
+                    ref: Ext.isString(ref) ? ref : ''
+                }
             };
         }
         return filter;
+    },
+
+    /**
+     * 设置搜索条件
+     * @param {Obect} references 组件引用对象
+     * @param {Obect[]} filters 搜索条件
+     */
+    ixSetFilter: function (references, filters) {
+        var me = this, filter, value = null,
+            ref = me.getIxAlignTarget();
+        var cmp = references[ref];
+        Ext.each(filters, function (item) {
+            var extra = item.extra || {};
+            if (extra.ref === ref) {
+                value = item.value;
+            }
+        });
+        if (cmp) {
+            cmp.setValue(value);
+        }
     },
 
     /**

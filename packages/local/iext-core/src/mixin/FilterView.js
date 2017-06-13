@@ -24,12 +24,6 @@ Ext.define('iExt.mixin.FilterView', {
         ixFilters: null
     },
 
-    /**
-     * 事件名称：ixsearch / ixquicksearch
-     * 缺省使用：ixsearch
-     */
-    ixEventName: 'ixsearch',
-
     applyIxFilters: function (filters) {
         if (filters) {
             filters = Ext.clone(filters);
@@ -55,6 +49,9 @@ Ext.define('iExt.mixin.FilterView', {
         iExt.View.ixClearValues(me);
     },
 
+    /**
+     * 获取搜索条件
+     */
     ixGetFilters: function () {
         var me = this,
             ixFilters = me.getIxFilters();
@@ -63,6 +60,39 @@ Ext.define('iExt.mixin.FilterView', {
             filters = ixFilters.ixGetFilter(me.getReferences());
         }
         return filters;
+    },
+
+    /**
+     * 设置搜索条件
+     * @param {Object[]} filters 搜索条件
+     */
+    ixSetFilters: function (filters) {
+        var me = this,
+            ixFilters = me.getIxFilters();
+        if (ixFilters) {
+            ixFilters.ixSetFilter(me.getReferences(), filters);
+        }
+    },
+
+    /**
+     * 删除搜索条件
+     * @param {Object} filters 搜索条件
+     */
+    ixRemoveFilter: function (filter) {
+        var me = this,
+            refs = me.getReferences(),
+            extra = filter.extra || {},
+            cmp = refs[extra.ref];
+        if (cmp) {
+            if (cmp.allowBlank === false) {
+                return false;
+            }
+            if (cmp.ixClearable === false) {
+                return false;
+            }
+            cmp.setValue(null);
+        }
+        return true;
     }
 
 });

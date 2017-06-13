@@ -86,6 +86,18 @@ Ext.define('iExt.app.view.container.Search', {
         me.callParent();
     },
 
+    /**
+     * TagSearch 同步删除条件
+     * 删除搜索条件
+     * @param {Object} filters 搜索条件
+     */
+    ixRemoveFilter: function (filter) {
+        var me = this;
+        if (me.__ixView) {
+            return me.__ixView.ixRemoveFilter(filter);
+        }
+    },
+
     privates: {
 
         /**
@@ -128,8 +140,8 @@ Ext.define('iExt.app.view.container.Search', {
                 }
             }, '->', {
                 xtype: 'button',
-                text: '搜索',
-                iconCls: 'x-fa fa-search',
+                text: '确定',
+                iconCls: 'x-fa fa-filter',
                 reference: '__btnOk',
                 listeners: {
                     click: {
@@ -166,7 +178,7 @@ Ext.define('iExt.app.view.container.Search', {
          */
         _ixOnCancel: function (item, e, eOpts) {
             var me = this;
-            me.fireEvent('ixclose', me);
+            me.fireEvent('ixclose', me, null);
         },
 
         /**
@@ -187,18 +199,11 @@ Ext.define('iExt.app.view.container.Search', {
          * @param {Object} eOpts 事件选项
          */
         _ixOnOk: function (item, e, eOpts) {
-            var me = this;
+            var me = this, filters = null;
             if (me.__ixView) {
-                var eventName = me.__ixView.ixEventName || 'ixsearch';
-                var filters = me.__ixView.ixGetFilters();
-                var itemId = me.getIxEventItemId();
-                // 获取搜索操作组件，触发 ixsearch 事件
-                var cmp = Ext.getCmp(itemId);
-                if (cmp) {
-                    cmp.fireEvent(eventName, cmp, filters);
-                }
+                filters = me.__ixView.ixGetFilters();
             }
-            me.fireEvent('ixclose', me);
+            me.fireEvent('ixclose', me, filters);
         }
 
     }

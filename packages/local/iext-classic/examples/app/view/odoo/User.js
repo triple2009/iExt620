@@ -5,7 +5,7 @@ Ext.define('app.view.odoo.User', {
     requires: [
         'iExt.toolbar.Indexer',
         'iExt.form.field.TagLabel',
-        'iExt.form.field.TagFilter',
+        'iExt.form.field.TagSearch',
         'iExt.meta.Types'
     ],
     controller: 'odoo',

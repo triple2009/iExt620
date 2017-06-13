@@ -1,5 +1,5 @@
 ﻿/**
- * @class iExt.meta.filter.Operators
+ * @class iExt.filter.Operators
  * @extends {iExt.enums.Base} 
  * @classdesc 筛选条件连接符枚举。
  */

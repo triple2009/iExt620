@@ -44,12 +44,6 @@ Ext.define('iExt.mixin.QuickSearch', {
      */
     ixEventItem: null,
 
-    /**
-     * 事件名称：ixsearch / ixquicksearch
-     * 缺省使用：ixsearch
-     */
-    ixEventName: 'ixquicksearch',
-
     applyIxFilters: function (filters) {
         if (filters) {
             filters = Ext.clone(filters);
@@ -70,7 +64,7 @@ Ext.define('iExt.mixin.QuickSearch', {
         }
         // 触发搜索事件
         // 列表的视图控制器会监听该事件，并进行相应的处理
-        this.fireEvent(me.ixEventName || 'ixquicksearch', me.ixEventItem || item, filters);
+        this.fireEvent('ixquicksearch', me.ixEventItem || item, filters);
     },
 
     /**

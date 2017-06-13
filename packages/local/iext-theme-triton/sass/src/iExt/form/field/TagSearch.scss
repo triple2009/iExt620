@@ -1,0 +1,17 @@
+.ix-tagsearch {
+
+    .x-tagfield-item {
+        padding-left: $ix-tag-search-item-padding-left;
+        background-image: $ix-tag-search-item-bgimage;
+        background-repeat: no-repeat;
+    }
+
+    .ix-tagfield-noclose{
+        padding-right: 1px;
+    }
+
+    .x-tagfield-item.x-tagfield-item-selected {
+        border: $ix-tag-search-item-selected-border;
+        background-color: $ix-tag-search-item-selected-bgcolor;
+    }
+}

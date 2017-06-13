@@ -44,8 +44,8 @@ Ext.define('iExt.app.view.window.Search', {
                 }
             }, '->', {
                 xtype: 'button',
-                text: '搜索',
-                iconCls: 'x-fa fa-search',
+                text: '确定',
+                iconCls: 'x-fa fa-filter',
                 reference: '__btnOk',
                 listeners: {
                     click: {

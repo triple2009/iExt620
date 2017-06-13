@@ -14,16 +14,6 @@ Ext.define('iExt.form.field.TagLabel', {
     triggerOnClick:false,
     triggerCls: 'x-fa fa-close',
 
-    /*
-    tagItemCls: 'ix-taglabel-item',
-    tagItemTextCls: 'ix-taglabel-item-text',
-    tagItemCloseCls: 'ix-taglabel-item-close',
-
-    tagItemSelector: '.ix-taglabel-item',
-    tagItemCloseSelector: '.ix-taglabel-item-close',
-    tagSelectedCls: 'ix-taglabel-item-selected',
-    */
-
     /**
      * 重载初始化控件。创建标签的数据源。
      * @memberOf iExt.form.field.TagLabel#
@@ -47,7 +37,7 @@ Ext.define('iExt.form.field.TagLabel', {
      */
     onTriggerClick: function () {
         this.ixClearTag();
-        return false;
+        return true;
     },
 
     /**

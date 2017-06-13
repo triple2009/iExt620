@@ -90,9 +90,34 @@ Ext.define('iExt.filter.Filters', {
 
     /**
      * 设置搜索条件
+     * @param {Obect} references 组件引用对象
+     * @param {Obect[]} filters 搜索条件
      */
-    ixSetFilter: function (references) {
+    ixSetFilter: function (references, filters) {
+        var me = this;
+        Ext.each(me.getIxItems(), function (item) {
+            item.ixSetFilter(references, filters);
+        });
+    },
 
+    statics: {
+
+        /**
+         * 根据搜索条件集合获取数据记录
+         */
+        ixGetFilterRecords: function (filters) {
+            var records = [], record;
+            Ext.each(filters, function (item) {
+                var extra = item.extra || {};
+                record = {
+                    value: item,
+                    text: extra.text,
+                    removable: extra.removable
+                };
+                records.push(record);
+            });
+            return records;
+        }
     }
 
 });

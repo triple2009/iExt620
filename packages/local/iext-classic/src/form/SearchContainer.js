@@ -23,8 +23,6 @@ Ext.define('iExt.form.SearchContainer', {
         minWidth: 300
     },
 
-    ixEventName: 'ixquicksearch',
-
     initComponent: function () {
         var me = this;
 

@@ -31,8 +31,6 @@ Ext.define('iExt.toolbar.Search', {
      * @param {Object[]} filters 快速搜索条件集合。
      */
 
-    ixEventName: 'ixquicksearch',
-
     /**
      * 重载初始化控件。主要是根据HFX配置项创建搜索项目和搜索按钮。
      * @memberOf iExt.toolbar.Search#

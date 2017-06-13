@@ -16,8 +16,6 @@ Ext.define('iExt.form.field.SearchField', {
         'iExt.mixin.Action'
     ],
 
-    ixEventName: 'ixquicksearch',
-
     /**
      * 允许回车直接搜索
      */

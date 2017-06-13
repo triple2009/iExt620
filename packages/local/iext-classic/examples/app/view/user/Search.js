@@ -9,9 +9,15 @@ Ext.define('app.view.user.Search', {
         reference: 'txtName',
         allowBlank: false
     }, {
-        fieldLabel: '名称'
+        fieldLabel: '邮箱',
+        reference: 'txtEmail'
     }, {
-        fieldLabel: 'Other 1'
+        fieldLabel: 'Other 1',
+        xtype: 'combobox',
+        store: {
+            type: 'ixenumsstore',
+            ixEnumType: 'iExt.meta.Types'
+        }
     }, {
         fieldLabel: 'Other 2'
     }],
@@ -22,6 +28,11 @@ Ext.define('app.view.user.Search', {
             ixProperty: 'name',
             ixOperator: iExt.filter.Operators.CT,
             ixAlignTarget: 'txtName',
+            type: 'string'
+        }, {
+            ixProperty: 'email',
+            ixOperator: iExt.filter.Operators.CT,
+            ixAlignTarget: 'txtEmail',
             type: 'string'
         }]
     }
