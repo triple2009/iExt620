@@ -7,18 +7,56 @@ Ext.define('app.view.user.View', {
     ],
 
     title: '用户视图',
+    controller: {
+        type: 'ixlist'
+    },
+
     tbar: {
-        xtype: 'toolbar',
+        xtype: 'ixacttbr',
         items: [{
-            text: '新建'
+            text: '新建',
+            iconCls: 'x-fa fa-plus',
+            ixAuth: 'add',
+            ixAlign: {
+                type: 'list',
+                ixMode: null
+            },
+            listeners: {
+                click: function (item, e, eOpts) {
+                    //var data = item.getIxAlign().ixGetAlignData();
+                    item.fireEvent('ixopenview', item, 'app-user-add', {
+                        target: iExt.action.ViewTarget.MAIN
+                    });
+                }
+            },
+            ixViewName: 'app-user-add'
         }, {
-            text: '修改'
+            text: '详细',
+            iconCls: 'x-fa fa-file-o',
+            ixAuth: {
+                ixOperation: 'detail'
+            },
+            ixAlign: {
+                type: 'list',
+                ixMode: false
+            },
+            listeners: {
+                click: function (item, e, eOpts) {
+                    var data = item.getIxAlign().ixGetAlignData();
+                    iExt.View.ixOpenView(item, {
+                        xtype: 'ixqvform',
+                        ixRecord: data[0]
+                    }, 'quick');
+                }
+            }
         }]
     },
 
     ixStore: {
         type: 'user'
     },
+
+    ixCols: 4,
 
     ixItemTpl: '<span style="float:left;"><img style="width:68px;height:68px;" /></span>' +
         '<span style="float:left;margin-left:10px;">' +
@@ -30,8 +68,8 @@ Ext.define('app.view.user.View', {
         '</tpl>">{name}</div><div>{phone}</div><div>{email}</div></span>',
 
     listeners: {
-        ixitemclick: function (kanban, item, data) {
-            iExt.Toast.ixInfo(data.name);
+        ixselection: function (sm, selections) {
+            //iExt.Toast.ixInfo(selections.length);
         }
     }
 

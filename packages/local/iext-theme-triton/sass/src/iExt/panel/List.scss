@@ -7,7 +7,20 @@
 .ix-list-item {
     float: left;
     cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    display: -webkit-flex; /* Safari */
     border: solid 1px #a8a8a8;
     padding: 5px 5px 5px 5px;
     margin: 5px 5px 5px 5px;
+}
+
+.ix-list-item-over {
+    background-color: #e5f1ee;
+}
+
+.ix-list-item-selected {
+    outline: none !important;
+    border-color: #1a7759;
+    background-color: #ffefbb;
 }

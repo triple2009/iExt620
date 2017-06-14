@@ -1,6 +1,10 @@
 .ix-kanban-item {
-    background-color: #fff;
-    border: solid 1px #a8a8a8;
     cursor: pointer;
-    padding: 5px 5px 5px 5px;
+    overflow: hidden;
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    background-color: #fff;
+    padding: 5px 5px 5px 5px; 
+    //border: solid 1px #a8a8a8;
+    box-shadow: 0px 0px 1px 1px #666666;
 }

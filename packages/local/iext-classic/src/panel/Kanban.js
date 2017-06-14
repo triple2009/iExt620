@@ -34,6 +34,10 @@ Ext.define('iExt.panel.Kanban', {
          */
         ixStageField: '',
         /**
+         * 阶段面板最小宽度
+         */
+        ixStageMinWidth: null,
+        /**
          * 是否允许收缩和展开
          */
         ixCollapsible: false,
@@ -69,6 +73,7 @@ Ext.define('iExt.panel.Kanban', {
      * @param {Object} data 看板项数据。
      */
 
+    scrollable: 'x',
     layout: {
         type: 'hbox',
         pack: 'start',
@@ -112,16 +117,23 @@ Ext.define('iExt.panel.Kanban', {
 
         var stages = me.getIxStages(),
             collapsible = me.getIxCollapsible(),
-            balt = false;
+            minWidth = me.getIxStageMinWidth();
+        balt = false;
 
         me.items = [];
         Ext.each(stages, function (stage) {
-            me.items.push({
+            var panel = {
                 title: stage.text,
                 ixAlt: balt,
                 ixCollapsible: collapsible,
                 reference: '__ixStage_' + stage.value
-            });
+            };
+            if (!Ext.isEmpty(minWidth)) {
+                Ext.apply(panel, {
+                    minWidth: minWidth
+                });
+            }
+            me.items.push(panel);
             balt = !balt;
         });
 

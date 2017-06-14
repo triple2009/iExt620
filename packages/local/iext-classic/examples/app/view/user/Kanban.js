@@ -18,13 +18,17 @@ Ext.define('app.view.user.Kanban', {
 
     ixStages: 'app.enums.UserStatus',
     ixStageField: 'status',
+    //ixStageMinWidth: 350,
     ixCollapsible: true,
     ixStore: {
         type: 'user'
     },
 
     ixItemConfig: {
-        minHeight: 80
+        minHeight: 80,
+        style: {
+            borderRadius: '2px'
+        }
     },
     ixItemTpl: '<span style="float:left;"><img style="width:68px;height:68px;" /></span>' +
         '<span style="float:left;margin-left:10px;">' +

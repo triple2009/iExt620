@@ -45,7 +45,6 @@ Ext.define('iExt.panel.List', {
     initComponent: function () {
         var me = this,
             ixstore = me.getIxStore(),
-            cols = me.getIxCols() || 1,
             tpl = me.getIxItemTpl() || [];
 
         ixstore = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
@@ -64,12 +63,14 @@ Ext.define('iExt.panel.List', {
             }
         }
 
-        var itemTpl = [],
-            width = 100 / cols + '%';
-
+        var itemTpl = [];
         itemTpl = itemTpl.concat(
-            '<div class="ix-list-item">',
-            tpl, '</div>');
+            '<div class="ix-list-item" style="width:{[this.getItemWidth()]}px;">',
+            tpl, '</div>', {
+                getItemWidth: function () {
+                    return me.__ixItemWidth;
+                }
+            });
 
         var view = {
             xtype: 'dataview',
@@ -80,19 +81,58 @@ Ext.define('iExt.panel.List', {
             store: ixstore,
             itemTpl: itemTpl
         };
+
+        var multi = me.getIxMulti();
+        if (multi !== undefined) {
+            view.selectionModel = {
+                type: 'dataviewmodel',
+                mode: multi === true ? 'SIMPLE' : 'SINGLE',
+                listeners: {
+                    selectionchange: {
+                        fn: me.ixOnSelectionChange,
+                        scope: me
+                    }
+                }
+            };
+        }
+
         me.items = [view];
         me.on('resize', me.ixOnResize, me);
         me.callParent(arguments);
     },
 
+    /**
+     * 获取选择的数据
+     */
+    ixGetSelectedData: function () {
+        var me = this,
+            view = me.items.getAt(0);
+        var data = view.getSelection();
+        return data;
+    },
+
+    /**
+     * 数据选择变更事件处理
+     * 为了统一列表组件，触发自定义的事件
+     */
+    ixOnSelectionChange: function (sm, selections) {
+        if (this.hasListeners.ixselection) {
+            this.fireEvent('ixselection', this, selections);
+        }
+    },
+
     ixOnResize: function (panel, width, height, oldWidth, oldHeight, eOpts) {
-        var me = this;
-        var size = me.getSize(true);
-        iExt.Toast.ixInfo(size.width + '-' + size.height);
+        var me = this,
+            bodyEl = me.body,
+            cols = me.getIxCols();
+
+        var size = bodyEl.getSize(true);
+        //iExt.Toast.ixInfo(size.width + '-' + size.height);
+        var itemWidth = size.width - (cols + 1) * 10;
+        me.__ixItemWidth = itemWidth / cols;
         var elItems = me.getEl().query('div.ix-list-item', false);
-        var width = width - 5 * 10;
         Ext.each(elItems, function (item) {
-            item.setWidth(width / 4);
+            item.setWidth(me.__ixItemWidth);
         });
     }
 
