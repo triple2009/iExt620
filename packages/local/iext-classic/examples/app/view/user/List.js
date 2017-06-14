@@ -18,7 +18,7 @@ Ext.define('app.view.user.List', {
     ixStore: {
         type: 'user'
     },
-    ixPageSize: 5,
+    //ixPageSize: 5,
 
     tbar: {
         xtype: 'ixacttbr',

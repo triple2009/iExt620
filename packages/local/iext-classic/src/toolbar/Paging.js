@@ -69,6 +69,7 @@ Ext.define('iExt.toolbar.Paging', {
                     xtype: 'label',
                     text: ''
                 });
+                iExt.toolbar.Paging.ixOnChange(me, null, null);
             }
         }
 

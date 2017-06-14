@@ -1,9 +1,9 @@
 ﻿/**
- * @class iExt.app.view.Quick
+ * @class iExt.form.Quick
  * @extends {Ext.form.Panel} 
  * @classdesc 快速查看表单。
  */
-Ext.define('iExt.app.view.Quick', {
+Ext.define('iExt.form.Quick', {
     extend: 'Ext.form.Panel',
     alias: 'widget.ixqvform',
 

@@ -19,18 +19,22 @@ Ext.define('iExt.mixin.ListView', {
          */
         ixMulti: true,
         /**
-         * 
-         */
-        ixPageSize: null,
-        /**
-         * 
+         * 数据源 {String|Object}
+         * String：绑定的数据源
+         * Object：数据源对象{type: ''}
          */
         ixStore: null,
         /**
-         * 
+         * 缺省搜索条件
          */
         ixFilters: null
     },
+
+    /**
+     * 分页大小
+     * 0 表示不分页
+     */
+    ixPageSize: null,
 
     /**
      * 数据选择事件。

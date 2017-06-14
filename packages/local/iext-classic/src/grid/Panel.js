@@ -27,6 +27,14 @@ Ext.define('iExt.grid.Panel', {
 
     config: {
         /**
+         * 如果用户未设置 ixPageSize，将不调用 applyIxPageSize 方法
+         * 正常情况下，可以通过 config 设置缺省值，但是为了支持主题设置
+         * 通过 ixTheme 来设置缺省值，导致该问题的出现。
+         * 所以在构造函数 constructor 中设置缺省值。
+         * ixPageSize:15, 
+         */
+
+        /**
          * 缺省不使用单元格焦点样式。
          * 但是对于有些情况，例如：可以选择单元格时则需要使用。
          */
@@ -48,19 +56,17 @@ Ext.define('iExt.grid.Panel', {
         xtype: 'ixcol'
     },
 
+    constructor: function (config) {
+        var me = this;
+        if (Ext.isEmpty(me.ixPageSize)) {
+            me.ixPageSize = me.ixTheme.pageSize;
+        }
+        me.callParent();
+    },
+
     initComponent: function () {
         var me = this,
-            ixstore = me.getIxStore(),
-            pageSize = me.getIxPageSize();
-
-        // 如果用户未设置 ixPageSize，将不调用 applyIxPageSize 方法
-        // 正常情况下，可以通过 config 设置缺省值，但是为了支持主题设置
-        // 通过 ixTheme 来设置缺省值，导致该问题的出现
-        // 目前的处理方式不够顺畅？
-        if (Ext.isEmpty(pageSize)) {
-            pageSize = me.ixTheme.pageSize
-            me.setIxPageSize(pageSize);
-        }
+            ixstore = me.getIxStore();
 
         if (ixstore) {
             var store;
@@ -71,12 +77,12 @@ Ext.define('iExt.grid.Panel', {
             } else if (Ext.isObject(ixstore)) {
                 // 指定的数据源
                 ixstore = Ext.apply(ixstore, {
-                    pageSize: pageSize
+                    pageSize: me.ixPageSize
                 });
                 store = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
                 me.store = store;
             }
-            if (store && pageSize > 0) {
+            if (store && me.ixPageSize > 0) {
                 if (me.bbar) {
                     Ext.apply(me.bbar, { ixStore: store });
                 } else {
@@ -99,10 +105,8 @@ Ext.define('iExt.grid.Panel', {
      * @param {boolean} initial 是否初始化。
      */
     bindStore: function (store, initial) {
-        var me = this,
-            pageSize = me.getIxPageSize();
-
-        store.setPageSize(pageSize);
+        var me = this;
+        store.setPageSize(me.ixPageSize);
         me.callParent(arguments);
     },
 
@@ -122,14 +126,6 @@ Ext.define('iExt.grid.Panel', {
             };
         }
         return multi;
-    },
-
-    applyPageSize: function (size) {
-        // Ext.isEmpty: null / undefined / [] / ''
-        if (Ext.isEmpty(size)) {
-            size = this.ixTheme.pageSize;
-        }
-        return size;
     },
 
     applyIxFocus: function (focus) {

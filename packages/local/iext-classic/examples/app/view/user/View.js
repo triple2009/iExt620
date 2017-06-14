@@ -1,12 +1,12 @@
-Ext.define('app.view.user.Kanban', {
-    extend: 'iExt.panel.Kanban',
-    xtype: 'app-user-kanban',
+Ext.define('app.view.user.View', {
+    extend: 'iExt.panel.List',
+    xtype: 'app-user-view',
 
     requires: [
         'app.enums.UserStatus'
     ],
 
-    title: '用户看板',
+    title: '用户视图',
     tbar: {
         xtype: 'toolbar',
         items: [{
@@ -16,16 +16,10 @@ Ext.define('app.view.user.Kanban', {
         }]
     },
 
-    ixStages: 'app.enums.UserStatus',
-    ixStageField: 'status',
-    ixCollapsible: true,
     ixStore: {
         type: 'user'
     },
 
-    ixItemConfig: {
-        minHeight: 80
-    },
     ixItemTpl: '<span style="float:left;"><img style="width:68px;height:68px;" /></span>' +
         '<span style="float:left;margin-left:10px;">' +
         '<div style="font-size:16px;font-weight:bold;margin-bottom:15px;' +

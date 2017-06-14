@@ -17,13 +17,10 @@
         name: 'name',
         type: 'string'
     }, {
-        name: 'password',
+        name: 'email',
         type: 'string'
     }, {
-        name: 'pwdModifiedOn',
-        type: 'date'
-    }, {
-        name: 'email',
+        name: 'phone',
         type: 'string'
     }, {
         name: 'status',
@@ -32,14 +29,5 @@
     }, {
         name: 'statusName',
         type: 'string'
-    }, {
-        name: 'mobile',
-        type: 'string'
-    }, {
-        name: 'birthday',
-        type: 'date'
-    }, {
-        name: 'age',
-        type: 'number'
     }]
 });

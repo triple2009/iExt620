@@ -1,23 +1,23 @@
 .ix-stage-panel {
     .x-panel-header {
-        background-color: #e9e6e6;
+        background-color: $ix-stage-panel-bg-color;
     }
     .x-panel-body {
-        background-color: #e9e6e6;
+        background-color: $ix-stage-panel-bg-color;
     }
     .x-tool-tool-el {
-        background-color: #e9e6e6;
+        background-color: $ix-stage-panel-bg-color;
     }
 }
 
 .ix-stage-panel-alt {
     .x-panel-header {
-        background-color: #f0eeee;
+        background-color: $ix-stage-panel-alt-bg-color;
     }
     .x-panel-body {
-        background-color: #f0eeee;
+        background-color: $ix-stage-panel-alt-bg-color;
     }
     .x-tool-tool-el {
-        background-color: #e9e6e6;
+        background-color: $ix-stage-panel-alt-bg-color;
     }
 }
