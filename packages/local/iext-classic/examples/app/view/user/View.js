@@ -24,7 +24,7 @@ Ext.define('app.view.user.View', {
             listeners: {
                 click: function (item, e, eOpts) {
                     //var data = item.getIxAlign().ixGetAlignData();
-                    item.fireEvent('ixopenview', item, 'app-user-add', {
+                    item.fireEvent('ixopenview', item, 'app-user-kanban', {
                         target: iExt.action.ViewTarget.MAIN
                     });
                 }

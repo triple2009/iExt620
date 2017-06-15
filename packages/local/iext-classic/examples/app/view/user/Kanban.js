@@ -7,10 +7,29 @@ Ext.define('app.view.user.Kanban', {
     ],
 
     title: '用户看板',
+    controller: {
+        type: 'ixlist'
+    },
+
     tbar: {
         xtype: 'toolbar',
         items: [{
-            text: '新建'
+            text: '新建',
+            iconCls: 'x-fa fa-plus',
+            ixAuth: 'add',
+            ixAlign: {
+                type: 'list',
+                ixMode: null
+            },
+            listeners: {
+                click: function (item, e, eOpts) {
+                    //var data = item.getIxAlign().ixGetAlignData();
+                    item.fireEvent('ixopenview', item, 'app-user-list', {
+                        target: iExt.action.ViewTarget.MAIN
+                    });
+                }
+            },
+            ixViewName: 'app-user-add'
         }, {
             text: '修改'
         }]

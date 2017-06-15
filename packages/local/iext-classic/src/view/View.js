@@ -28,7 +28,7 @@ Ext.define('iExt.view.View', {
          * 最小宽度
          * TODO: 自动调整列数
          */
-        ixMinWidth
+        ixMinWidth: null
     },
 
     /**
@@ -38,12 +38,14 @@ Ext.define('iExt.view.View', {
     scrollable: {
         y: 'scroll'
     },
+
     trackOver: true,
     padding: '5 5 5 5',
     itemSelector: 'div.ix-view-item',
     itemCls: 'ix-view-item',
     overItemCls: 'ix-view-item-over',
     selectedItemCls: 'ix-view-item-selected',
+
     loadMask: {
         cls: 'ix-view-mask'
     },
