@@ -1,10 +1,10 @@
-.ix-list-panel {
+.ix-data-view {
     .x-view-item-focused {
         outline: none !important;
     }
 }
 
-.ix-list-item {
+.ix-view-item {
     float: left;
     cursor: pointer;
     overflow: hidden;
@@ -15,12 +15,16 @@
     margin: 5px 5px 5px 5px;
 }
 
-.ix-list-item-over {
+.ix-view-item-over {
     background-color: #e5f1ee;
 }
 
-.ix-list-item-selected {
+.ix-view-item-selected {
     outline: none !important;
     border-color: #1a7759;
     background-color: #ffefbb;
+}
+
+.ix-view-mask {
+    background-color: #e8e8e8 !important;
 }

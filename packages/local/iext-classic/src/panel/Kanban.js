@@ -1,7 +1,8 @@
 /**
  * @class iExt.panel.Kanban
  * @extends {Ext.panel.Panel} 
- * @classdesc 应用程序列表。
+ * @classdesc 看板列表。
+ * 看板项使用 Ext.Component 实现
  */
 Ext.define('iExt.panel.Kanban', {
     extend: 'Ext.panel.Panel',
@@ -16,6 +17,9 @@ Ext.define('iExt.panel.Kanban', {
      */
     ixTheme: {
         pageSize: 15,
+        /**
+         * 看板项缺省配置
+         */
         itemConfig: {
             cls: 'ix-kanban-item',
             minHeight: 80
@@ -58,6 +62,7 @@ Ext.define('iExt.panel.Kanban', {
      * 0 表示不分页
      */
     ixPageSize: null,
+    
     /**
      * 看板项配置信息
      * 参见 Ext.Component 的配置项
