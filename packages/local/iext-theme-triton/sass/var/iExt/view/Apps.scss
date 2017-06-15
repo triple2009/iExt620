@@ -1,4 +1,5 @@
-$ix-apps-body-back-color: dynamic(#847686);
+//$ix-apps-body-back-color: dynamic(#847686);
+$ix-apps-body-back-color: lighten($ix-app-base-color, 30%);
 $ix-apps-body-padding-top: dynamic(30px);
 
 $ix-apps-item-width: dynamic(120px);

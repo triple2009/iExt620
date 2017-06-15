@@ -32,14 +32,26 @@ Ext.define('iExt.panel.Stage', {
         margin: '5 10 5 10'
     },
 
+    /**
+     * 收缩图标样式
+     * x-fa fa-chevron-left
+     */
+    ixCollapseIconCls: 'x-fa fa-arrows-v',
+
+    /**
+     * 展开图标样式
+     * x-fa fa-chevron-right
+     */
+    ixExpandIconCls: 'x-fa fa-arrows-h',
+
     initComponent: function () {
         var me = this,
             collapsible = me.getIxCollapsible();
-            
+
         if (collapsible === true) {
             me.header = {
                 tools: [{
-                    iconCls: 'x-fa fa-chevron-left',
+                    iconCls: me.ixCollapseIconCls,
                     tooltip: '收缩/展开',
                     callback: me._ixToggle
                 }],
@@ -68,13 +80,13 @@ Ext.define('iExt.panel.Stage', {
                 // 设置 null 清除 width
                 me.setWidth(null);
                 me.setHeaderPosition('top');
-                tool.setIconCls('x-fa fa-chevron-left');
+                tool.setIconCls(me.ixCollapseIconCls);
                 me.__ixCollapsed = false;
             } else {
                 me.setFlex(0);
                 me.setWidth(me.ixTheme.collapsedWidth);
                 me.setHeaderPosition('left');
-                tool.setIconCls('x-fa fa-chevron-right');
+                tool.setIconCls(me.ixExpandIconCls);
                 me.__ixCollapsed = true;
             }
         }

@@ -12,9 +12,6 @@ $ix-border-color: #a8a8a8;
 $ix-filter-img-bg-color: #777777;
 $ix-filter-item-bg-color: #e9e9f1;
 $ix-filter-item-border-color: #777777;
-$ix-button-border-color: #8c8c8c;
-$ix-button-bg-color: #d4d4d4;
-$ix-btn-pressed-bg-color: #e6e6e6;
 
 $ix-grid-alter-bg-color: #efeff8;
 
@@ -43,6 +40,13 @@ $ix-kanban-tag7-color: #5e5e5e;
 $ix-kanban-tag8-color: #a5a5a5;
 $ix-kanban-tag9-color: #5e5e5e;
 
+$ix-kanban-btn-background-color: #e2e2e0;
+$ix-kanban-btn-over-background-color: #c9c9c6;
+
+$ix-tag-bar-div-max-height: 9px;
+$ix-tag-bar-span-width: 40px;
+$ix-tag-bar-span-height: 9px;
+
 $ix-tab-over-bg-color: #eeeeee;
 $ix-tab-bottom-border-color: #ddd;
 $ix-tab-border-radius: 4px 4px 0 0;
@@ -51,3 +55,28 @@ $ix-tab-inactive-text-color: #4c4c4c;
 $ix-win-close-icon-color: #000;
 $ix-win-close-icon-opacity-normal: 0.2;
 $ix-win-close-icon-opacity-over: 0.5;
+
+$ix-button-border-color: #8c8c8c;
+$ix-button-bg-color: #d4d4d4;
+
+$ix-btn-bg-color: #ffffff;
+$ix-btn-border-color: #cccccc;
+$ix-btn-over-bg-color: #e6e6e6;
+$ix-btn-over-border-color: #adadad;
+$ix-btn-pressed-bg-color: #e6e6e6;
+
+$ix-default-btn-bg-color: #515081;
+$ix-default-btn-border-color: #414168;
+$ix-default-btn-over-bg-color: #5f5e97;
+$ix-default-btn-over-border-color: #5b5a91;
+
+$ix-form-border: 1px solid #c8c8d3;
+$ix-form-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+$ix-form-min-width: 650px;
+$ix-form-max-width: 860px;
+$ix-form-min-height: 330px;
+$ix-form-padding: 16px;
+$ix-form-ct-padding: 16px 0;
+$ix-form-ct-border-bottom: 1px solid #ddd;
+
+$ix-ws-border-right: 1px solid #afafb6;

@@ -62,7 +62,7 @@ Ext.define('iExt.panel.Kanban', {
      * 0 表示不分页
      */
     ixPageSize: null,
-    
+
     /**
      * 看板项配置信息
      * 参见 Ext.Component 的配置项
@@ -120,10 +120,10 @@ Ext.define('iExt.panel.Kanban', {
             }
         }
 
-        var stages = me.getIxStages(),
+        var balt = false,
+            stages = me.getIxStages(),
             collapsible = me.getIxCollapsible(),
             minWidth = me.getIxStageMinWidth();
-        balt = false;
 
         me.items = [];
         Ext.each(stages, function (stage) {
@@ -157,28 +157,20 @@ Ext.define('iExt.panel.Kanban', {
         if (Ext.isString(stages)) {
             var enums = Ext.ClassManager.get(stages);
             if (enums) {
-                var list = enums.ixList();
-                stages = [];
-                Ext.each(list, function (item) {
-                    stages.push({
-                        value: item[enums.ixValueProperty],
-                        text: item[enums.ixTextProperty]
-                    });
-                });
+                stages = enums.ixList();
             } else {
                 Ext.raise('指定的枚举类型 [' + stages + '] 不存在!');
             }
         } else if (Ext.isObject(stages)) {
             var obj = Ext.clone(stages);
             stages = [];
-            for (var p in obj) {
-                if (obj.hasOwnProperty(p)) {
+            Object.getOwnPropertyNames(obj).forEach(
+                function (val, idx, array) {
                     stages.push({
-                        value: p,
-                        text: obj[p]
+                        value: val,
+                        text: obj[val]
                     });
-                }
-            }
+                });
         } else {
             Ext.raise('无效的阶段配置信息!');
         }
@@ -223,22 +215,24 @@ Ext.define('iExt.panel.Kanban', {
                 ref = record.get(stageField);
                 ref = '__ixStage_' + ref;
                 stagePanel = refs[ref];
-                var cmp = {
-                    xtype: 'box',
-                    renderTpl: itemTpl,
-                    renderData: record.data,
-                    listeners: {
-                        click: {
-                            element: 'el',
-                            fn: function () {
-                                me._ixItemClick(this, record.data);
-                            },
-                            scope: me
+                if (stagePanel) {
+                    var cmp = {
+                        xtype: 'box',
+                        renderTpl: itemTpl,
+                        renderData: record.data,
+                        listeners: {
+                            click: {
+                                element: 'el',
+                                fn: function () {
+                                    me._ixItemClick(this, record.data);
+                                },
+                                scope: me
+                            }
                         }
-                    }
-                };
-                Ext.applyIf(cmp, itemConfig);
-                stagePanel.add(cmp);
+                    };
+                    Ext.applyIf(cmp, itemConfig);
+                    stagePanel.add(cmp);
+                }
             });
             Ext.resumeLayouts(true);
         },

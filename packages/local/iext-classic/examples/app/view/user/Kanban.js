@@ -36,6 +36,12 @@ Ext.define('app.view.user.Kanban', {
     },
 
     ixStages: 'app.enums.UserStatus',
+    /*
+    ixStages: {
+        1: 'inactive',
+        2: 'active'
+    },
+    */
     ixStageField: 'status',
     //ixStageMinWidth: 350,
     ixCollapsible: true,
