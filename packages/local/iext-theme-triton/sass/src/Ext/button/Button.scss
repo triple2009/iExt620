@@ -1,9 +1,27 @@
 /* 设置按钮边框圆角 */
-.x-btn{
-    border-radius: 2px;
+
+.x-btn {
+    border-radius: 3px;
 }
 
+
 /* 对于较大字体，文字显示不完整 */
+
 .x-btn-inner {
     overflow: visible;
+}
+
+
+/* fbar(footer0ui) 不支持变量设置，通过此方法 hack */
+
+.x-toolbar-footer {
+    .x-btn-icon-el {
+        color: #919191;
+    }
+    .x-btn-inner {
+        color: $color;
+    }
+    .x-btn-disabled {
+        background-color: #fff !important;
+    }
 }

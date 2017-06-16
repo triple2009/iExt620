@@ -11,7 +11,6 @@ Ext.define('Ext.overrides.window.Toast', {
     paddingY: 4,
     shadow: false,
 
-    ui: 'ix-toast-ui',
     bodyCls: 'ix-toast-body'
 
 });

@@ -1,11 +1,10 @@
 .ix-logon {
-
-    .ix-logon-header{
-       background-color: $ix-logon-header-background-color !important;
+    .ix-logon-header {
+        background-color: #5f5e97;
+        color: #fff;
     }
-
-    .ix-logon-copyright{
+    .ix-logon-copyright {
         text-align: center;
-        padding: $ix-logon-copyright-padding;
+        padding: 25px 5px 5px;
     }
 }

@@ -1,3 +1,4 @@
 ﻿/* 设置不合法组件的边框与常规边框一致，避免界面杂乱 */
 
 $form-field-invalid-border-color: dynamic($form-field-border-color);
+$form-field-focus-border-color: #7c7bad;

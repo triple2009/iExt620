@@ -1,44 +1,45 @@
 @include extjs-toolbar-ui(
     $ui: 'ix-app-header-ui',
 
-    $background-color: $ix-app-header-background-color,
-    $vertical-spacing: $ix-app-header-vertical-spacing,
-    $horizontal-spacing: $ix-app-header-horizontal-spacing,
+    $background-color: #5f5e97,
+    $vertical-spacing: 2px,
+    $horizontal-spacing: 6px,
 
-    $text-color: $ix-app-header-text-color
+    $text-color: #fff
 );
 
 @include extjs-button-small-ui(
     $ui: 'ix-app-btn-ui',
 
-    $color: $ix-app-header-text-color,
-    $background-color-over: $ix-app-header-background-color-over,
-    $background-color: transparent,
-    $border-color: transparent,
-    $border-color-over: transparent,
-    $border-color-focus: transparent
-        
+    $color: #fff,
+    $glyph-color: #fff,
+    $arrow-glyph-color: #fff,
+    $border-width: 0,
+    $background-color: #5f5e97,
+    $background-color-over: #5f5e97,
+    $background-color-pressed: #5f5e97
 );
 
 @include extjs-button-medium-ui(
     $ui: 'ix-app-btn-ui',
 
-    $color: $ix-app-header-text-color,
-    $background-color-over: $ix-app-header-background-color-over,
-    $background-color: transparent,
-    $border-color: transparent,
-    $border-color-over: transparent,
-    $border-color-focus: transparent
-        
+    $color: #fff,
+    $glyph-color: #fff,
+    $arrow-glyph-color: #fff,
+    $border-width: 0,
+    $background-color: #5f5e97,
+    $background-color-over: #5f5e97,
+    $background-color-pressed: #5f5e97
 );
 
 @include extjs-button-large-ui(
     $ui: 'ix-app-btn-ui',
 
-    $color: $ix-app-header-text-color,
-    $background-color-over: $ix-app-header-background-color-over,
-    $background-color: transparent,
-    $border-color: transparent,
-    $border-color-over: transparent,
-    $border-color-focus: transparent
+    $color: #fff,
+    $glyph-color: #fff,
+    $arrow-glyph-color: #fff,
+    $border-width: 0,
+    $background-color: #5f5e97,
+    $background-color-over: #5f5e97,
+    $background-color-pressed: #5f5e97
 );

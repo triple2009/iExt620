@@ -95,7 +95,7 @@ Ext.define('iExt.app.view.window.Base', {
 
     initComponent: function () {
         var me = this;
-        me.bbar = {
+        me.fbar = {
             xtype: 'toolbar',
             items: me._ixGetButtons()
         };

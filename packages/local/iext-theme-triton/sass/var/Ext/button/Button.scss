@@ -3,6 +3,7 @@
 $button-small-font-size: 12px;
 $button-medium-font-size: 14px;
 $button-large-font-size: 16px;
+$button-default-color: #000;
 
 /* 按钮样式设置 */
 
@@ -11,37 +12,62 @@ $button-default-border-color: dynamic(#cccccc);
 
 /* 按钮鼠标移过样式设置 */
 
-$button-default-background-color-over: dynamic(#c9c9c6);
+$button-default-background-color-over: dynamic(#e6e6e6);
 $button-default-border-color-over: dynamic(#adadad);
+
+/* 按钮按下样式设置 */
+
+$button-default-background-color-pressed: dynamic(#e6e6e6);
+$button-default-border-color-pressed: dynamic(#cccccc);
 
 /* 按钮焦点样式设置 */
 
 $button-default-background-color-focus: dynamic(#ffffff);
-$button-default-border-color-focus: dynamic(#7c7bad);
-$button-default-body-outline-width-focus: 0;
+$button-default-border-color-focus: dynamic(#adadad);
+$button-default-inner-border-color-focus: dynamic(#ffffff);
 
 /* 按钮焦点且鼠标移过设置 */
 
-$button-default-background-color-focus-over: dynamic(#c9c9c6);
-$button-default-border-color-focus-over: dynamic(#5b5a91);
+$button-default-background-color-focus-over: dynamic(#e6e6e6);
+$button-default-border-color-focus-over: dynamic(#adadad);
+$button-default-inner-border-color-focus-over: dynamic(#e6e6e6);
+
+/* 按钮焦点且按下设置 */
+
+$button-default-background-color-focus-pressed: dynamic(#ffffff);
+$button-default-border-color-focus-pressed: dynamic(#adadad);
+$button-default-inner-border-color-focus-pressed: dynamic(#ffffff);
 
 /* 工具栏按钮样式设置 */
+$button-toolbar-color: #000;
 
 $button-toolbar-background-color: dynamic(#ffffff);
 $button-toolbar-border-color: dynamic(#cccccc);
 
 /* 工具栏按钮鼠标移过样式设置 */
 
-$button-toolbar-background-color-over: dynamic(#c9c9c6);
+$button-toolbar-background-color-over: dynamic(#e6e6e6);
 $button-toolbar-border-color-over: dynamic(#adadad);
+
+/* 工具栏按钮按下样式设置 */
+
+$button-toolbar-background-color-pressed: dynamic(#e6e6e6);
+$button-toolbar-border-color-pressed: dynamic(#cccccc);
 
 /* 工具栏按钮焦点样式设置 */
 
 $button-toolbar-background-color-focus: dynamic(#ffffff);
-$button-toolbar-border-color-focus: dynamic(#7c7bad);
-$button-toolbar-body-outline-width-focus: 0;
+$button-toolbar-border-color-focus: dynamic(#adadad);
+$button-toolbar-inner-border-color-focus: dynamic(#ffffff);
 
 /* 工具栏按钮焦点且鼠标移过设置 */
 
-$button-toolbar-background-color-focus-over: dynamic(#c9c9c6);
-$button-toolbar-border-color-focus-over: dynamic(#5b5a91);
+$button-toolbar-background-color-focus-over: dynamic(#e6e6e6);
+$button-toolbar-border-color-focus-over: dynamic(#adadad);
+$button-toolbar-inner-border-color-focus-over: dynamic(#e6e6e6);
+
+/* 工具栏按钮焦点且按下设置 */
+
+$button-toolbar-background-color-focus-pressed: dynamic(#ffffff);
+$button-toolbar-border-color-focus-pressed: dynamic(#adadad);
+$button-toolbar-inner-border-color-focus-pressed: dynamic(#ffffff);

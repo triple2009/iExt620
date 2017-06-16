@@ -5,11 +5,14 @@ $tab-color: #7c7bad;
 $tab-font-weight: normal;
 
 /* active tab */
-$tab-color-active: #333;
+
+$tab-color-active: #000;
 $tab-font-weight-active: bold;
 $tab-closable-icon-glyph-color-active: #333;
 
 /* 关闭焦点边框 */
+
+
 /*
 $tab-body-outline-width-focus: 0;
 $tab-border-color: #fff;
@@ -18,11 +21,25 @@ $tab-border-color-focus: #fff;
 $tab-border-color-focus-active: #fff;
 $tab-border-color-focus-over: #fff;
 $tab-border-color-over: #fff;
-
 */
 
-/**/
+
+/* focus tab */
+
 $tab-closable-icon-glyph-color-focus: #aaa;
+
+/* focus active tab */
+
 $tab-closable-icon-glyph-color-focus-active: #aaa;
+
+/* focus over tab */
+
 $tab-closable-icon-glyph-color-focus-over: #aaa;
+
+/* over tab */
+
 $tab-closable-icon-glyph-color-over: #aaa;
+
+/* plain tab */
+
+$tab-plain-background-color: #f0eeee;

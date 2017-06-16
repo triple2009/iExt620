@@ -8,6 +8,7 @@ Ext.define('iExt.form.Quick', {
     alias: 'widget.ixqvform',
 
     cls: 'ix-quick-form',
+    bodyCls: 'ix-quick-form-body',
 
     viewModel: true,
     header: false,
@@ -64,7 +65,7 @@ Ext.define('iExt.form.Quick', {
         if (me._ixMeta) {
             title = me._ixMeta.ixName || title;
         }
-        me.title = '快速查看 - ' + title;
+        me.title = title;
 
         me.callParent();
     },

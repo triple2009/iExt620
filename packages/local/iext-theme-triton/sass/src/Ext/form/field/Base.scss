@@ -10,16 +10,16 @@
 /* 必须输入项样式 */
 
 .x-form-required-field {
-    background-color: dynamic(#ffffea) !important;
+    background-color: #ffffea !important;
 }
 
 
 /* 必须输入项标签样式。因为在 classic 中重载，所以在此处定义 */
 
 .ix-label-required {
-    color: dynamic(#c30);
-    padding: dynamic(5px 3px 0 3px);
-    font-size: dynamic(9px);
+    color: #c30;
+    padding: 5px 3px 0 3px;
+    font-size: 9px;
     font-weight: bold;
 }
 

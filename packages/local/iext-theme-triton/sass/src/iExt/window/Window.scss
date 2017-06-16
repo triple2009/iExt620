@@ -22,17 +22,3 @@
         color: $ix-win-header-color;
     }
 }
-
-@include extjs-window-ui(
-    $ui: 'ix-ddwin-ui',
-
-    $ui-border-width: $ix-ddwin-border-width,
-    $ui-border-radius: $ix-ddwin-border-radius,
-    $ui-border-color: $ix-ddwin-border-color,
-    $ui-header-color: $ix-ddwin-header-color,
-    $ui-header-border-width: $ix-ddwin-header-border-width,
-    $ui-header-padding: $ix-ddwin-header-padding,
-    $ui-header-background-color: $ix-ddwin-header-background-color,
-    $ui-tool-background-image: $ix-ddwin-tool-background-image
-
-);

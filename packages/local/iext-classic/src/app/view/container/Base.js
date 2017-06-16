@@ -13,26 +13,11 @@ Ext.define('iExt.app.view.container.Base', {
     layout: 'fit',
 
     config: {
-
-        /**
-         * 缺省标题
-         * 由于title属性用于绑定，不能直接设置标题？
-         * 需要验证绑定属性的赋值操作？
-         */
-        ixDefaultTitle: null,
-
         /**
          * 领域模型 String / iExt.domain.Domain
          * 领域模型类名称，或者domain的实例
          */
         ixDomain: null
-    },
-
-    bind: {
-        /**
-         * 绑定标题 ixvcTitle
-         */
-        title: '{ixvcTitle}'
     },
 
     /**
@@ -45,23 +30,6 @@ Ext.define('iExt.app.view.container.Base', {
         var me = this;
 
         me.callParent();
-    },
-
-    /**
-     * 设置缺省标题
-     */
-    applyIxDefaultTitle: function (title) {
-        title = title || '&#160;';
-        return title;
-    },
-
-    /**
-     * 更新缺省标题
-     * 
-     */
-    updateIxDefaultTitle: function (title, oldTitle) {
-        var vm = this.getViewModel();
-        vm.ixSetDefaultTitle(title);
     }
 
 });

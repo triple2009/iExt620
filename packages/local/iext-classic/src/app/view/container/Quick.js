@@ -15,7 +15,7 @@ Ext.define('iExt.app.view.container.Quick', {
     /**
      * 缺省标题
      */
-    ixDefaultTitle: '快速查看',
+    title: '快速查看',
 
     initComponent: function () {
         var me = this;
@@ -25,6 +25,20 @@ Ext.define('iExt.app.view.container.Quick', {
             tooltip: '隐藏',
             callback: me._ixHideMe
         }];
+        me.tbar = {
+            xtype: 'toolbar',
+            items: [{
+                xtype: 'ixtbrtitle',
+                ixScale: 'medium',
+                flex: 1,
+                bind: {
+                    text: '{ixvc.title}'
+                }
+            }, '->', {
+                xtype: 'ixtbrholder',
+                scale: 'small',
+            }]
+        };
         me.on('add', me._ixOnAdd);
         me.callParent();
     },
