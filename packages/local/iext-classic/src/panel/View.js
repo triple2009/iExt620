@@ -12,6 +12,9 @@ Ext.define('iExt.panel.View', {
         'iExt.mixin.ListView'
     ],
 
+    cls: 'ix-view-panel',
+    bodyCls: 'ix-view-body',
+
     /**
      * 可配置主题
      * 可以在主题包中进行重载
@@ -28,7 +31,6 @@ Ext.define('iExt.panel.View', {
         ixViewConfig: null
     },
 
-    cls: 'ix-view-panel',
     layout: 'fit',
 
     constructor: function (config) {

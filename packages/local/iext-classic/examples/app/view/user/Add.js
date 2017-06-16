@@ -110,77 +110,80 @@ Ext.define('app.view.user.Add', {
             items: [{
                 xtype: 'tbfill'
             }, {
-                xtype: 'ixstatbtn',
-                iconCls: 'x-fa fa-plus',
-                text: 'Activities',
-                value: 1000,
-                listeners: {
-                    click: function (item, e, eOpts) {
-                        item.setText('new text');
-                        item.setValue(200);
+                xtype: 'segmentedbutton',
+                items: [{
+                    xtype: 'ixstatbtn',
+                    iconCls: 'x-fa fa-plus',
+                    text: 'Activities',
+                    value: 1000,
+                    listeners: {
+                        click: function (item, e, eOpts) {
+                            item.setText('new text');
+                            item.setValue(200);
+                        }
                     }
-                }
-            }, {
-                xtype: 'ixactbtn',
-                text: 'Inactivated',
-                ixBadgeText: '9000',
-                iconCls: 'x-fa fa-plus',
-                listeners: {
-                    click: function (item, e, eOpts) {
-                        item.setIxBadgeText('888');
-                        item.setText('new text');
+                }, {
+                    xtype: 'ixactbtn',
+                    text: 'Inactivated',
+                    ixBadgeText: '9000',
+                    iconCls: 'x-fa fa-plus',
+                    listeners: {
+                        click: function (item, e, eOpts) {
+                            item.setIxBadgeText('888');
+                            item.setText('new text');
+                        }
                     }
-                }
-            }, {
-                text: 'Active'
-            }, {
-                text: '中文测试',
-                iconCls: 'x-fa fa-search',
-                listeners: {
-                    click: function (item, e, eOpts) {
-                        //var data = item.getIxAlign().ixGetAlignData();
-                        item.fireEvent('ixopenview', item, 'app-user-edit', {
-                            target: iExt.action.ViewTarget.MAIN
-                        });
+                }, {
+                    text: 'Active'
+                }, {
+                    text: '中文测试',
+                    iconCls: 'x-fa fa-search',
+                    listeners: {
+                        click: function (item, e, eOpts) {
+                            //var data = item.getIxAlign().ixGetAlignData();
+                            item.fireEvent('ixopenview', item, 'app-user-edit', {
+                                target: iExt.action.ViewTarget.MAIN
+                            });
+                        }
                     }
-                }
+                }]
             }]
         },
 
         items: [{
-            xtype: 'ixtext',
-            ixScale: 'large',
-            fieldLabel: '代码',
-            bind: '{_ixvc.title}',
-            reference: 'code',
-            allowBlank: false
-        },
-        {
-            xtype: 'ixtext',
-            fieldLabel: '姓名',
-            bind: '{user.name}',
-            reference: 'name'
-        },
-        {
-            fieldLabel: '电话',
-            bind: '{user.mobilePhone}',
-            reference: 'mobilePhone'
-        },
-        {
-            fieldLabel: '名称',
-            labelAlign: 'right',
-            bind: '{user.userName}',
-            reference: 'userName'
-        },
-        {
-            fieldLabel: '密码',
-            bind: '{user.password}',
-            reference: 'password'
-        },
-        {
-            fieldLabel: '确认',
-            reference: 'repwd'
-        }
+                xtype: 'ixtext',
+                ixScale: 'large',
+                fieldLabel: '代码',
+                bind: '{_ixvc.title}',
+                reference: 'code',
+                allowBlank: false
+            },
+            {
+                xtype: 'ixtext',
+                fieldLabel: '姓名',
+                bind: '{user.name}',
+                reference: 'name'
+            },
+            {
+                fieldLabel: '电话',
+                bind: '{user.mobilePhone}',
+                reference: 'mobilePhone'
+            },
+            {
+                fieldLabel: '名称',
+                labelAlign: 'right',
+                bind: '{user.userName}',
+                reference: 'userName'
+            },
+            {
+                fieldLabel: '密码',
+                bind: '{user.password}',
+                reference: 'password'
+            },
+            {
+                fieldLabel: '确认',
+                reference: 'repwd'
+            }
         ]
     }, {
         xtype: 'tabpanel',

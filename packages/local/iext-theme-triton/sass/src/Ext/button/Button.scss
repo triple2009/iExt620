@@ -1,17 +1,9 @@
-/* 对于较大字体，文字显示不完整 */
-
-.x-btn-inner {
-    overflow: visible;
+/* 设置按钮边框圆角 */
+.x-btn{
+    border-radius: 2px;
 }
 
-/* 去掉焦点边框 */
-.x-btn-focus {
-    -webkit-box-shadow: none !important;
-    -moz-box-shadow: none !important;
-    box-shadow: none !important;
-    /*
-    -webkit-box-shadow: #21b799 0 1px 0px 0 inset, #21b799 0 -1px 0px 0 inset, #21b799 -1px 0 0px 0 inset, #21b799 1px 0 0px 0 inset;
-    -moz-box-shadow: #21b799 0 1px 0px 0 inset, #21b799 0 -1px 0px 0 inset, #21b799 -1px 0 0px 0 inset, #21b799 1px 0 0px 0 inset;
-    box-shadow: #21b799 0 1px 0px 0 inset, #21b799 0 -1px 0px 0 inset, #21b799 -1px 0 0px 0 inset, #21b799 1px 0 0px 0 inset;
-    */
+/* 对于较大字体，文字显示不完整 */
+.x-btn-inner {
+    overflow: visible;
 }

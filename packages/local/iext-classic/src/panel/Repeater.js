@@ -13,6 +13,7 @@ Ext.define('iExt.panel.Repeater', {
     alias: 'widget.ixrepeater',
 
     cls: 'ix-repeater-panel',
+    bodyCls: 'ix-repeater-body',
 
     /**
      * 可配置主题

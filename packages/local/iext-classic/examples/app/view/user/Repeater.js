@@ -25,7 +25,7 @@ Ext.define('app.view.user.Repeater', {
             listeners: {
                 click: function (item, e, eOpts) {
                     //var data = item.getIxAlign().ixGetAlignData();
-                    item.fireEvent('ixopenview', item, 'app-user-kanban', {
+                    item.fireEvent('ixopenview', item, 'app-user-view', {
                         target: iExt.action.ViewTarget.MAIN
                     });
                 }

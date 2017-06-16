@@ -1,10 +1,3 @@
-﻿$form-label-font-weight: dynamic($font-weight);
+﻿/* 设置不合法组件的边框与常规边框一致，避免界面杂乱 */
+
 $form-field-invalid-border-color: dynamic($form-field-border-color);
-
-$ix-field-invalid-border-color: dynamic(#c30);
-$ix-field-invalid-border-width: dynamic(1px);
-
-$ix-required-field-background-color: dynamic(#ffffea);
-$ix-required-lable-color: dynamic(#c30);
-$ix-required-lable-font-size: dynamic(9px);
-$ix-required-lable-padding: dynamic(5px 3px 0 3px);

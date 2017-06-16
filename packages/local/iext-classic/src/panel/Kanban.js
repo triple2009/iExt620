@@ -9,6 +9,7 @@ Ext.define('iExt.panel.Kanban', {
     alias: 'widget.ixkanbanpanel',
 
     cls: 'ix-kaban-panel',
+    bodyCls: 'ix-kaban-body',
     referenceHolder: true,
 
     /**

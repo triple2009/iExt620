@@ -91,6 +91,7 @@ Ext.define('iExt.app.view.Tab', {
         items.push({
             xtype: 'ixtabpanel',
             region: 'center',
+            plain: true,
             //plain: true,
             reference: 'ixAppMain',
             items: [{

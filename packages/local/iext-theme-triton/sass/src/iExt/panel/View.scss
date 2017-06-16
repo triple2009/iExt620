@@ -1,5 +1,10 @@
 .ix-view-panel {
     .x-view-item-focused {
-        outline: none !important;
+        outline-width: 0 !important;
     }
+}
+
+.ix-view-body {
+    border-top: solid 1px #adadad !important;
+    border-bottom: solid 1px #adadad !important;
 }

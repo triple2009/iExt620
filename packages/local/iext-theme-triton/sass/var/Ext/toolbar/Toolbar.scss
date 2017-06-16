@@ -1,2 +1,3 @@
-$toolbar-background-color: $ix-toolbar-background-color;
-$toolbar-text-color: $ix-toolbar-text-color;
+$toolbar-background-color: dynamic(#ffffff);
+$toolbar-text-color: dynamic(#333);
+$toolbar-border-color: dynamic(#adadad);

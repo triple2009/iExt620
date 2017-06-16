@@ -1,42 +1,31 @@
-﻿.x-form-invalid-field-default {
+﻿/* 不合法组件的样式 */
+
+.x-form-invalid-field-default {
     background-image: theme-background-image('iext/invalid');
     background-position: -1px -1px !important;
     background-repeat: no-repeat;
 }
 
+
+/* 必须输入项样式 */
+
 .x-form-required-field {
-    background-color: $ix-required-field-background-color !important;
+    background-color: dynamic(#ffffea) !important;
 }
 
 
-/* 设置边框样式 */
-/*
-.x-form-trigger-wrap-default {
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-left-color: transparent;
-}
-*/
+/* 必须输入项标签样式。因为在 classic 中重载，所以在此处定义 */
 
-/* 设置焦点边框样式 */
-/*
-.x-form-trigger-wrap-default.x-form-trigger-wrap-focus {
-    border-top-color: transparent;
-    border-right-color: transparent;
-    border-left-color: transparent;
-    border-bottom-color: $form-field-focus-border-color;
-}
-*/
-
-/* 因为在 classic 中重载，所以在此处定义 */
 .ix-label-required {
-    color: $ix-required-lable-color;
-    padding: $ix-required-lable-padding;
-    font-size: $ix-required-lable-font-size;
+    color: dynamic(#c30);
+    padding: dynamic(5px 3px 0 3px);
+    font-size: dynamic(9px);
     font-weight: bold;
 }
 
+
 /* 如果通过 beforeLabelTextTpl 属性设置，应该不需要该方法*/
+
 .ix-label-required:before {
     content: "*";
 }

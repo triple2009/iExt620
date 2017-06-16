@@ -1,4 +1,17 @@
-$panel-header-background-color: dynamic(#ffffff);
-$panel-header-border-color : dynamic(#ffffff);
-$panel-header-color: dynamic(#666666);
-$tool-glyph-color: dynamic(#666666);
+/* 标题栏设置 */
+
+$panel-header-background-color: dynamic(#fff);
+$panel-header-border-color: dynamic(#fff);
+$panel-header-color: dynamic(#666);
+
+/* tools 设置 */
+
+$tool-glyph-color: dynamic(#666);
+
+/* panel 设置*/
+
+$panel-border-color: dynamic(#afafb6);
+
+/* body 设置*/
+
+$panel-body-border-color: dynamic(#f0eeee);
