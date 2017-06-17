@@ -18,7 +18,7 @@ Ext.define('app.view.user.Add', {
                         title: {
                             xtype: 'toolbar',
                             items: [{
-                                xtype: 'tbtext',
+                                xtype: 'ixtbrtitle',
                                 text: '文本'
                             }, '->', {
                                 xtype: 'button',
@@ -111,11 +111,16 @@ Ext.define('app.view.user.Add', {
                 xtype: 'tbfill'
             }, {
                 xtype: 'segmentedbutton',
+                allowToggle: false,
+                defaults: {
+                    scale: 'large',
+                    width: 150
+                },
                 items: [{
                     xtype: 'ixstatbtn',
                     iconCls: 'x-fa fa-plus',
                     text: 'Activities',
-                    value: 1000,
+                    value: 100,
                     listeners: {
                         click: function (item, e, eOpts) {
                             item.setText('new text');
@@ -124,8 +129,8 @@ Ext.define('app.view.user.Add', {
                     }
                 }, {
                     xtype: 'ixactbtn',
-                    text: 'Inactivated',
-                    ixBadgeText: '9000',
+                    text: 'status',
+                    ixBadgeText: '900',
                     iconCls: 'x-fa fa-plus',
                     listeners: {
                         click: function (item, e, eOpts) {
@@ -160,14 +165,17 @@ Ext.define('app.view.user.Add', {
             },
             {
                 xtype: 'ixtext',
+                ixScale: 'medium',
                 fieldLabel: '姓名',
                 bind: '{user.name}',
-                reference: 'name'
+                reference: 'name',
+                allowBlank: false
             },
             {
                 fieldLabel: '电话',
                 bind: '{user.mobilePhone}',
-                reference: 'mobilePhone'
+                reference: 'mobilePhone',
+                allowBlank: false
             },
             {
                 fieldLabel: '名称',

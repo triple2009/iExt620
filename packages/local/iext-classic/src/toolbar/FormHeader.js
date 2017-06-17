@@ -9,7 +9,6 @@ Ext.define('iExt.toolbar.FormHeader', {
 
     requires: [],
 
-    ui: 'ix-form-header-ui',
     cls: 'ix-form-header',
     
     defaults: {

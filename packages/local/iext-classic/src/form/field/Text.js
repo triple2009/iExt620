@@ -15,7 +15,7 @@ Ext.define('iExt.form.field.Text', {
         var me = this,
             scale = me.getIxScale();
         if (scale) {
-            me.addCls('ix-text-' + scale);
+            me.userCls = 'ix-' + scale;
         }
 
         me.callParent(arguments);

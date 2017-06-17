@@ -1,24 +1,9 @@
-@include extjs-window-ui(
-    $ui: 'ix-win-ui',
-
-    $ui-border-width: $ix-win-border-width,
-    $ui-border-radius: $ix-win-border-radius,
-    $ui-border-color: $ix-win-border-color,
-
-    $ui-header-color: $ix-win-header-color,
-    $ui-header-text-padding: $ix-win-header-text-padding,
-    $ui-header-border-width: $ix-win-header-border-width,
-    $ui-header-background-color: $ix-win-header-background-color,
-    $ui-header-padding: $ix-win-header-padding
-
-);
-
-.ix-win{
-    .x-tool-tool-el{
-        color: $ix-win-tool-el-color
+.ix-win {
+    .x-toolbar {
+        background-color: #fff;
     }
-    .x-toolbar-text-default{
-        font-size: $ix-win-header-font-size;
-        color: $ix-win-header-color;
+    .x-tool-tool-el {
+        /* 与按钮边框颜色相同 */
+        color: #ccc;
     }
 }

@@ -1,17 +1,18 @@
 .ix-tagsearch {
-
     .x-tagfield-item {
-        padding-left: $ix-tag-search-item-padding-left;
-        background-image: $ix-tag-search-item-bgimage;
+        padding-left: 25px;
+        background-image: theme-background-image('iext/filter');
         background-repeat: no-repeat;
     }
-
-    .ix-tagfield-noclose{
+    .ix-tagfield-noclose {
         padding-right: 1px;
     }
-
     .x-tagfield-item.x-tagfield-item-selected {
-        border: $ix-tag-search-item-selected-border;
-        background-color: $ix-tag-search-item-selected-bgcolor;
+        border: solid 1px #777777;
+        background-color: #e9e9f1;
+        color: #333;
+        .x-tagfield-item-close {
+            color: #333;
+        }
     }
 }

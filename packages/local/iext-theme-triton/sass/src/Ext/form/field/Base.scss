@@ -14,13 +14,20 @@
 }
 
 
+/* 为输入项添加圆角 */
+
+.x-form-trigger-wrap-default {
+    border-radius: 2px;
+}
+
+
 /* 必须输入项标签样式。因为在 classic 中重载，所以在此处定义 */
 
 .ix-label-required {
     color: #c30;
-    padding: 5px 3px 0 3px;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: bold;
+    margin: 0 2px 0 2px;
 }
 
 
@@ -28,4 +35,22 @@
 
 .ix-label-required:before {
     content: "*";
+}
+
+.ix-large {
+    .x-form-item-label-default {
+        font-size: 20px;
+    }
+    .ix-label-required {
+        font-size: 18px;
+    }
+}
+
+.ix-medium {
+    .x-form-item-label-default {
+        font-size: 17px;
+    }
+    .ix-label-required {
+        font-size: 14px;
+    }
 }
