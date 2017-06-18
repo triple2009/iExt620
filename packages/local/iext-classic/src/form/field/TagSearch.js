@@ -30,6 +30,7 @@ Ext.define('iExt.form.field.TagSearch', {
     selectOnFocus: false,
     triggerOnClick: false,
     triggerCls: 'x-fa fa-search-plus',
+    pickerOffset: [0, -1],
     // autoselect=true，会自动检索下拉列表的数据
     autoSelect: false,
     emptyText: '搜索 ···',
@@ -55,11 +56,14 @@ Ext.define('iExt.form.field.TagSearch', {
     },
 
     createPicker: function () {
-        var me = this, picker;
+        var me = this,
+            picker;
         picker = me.picker = Ext.create({
             xtype: 'ixsearchcontainer',
             floating: true,
             header: false,
+            shadow: false,
+            userCls: 'ix-tagsearch-picker',
             items: [{
                 xtype: me.getIxView()
             }],
@@ -108,7 +112,8 @@ Ext.define('iExt.form.field.TagSearch', {
      * @param {Element} itemEl 关闭的标签对象。
      */
     removeByListItemNode: function (itemEl) {
-        var me = this, removable = true,
+        var me = this,
+            removable = true,
             rec = me.getRecordByListItemNode(itemEl);
 
         if (rec) {

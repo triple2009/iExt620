@@ -4,35 +4,11 @@ Ext.define('app.view.odoo.Add', {
 
     requires: [],
 
-    title: '{_ixvc.title}',
+    title: '新建用户',
 
     tbar: {
         xtype: 'toolbar',
         items: [{
-            text: '编辑',
-            iconCls: 'x-fa fa-edit',
-            listeners: {
-                click: function () {
-                    var win = Ext.create({
-                        xtype: 'ixwin',
-                        title: {
-                            xtype: 'toolbar',
-                            items: [{
-                                xtype: 'tbtext',
-                                text: '文本'
-                            }, '->', {
-                                xtype: 'button',
-                                iconCls: 'x-fa fa-search',
-                                text: '按钮'
-                            }]
-                        },
-                        width: 600,
-                        height: 450
-                    });
-                    win.show();
-                }
-            }
-        }, {
             text: '保存',
             iconCls: 'x-fa fa-save',
             listeners: {
@@ -71,7 +47,10 @@ Ext.define('app.view.odoo.Add', {
                     );
                 }
             }
-        }, '->', {
+        }, {
+            xtype: 'tbspacer',
+            flex: 1
+        }, {
             text: '操作',
             menuAlign: 'tc-bc',
             menu: {
@@ -90,20 +69,15 @@ Ext.define('app.view.odoo.Add', {
                     text: '审批'
                 }]
             }
-        }, '->']
+        }, {
+            xtype: 'tbspacer',
+            flex: 2
+        }]
     },
 
     items: [{
         xtype: 'ixform',
-        layout: 'column',
-        header: false,
         width: 750,
-        bodyPadding: '5 10 0 10',
-        defaultType: 'textfield',
-        defaults: {
-            columnWidth: 0.5,
-            margin: 10
-        },
 
         tbar: {
             xtype: 'ixformheader',
@@ -140,50 +114,34 @@ Ext.define('app.view.odoo.Add', {
         },
 
         items: [{
-                xtype: 'ixtext',
-                ixScale: 'large',
-                fieldLabel: '代码',
-                bind: '{_ixvc.title}',
-                reference: 'code',
-                allowBlank: false
-            },
-            {
-                xtype: 'ixtext',
-                fieldLabel: '姓名',
-                bind: '{user.name}',
-                reference: 'name'
-            },
-            {
-                fieldLabel: '电话',
-                bind: '{user.mobilePhone}',
-                reference: 'mobilePhone'
-            },
-            {
-                fieldLabel: '名称',
-                labelAlign: 'right',
-                bind: '{user.userName}',
-                reference: 'userName'
-            },
-            {
-                fieldLabel: '密码',
-                bind: '{user.password}',
-                reference: 'password'
-            },
-            {
-                fieldLabel: '确认',
-                reference: 'repwd'
-            }
-        ]
-    }, {
-        xtype: 'tabpanel',
-        margin: '20 0 0 0',
-        minHeight: 200,
-        items: [{
-            xtype: 'panel',
-            title: 'internal messages'
+            xtype: 'ixtext',
+            ixScale: 'large',
+            fieldLabel: '代码',
+            bind: '{user.code}',
+            reference: 'code',
+            allowBlank: false
         }, {
-            xtype: 'panel',
-            title: 'others'
+            xtype: 'ixtext',
+            ixScale: 'large',
+            fieldLabel: '姓名',
+            bind: '{user.name}',
+            reference: 'name',
+            allowBlank: false
+        }, {
+            fieldLabel: '电话',
+            bind: '{user.mobilePhone}',
+            reference: 'mobilePhone'
+        }, {
+            fieldLabel: '名称',
+            bind: '{user.userName}',
+            reference: 'userName'
+        }, {
+            fieldLabel: '密码',
+            bind: '{user.password}',
+            reference: 'password'
+        }, {
+            fieldLabel: '确认',
+            reference: 'repwd'
         }]
     }]
 

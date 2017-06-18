@@ -1,3 +1,6 @@
-﻿.ix-msg-body {
+﻿/* 设置对话框字体，不能通过变量设置，影响所有的 panel */
+
+.ix-msg-body {
     overflow: hidden !important;
+    font-size: 15px;
 }

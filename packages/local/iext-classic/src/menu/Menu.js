@@ -10,7 +10,6 @@ Ext.define('iExt.menu.Menu', {
     defaults: {
         xtype: 'ixactitem'
     },
-
     shadow: false
 
 });

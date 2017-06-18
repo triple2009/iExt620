@@ -4,7 +4,7 @@ Ext.define('app.view.user.Add', {
 
     requires: [],
 
-    title: '{_ixvc.title}',
+    title: '新建用户',
 
     tbar: {
         xtype: 'toolbar',
@@ -15,15 +15,19 @@ Ext.define('app.view.user.Add', {
                 click: function () {
                     var win = Ext.create({
                         xtype: 'ixwin',
-                        title: {
-                            xtype: 'toolbar',
+                        title: '工具栏按钮',
+                        header: {
                             items: [{
-                                xtype: 'ixtbrtitle',
-                                text: '文本'
-                            }, '->', {
-                                xtype: 'button',
-                                iconCls: 'x-fa fa-search',
-                                text: '按钮'
+                                xtype: 'toolbar',
+                                items: [{
+                                    xtype: 'button',
+                                    iconCls: 'x-fa fa-search',
+                                    text: '按钮'
+                                }, {
+                                    xtype: 'button',
+                                    iconCls: 'x-fa fa-search',
+                                    text: 'other'
+                                }]
                             }]
                         },
                         width: 600,
@@ -62,13 +66,27 @@ Ext.define('app.view.user.Add', {
             iconCls: 'x-fa fa-close',
             listeners: {
                 click: function () {
-                    Ext.Msg.confirm('系统更新', '系统存在新的版本，是否重新加载？',
-                        function (choice) {
-                            if (choice === 'yes') {
-
-                            }
-                        }
-                    );
+                    var win = Ext.create({
+                        xtype: 'ixwin',
+                        title: '组合按钮',
+                        header: {
+                            items: [{
+                                xtype: 'segmentedbutton',
+                                items: [{
+                                    xtype: 'button',
+                                    iconCls: 'x-fa fa-search',
+                                    text: '按钮'
+                                }, {
+                                    xtype: 'button',
+                                    iconCls: 'x-fa fa-search',
+                                    text: 'other'
+                                }]
+                            }]
+                        },
+                        width: 600,
+                        height: 450
+                    });
+                    win.show();
                 }
             }
         }, '->', {
@@ -159,7 +177,7 @@ Ext.define('app.view.user.Add', {
                 xtype: 'ixtext',
                 ixScale: 'large',
                 fieldLabel: '代码',
-                bind: '{_ixvc.title}',
+                bind: '{user.code}',
                 reference: 'code',
                 allowBlank: false
             },
@@ -193,17 +211,6 @@ Ext.define('app.view.user.Add', {
                 reference: 'repwd'
             }
         ]
-    }, {
-        xtype: 'tabpanel',
-        margin: '20 0 0 0',
-        minHeight: 200,
-        items: [{
-            xtype: 'panel',
-            title: 'internal messages'
-        }, {
-            xtype: 'panel',
-            title: 'others'
-        }]
     }]
 
 });

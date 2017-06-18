@@ -15,13 +15,6 @@ Ext.define('iExt.app.view.window.Base', {
         ixEventItemId: null,
 
         /**
-         * 缺省标题
-         * 由于title属性用于绑定，不能直接设置标题？
-         * 需要验证绑定属性的赋值操作？
-         */
-        ixDefaultTitle: null,
-
-        /**
          * 视图类名称或视图组件配置
          * {String|Object}
          */
@@ -48,26 +41,9 @@ Ext.define('iExt.app.view.window.Base', {
 
     bind: {
         /**
-         * 绑定标题 ixvcTitle
+         * 绑定标题 title
          */
-        title: '{ixvcTitle}'
-    },
-
-    /**
-     * 设置缺省标题
-     */
-    applyIxDefaultTitle: function (title) {
-        title = title || '&#160;';
-        return title;
-    },
-
-    /**
-     * 更新缺省标题
-     * 
-     */
-    updateIxDefaultTitle: function (title, oldTitle) {
-        var vm = this.getViewModel();
-        vm.ixSetDefaultTitle(title);
+        title: '{title}'
     },
 
     /**
@@ -84,7 +60,9 @@ Ext.define('iExt.app.view.window.Base', {
                 me.add(view);
             } else {
                 if (Ext.isString(view)) {
-                    view = { xtype: view };
+                    view = {
+                        xtype: view
+                    };
                 }
                 me.items = [];
                 me.items.push(view);

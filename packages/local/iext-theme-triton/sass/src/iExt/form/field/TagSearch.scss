@@ -7,12 +7,10 @@
     .ix-tagfield-noclose {
         padding-right: 1px;
     }
-    .x-tagfield-item.x-tagfield-item-selected {
-        border: solid 1px #777777;
-        background-color: #e9e9f1;
-        color: #333;
-        .x-tagfield-item-close {
-            color: #333;
-        }
-    }
+}
+
+.ix-tagsearch-picker {
+    border: 1px solid #afafb6;
+    border-radius: 2px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }

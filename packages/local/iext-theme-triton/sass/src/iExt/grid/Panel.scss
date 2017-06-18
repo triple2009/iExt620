@@ -1,17 +1,24 @@
-.ix-grid .x-grid-row-checker:focus {
-    outline: none !important;
-}
+/* 去掉焦点边框 */
 
-.ix-grid-no-focus .x-grid-row-checker:focus {
-    outline: none !important;
+.ix-grid .x-grid-row-checker:focus {
+    outline-width: 0 !important;
 }
 
 .ix-grid-no-focus .x-grid-item-focused .x-grid-cell-inner:before {
-    border: none !important;
+    border-width: 0 !important;
 }
 
 .ix-grid {
     .x-unselectable {
         cursor: pointer !important;
+    }
+    /* 设置 preview plugin 样式 */
+    .x-grid-rowbody {
+        margin-left: 31px;
+        border-left: solid 1px #e9e9e9;
+    }
+    /* 调整body上边框为1px */
+    .x-grid-body {
+        border-top-width: 1px;
     }
 }

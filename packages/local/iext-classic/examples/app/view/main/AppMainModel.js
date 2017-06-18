@@ -6,13 +6,16 @@ Ext.define('app.view.main.AppMainModel', {
     data: {
         hr: [{
             code: 'hr01',
-            name: '组织管理'
+            name: '看板管理',
+            view:'app-user-kanban'
         }, {
             code: 'hr02',
-            name: '职员管理'
+            name: '用户视图',
+            view:'app-user-view'
         }, {
             code: 'hr03',
-            name: '薪资管理'
+            name: '用户管理',
+            view:'app-user-repeater'
         }],
         oa: [{
             code: 'oa01',

@@ -3,7 +3,11 @@
 $button-small-font-size: 12px;
 $button-medium-font-size: 14px;
 $button-large-font-size: 16px;
+// 按钮文本颜色
 $button-default-color: #000;
+// 按钮图标颜色
+$button-default-glyph-color: #919191;
+$button-default-arrow-glyph-color: #919191;
 
 /* 按钮样式设置 */
 
@@ -39,8 +43,10 @@ $button-default-border-color-focus-pressed: dynamic(#adadad);
 $button-default-inner-border-color-focus-pressed: dynamic(#ffffff);
 
 /* 工具栏按钮样式设置 */
-$button-toolbar-color: #000;
 
+$button-toolbar-color: #000;
+$button-toolbar-glyph-color: #919191;
+$button-toolbar-arrow-glyph-color: #919191;
 $button-toolbar-background-color: dynamic(#ffffff);
 $button-toolbar-border-color: dynamic(#cccccc);
 

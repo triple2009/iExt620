@@ -12,9 +12,9 @@ Ext.define('iExt.app.view.container.Form', {
     cls: 'ix-form-container',
     bodyCls: 'ix-form-container-body',
 
-    layout: 'auto',   
+    layout: 'auto',
     scrollable: 'y',
-    ixDefaultTitle: '表单',
+    title: '表单',
 
     // view:
     config: {
@@ -22,8 +22,15 @@ Ext.define('iExt.app.view.container.Form', {
     },
 
     initComponent: function () {
-        var me = this;
-
+        var me = this,
+            title = me.getTitle();
+        if (title) {
+            me.setBind({
+                title: '{title}'
+            });
+            vm = me.getViewModel();
+            vm.ixSetTitle(title);
+        }
         me.callParent();
     }
 

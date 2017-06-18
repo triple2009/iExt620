@@ -2,6 +2,11 @@
     .x-toolbar {
         background-color: #fff;
     }
+    .x-window-header {
+        .x-toolbar {
+            padding: 0;
+        }
+    }
     .x-tool-tool-el {
         /* 与按钮边框颜色相同 */
         color: #ccc;

@@ -8,15 +8,19 @@ Ext.define('iExt.form.Panel', {
     alias: 'widget.ixform',
 
     cls: 'ix-form',
-    layout: 'column',
     header: false,
     border: false,
     minWidth: 650,
     maxWidth: 860,
     minHeight: 400,
-    bodyPadding: '5 10 0 10',
+    trackResetOnLoad: true,
+    bodyPadding: '16 16 16 16',
     defaultType: 'ixtext',
     defaultFocus: 'field:focusable:not([hidden]):not([disabled]):not([readOnly])',
-    trackResetOnLoad: true
+    layout: 'column',
+    defaults: {
+        columnWidth: 0.5,
+        margin: 5
+    },
 
 });

@@ -2,7 +2,7 @@
 
 ## Ext
 
-该目录下定义的 scss 文件应该是重载 Ext 组件的样式。如果能够通过 `Ext Theme Variables` 设定的，就不要使用样式 hack 。
+该目录下定义的 scss 文件应该是重载 Ext 组件的样式。如果能够通过 `Ext Theme Variables` 设定的，就不要使用样式 hack 。通过 `Ext Theme Variables` 设定的样式文件应该存放在 `var/Ext` 对应的目录中。
 
 ## iExt
 

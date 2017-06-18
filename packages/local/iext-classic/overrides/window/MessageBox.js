@@ -7,9 +7,9 @@
 Ext.define('Ext.overrides.window.MessageBox', {
     override: 'Ext.window.MessageBox',
 
-    ui: 'ix-win-ui',
+    cls: 'ix-win',
     bodyCls: 'ix-msg-body',
-    
+
     defaultMinWidth: 450,
     defaultMinHeight: 120,
     minProgressWidth: 450,

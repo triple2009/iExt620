@@ -14,7 +14,7 @@ Ext.define('iExt.app.view.window.Search', {
     /**
      * 缺省标题
      */
-    ixDefaultTitle: '详细搜索',
+    title: '详细搜索',
 
     privates: {
 

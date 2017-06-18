@@ -34,6 +34,7 @@ Ext.define('iExt.button.Search', {
             ixMode: null
         });
         me.menu = {
+            userCls: 'ix-search-menu',
             items: [{
                 xtype: 'ixsearchcontainer',
                 header: false,

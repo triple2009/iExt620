@@ -233,9 +233,15 @@ Ext.define('iExt.app.view.Tab', {
                     tbr.insert(idx, {
                         text: item.name,
                         ixAppMenu: true,
+                        ixView: item.view,
                         listeners: {
                             click: function (item, e, eOpts) {
-                                alert('you are clicking ' + item.getText());
+                                var view = item.ixView;
+                                if (view) {
+                                    item.fireEvent('ixopenview', item, view, {
+                                        target: iExt.action.ViewTarget.MAIN
+                                    });
+                                }
                             }
                         }
                     });

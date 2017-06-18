@@ -21,9 +21,9 @@ Ext.define('iExt.app.view.model.Container', {
             title: '',
 
             /**
-             * 缺省标题
+             * 子标题
              */
-            defaultTitle: ''
+            subTitle: null
         }
     },
 
@@ -31,10 +31,14 @@ Ext.define('iExt.app.view.model.Container', {
 
         /**
          * 视图容器标题。
-         * 如果指定了标题则使用该标题，否则使用缺省标题。
          */
-        ixvcTitle: function (get) {
-            return get('ixvc.title') || get('ixvc.defaultTitle');
+        title: function (get) {
+            var title = get('ixvc.title');
+            var subTitle = get('ixvc.subTitle');
+            if (!Ext.isEmpty(subTitle)) {
+                title = title + '：' + subTitle;
+            }
+            return title;
         }
 
     },
@@ -43,22 +47,14 @@ Ext.define('iExt.app.view.model.Container', {
      * 设置标题的快捷方式
      */
     ixSetTitle: function (title) {
-        this.setData({
-            ixvc: {
-                title: title
-            }
-        });
+        this.set('ixvc.title', title);
     },
 
     /**
-     * 设置缺省标题的快捷方式
+     * 设置子标题的快捷方式
      */
-    ixSetDefaultTitle: function (title) {
-        this.setData({
-            ixvc: {
-                defaultTitle: title
-            }
-        });
+    ixSetSubTitle: function (subTitle) {
+        this.set('ixvc.subTitle', subTitle);
     }
 
 });

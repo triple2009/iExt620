@@ -1,22 +1,29 @@
-Ext.define('app.view.odoo.List', {
-    extend: 'iExt.grid.Panel',
-    xtype: 'app-odoo-list',
+Ext.define('app.view.user.Tree', {
+    extend: 'iExt.tree.Panel',
+    xtype: 'app-user-tree',
 
     requires: [
-        'iExt.grid.column.Column'
+        'app.store.Navigation'
     ],
-    layout: 'fit',
 
-    title: 'Users',
-    controller: {
-        type: 'ixlist'
-    },
+    title: '用户树',
 
+    //autoLoad: true,
+
+    ixMultiSelect: true,
+    ixLeafOnly: false,
+    ixService: 'menu',
+    ixNodeIcon: false,
     ixStore: {
-        type: 'user'
+        type: 'navigation'
     },
-    //ixPreviewField: 'email',
-    
+
+    /*
+    store: {
+        type: 'navigation'
+    },
+    */
+
     tbar: {
         xtype: 'ixacttbr',
         ixAuthService: 'user',
@@ -121,16 +128,24 @@ Ext.define('app.view.odoo.List', {
     },
 
     columns: [{
-        text: 'Name',
-        dataIndex: 'name'
+        xtype: 'ixtreecol',
+        text: '名称',
+        flex: 1,
+        dataIndex: 'text'
     }, {
-        text: 'Email',
-        dataIndex: 'email',
-        flex: 1
+        xtype: 'ixcol',
+        text: '代码',
+        dataIndex: 'code',
+        width: 150
     }, {
-        text: 'Phone',
-        dataIndex: 'phone',
-        flex: 1
+        text: '图标',
+        dataIndex: 'iconCls',
+        width: 150
+    }, {
+        text: '地址',
+        dataIndex: 'address',
+        width: 150,
+        sortable: false
     }]
 
 });

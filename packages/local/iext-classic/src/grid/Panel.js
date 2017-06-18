@@ -7,6 +7,8 @@ Ext.define('iExt.grid.Panel', {
     extend: 'Ext.grid.Panel',
     alias: 'widget.ixgrid',
 
+    cls: 'ix-grid',
+
     requires: [
         'Ext.ux.PreviewPlugin',
         'iExt.grid.column.Column',
@@ -72,7 +74,9 @@ Ext.define('iExt.grid.Panel', {
             var store;
             if (Ext.isString(ixstore)) {
                 // 绑定的数据源
-                me.setBind({ store: ixstore });
+                me.setBind({
+                    store: ixstore
+                });
                 store = ixstore;
             } else if (Ext.isObject(ixstore)) {
                 // 指定的数据源
@@ -84,7 +88,9 @@ Ext.define('iExt.grid.Panel', {
             }
             if (store && me.ixPageSize > 0) {
                 if (me.bbar) {
-                    Ext.apply(me.bbar, { ixStore: store });
+                    Ext.apply(me.bbar, {
+                        ixStore: store
+                    });
                 } else {
                     me.bbar = {
                         xtype: 'ixpagetbr',
@@ -131,9 +137,7 @@ Ext.define('iExt.grid.Panel', {
     applyIxFocus: function (focus) {
         var me = this;
         if (focus === false) {
-            me.cls = 'ix-grid-no-focus';
-        } else {
-            me.cls = 'ix-grid';
+            me.userCls = 'ix-grid-no-focus';
         }
         return focus;
     },
@@ -143,7 +147,8 @@ Ext.define('iExt.grid.Panel', {
      */
     applyIxPreviewField: function (field) {
         if (field) {
-            var me = this, plugin = me.getPlugin('preview');
+            var me = this,
+                plugin = me.getPlugin('preview');
             if (!plugin) {
                 me.plugins = me.plugins || [];
                 me.plugins.push({
@@ -170,7 +175,8 @@ Ext.define('iExt.grid.Panel', {
      * @memberOf iExt.grid.Panel#
      */
     ixRefresh: function () {
-        var me = this, store = me.getStore();
+        var me = this,
+            store = me.getStore();
         if (store) {
             store.reload({
                 callback: function (records, operation, success) {
