@@ -1,4 +1,6 @@
 .ix-stat-btn {
+    padding-top: 4px;
+    padding-bottom: 4px;
     .ix-stat-btn-value {
         color: #000;
         font-weight: bold;
@@ -9,35 +11,5 @@
         color: $base-color;
         line-height: 1.0;
         display: block;
-    }
-}
-
-.ix-stat-btn.x-btn-default-toolbar-large {
-    .ix-stat-btn-value {
-        font-size: 13px;
-        margin-bottom: 2px;
-    }
-    .ix-stat-btn-text {
-        font-size: 10px;
-    }
-}
-
-.ix-stat-btn.x-btn-default-toolbar-medium {
-    .ix-stat-btn-value {
-        font-size: 11px;
-        margin-bottom: 2px;
-    }
-    .ix-stat-btn-text {
-        font-size: 8px;
-    }
-}
-
-.ix-stat-btn.x-btn-default-toolbar-small {
-    .ix-stat-btn-value {
-        font-size: 9px;
-        margin-bottom: 2px;
-    }
-    .ix-stat-btn-text {
-        font-size: 6px;
     }
 }

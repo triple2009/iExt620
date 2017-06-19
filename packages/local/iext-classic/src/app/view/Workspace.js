@@ -19,7 +19,6 @@ Ext.define('iExt.app.view.Workspace', {
     controller: 'ixws',
 
     layout: 'border',
-    referenceHolder: true,
 
     config: {
         /**

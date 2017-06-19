@@ -33,7 +33,8 @@ Ext.define('iExt.action.Page', {
      */
     applyIxTarget: function (target) {
         if (Ext.isString(target)) {
-            target = iExt.action.PageTarget.ixGetValue(target);
+            target = iExt.action.PageTarget.ixGetValue(
+                target.toUpperCase());
         }
         return target;
     },

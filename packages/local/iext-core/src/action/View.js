@@ -40,7 +40,8 @@ Ext.define('iExt.action.View', {
      */
     applyIxTarget: function (target) {
         if (Ext.isString(target)) {
-            target = iExt.action.ViewTarget.ixGetValue(target);
+            target = iExt.action.ViewTarget.ixGetValue(
+                target.toUpperCase());
         }
         return target;
     },

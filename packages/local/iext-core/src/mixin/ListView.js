@@ -27,7 +27,11 @@ Ext.define('iExt.mixin.ListView', {
         /**
          * 缺省搜索条件
          */
-        ixFilters: null
+        ixFilters: null,
+        /**
+         * 快速查看视图名称
+         */
+        ixQuickView: null
     },
 
     /**

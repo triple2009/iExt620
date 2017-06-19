@@ -11,6 +11,7 @@ Ext.define('iExt.app.view.container.Base', {
 
     border: false,
     layout: 'fit',
+    referenceHolder: true,
 
     config: {
         /**

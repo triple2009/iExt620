@@ -77,6 +77,7 @@ Ext.define('app.view.odoo.Add', {
 
     items: [{
         xtype: 'ixform',
+        ixFormType: 'edit',
         width: 750,
 
         tbar: {

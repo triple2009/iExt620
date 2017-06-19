@@ -13,7 +13,7 @@ Ext.define('app.view.user.Search', {
         reference: 'txtEmail'
     }, {
         fieldLabel: 'Other 1',
-        xtype: 'combobox',
+        xtype: 'ixcombo',
         store: {
             type: 'ixenumsstore',
             ixEnumType: 'iExt.meta.Types'

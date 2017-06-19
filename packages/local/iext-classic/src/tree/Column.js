@@ -7,9 +7,13 @@ Ext.define('iExt.tree.Column', {
     extend: 'Ext.tree.Column',
     alias: 'widget.ixtreecol',
 
+    /**
+     * 重载对齐方式
+     * 原对齐'start'，目前存在问题
+     */
     align: 'left',
+    textAlign: 'left',
     sortable: false,
-    tooltipType: 'title',
-    textAlign: 'left'
+    tooltipType: 'title'
 
 });

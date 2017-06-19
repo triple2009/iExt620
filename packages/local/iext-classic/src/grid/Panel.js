@@ -51,7 +51,8 @@ Ext.define('iExt.grid.Panel', {
     columnLines: false,
     headerBorders: true,
     viewConfig: {
-        enableTextSelection: true
+        // 允许选择文本
+        //enableTextSelection: true
     },
 
     defaults: {
@@ -100,6 +101,10 @@ Ext.define('iExt.grid.Panel', {
             }
         }
 
+        var qv = me.getIxQuickView();
+        if (qv) {
+            me.on('itemclick', me._ixOnItemClick, me);
+        }
         me.callParent(arguments);
     },
 
@@ -122,10 +127,11 @@ Ext.define('iExt.grid.Panel', {
             me.selModel = {
                 type: 'checkboxmodel',
                 mode: multi === true ? 'MULTI' : 'SINGLE',
-                checkOnly: true,
+                // 只允许使用 checkbox 选择
+                // checkOnly: true,
                 listeners: {
                     selectionchange: {
-                        fn: me.ixOnSelectionChange,
+                        fn: me._ixOnSelectionChange,
                         scope: me
                     }
                 }
@@ -183,7 +189,7 @@ Ext.define('iExt.grid.Panel', {
                     if (success === true) {
                         var selModel = me.getSelectionModel();
                         var selections = me.getView().getSelection();
-                        me.ixOnSelectionChange(selModel, selections);
+                        me._ixOnSelectionChange(selModel, selections);
                     }
                 }
             });
@@ -214,13 +220,32 @@ Ext.define('iExt.grid.Panel', {
         }
     },
 
-    /**
-     * 数据选择变更事件处理
-     * 为了统一列表组件，触发自定义的事件
-     */
-    ixOnSelectionChange: function (sm, selections) {
-        if (this.hasListeners.ixselection) {
-            this.fireEvent('ixselection', this, selections);
+    privates: {
+
+        /**
+         * 数据选择变更事件处理
+         * 为了统一列表组件，触发自定义的事件
+         */
+        _ixOnSelectionChange: function (sm, selections) {
+            if (this.hasListeners.ixselection) {
+                this.fireEvent('ixselection', this, selections);
+            }
+        },
+
+        /**
+         * 快速查看
+         */
+        _ixOnItemClick: function (view, record, item, index, e, eOpts) {
+            var me = this,
+                qv = me.getIxQuickView();
+            if (qv) {
+                me.fireEvent('ixopenview', me, qv, {
+                    target: iExt.action.ViewTarget.QUICK,
+                    viewConfig: {
+                        ixRecord: record
+                    }
+                });
+            }
         }
     }
 

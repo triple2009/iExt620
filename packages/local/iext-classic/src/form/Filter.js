@@ -2,17 +2,19 @@
  * @class iExt.form.Filter
  * @extends {Ext.form.Panel} 
  * @classdesc 搜索表单控件。
+ * 该表单只用于定义搜索条件，不具备执行搜索的功能。
+ * 所以命名为 Filter，而不是命名为 Search。
  */
 Ext.define('iExt.form.Filter', {
     extend: 'Ext.form.Panel',
-    alias: 'widget.ixsearchform',
+    alias: 'widget.ixfilterform',
 
     mixins: [
         'iExt.mixin.FilterView'
     ],
 
     cls: 'ix-filter-form',
-    bodyPadding: '5 0 5 0',
+    bodyPadding: 5,
     border: false,
     header: false,
     title: '详细搜索',
@@ -22,7 +24,6 @@ Ext.define('iExt.form.Filter', {
     layout: 'column',
 
     defaults: {
-        anchor: '100%',
         columnWidth: 0.5,
         labelAlign: 'left',
         labelWidth: 80,

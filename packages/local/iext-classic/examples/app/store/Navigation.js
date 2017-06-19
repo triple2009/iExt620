@@ -2,100 +2,104 @@ Ext.define('app.store.Navigation', {
     extend: 'Ext.data.TreeStore',
     alias: 'store.navigation',
 
-    rootData: {
-        text: 'Ext JS',
-        expanded: true,
-        children: [
-            {
-                text: 'app',
-                children: [
-                    { leaf:true, text: 'Application.js' }
-                ]
-            },
-            {
-                text: 'button',
+    constructor: function (config) {
+        var me = this;
+
+        me.callParent([Ext.apply({
+            root: {
+                text: '全部',
+                id: 'all',
                 expanded: true,
-                children: [
-                    { leaf:true, text: 'Button.js' },
-                    { leaf:true, text: 'Cycle.js' },
-                    { leaf:true, text: 'Split.js' }
-                ]
-            },
+                children: me.getNavItems()
+            }
+        }, config)]);
+    },
+
+    addIconClasses: function (items) {
+        return items;
+    },
+
+    getNavItems: function () {
+        return this.addIconClasses([
             {
-                text: 'container',
+                text: '基础配置',
+                code: 'base',
+                expanded: true,
+                iconCls: 'x-fa fa-desktop',
                 children: [
-                    { leaf:true, text: 'ButtonGroup.js' },
-                    { leaf:true, text: 'Container.js' },
-                    { leaf:true, text: 'Viewport.js' }
-                ]
-            },
-            {
-                text: 'core',
-                children: [
+                    { code: 'system', text: '系统维护', leaf: true },
+                    { code: 'program', text: '程序维护', leaf: true },
                     {
-                        text: 'dom',
-                        children: [
-                            { leaf:true, text: 'Element.form.js' },
-                            { leaf:true, text: 'Element.static-more.js' }
-                        ]
+                        code: 'menu', text: '菜单维护',
+                        address: 'examples.view.menu.List', openType: 1, leaf: true
+                    },
+                    {
+                        code: 'baidu', text: '百度',
+                        address: 'https://www.baidu.com',
+                        target: 1,
+                        type: 4,
+                        leaf: true
+                    },
+                    {
+                        code: 'sina', text: '新浪',
+                        address: 'http://www.sina.com.cn',
+                        target: 2,
+                        type: 4,
+                        leaf: true
+                    },
+                    {
+                        code: 'sohu', text: '搜狐',
+                        address: 'http://www.sohu.com',
+                        target: 4,
+                        type: 4,
+                        leaf: true
                     }
                 ]
             },
             {
-                text: 'dd',
+                text: '用户管理',
+                code: 'users',
+                expanded: true,
+                iconCls: 'x-fa fa-edit',
                 children: [
-                    { leaf:true, text: 'DD.js' },
-                    { leaf:true, text: 'DDProxy.js' },
-                    { leaf:true, text: 'DDTarget.js' },
-                    { leaf:true, text: 'DragDrop.js' },
-                    { leaf:true, text: 'DragDropManager.js' },
-                    { leaf:true, text: 'DragSource.js' },
-                    { leaf:true, text: 'DragTracker.js' },
-                    { leaf:true, text: 'DragZone.js' },
-                    { leaf:true, text: 'DragTarget.js' },
-                    { leaf:true, text: 'DragZone.js' },
-                    { leaf:true, text: 'Registry.js' },
-                    { leaf:true, text: 'ScrollManager.js' },
-                    { leaf:true, text: 'StatusProxy.js' }
+                    {
+                        code: 'role', text: '角色维护',
+                        address: 'examples.view.role.List', leaf: true
+                    },
+                    {
+                        code: 'user', text: '用户维护',
+                        address: 'examples.view.user.List', target: 1, leaf: true
+                    }
                 ]
             },
             {
-                text: 'core',
+                text: '控件示例',
+                code: 'components',
+                expanded: true,
+                iconCls: 'x-fa fa-leanpub',
                 children: [
-                    { leaf:true, text: 'Element.alignment.js' },
-                    { leaf:true, text: 'Element.anim.js' },
-                    { leaf:true, text: 'Element.dd.js' },
-                    { leaf:true, text: 'Element.fx.js' },
-                    { leaf:true, text: 'Element.js' },
-                    { leaf:true, text: 'Element.position.js' },
-                    { leaf:true, text: 'Element.scroll.js' },
-                    { leaf:true, text: 'Element.style.js' },
-                    { leaf:true, text: 'Element.traversal.js' },
-                    { leaf:true, text: 'Helper.js' },
-                    { leaf:true, text: 'Query.js' }
-                ]
-            },
-            { leaf:true, text: 'Action.js' },
-            { leaf:true, text: 'Component.js' },
-            { leaf:true, text: 'Editor.js' },
-            { leaf:true, text: 'Img.js' },
-            { leaf:true, text: 'Layer.js' },
-            { leaf:true, text: 'LoadMask.js' },
-            { leaf:true, text: 'ProgressBar.js' },
-            { leaf:true, text: 'Shadow.js' },
-            { leaf:true, text: 'ShadowPool.js' },
-            { leaf:true, text: 'ZIndexManager.js' }
-        ]
-    },
-
-    constructor: function (config) {
-        // Since records claim the data object given to them, clone the data
-        // for each instance.
-        config = Ext.apply({
-            root: Ext.clone(this.rootData)
-        }, config);
-
-        this.callParent([config]);
+                    {
+                        code: 'gridedit', text: 'GridEdit',
+                        address: 'examples.view.component.grid.Edit', leaf: true
+                    },
+                    {
+                        code: 'multicombox', text: 'MultiCombox',
+                        address: 'examples.view.component.field.MultiCombox', leaf: true
+                    },
+                    {
+                        code: 'myhome', text: '首页',
+                        address: 'examples.view.home.Home', leaf: true
+                    },
+                    {
+                        code: 'report', text: '报表',
+                        address: 'examples.view.user.Report', leaf: true
+                    },
+                    {
+                        code: 'calendar', text: '日历',
+                        address: 'examples.view.component.calendar.Calendar', leaf: true
+                    }]
+            }
+        ]);
     }
 
 });

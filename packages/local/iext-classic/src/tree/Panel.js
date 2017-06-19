@@ -50,6 +50,7 @@ Ext.define('iExt.tree.Panel', {
     singleExpand: false,
     columnLines: false,
     rowLines: true,
+    animate: true,
 
     constructor: function (config) {
         var me = this;
@@ -128,7 +129,7 @@ Ext.define('iExt.tree.Panel', {
     /**
      * 节点复选事件处理。
      * @memberOf iExt.tree.Panel#
-     * @param {Object} node 触发事件的节点。
+     * @param {Ext.data.TreeModel} node 触发事件的节点。
      * @param {Boolean} checked 是否选中。
      * @param {Object} e 事件。
      * @param {Object} eOpts 事件参数。
@@ -204,13 +205,29 @@ Ext.define('iExt.tree.Panel', {
     /**
      * 单选数据事件处理。
      * @memberOf iExt.tree.Panel#
+     * @param {Ext.selection.Model} selected SelectionModel。
      * @param {Object} selected 选择的数据。
      * @param {Object} eOpts 事件参数。
      */
-    ixOnSelectionChange: function (selected, eOpts) {
+    ixOnSelectionChange: function (sm, selected, eOpts) {
         if (this.hasListeners.ixselection) {
-            this.fireEvent('ixselection', this, [selected]);
+            this.fireEvent('ixselection', this, selected);
         }
+    },
+
+    /**
+     * 获取选择的数据
+     */
+    ixGetSelectedData: function () {
+        var me = this,
+            data = [],
+            multi = me.getIxMulti();
+        if (multi === true) {
+            data = me.getChecked();
+        } else {
+            data = me.getSelection();
+        }
+        return data;
     },
 
     /**

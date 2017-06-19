@@ -12,7 +12,9 @@ Ext.define('iExt.align.List', {
      * @param {Ext.data.Model[]} data 数据
      */
     ixIsEnabled: function (isMulti, data) {
-        var me = this, enabled = true, mode = me.getIxMode();
+        var me = this,
+            enabled = true,
+            mode = me.getIxMode();
 
         // 如果未指定对齐方式直接返回true
         if (mode === null) {
@@ -38,7 +40,9 @@ Ext.define('iExt.align.List', {
         if (fn) {
             for (var i = 0; i < data.length; i++) {
                 enabled = fn(data[i]);
-                if (!enabled) { break; }
+                if (!enabled) {
+                    break;
+                }
             }
         }
         return enabled;
@@ -50,10 +54,11 @@ Ext.define('iExt.align.List', {
      * @return {Object[]} 
      */
     ixGetAlignData: function () {
-        var me = this, id = me.getIxTargetId();
+        var me = this,
+            id = me.getIxTargetId();
         // <debug>
         if (!id) {
-            Ext.log('action list get data... target id is undefined !');
+            iExt.log('列表对齐操作', '对齐的组件标识未定义！');
             return null;
         }
         // </debug>

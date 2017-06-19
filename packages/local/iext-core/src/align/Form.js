@@ -12,7 +12,9 @@ Ext.define('iExt.align.Form', {
      * @param {Ext.data.Model[]} data 数据
      */
     ixIsEnabled: function (isValid, data) {
-        var me = this, enabled = true, mode = me.getIxMode();
+        var me = this,
+            enabled = true,
+            mode = me.getIxMode();
 
         // 未指定数据验证，直接返回 true
         if (mode === null) {
@@ -33,7 +35,9 @@ Ext.define('iExt.align.Form', {
         if (fn) {
             for (var i = 0; i < data.length; i++) {
                 enabled = fn(data[i]);
-                if (!enabled) { break; }
+                if (!enabled) {
+                    break;
+                }
             }
         }
         return enabled;

@@ -7,13 +7,16 @@ Ext.define('app.view.user.Tree', {
     ],
 
     title: '用户树',
+    controller: {
+        type: 'ixlist'
+    },
 
     //autoLoad: true,
 
-    ixMultiSelect: true,
+    ixMulti: false,
     ixLeafOnly: false,
     ixService: 'menu',
-    ixNodeIcon: false,
+    //ixNodeIcon: true,
     ixStore: {
         type: 'navigation'
     },
@@ -64,10 +67,7 @@ Ext.define('app.view.user.Tree', {
                     listeners: {
                         click: function (item, e, eOpts) {
                             var data = item.getIxAlign().ixGetAlignData();
-                            iExt.View.ixOpenView(item, {
-                                xtype: 'ixqvform',
-                                ixRecord: data[0]
-                            }, 'quick');
+                            iExt.Toast.ixInfo(data[0].get('address'));
                         }
                     }
                 }, {
@@ -79,7 +79,7 @@ Ext.define('app.view.user.Tree', {
                     ixAlign: {
                         type: 'list',
                         ixMode: true,
-                        ixEnabledWhen: '"{name}"==="Worf"'
+                        ixEnabledWhen: '"{code}"==="system"'
                     },
                     listeners: {
                         click: function (item, e, eOpts) {
@@ -144,7 +144,7 @@ Ext.define('app.view.user.Tree', {
     }, {
         text: '地址',
         dataIndex: 'address',
-        width: 150,
+        flex: 1,
         sortable: false
     }]
 

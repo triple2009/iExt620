@@ -1,7 +1,7 @@
 ﻿/* 不合法组件的样式 */
 /* 设置不合法组件的边框与常规边框一致，避免界面杂乱 */
 $form-field-invalid-background-image: 'iext/invalid';
-$form-field-invalid-background-position: -1px -1px;
+$form-field-invalid-background-position: 0 0;
 $form-field-invalid-background-repeat: no-repeat;
 $form-field-invalid-border-color: dynamic($form-field-border-color);
-$form-field-focus-border-color: #7c7bad;
+$form-field-focus-border-color: #afafb6;

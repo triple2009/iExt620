@@ -15,6 +15,41 @@ Ext.define('iExt.mixin.FormView', {
 
     ixIsFormView: true,
 
+    config: {
+        /**
+         * 表单类型
+         * {iExt.app.view.FormTypes}
+         */
+        ixFormType: 'detail',
+        /**
+         * 表单规格
+         * {iExt.app.view.Scales}
+         */
+        ixScale: 'normal'
+    },
+
+    /**
+     * 根据字符串解析枚举值
+     */
+    applyIxFormType: function (formType) {
+        if (Ext.isString(formType)) {
+            formType = iExt.app.view.FormTypes.ixGetValue(
+                formType.toUpperCase());
+        }
+        return formType;
+    },
+
+    /**
+     * 根据字符串解析枚举值
+     */
+    applyIxScale: function (scale) {
+        if (Ext.isString(scale)) {
+            scale = iExt.app.view.Scales.ixGetValue(
+                scale.toUpperCase());
+        }
+        return scale;
+    },
+
     /**
      * 取消事件。
      * 关闭当前视图，可能是为获取到数据或者未经授权

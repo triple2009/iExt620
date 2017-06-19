@@ -14,7 +14,7 @@ Ext.define('iExt.form.Quick', {
     header: false,
     scrollable: 'y',
     defaultType: 'ixdisplay',
-    bodyPadding: '20 5 5 5',
+    bodyPadding: '10 5 5 5',
 
     fieldDefaults: {
         labelAlign: 'top'

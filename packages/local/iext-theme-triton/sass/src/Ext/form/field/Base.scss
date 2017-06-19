@@ -28,20 +28,32 @@
     content: "*";
 }
 
+
+/* 输入项标签和必须输入标签样式设置 */
+
 .ix-large {
     .x-form-item-label-default {
-        font-size: 20px;
+        font-size: 18px;
     }
     .ix-label-required {
-        font-size: 18px;
+        font-size: 16px;
     }
 }
 
 .ix-medium {
     .x-form-item-label-default {
-        font-size: 17px;
+        font-size: 16px;
     }
     .ix-label-required {
         font-size: 14px;
     }
+}
+
+
+/* 只读项样式设置 */
+
+.x-form-display-field-body {
+    vertical-align: bottom;
+    padding: 5px 10px 4px;
+    border-bottom: solid 1px #e9e9e9;
 }

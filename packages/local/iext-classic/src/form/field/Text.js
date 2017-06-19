@@ -8,6 +8,10 @@ Ext.define('iExt.form.field.Text', {
     alias: 'widget.ixtext',
 
     config: {
+        /**
+         * 输入框规格
+         * {String} 'larger/medium/small'
+         */
         ixScale: undefined
     },
 
