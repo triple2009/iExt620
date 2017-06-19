@@ -6,7 +6,8 @@
 Ext.define('iExt.form.field.Blank', {
     extend: 'Ext.form.field.Display',
     alias: 'widget.ixblank',
-
+    cls: 'ix-blank',
+    
     fieldStyle: 'margin-top: 0px'
 
 });

@@ -23,7 +23,7 @@ Ext.define('iExt.form.Panel', {
     defaults: {
         columnWidth: 0.5,
         labelAlign: 'left',
-        labelWidth: 80,
+        labelWidth: 100,
         msgTarget: 'title',
         margin: '5 5 5 5'
     },

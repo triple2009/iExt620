@@ -64,7 +64,7 @@ Ext.define('iExt.grid.Panel', {
         if (Ext.isEmpty(me.ixPageSize)) {
             me.ixPageSize = me.ixTheme.pageSize;
         }
-        me.callParent();
+        me.callParent(config);
     },
 
     initComponent: function () {

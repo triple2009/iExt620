@@ -115,19 +115,71 @@ Ext.define('app.view.odoo.Add', {
         },
 
         items: [{
-            xtype: 'ixtext',
             ixScale: 'large',
             fieldLabel: '代码',
             bind: '{user.code}',
             reference: 'code',
             allowBlank: false
         }, {
-            xtype: 'ixtext',
             ixScale: 'large',
             fieldLabel: '姓名',
             bind: '{user.name}',
             reference: 'name',
             allowBlank: false
+        }, {
+            fieldLabel: 'Columns',
+            xtype: 'ixcombo',
+            store: {
+                type: 'user'
+            },
+            pageSize: 5,
+            valueField: 'email',
+            displayField: 'name',
+            ixLines: 'all',
+            ixColumns: [{
+                dataIndex: 'name',
+                width: 100
+            }, {
+                dataIndex: 'email'
+            }]
+        }, {
+            fieldLabel: 'ItemTpl',
+            xtype: 'ixcombo',
+            store: {
+                type: 'user'
+            },
+            pageSize: 5,
+            valueField: 'email',
+            displayField: 'name',
+            ixItemTpl: [
+                '<div title="{name}: {email}">{name} ({phone})</div>'
+            ]
+        }, {
+            fieldLabel: 'TagColumns',
+            xtype: 'ixtag',
+            store: {
+                type: 'user'
+            },
+            pageSize: 5,
+            ixLines: 'all',
+            ixColumns: [{
+                dataIndex: 'name',
+                width: 100
+            }, {
+                dataIndex: 'email'
+            }]
+        }, {
+            fieldLabel: 'TagTpl',
+            xtype: 'ixtag',
+            store: {
+                type: 'user'
+            },
+            pageSize: 5,
+            valueField: 'email',
+            displayField: 'name',
+            ixItemTpl: [
+                '<div title="{name}: {email}">{name} ({phone})</div>'
+            ]
         }, {
             fieldLabel: '电话',
             bind: '{user.mobilePhone}',

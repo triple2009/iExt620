@@ -7,6 +7,8 @@ Ext.define('iExt.form.field.TagSearch', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.ixtagsearch',
 
+    cls: 'ix-tag-search',
+
     mixins: [
         'iExt.mixin.FilterView',
         'iExt.mixin.Action'
@@ -23,14 +25,13 @@ Ext.define('iExt.form.field.TagSearch', {
         ixScale: 'normal'
     },
 
-    cls: 'ix-tagsearch',
     hideTrigger: false,
     grow: false,
     editable: false,
     selectOnFocus: false,
     triggerOnClick: false,
     triggerCls: 'x-fa fa-search-plus',
-    pickerOffset: [0, -1],
+    pickerOffset: [0, 1],
     // autoselect=true，会自动检索下拉列表的数据
     autoSelect: false,
     emptyText: '搜索 ···',
@@ -63,7 +64,7 @@ Ext.define('iExt.form.field.TagSearch', {
             floating: true,
             header: false,
             shadow: false,
-            userCls: 'ix-tagsearch-picker',
+            userCls: 'ix-tag-search-picker',
             items: [{
                 xtype: me.getIxView()
             }],

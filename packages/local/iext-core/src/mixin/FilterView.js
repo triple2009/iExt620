@@ -2,7 +2,7 @@
  * @mixin iExt.mixin.FilterView
  * @extends {iExt.mixin.View} 
  * @classdesc iExt 筛选条件 MIXIN。
- * 该视图只用于定义删选条件，并不执行实际的搜索。
+ * 该视图只用于定义筛选条件，并不执行实际的搜索。
  */
 Ext.define('iExt.mixin.FilterView', {
     extend: 'iExt.mixin.View',

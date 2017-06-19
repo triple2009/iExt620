@@ -2,6 +2,7 @@
  * @mixin iExt.mixin.QuickSearch
  * @extends {Ext.Mixin} 
  * @classdesc iExt 快速搜索 MIXIN。
+ * 该视图定义筛选条件，并执行实际的搜索。
  */
 Ext.define('iExt.mixin.QuickSearch', {
     extend: 'Ext.Mixin',
