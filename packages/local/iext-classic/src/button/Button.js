@@ -95,6 +95,9 @@ Ext.define('iExt.button.Button', {
         }
     },
 
+    /**
+     * 重载 showMenu ，支持 menuOffset 功能。
+     */
     showMenu: function (clickEvent) {
         var me = this,
             menu = me.menu,
