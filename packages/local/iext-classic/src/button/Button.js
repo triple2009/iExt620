@@ -28,6 +28,8 @@ Ext.define('iExt.button.Button', {
         ixBadgeStyle: null
     },
 
+    ixMenuOffset: [0, 1],
+
     cls: 'ix-act-btn',
     menuAlign: 'tc-bc',
 
@@ -91,6 +93,29 @@ Ext.define('iExt.button.Button', {
             spanText.setStyle(style);
             me.updateLayout();
         }
+    },
+
+    showMenu: function (clickEvent) {
+        var me = this,
+            menu = me.menu,
+            isPointerEvent = !clickEvent || clickEvent.pointerType;
+
+        if (menu && me.rendered) {
+            if (me.tooltip && Ext.quickTipsActive && me.getTipAttr() !== 'title') {
+                Ext.tip.QuickTipManager.getQuickTip().cancelShow(me.el);
+            }
+            if (menu.isVisible()) {
+                if (isPointerEvent) {
+                    menu.hide();
+                } else {
+                    menu.focus();
+                }
+            } else if (!clickEvent || me.showEmptyMenu || menu.items.getCount() > 0) {
+                menu.autoFocus = !isPointerEvent;
+                menu.showBy(me.el, me.menuAlign, me.ixMenuOffset);
+            }
+        }
+        return me;
     }
 
 }, function (btnClass) {
