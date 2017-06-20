@@ -14,6 +14,31 @@ Ext.define('iExt.form.field.TagSearch', {
         'iExt.mixin.Action'
     ],
 
+    /**
+     * 可配置主题
+     * 可以在主题包中进行重载
+     */
+    ixTheme: {
+        scales: {
+            small: {
+                width: 240,
+                maxHeight: 320
+            },
+            normal: {
+                width: 560,
+                maxHeight: 420
+            },
+            medium: {
+                width: 640,
+                maxHeight: 480
+            },
+            large: {
+                width: 720,
+                maxHeight: 520
+            }
+        }
+    },
+
     config: {
         /**
          * 筛选条件视图
@@ -153,7 +178,7 @@ Ext.define('iExt.form.field.TagSearch', {
             me.ixMultiSelectItemTpl.set(html, true);
         }
         if (!me.ixMultiSelectItemTpl.isTemplate) {
-            me.ixMultiSelectItemTpl = this.lookupTpl('ixMultiSelectItemTpl');
+            me.ixMultiSelectItemTpl = me.lookupTpl('ixMultiSelectItemTpl');
         }
         return me.ixMultiSelectItemTpl.apply(me.valueCollection.getRange());
     },

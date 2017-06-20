@@ -257,16 +257,28 @@ Ext.define('iExt.app.view.Tab', {
             tbr._ixApps = false;
         },
 
+        /**
+         * 根据视图信息获取视图
+         */
+        _ixGetView: function (view, viewConfig) {
+            var cmp = view;
+            if (Ext.isString(view)) {
+                cmp = iExt.View.ixCreate(view, viewConfig);
+            } else if (view.isComponent !== true) {
+                cmp = Ext.apply(view, viewConfig);
+                cmp = Ext.create(cmp);
+            }
+            return cmp;
+        },
+
+        /**
+         * 在主工作区打开视图
+         */
         _ixMain: function (item, view, options) {
             var me = this,
                 refs = me.getReferences(),
-                main = refs.ixAppMain;
-
-            if (Ext.isString(view)) {
-                view = iExt.View.ixCreate(view, options.viewConfig);
-            } else if (view.isComponent !== true) {
-                view = Ext.create(view, options.viewConfig);
-            }
+                main = refs.ixAppMain,
+                view = me._ixGetView(view, options.viewConfig);
             if (view) {
                 main.ixAddView(view);
             }
@@ -275,12 +287,10 @@ Ext.define('iExt.app.view.Tab', {
         _ixQuick: function (item, view, options) {
             var me = this,
                 refs = me.getReferences(),
-                qv = refs.ixAppQuick;
+                qv = refs.ixAppQuick,
+                view = me._ixGetView(view, options.viewConfig);
 
             Ext.suspendLayouts();
-            if (Ext.isString(view)) {
-                view = iExt.View.ixCreate(view, options.viewConfig);
-            }
             if (view) {
                 qv.removeAll(true);
                 qv.add(view);
@@ -290,21 +300,28 @@ Ext.define('iExt.app.view.Tab', {
         },
 
         _ixWin: function (item, view, options) {
+            // ****组件在删除时要销毁 ixViewId 组件
             var winId = item.ixViewId;
             var win = Ext.getCmp(winId);
             if (!win) {
                 var me = this,
                     itemId = item.getId(),
                     options = options || {},
-                    formType = options.formType || 'search',
                     scale = options.scale || 'normal',
+                    formType = options.formType || 'search',
                     xtype = 'ix' + formType.toLowerCase() + 'win';
-
+                var fn = options.fn || Ext.emptyFn;
                 var winConfig = {
                     xtype: xtype,
                     closable: false,
                     closeAction: 'hide',
                     modal: true,
+                    listeners: {
+                        ixwinclose: {
+                            fn: fn,
+                            scope: item
+                        }
+                    },
                     //animateTarget: item,
                     ixEventItemId: itemId,
                     ixView: view

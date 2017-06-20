@@ -15,7 +15,7 @@ Ext.define('iExt.app.view.controller.Workspace', {
      */
     init: function (view) {
         //<debug>
-        iExt.log('初始化工作区', view.$className);
+        iExt.log('工作区初始化', view.$className);
 
         if (view.ixIsWorkspace !== true) {
             Ext.raise("关联的视图不是工作区视图！");

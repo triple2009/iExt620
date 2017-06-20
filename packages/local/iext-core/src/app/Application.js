@@ -60,7 +60,7 @@ Ext.define('iExt.app.Application', {
      */
     onBeforeLaunch: function () {
         //<debug>
-        iExt.log('准备加载应用程序', this.getName());
+        iExt.log('应用程序准备加载', this.getName());
         //</debug>
 
         var me = this;

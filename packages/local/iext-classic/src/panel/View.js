@@ -33,17 +33,13 @@ Ext.define('iExt.panel.View', {
 
     layout: 'fit',
 
-    constructor: function (config) {
-        var me = this;
-        if (Ext.isEmpty(me.ixPageSize)) {
-            me.ixPageSize = me.ixTheme.pageSize;
-        }
-        me.callParent();
-    },
-
     initComponent: function () {
         var me = this,
             ixstore = me.getIxStore();
+
+        if (Ext.isEmpty(me.ixPageSize)) {
+            me.ixPageSize = me.ixTheme.pageSize;
+        }
 
         me.minWidth = me.minWidth || me.ixTheme.minWidth;
         ixstore = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');

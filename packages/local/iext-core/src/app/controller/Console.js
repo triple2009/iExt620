@@ -13,7 +13,7 @@ Ext.define('iExt.app.controller.Console', {
      */
     init: function (app) {
         //<debug>
-        iExt.log('初始化控制台', app.getName());
+        iExt.log('控制台初始化', app.getName());
         //</debug>
 
         var me = this;

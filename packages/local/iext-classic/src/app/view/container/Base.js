@@ -29,7 +29,6 @@ Ext.define('iExt.app.view.container.Base', {
          * {String}
          */
         ixEventItemId: null,
-
         /**
          * 视图类名称或视图组件配置
          * {String|Object}
@@ -110,6 +109,14 @@ Ext.define('iExt.app.view.container.Base', {
             me.__ixCurrentView = component;
             me.ixSetView();
         }
+    },
+
+    /**
+     * 销毁处理，清除缓存的视图
+     */
+    onDestroy: function () {
+        this.callParent();
+        Ext.destroyMembers(this, '__ixCurrentView');
     }
 
 });

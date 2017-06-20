@@ -26,8 +26,8 @@ Ext.define('iExt.app.view.container.Search', {
      */
     ixRemoveFilter: function (filter) {
         var me = this;
-        if (me.__ixView) {
-            return me.__ixView.ixRemoveFilter(filter);
+        if (me.__ixCurrentView) {
+            return me.__ixCurrentView.ixRemoveFilter(filter);
         }
     },
 

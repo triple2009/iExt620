@@ -62,6 +62,7 @@ Ext.define('iExt.view.View', {
                 mode: multi === true ? 'SIMPLE' : 'SINGLE'
             };
         }
+        // 为何使用数组？
         this.callParent([config]);    
     },
 

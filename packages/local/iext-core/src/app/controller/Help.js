@@ -13,7 +13,7 @@ Ext.define('iExt.app.controller.Help', {
      */
     init: function (app) {
         //<debug>
-        iExt.log('初始化在线帮助', app.getName());
+        iExt.log('在线帮助初始化', app.getName());
         //</debug>
 
         var me = this;

@@ -13,7 +13,7 @@ Ext.define('iExt.app.controller.Main', {
      */
     init: function (app) {
         //<debug>
-        iExt.log('初始化应用程序', app.getName());
+        iExt.log('应用程序初始化', app.getName());
         //</debug>
 
         // 关闭 aria 警告信息

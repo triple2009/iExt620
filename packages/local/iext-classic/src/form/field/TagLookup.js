@@ -9,6 +9,19 @@ Ext.define('iExt.form.field.TagLookup', {
 
     cls: 'ix-tag-lookup',
 
+    /**
+     * 可配置主题
+     * 可以在主题包中进行重载
+     */
+    ixTheme: {
+        scales: {
+            normal: {
+                width: 600,
+                maxHeight: 300
+            }
+        }
+    },
+
     config: {
         /**
          * 参照视图

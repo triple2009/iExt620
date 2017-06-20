@@ -119,6 +119,19 @@ Ext.define('iExt.button.Button', {
             }
         }
         return me;
+    },
+
+    /**
+     * 销毁处理，清除缓存的视图
+     */
+    onDestroy: function () {
+        if (this.ixViewId) {
+            var cmp = Ext.getCmp(this.ixViewId);
+            if (cmp) {
+                cmp.destroy();
+            }
+        }
+        this.callParent();
     }
 
 }, function (btnClass) {

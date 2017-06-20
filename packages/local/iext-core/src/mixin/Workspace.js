@@ -24,6 +24,13 @@ Ext.define('iExt.mixin.Workspace', {
 
     /**
      * 打开视图
+     * @param {Ext.Component} item 打开视图的组件
+     * @param {String|Object} view 视图名称或对象
+     * @param {Object} options 选项
+     * target {iExt.action.ViewTarget} 打开目标
+     * viewConfig {Object} 视图配置信息
+     * formType {iExt.app.view.FormTypes} 表单类型
+     * scale {iExt.app.view.Scales} 视图规格
      */
     ixOpenView: iExt.unimplFn,
 

@@ -21,6 +21,11 @@ Ext.define('iExt.app.view.window.Base', {
         ixView: null,
 
         /**
+         * 视图规格
+         */
+        ixScale: 'normal',
+
+        /**
          * 返回的数据
          */
         ixReturn: null,
@@ -47,23 +52,22 @@ Ext.define('iExt.app.view.window.Base', {
     },
 
     /**
+     * 当前视图
+     * 添加子组件后设置为当前视图
+     */
+    __ixCurrentView: null,
+
+    /**
      * 设置视图
      */
     applyIxView: function (view) {
         var me = this;
         if (view) {
-            if (this.rendered) {
-                if (Ext.isString(view)) {
-                    view = iExt.View.ixCreate(view);
-                }
+            view = iExt.View.ixGetView(view);
+            if (me.rendered) {
                 me.removeAll();
                 me.add(view);
             } else {
-                if (Ext.isString(view)) {
-                    view = {
-                        xtype: view
-                    };
-                }
                 me.items = [];
                 me.items.push(view);
             }
@@ -73,24 +77,64 @@ Ext.define('iExt.app.view.window.Base', {
 
     initComponent: function () {
         var me = this;
-        me.fbar = {
-            xtype: 'toolbar',
-            items: me._ixGetButtons()
-        };
-        me.on('add', me._ixOnAdd);
-        me.on('show', me._ixOnShow, me);
-        me.on('beforeclose', me._ixOnBeforeClose, me);
+        // 设置工具栏
+        me.ixSetToolbar();
+        // 监听事件处理
+        me.on('add', me.ixOnAdd, me);
+        me.on('show', me.ixOnShow, me);
+        me.on('beforeclose', me.ixOnBeforeClose, me);
         me.callParent(arguments);
     },
 
     /**
-     * 获取缺省视图
-     * 添加渲染事件处理
+     * 设置容器的工具栏
      */
-    afterRender: function () {
-        var me = this;
+    ixSetToolbar: Ext.emptyFn,
 
-        me.callParent(arguments);
+    /**
+     * 设置当前视图
+     */
+    ixSetView: Ext.emptyFn,
+
+    /**
+     * 处理组件标题
+     */
+    ixOnAdd: function (panel, component, index, eOpts) {
+        if (component.isComponent === true && component.getTitle) {
+            var me = this,
+                title = component.getTitle();
+            var vm = this.getViewModel();
+            vm.ixSetTitle(title);
+            me.__ixCurrentView = component;
+            me.ixSetView();
+        }
+    },
+
+    /**
+     * 
+     */
+    ixOnShow: function (win, eOpts) {
+
+    },
+
+    /**
+     * 关闭前事件处理，
+     * 对于一些需要提示存在未保存数据的情况下进行处理
+     */
+    ixOnBeforeClose: function () {
+        var me = this;
+        me.ixOnClose();
+        return true;
+    },
+
+    /**
+     * 触发自定义的关闭事件 ixclose
+     */
+    ixOnClose: function () {
+        var me = this;
+        if (me.hasListeners.ixwinclose) {
+            me.fireEvent('ixwinclose', me, Ext.clone(me.getIxReturn()));
+        }
     },
 
     /**
@@ -98,78 +142,19 @@ Ext.define('iExt.app.view.window.Base', {
      */
     onDestroy: function () {
         this.callParent();
-        Ext.destroyMembers(this, '__ixView');
+        Ext.destroyMembers(this, '__ixCurrentView');
     },
 
-    privates: {
-
-        /**
-         * 设置视图信息，例如绑定视图的事件等
-         */
-        _ixSetView: function () {
-
-        },
-
-        /**
-         * 处理组件标题
-         */
-        _ixOnAdd: function (panel, component, index, eOpts) {
-            if (component.isComponent === true && component.getTitle) {
-                var me = this,
-                    title = component.getTitle();
-                var vm = this.getViewModel();
-                vm.ixSetTitle(title);
-                me.__ixView = component;
-                me._ixSetView();
-            }
-        },
-
-        /**
-         * 
-         */
-        _ixOnShow: function (win, eOpts) {
-
-        },
-
-        /**
-         * 获取视图的控制按钮
-         * 根据不同的视图，可以重载不同的操作按钮
-         */
-        _ixGetButtons: function () {
-            return [];
-        },
-
-        /**
-         * 关闭前事件处理，
-         * 对于一些需要提示存在未保存数据的情况下进行处理
-         */
-        _ixOnBeforeClose: function () {
-            var me = this;
-            me._ixOnClose();
-            return true;
-        },
-
-        /**
-         * 触发自定义的关闭事件 ixclose
-         */
-        _ixOnClose: function () {
-            var me = this;
-            if (me.hasListeners.ixwinclose) {
-                me.fireEvent('ixwinclose', me, Ext.clone(me.getIxReturn()));
-            }
-        },
-
-        /**
-         * 取消按钮的默认处理，可以被重载
-         * @param {Ext.Compomnent} item 触发事件的组件
-         * @param {Event} e 事件
-         * @param {Object} eOpts 事件选项
-         */
-        _ixOnCancel: function (item, e, eOpts) {
-            var me = this;
-            me.setIxReturn(null);
-            me.close();
-        }
+    /**
+     * 取消按钮的默认处理，可以被重载
+     * @param {Ext.Compomnent} item 触发事件的组件
+     * @param {Event} e 事件
+     * @param {Object} eOpts 事件选项
+     */
+    ixOnCancel: function (item, e, eOpts) {
+        var me = this;
+        me.setIxReturn(null);
+        me.close();
     }
 
 });

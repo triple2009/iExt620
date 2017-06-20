@@ -266,6 +266,19 @@ Ext.define('app.view.odoo.Add', {
                     Ext.defer(iExt.Toast.ixInfo, 100, null, [item.getValue()]);
                 }
             }
+        }, {
+            fieldLabel: 'LookupField',
+            xtype: 'ixlookupfield',
+            ixMulti: true,
+            ixValueField: 'name',
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
+            ixView: 'app-user-lookup'
         }]
     }]
 

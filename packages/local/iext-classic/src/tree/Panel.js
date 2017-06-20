@@ -52,17 +52,14 @@ Ext.define('iExt.tree.Panel', {
     rowLines: true,
     animate: true,
 
-    constructor: function (config) {
-        var me = this;
-        if (Ext.isEmpty(me.ixPageSize)) {
-            me.ixPageSize = me.ixTheme.pageSize;
-        }
-        me.callParent(config);
-    },
-
     initComponent: function () {
         var me = this,
             ixstore = me.getIxStore();
+
+        if (Ext.isEmpty(me.ixPageSize)) {
+            me.ixPageSize = me.ixTheme.pageSize;
+        }
+
         if (ixstore) {
             var store;
             if (Ext.isString(ixstore)) {

@@ -13,7 +13,7 @@ Ext.define('iExt.app.controller.Identity', {
      */
     init: function (app) {
         //<debug>
-        iExt.log('初始化身份认证', app.getName());
+        iExt.log('身份认证初始化', app.getName());
         //</debug>
 
         var me = this;
@@ -81,7 +81,7 @@ Ext.define('iExt.app.controller.Identity', {
      */
     ixOnLogoff: function () {
         //<debug>
-        iExt.log('调用退出系统');
+        iExt.log('应用程序退出');
         //</debug>
 
         var me = this;

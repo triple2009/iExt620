@@ -1,15 +1,15 @@
 /**
- * @class iExt.app.view.window.Search
+ * @class iExt.app.view.window.Lookup
  * @extends {iExt.app.view.window.Base} 
- * @classdesc iExt 详细搜索视图窗口类。
+ * @classdesc iExt 参照视图窗口类。
  */
-Ext.define('iExt.app.view.window.Search', {
+Ext.define('iExt.app.view.window.Lookup', {
     extend: 'iExt.app.view.window.Base',
-    alias: 'widget.ixsearchwin',
+    alias: 'widget.ixlookupwin',
 
-    maximizable: false,
+    maximizable: true,
     minimizable: false,
-    bodyPadding: '0 5 0 5',
+    bodyPadding: 0,
 
     /**
      * 缺省标题
@@ -30,10 +30,11 @@ Ext.define('iExt.app.view.window.Search', {
     ixSetView: function () {
         var me = this;
         if (me.__ixCurrentView) {
-            if (me.__ixCurrentView.ixIsFilterView !== true) {
-                Ext.raise('指定的视图不是搜索视图！');
+            if (me.__ixCurrentView.ixIsListView !== true) {
+                Ext.raise('指定的视图不是列表视图！');
             }
-            me.__ixCurrentView.on('ixvaliditychange', me._ixOnIxValidityChange, me);
+            me.__ixCurrentView.on('ixselection', me._ixOnIxSelection, me);
+            me.__ixMulti = me.__ixCurrentView.getIxMulti();
         }
     },
 
@@ -44,19 +45,10 @@ Ext.define('iExt.app.view.window.Search', {
          */
         _ixGetButtons: function () {
             var me = this;
-            return [{
-                text: '清空',
-                iconCls: 'x-fa fa-clipboard',
-                listeners: {
-                    click: {
-                        fn: me._ixOnClear,
-                        scope: me
-                    }
-                }
-            }, '->', {
+            return ['->', {
                 xtype: 'button',
                 text: '确定',
-                iconCls: 'x-fa fa-filter',
+                iconCls: 'x-fa fa-check',
                 reference: '__btnOk',
                 listeners: {
                     click: {
@@ -77,23 +69,19 @@ Ext.define('iExt.app.view.window.Search', {
             }];
         },
 
-        _ixOnIxValidityChange: function (item, valid) {
+        _ixOnIxSelection: function (sm, records) {
             var me = this,
-                enable = valid,
-                refs = me.getReferences();
-            var btnOk = refs.__btnOk;
+                enable,
+                refs = me.getReferences(),
+                btnOk = refs.__btnOk;
+            if (records && records.length > 0) {
+                if (records.length > 1 && me.__ixMulti === false) {
+                    enable = false;
+                } else {
+                    enable = true;
+                }
+            }
             btnOk.setDisabled(!enable);
-        },
-
-        /**
-         * 清除窗口内容的事件处理
-         * @param {Ext.Compomnent} item 触发事件的组件
-         * @param {Event} e 事件
-         * @param {Object} eOpts 事件选项
-         */
-        _ixOnClear: function (item, e, eOpts) {
-            var me = this;
-            me.__ixCurrentView.ixClear();
         },
 
         /**
@@ -105,14 +93,7 @@ Ext.define('iExt.app.view.window.Search', {
         _ixOnOk: function (item, e, eOpts) {
             var me = this;
             if (me.__ixCurrentView) {
-                var eventName = me.__ixCurrentView.ixEventName || 'ixsearch';
-                var filters = me.__ixCurrentView.ixGetFilters();
-                var itemId = me.getIxEventItemId();
-                // 获取搜索操作组件，触发 ixsearch 事件
-                var cmp = Ext.getCmp(itemId);
-                if (cmp) {
-                    cmp.fireEvent(eventName, cmp, filters);
-                }
+                me.setIxReturn(me.__ixCurrentView.ixGetSelectedData());
             }
             me.close();
         }

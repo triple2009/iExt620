@@ -101,7 +101,7 @@ Ext.define('iExt.panel.Kanban', {
             me.ixItemConfig = me.ixItemConfig || {};
             Ext.applyIf(me.ixItemConfig, me.ixTheme.itemConfig);
         }
-        me.callParent();
+        me.callParent([config]);
     },
 
     initComponent: function () {

@@ -8,19 +8,19 @@
     }
     .ix-line {
         /* 利用原x-boundlist-item的padding:10px，采用右边框方案 */
-        border-right: 1px solid #afafb6;
+        border-right: 1px solid #f0eeee;
     }
 }
 
 .ix-picker.ix-rows {
     .x-boundlist-item {
         border-width: 0;
-        border-bottom: 1px solid #afafb6;
+        border-bottom: 1px solid #f0eeee;
     }
 }
 
 .ix-picker.ix-cols {
-    /* 去掉边框，否则列线回出现一个像素的断点 */
+    /* 去掉边框(原组件存在一个像素的白色边框)，否则列线回出现一个像素的断点 */
     .x-boundlist-item {
         border-width: 0;
     }

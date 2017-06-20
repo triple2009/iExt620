@@ -1,1 +1,4 @@
-$panel-body-border-color: dynamic(#adadad);
+/* 设置此属性会导致 grid 的 body 带有边框
+   对于可变高度的 grid 来说，如果没有数据
+   会导致两条边框的重叠，所以先去掉该属性 */
+//$panel-body-border-color: dynamic(#adadad);

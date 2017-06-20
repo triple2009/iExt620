@@ -10,6 +10,10 @@ Ext.define('iExt.form.Quick', {
     cls: 'ix-quick-form',
     bodyCls: 'ix-quick-form-body',
 
+    mixins: [
+        'iExt.mixin.View'
+    ],
+
     viewModel: true,
     header: false,
     scrollable: 'y',

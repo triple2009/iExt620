@@ -7,6 +7,19 @@ Ext.define('iExt.form.field.TagBase', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.ixtagbase',
 
+    /**
+     * 可配置主题
+     * 可以在主题包中进行重载
+     */
+    ixTheme: {
+        /**
+         * 下拉组件的规格定义与窗口组件的定义应该不一致
+         * 所以对于下拉参照、下拉搜索提供单独的规格定义
+         * 宽度定义基本一致，主要区别应该在高度上。
+         */
+        scales: {}
+    },
+
     cls: 'ix-tag-base',
     hideTrigger: false,
     editable: false,
@@ -100,7 +113,7 @@ Ext.define('iExt.form.field.TagBase', {
     ixGetPickerConfig: function (view, viewType, scale) {
         var me = this,
             listConfig = me.listConfig || {},
-            size = iExt.View.ixGetScaleSize(viewType, scale);
+            size = me.ixTheme.scales[scale];
 
         if (size) {
             listConfig = Ext.applyIf(listConfig, {

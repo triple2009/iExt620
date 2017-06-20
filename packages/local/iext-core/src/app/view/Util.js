@@ -144,7 +144,7 @@ Ext.define('iExt.app.view.Util', {
         }
         //<debug>
         if (!size) {
-            iExt.log('未能获得尺寸信息', formType, scale);
+            iExt.warn('未能获得尺寸信息', formType, scale);
         }
         //</debug>
         return size;
@@ -180,8 +180,9 @@ Ext.define('iExt.app.view.Util', {
         },
         'lookup': {
             normal: {
-                width: 600,
-                maxHeight: 300
+                width: 640,
+                minHeight: 480,
+                maxHeight: 640
             }
         },
         'quick': {}

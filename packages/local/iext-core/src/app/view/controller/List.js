@@ -30,7 +30,7 @@ Ext.define('iExt.app.view.controller.List', {
      */
     ixOnViewInited: function (view, auths) {
         // <debug>
-        iExt.log('已初始化视图', view.$className, view.getId());
+        iExt.log('控制器完成视图初始化', view.$className, view.getId());
         // </debug>
 
         var me = this,

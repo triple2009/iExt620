@@ -100,7 +100,7 @@ Ext.define('iExt.app.view.controller.Base', {
     destroy: function () {
         var me = this;
         // <debug>
-        iExt.log('销毁控制器', this.$className, this.getId());
+        iExt.log('控制器销毁', this.$className, this.getId());
         // </debug>
         me.callParent();
     },
@@ -193,7 +193,7 @@ Ext.define('iExt.app.view.controller.Base', {
          */
         _ixInitUserAuth: function (view) {
             // <debug>
-            iExt.log('初始化用户授权', this.$className, this.getId());
+            iExt.log('用户授权初始化', this.$className, this.getId());
             // </debug>
 
             var me = this,

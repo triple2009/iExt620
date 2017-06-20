@@ -18,17 +18,52 @@ var iExt = iExt || {}; // jshint ignore:line
         },
 
         /**
-         * 输出日志信息
+         * 输出日志信息 Ext.log
+         * options :  String / Object (optional)
+         *      msg: The message to log (required).
+         *      level: One of: "error", "warn", "info" or "log" (the default is "log").
+         *      dump: An object to dump to the log as part of the message.
+         *      stack: True to include a stack trace in the log.
+         *      indent: Cause subsequent log statements to be indented one step.
+         *      outdent: Cause this and following statements to be one step less indented.
+         * message :  String... (optional)
+         *      The message to log (required unless specified in options object).
          */
         log: function () {
+            var msg = this.getMsg.apply(this, arguments);
+            Ext.log(msg);
+        },
+
+        /**
+         * 输出提示信息
+         */
+        info: function () {
+            var msg = this.getMsg.apply(this, arguments);
+            Ext.log({
+                level: 'info'
+            }, msg);
+        },
+
+        /**
+         * 输出警告信息
+         */
+        warn: function () {
+            var msg = this.getMsg.apply(this, arguments);
+            Ext.log({
+                level: 'warn'
+            }, msg);
+        },
+
+        getMsg: function () {
+            var msg = '';
             if (arguments.length > 0) {
                 var msg = '';
                 for (var i = 0; i < arguments.length; i++) {
                     var arg = arguments[i];
                     msg += arg + ' ... ';
                 }
-                Ext.log(msg);
             }
+            return msg;
         }
 
     });
