@@ -28,6 +28,11 @@ Ext.define('iExt.form.field.ComboBox', {
          */
         ixLines: 'none',
         /**
+         * 显示属性集合
+         * {Object[]}: [{dataIndex:'', ref:''},{...}]
+         */
+        ixDisplayFields: [],
+        /**
          * 缺省搜索条件
          */
         ixFilters: undefined
@@ -52,7 +57,6 @@ Ext.define('iExt.form.field.ComboBox', {
     displayField: 'text',
 
     minChars: 2,
-    pickerOffset: [0, 1],
     defaultListConfig: {
         cls: 'ix-picker'
     },
@@ -79,11 +83,26 @@ Ext.define('iExt.form.field.ComboBox', {
         var tpl = me.getIxItemTpl();
         var cols = me.getIxColumns();
         var lines = me.getIxLines();
-        var tplConfig = iExt.form.field.ComboBox.ixGetItemTplConfig(
-            tpl, cols, lines
-        );
+        var tplConfig = iExt.util.View.ixGetItemTplConfig(tpl, cols, lines);
         me.listConfig = Ext.applyIf(me.listConfig, tplConfig);
         me.callParent();
+    },
+
+    onValueCollectionEndUpdate: function () {
+        var  me  = this,
+            selectedRecords  =  me.valueCollection.getRange(),
+            selectedRecord  = selectedRecords[0];
+
+        me.callParent();
+        var displayFields = me.getIxDisplayFields();
+        var refHoder = me.lookupReferenceHolder(true);
+        //<debug>
+        if (!refHoder) {
+            Ext.raise('未找到 ReferenceHolder ！');
+            return;
+        }
+        var refs = refHoder.getReferences();
+        iExt.util.View.ixSetDisplayValue(selectedRecord , displayFields, refs);
     },
 
     getParams: function (queryString) {
@@ -121,48 +140,6 @@ Ext.define('iExt.form.field.ComboBox', {
             this.queryParam = 'filter';
         }
         return filters;
-    },
-
-    statics: {
-
-        /**
-         * 根据自定义模板、列集合、线型获取列表配置
-         */
-        ixGetItemTplConfig: function (tpl, cols, lines) {
-            var listConfig = {};
-            if (tpl) {
-                listConfig.itemTpl = tpl;
-            } else {
-                if (cols) {
-                    listConfig.cls = 'ix-picker';
-                    if (lines === 'row' || lines === 'all') {
-                        listConfig.cls += ' ix-rows';
-                    } else if (lines === 'col') {
-                        listConfig.cls += ' ix-cols';
-                    }
-                    var i = 1,
-                        item = '',
-                        total = cols.length;
-                    tpl = [];
-                    Ext.each(cols, function (col) {
-                        item = '<span class="ix-col';
-                        // 后续列加左边框线
-                        if (i < total && (lines === 'col' || lines === 'all')) {
-                            item += ' ix-line';
-                        }
-                        item += '"';
-                        if (col.width) {
-                            item += ' style="width:' + col.width + 'px;"';
-                        }
-                        item += '>{' + col.dataIndex + '}</span>'
-                        tpl.push(item);
-                        i++;
-                    });
-                    listConfig.itemTpl = tpl;
-                }
-            }
-            return listConfig;
-        }
     }
 
 });

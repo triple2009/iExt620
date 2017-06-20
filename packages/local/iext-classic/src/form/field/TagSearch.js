@@ -1,10 +1,10 @@
 /**
  * @class iExt.form.field.TagSearch
- * @extends {Ext.form.field.Tag} 
- * @classdesc iExt 筛选条件控件。
+ * @extends {iExt.form.field.TagBase} 
+ * @classdesc iExt 下拉筛选视图控件。
  */
 Ext.define('iExt.form.field.TagSearch', {
-    extend: 'Ext.form.field.Tag',
+    extend: 'iExt.form.field.TagBase',
     alias: 'widget.ixtagsearch',
 
     cls: 'ix-tag-search',
@@ -25,15 +25,9 @@ Ext.define('iExt.form.field.TagSearch', {
         ixScale: 'normal'
     },
 
-    hideTrigger: false,
     grow: false,
-    editable: false,
-    selectOnFocus: false,
-    triggerOnClick: false,
     triggerCls: 'x-fa fa-search-plus',
-    pickerOffset: [0, 1],
     // autoselect=true，会自动检索下拉列表的数据
-    autoSelect: false,
     emptyText: '搜索 ···',
 
     /*
@@ -58,27 +52,25 @@ Ext.define('iExt.form.field.TagSearch', {
 
     createPicker: function () {
         var me = this,
-            picker;
-        picker = me.picker = Ext.create({
+            picker, pickerCfg ,
+            view = me.getIxView(),
+            scale = me.getIxScale();
+
+        view =   {
             xtype: 'ixsearchcontainer',
-            floating: true,
-            header: false,
-            shadow: false,
             userCls: 'ix-tag-search-picker',
-            items: [{
-                xtype: me.getIxView()
-            }],
+            ixView: view,
             listeners: {
                 ixclose: {
                     fn: me._ixOnClose,
                     scope: me
                 }
-            },
-            // hack some methods
-            refresh: Ext.emptyFn,
-            getNavigationModel: Ext.emptyFn,
-            getSelectionModel: Ext.emptyFn
-        });
+            }
+        };
+
+        pickerCfg  = me.ixGetPickerConfig(view, 'search', scale);
+        picker  =  me.picker  =  Ext.widget(pickerCfg);
+
         return picker;
     },
 
@@ -93,14 +85,6 @@ Ext.define('iExt.form.field.TagSearch', {
         if (trigger) {
             trigger.setTooltip('筛选');
         }
-
-        var store = Ext.create('Ext.data.Store', {
-            proxy: {
-                type: 'memory',
-                reader: 'json'
-            }
-        });
-        me.store = store;
         me.valueField = 'value';
         me.displayField = 'text';
 
@@ -109,7 +93,7 @@ Ext.define('iExt.form.field.TagSearch', {
 
     /**
      * 重载关闭Tag时触发的处理过程，删除Store中的记录。
-     * @memberOf iExt.form.field.TagLabel#
+     * @memberOf iExt.form.field.TagSearch#
      * @param {Element} itemEl 关闭的标签对象。
      */
     removeByListItemNode: function (itemEl) {
@@ -125,13 +109,12 @@ Ext.define('iExt.form.field.TagSearch', {
                 me.setValue(me.store.getRange());
                 return;
             }
-            me.store.remove(rec);
         }
+        me.callParent(arguments);
         var filters = [];
         Ext.each(me.store.getRange(0), function (record) {
             filters.push(record.get('value'));
         });
-        me.callParent(arguments);
         me.fireEvent('ixsearch', me, filters);
     },
 

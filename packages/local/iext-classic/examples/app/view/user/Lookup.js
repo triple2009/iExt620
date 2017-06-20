@@ -2,7 +2,7 @@
  * This view is an example list of people.
  */
 Ext.define('app.view.user.Lookup', {
-    extend: 'iExt.grid.Panel',
+    extend: 'iExt.grid.Lookup',
     xtype: 'app-user-lookup',
 
     requires: [
@@ -11,14 +11,21 @@ Ext.define('app.view.user.Lookup', {
     ],
 
     title: '用户参照',
+    //header: false,
     controller: {
         type: 'ixlist'
     },
 
+    tbar: [{
+        xtype: 'ixtagsearch',
+        ixView: 'app-user-search',
+        flex: 1
+    }],
+
     ixStore: {
         type: 'user'
     },
-    //ixPageSize: 5,
+    ixPageSize: 5,
 
     columns: [{
         text: 'Name',
@@ -26,10 +33,6 @@ Ext.define('app.view.user.Lookup', {
     }, {
         text: 'Email',
         dataIndex: 'email',
-        flex: 1
-    }, {
-        text: 'Phone',
-        dataIndex: 'phone',
         flex: 1
     }]
 });

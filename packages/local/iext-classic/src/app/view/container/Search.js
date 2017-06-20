@@ -9,82 +9,15 @@ Ext.define('iExt.app.view.container.Search', {
 
     requires: [],
 
-    bodyPadding: '0 5 0 5',
     layout: 'auto',
     scrollable: 'y',
-    ixDefaultTitle: '搜索',
-    referenceHolder: true,
-
-    config: {
-        /**
-         * 调用该窗口的组件
-         * {String}
-         */
-        ixEventItemId: null,
-
-        /**
-         * 视图类名称或视图组件配置
-         * {String|Object}
-         */
-        ixView: null,
-        /**
-         * 视图规格
-         */
-        ixScale: 'normal'
-    },
+    title: '搜索',
+    bodyPadding: '0 5 0 5',
 
     /**
-     * 缺省标题
-     * 由于title属性用于绑定，不能直接设置标题？
-     * 需要验证绑定属性的赋值操作？
+     * 视图类型
      */
-    ixDefaultTitle: '搜索',
-
-    /**
-     * 设置视图
-     */
-    applyIxView: function (view) {
-        var me = this;
-        if (view) {
-            if (this.rendered) {
-                if (Ext.isString(view)) {
-                    view = iExt.View.ixCreate(view);
-                }
-                me.removeAll();
-                me.add(view);
-            } else {
-                if (Ext.isString(view)) {
-                    view = {
-                        xtype: view
-                    };
-                }
-                me.items = [];
-                me.items.push(view);
-            }
-        }
-        return view;
-    },
-
-    applyIxScale: function (scale) {
-        var me = this;
-        if (scale) {
-            var size = iExt.View.ixGetScaleSize('search', scale);
-            if (size) {
-                Ext.applyIf(me, size);
-            }
-        }
-        return scale;
-    },
-
-    initComponent: function () {
-        var me = this;
-        me.fbar = {
-            xtype: 'toolbar',
-            items: me._ixGetButtons()
-        };
-        me.on('add', me._ixOnAdd);
-        me.callParent();
-    },
+    ixViewType: 'search',
 
     /**
      * TagSearch 同步删除条件
@@ -98,31 +31,31 @@ Ext.define('iExt.app.view.container.Search', {
         }
     },
 
+    /**
+     * 设置容器的工具栏
+     */
+    ixSetToolbar: function () {
+        var me = this;
+        me.fbar = {
+            xtype: 'toolbar',
+            items: me._ixGetButtons()
+        };
+    },
+
+    /**
+     * 设置当前视图
+     */
+    ixSetView: function () {
+        var me = this;
+        if (me.__ixCurrentView) {
+            if (me.__ixCurrentView.ixIsFilterView !== true) {
+                Ext.raise('指定的视图不是搜索视图！');
+            }
+            me.__ixCurrentView.on('ixvaliditychange', me._ixOnIxValidityChange, me);
+        }
+    },
+
     privates: {
-
-        /**
-         * 处理组件标题
-         */
-        _ixOnAdd: function (panel, component, index, eOpts) {
-            if (component.isComponent === true && component.getTitle) {
-                var me = this,
-                    title = component.getTitle();
-                var vm = this.getViewModel();
-                vm.ixSetTitle(title);
-                me.__ixView = component;
-                me._ixSetView();
-            }
-        },
-
-        _ixSetView: function () {
-            var me = this;
-            if (me.__ixView) {
-                if (me.__ixView.ixIsFilterView !== true) {
-                    Ext.raise('指定的视图不是搜索视图！');
-                }
-                me.__ixView.on('ixvaliditychange', me._ixOnIxValidityChange, me);
-            }
-        },
 
         /**
          * 获取搜索的处理按钮
@@ -189,7 +122,7 @@ Ext.define('iExt.app.view.container.Search', {
          */
         _ixOnClear: function (item, e, eOpts) {
             var me = this;
-            me.__ixView.ixClear();
+            me.__ixCurrentView.ixClear();
         },
 
         /**
@@ -199,9 +132,10 @@ Ext.define('iExt.app.view.container.Search', {
          * @param {Object} eOpts 事件选项
          */
         _ixOnOk: function (item, e, eOpts) {
-            var me = this, filters = null;
-            if (me.__ixView) {
-                filters = me.__ixView.ixGetFilters();
+            var me = this,
+                filters = null;
+            if (me.__ixCurrentView) {
+                filters = me.__ixCurrentView.ixGetFilters();
             }
             me.fireEvent('ixclose', me, filters);
         }

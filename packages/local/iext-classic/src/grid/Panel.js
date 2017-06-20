@@ -48,6 +48,14 @@ Ext.define('iExt.grid.Panel', {
         ixPreviewField: null
     },
 
+    /**
+     * 分页栏缺省配置
+     */
+    ixPagingConfig: {
+        displayInfo: true,
+        ixLastInfo: true
+    },
+
     columnLines: false,
     headerBorders: true,
     viewConfig: {
@@ -59,17 +67,13 @@ Ext.define('iExt.grid.Panel', {
         xtype: 'ixcol'
     },
 
-    constructor: function (config) {
-        var me = this;
-        if (Ext.isEmpty(me.ixPageSize)) {
-            me.ixPageSize = me.ixTheme.pageSize;
-        }
-        me.callParent(config);
-    },
-
     initComponent: function () {
         var me = this,
             ixstore = me.getIxStore();
+
+        if (Ext.isEmpty(me.ixPageSize)) {
+            me.ixPageSize = me.ixTheme.pageSize;
+        }
 
         if (ixstore) {
             var store;
@@ -91,12 +95,12 @@ Ext.define('iExt.grid.Panel', {
                 if (me.bbar) {
                     Ext.apply(me.bbar, {
                         ixStore: store
-                    });
+                    }, me.ixPagingConfig);
                 } else {
-                    me.bbar = {
+                    me.bbar = Ext.apply({
                         xtype: 'ixpagetbr',
                         ixStore: store
-                    };
+                    }, me.ixPagingConfig);
                 }
             }
         }
@@ -117,7 +121,9 @@ Ext.define('iExt.grid.Panel', {
      */
     bindStore: function (store, initial) {
         var me = this;
-        store.setPageSize(me.ixPageSize);
+        if (store) {
+            store.setPageSize(me.ixPageSize);
+        }
         me.callParent(arguments);
     },
 
@@ -131,7 +137,7 @@ Ext.define('iExt.grid.Panel', {
                 // checkOnly: true,
                 listeners: {
                     selectionchange: {
-                        fn: me._ixOnSelectionChange,
+                        fn: me.ixOnSelectionChange,
                         scope: me
                     }
                 }
@@ -189,7 +195,7 @@ Ext.define('iExt.grid.Panel', {
                     if (success === true) {
                         var selModel = me.getSelectionModel();
                         var selections = me.getView().getSelection();
-                        me._ixOnSelectionChange(selModel, selections);
+                        me.ixOnSelectionChange(selModel, selections);
                     }
                 }
             });
@@ -220,17 +226,17 @@ Ext.define('iExt.grid.Panel', {
         }
     },
 
-    privates: {
+    /**
+     * 数据选择变更事件处理
+     * 为了统一列表组件，触发自定义的事件
+     */
+    ixOnSelectionChange: function (sm, selections) {
+        if (this.hasListeners.ixselection) {
+            this.fireEvent('ixselection', this, selections);
+        }
+    },
 
-        /**
-         * 数据选择变更事件处理
-         * 为了统一列表组件，触发自定义的事件
-         */
-        _ixOnSelectionChange: function (sm, selections) {
-            if (this.hasListeners.ixselection) {
-                this.fireEvent('ixselection', this, selections);
-            }
-        },
+    privates: {
 
         /**
          * 快速查看

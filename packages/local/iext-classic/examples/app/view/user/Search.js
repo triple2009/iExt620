@@ -6,14 +6,15 @@ Ext.define('app.view.user.Search', {
 
     items: [{
         fieldLabel: '代码',
-        reference: 'txtName',
-        allowBlank: false
+        //allowBlank: false,
+        reference: 'txtName'
     }, {
         fieldLabel: '邮箱',
         reference: 'txtEmail'
     }, {
         fieldLabel: 'Other 1',
         xtype: 'ixcombo',
+        multiSelect: true,
         store: {
             type: 'ixenumsstore',
             ixEnumType: 'iExt.meta.Types'

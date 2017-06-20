@@ -14,36 +14,56 @@ Ext.define('iExt.app.view.Util', {
     /**
      * 创建视图对象。
      * @memberOf iExt.app.view.Util#
-     * @param {String} viewName 视图名称。
+     * @param {String|Object} view 视图名称或者视图对象。
      * @param {Object} config 视图的配置信息。
-     * @return {Ext.Component} 创建的视图对象。
+     * @return {Ext.Component} 创建的视图组件。
      */
-    ixCreate: function (viewName, config) {
-        if (!viewName) {
+    ixCreate: function (view, config) {
+        if (!view) {
             Ext.raise('请指定要创建的视图！');
             return null;
         }
-        var view = null;
+        var cmp = null;
 
-        if (viewName.indexOf('.') < 0) {
-            // 使用的是别名
-            var alias = 'widget.' + viewName;
-            var className = Ext.ClassManager.getNameByAlias(alias);
-            if (!className) {
-                Ext.raise('指定的视图 [' + viewName + '] 不存在！');
+        if (Ext.isString(view)) {
+            if (view.indexOf('.') < 0) {
+                // 使用的是别名
+                var alias = 'widget.' + view;
+                var className = Ext.ClassManager.getNameByAlias(alias);
+                if (!className) {
+                    Ext.raise('指定的视图 [' + view + '] 不存在！');
+                } else {
+                    cmp = Ext.widget(view, config);
+                }
             } else {
-                view = Ext.widget(viewName, config);
+                // 使用的是完整类名
+                var viewClass = Ext.ClassManager.get(view);
+                if (!viewClass) {
+                    Ext.raise('指定的视图 [' + view + '] 不存在！');
+                } else {
+                    cmp = Ext.create(view, config);
+                }
             }
         } else {
-            // 使用的是完整类名
-            var viewClass = Ext.ClassManager.get(viewName);
-            if (!viewClass) {
-                Ext.raise('指定的视图 [' + viewName + '] 不存在！');
-            } else {
-                view = Ext.create(viewName, config);
-            }
+            cmp = Ext.widget(view, config);
         }
 
+        return cmp;
+    },
+
+    /**
+     * 根据视图信息获取视图对象
+     * @param {String|Object} view 视图信息
+     * @param {Object} viewConfig 视图信息
+     * @return {Object} 视图对象
+     */
+    ixGetView: function (view, viewConfig) {
+        if (Ext.isString(view)) {
+            view = {
+                xtype: view
+            };
+        }
+        view = Ext.apply(view, viewConfig);
         return view;
     },
 
@@ -109,33 +129,62 @@ Ext.define('iExt.app.view.Util', {
         clear(component.items);
     },
 
-
-    ixScaleSizes: {
-        'add': {
-
-        },
-        'edit': {},
-        'detail': {},
-        'search': {
-            small: { width: 240, maxHeight: 320 },
-            normal: { width: 560, maxHeight: 420 },
-            medium: { width: 640, maxHeight: 480 },
-            large: { width: 720, maxHeight: 520 }
-        },
-        'lookup': {}
-    },
-
     /**
      * 根据表单类型和规格获取尺寸配置
      * @param {iExt.app.view.FormTypes} formType 表单类型
      * @param {iExt.app.view.Scales} scale 规格
      */
     ixGetScaleSize: function (formType, scale) {
-        var type = formType.toLowerCase();
+        formType = formType.toLowerCase();
         scale = scale || 'normal';
-        var size = scale.toLowerCase();
+        scale = scale.toLowerCase();
+        var size;
+        if (this.ixScaleSizes[formType]) {
+            size = this.ixScaleSizes[formType][scale];
+        }
+        //<debug>
+        if (!size) {
+            iExt.log('未能获得尺寸信息', formType, scale);
+        }
+        //</debug>
+        return size;
+    },
 
-        return this.ixScaleSizes[type][size];
+    /**
+     * 规格尺寸定义
+     */
+    ixScaleSizes: {
+        'list': {},
+        'add': {
+
+        },
+        'edit': {},
+        'detail': {},
+        'search': {
+            small: {
+                width: 240,
+                maxHeight: 320
+            },
+            normal: {
+                width: 560,
+                maxHeight: 420
+            },
+            medium: {
+                width: 640,
+                maxHeight: 480
+            },
+            large: {
+                width: 720,
+                maxHeight: 520
+            }
+        },
+        'lookup': {
+            normal: {
+                width: 600,
+                maxHeight: 300
+            }
+        },
+        'quick': {}
     }
 
 });

@@ -119,6 +119,7 @@ Ext.define('app.view.odoo.Add', {
             fieldLabel: '代码',
             bind: '{user.code}',
             reference: 'code',
+            vtype: 'code',
             allowBlank: false
         }, {
             ixScale: 'large',
@@ -135,6 +136,13 @@ Ext.define('app.view.odoo.Add', {
             pageSize: 5,
             valueField: 'email',
             displayField: 'name',
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
             ixLines: 'all',
             ixColumns: [{
                 dataIndex: 'name',
@@ -148,6 +156,13 @@ Ext.define('app.view.odoo.Add', {
             store: {
                 type: 'user'
             },
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
             pageSize: 5,
             valueField: 'email',
             displayField: 'name',
@@ -156,11 +171,18 @@ Ext.define('app.view.odoo.Add', {
             ]
         }, {
             fieldLabel: 'TagColumns',
-            xtype: 'ixtag',
+            xtype: 'ixtagfield',
             store: {
                 type: 'user'
             },
             pageSize: 5,
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
             ixLines: 'all',
             ixColumns: [{
                 dataIndex: 'name',
@@ -170,7 +192,14 @@ Ext.define('app.view.odoo.Add', {
             }]
         }, {
             fieldLabel: 'TagTpl',
-            xtype: 'ixtag',
+            xtype: 'ixtagfield',
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
             store: {
                 type: 'user'
             },
@@ -181,20 +210,62 @@ Ext.define('app.view.odoo.Add', {
                 '<div title="{name}: {email}">{name} ({phone})</div>'
             ]
         }, {
+            fieldLabel: 'LookupMulti',
+            xtype: 'ixtaglookup',
+            valueField: 'email',
+            displayField: 'name',
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
+            ixView: 'app-user-lookup'
+        }, {
+            fieldLabel: 'LookupSingle',
+            xtype: 'ixlookuppicker',
+            ixMulti: true,
+            ixValueField: 'name',
+            ixDisplayFields: [{
+                dataIndex: 'name',
+                ref: 'userName'
+            }, {
+                dataIndex: 'email',
+                ref: 'mobilePhone'
+            }],
+            ixView: 'app-user-lookup'
+        }, {
             fieldLabel: '电话',
             bind: '{user.mobilePhone}',
             reference: 'mobilePhone'
-        }, {
-            fieldLabel: '名称',
-            bind: '{user.userName}',
-            reference: 'userName'
         }, {
             fieldLabel: '密码',
             bind: '{user.password}',
             reference: 'password'
         }, {
+            fieldLabel: '名称',
+            bind: '{user.userName}',
+            reference: 'userName'
+        }, {
             fieldLabel: '确认',
             reference: 'repwd'
+        }, {
+            fieldLabel: 'Multi',
+            xtype: 'ixmulticombo',
+            ixBit: true,
+            valueField: 'value',
+            displayField: 'text',
+            store: {
+                type: 'ixenumsstore',
+                ixEnumType: 'iExt.meta.Types'
+            },
+            listeners: {
+                change: function (item, newValue, oldValue, eOpts) {
+                    //iExt.Toast.ixInfo(item.getValue());
+                    Ext.defer(iExt.Toast.ixInfo, 100, null, [item.getValue()]);
+                }
+            }
         }]
     }]
 

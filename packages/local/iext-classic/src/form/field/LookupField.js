@@ -1,40 +1,42 @@
 /**
  * @class iExt.form.field.LookupField
- * @extends {Ext.form.field.Text}
+ * @extends {Ext.form.field.Picker}
  * @classdesc iExt 参照文本框。
  */
 Ext.define('iExt.form.field.LookupField', {
-    extend: 'Ext.form.field.Text',
+    extend: 'Ext.form.field.Picker',
     alias: 'widget.ixlookupfield',
 
     cls: 'ix-lookup-field',
 
     config: {
-        ixView: undefined,
-        ixAllowBlank: false,
-        ixMultiSelect: false,
-        ixFields: undefined
+        /**
+         * 参照视图
+         */
+        ixView: null,
+        /**
+         * 视图规格
+         */
+        ixScale: 'normal'
     },
 
     ixDelimiter: ',',
 
+    defaultListConfig: {
+        cls: 'ix-picker'
+    },
+
     initComponent: function () {
-        var me = this,
-            triggers = {
+        var me = this;
+        if (me.readOnly !== true) {
+            var triggers = {
                 lookup: {
                     cls: 'x-fa fa-ellipsis-h',
                     handler: me.ixOnLookup.bind(me)
                 }
             };
-
-        if (me.getIxAllowBlank()) {
-            triggers.clear = {
-                cls: 'x-fa fa-remove',
-                handler: me.ixClearValue.bind(me)
-            };
+            me.setTriggers(triggers);
         }
-
-        me.setTriggers(triggers);
         me.callParent(arguments);
     },
 
@@ -43,7 +45,7 @@ Ext.define('iExt.form.field.LookupField', {
             view = this.getIxView(),
             multi = me.getIxMultiSelect();
         if (view) {
-            var target = iExt.app.view.ViewTarget.LOOKUP;
+            var target = iExt.app.view.ViewTarget.MAIN;
             me.fireEvent('ixopenview', me, target, view, {
                 ixMultiSelect: multi
             });
@@ -51,93 +53,72 @@ Ext.define('iExt.form.field.LookupField', {
         e.stopPropagation();
     },
 
-    ixSetValue: function (data) {
-        var me = this,
-            i = 0,
-            j = 0,
-            multi = me.getIxMultiSelect(),
-            fields = me.getIxFields();
+    privates: {
 
-        //<debug>
-        if (!fields) {
-            Ext.raise('LookupField：未指定参照的属性信息！');
-            return;
-        }
-        //</debug>
-        if (Ext.isString(fields)) {
-            fields = [{
-                ixName: me.name,
-                ixProperty: fields
-            }];
-        }
-        var vals = {};
-        for (i = 0; i < fields.length; i++) {
-            var field = fields[i];
-            var propVals = '';
-            for (j = 0; j < data.length; j++) {
-                if (j > 0) {
-                    if (multi === true) {
-                        propVals += me.ixDelimiter;
-                    } else {
-                        break;
-                    }
-                }
-                propVals += data[j].data[field.ixProperty];
+        /**
+         * 数据选择事件处理
+         */
+        _ixOnSelection: function (sm, records) {
+            if (!records || !Ext.isArray(records)) {
+                return;
             }
-            vals[field.ixName] = propVals;
-        }
-        var parent = me.findParentByType('panel');
-        if (!parent) {
-            Ext.raise('LookupField：未能找到参照控件所在的Panel！');
-            return;
-        }
-        var p, items;
-        for (p in vals) {
-            if (vals.hasOwnProperty(p)) {
-                items = parent.query('[name=' + p + ']');
-                if (items.length === 0) {
-                    Ext.raise('LookupField：未能找到 name=' + p + ' 的控件！');
-                    return;
-                }
-                for (i = 0; i < items.length; i++) {
-                    if (items[i].setValue) {
-                        items[i].setValue(vals[p]);
-                    }
-                }
+            if (records.length === 0) {
+                return;
             }
-        }
-    },
+            var me = this,
+                record = records[0],
+                valueField = me.getIxValueField(),
+                displayFields = me.getIxDisplayFields() || [],
+                multi = me.getIxMulti();
 
-    ixClearValue: function () {
-        var me = this,
-            fields = me.getIxFields || [];
+            var vals = '',
+                disp = '',
+                disps = {};
 
-        if (Ext.isString(fields)) {
-            fields = [{
-                ixName: me.name,
-                ixProperty: fields
-            }];
-        }
-
-        if (fields.length > 0) {
-            fields.forEach(function (field) {
-                var cmp = me.up().query('[name=' + field.ixName + ']')[0];
-                if (cmp && cmp.setValue) {
-                    cmp.setValue(null);
-                }
+            Ext.each(records, function (record) {
+                vals += record.get(valueField) + me.ixDelimiter;
+                Ext.each(displayFields, function (field) {
+                    //<debug>
+                    if (!field.dataIndex) {
+                        Ext.raise('未指定显示属性的 dataIndex ！');
+                        return;
+                    }
+                    if (!field.ref) {
+                        Ext.raise('未指定显示属性的 ref ！');
+                        return;
+                    }
+                    //</debug>
+                    disp = record.get(field.dataIndex) || '';
+                    disps[field.ref] = disps[field.ref] || '';
+                    disps[field.ref] += disp + me.ixDelimiter;
+                });
             });
-        } else {
-            me.setValue(null);
-        }
+            vals = vals.substr(0, vals.length - 1);
+            me.setValue(vals);
 
-        if (me.hasListeners.ixdataclear) {
-            me.fireEvent('ixdataclear', this);
-        }
-    },
+            // 设置显示属性值
+            var refHoder = me.lookupReferenceHolder(true);
+            //<debug>
+            if (!refHoder) {
+                Ext.raise('未找到 ReferenceHolder ！');
+                return;
+            }
+            var refs = refHoder.getReferences();
+            //</debug>
+            for (p in disps) {
+                if (disps.hasOwnProperty(p)) {
+                    var ref = refs[p];
+                    //<debug>
+                    if (!ref) {
+                        Ext.raise('未找到引用的控件 [' + p + '] ！');
+                        return;
+                    }
+                    vals = disps[p];
+                    vals = vals.substr(0, vals.length - 1);
+                    ref.setValue(vals);
+                }
+            }
 
-    onDestroy: function () {
-        this.callParent();
-        Ext.destroyMembers(this, '__ixWin');
+        }
     }
-
 });

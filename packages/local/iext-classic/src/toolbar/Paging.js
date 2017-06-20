@@ -13,7 +13,7 @@ Ext.define('iExt.toolbar.Paging', {
 
     cls: 'ix-page-tbr',
     dock: 'bottom',
-    displayInfo: true,
+    displayInfo: false,
 
     defaults: {
         tooltipType: 'title'
@@ -25,18 +25,26 @@ Ext.define('iExt.toolbar.Paging', {
          */
         ixStore: null
     },
+    
+    /**
+     * 上次更新时间
+     */
+    ixLastInfo: true,
 
     applyIxStore: function (ixstore) {
         if (ixstore) {
-            var me = this, store;
+            var me = this,
+                store;
             if (Ext.isString(ixstore)) {
                 // 绑定的数据源
-                me.setBind({ store: ixstore });
+                me.setBind({
+                    store: ixstore
+                });
             } else if (Ext.isObject(ixstore)) {
                 // 指定的数据源
                 me.store = ixstore;
             }
-            if (me.displayInfo === true) {
+            if (me.ixLastInfo === true) {
                 me.on('change', iExt.toolbar.Paging.ixOnChange);
             }
         }
@@ -58,8 +66,9 @@ Ext.define('iExt.toolbar.Paging', {
          * 添加自定义的组件
          */
         _ixAddItems: function () {
-            var me = this, idx = me.items.length;
-            if (me.displayInfo === true) {
+            var me = this,
+                idx = me.items.length;
+            if (me.ixLastInfo === true) {
                 // 显示提示信息时才添加更新时间
                 // 有一个toolbarFill控件
                 idx = idx - 2;

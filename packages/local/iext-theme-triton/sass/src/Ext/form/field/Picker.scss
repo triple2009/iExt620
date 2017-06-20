@@ -1,0 +1,9 @@
+.ix-picker {
+    border: 1px solid #afafb6;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    /* 没有数据时，会存在边框重叠的问题 */
+    /*.x-toolbar {
+        border-top: solid 1px #afafb6 !important;
+    }*/
+}

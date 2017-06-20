@@ -13,9 +13,16 @@ Ext.define('iExt.app.view.container.Quick', {
     bodyCls: 'ix-quick-container-body',
     title: '快速查看',
 
-    initComponent: function () {
-        var me = this;
+    /**
+     * 视图类型
+     */
+    ixViewType: 'quick',
 
+    /**
+     * 设置容器的工具栏
+     */
+    ixSetToolbar: function () {
+        var me = this;
         me.tools = [{
             iconCls: 'x-fa fa-chevron-right',
             tooltip: '隐藏',
@@ -35,23 +42,12 @@ Ext.define('iExt.app.view.container.Quick', {
                 scale: 'small'
             }]
         };
-        me.on('add', me._ixOnAdd);
-        me.callParent();
     },
 
     privates: {
 
         _ixHideMe: function (owner, tool, e) {
             owner.hide();
-        },
-
-        _ixOnAdd: function (panel, component, index, eOpts) {
-            if (component.isComponent === true && component.getTitle) {
-                var me = this,
-                    title = component.getTitle();
-                var vm = this.getViewModel();
-                vm.ixSetSubTitle(title);
-            }
         }
     }
 

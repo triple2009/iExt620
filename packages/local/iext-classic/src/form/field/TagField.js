@@ -1,22 +1,23 @@
 /**
- * @class iExt.form.field.Tag
+ * @class iExt.form.field.TagField
  * @extends {Ext.form.field.Tag}
  * @classdesc iExt Tag组件。
  */
-Ext.define('iExt.form.field.Tag', {
+Ext.define('iExt.form.field.TagField', {
     extend: 'Ext.form.field.Tag',
-    alias: 'widget.ixtag',
-    cls: 'ix-tag',
+    alias: 'widget.ixtagfield',
+    cls: 'ix-tag-field',
+
+    /**
+     * 可配置主题
+     * 可以在主题包中进行重载
+     */
+    ixTheme: {
+        pageSize: 15,
+        listMinWidth: 400
+    },
 
     config: {
-        /**
-         * 参照视图
-         */
-        ixView: null,
-        /**
-         * 视图规格
-         */
-        ixScale: 'normal',
         /**
          * 使用模板形式。模板模式优先。
          * {String[]}
@@ -35,18 +36,18 @@ Ext.define('iExt.form.field.Tag', {
          */
         ixLines: 'all',
         /**
+         * 显示属性集合
+         * {Object[]}: [{dataIndex:'', ref:''},{...}]
+         */
+        ixDisplayFields: [],
+        /**
          * 缺省搜索条件
          */
         ixFilters: undefined
     },
 
-    /**
-     * 可配置主题
-     * 可以在主题包中进行重载
-     */
-    ixTheme: {
-        pageSize: 15,
-        listMinWidth: 400
+    defaultListConfig: {
+        cls: 'ix-picker'
     },
 
     /**
@@ -57,17 +58,10 @@ Ext.define('iExt.form.field.Tag', {
      * 缺省使用名称做为显示值
      */
     displayField: 'name',
-
-    hideTrigger: false,
-    editable: false,
-    selectOnFocus: false,
-    triggerOnClick: false,
-    // autoselect=true，会自动检索下拉列表的数据
-    autoSelect: false,
-    pickerOffset: [0, 1],
-    defaultListConfig: {
-        cls: 'ix-picker'
-    },
+    /**
+     * 缺省分隔符
+     */
+    ixDelimiter: ',',
 
     initComponent: function () {
         var me = this,
@@ -91,11 +85,29 @@ Ext.define('iExt.form.field.Tag', {
         var tpl = me.getIxItemTpl(),
             cols = me.getIxColumns(),
             lines = me.getIxLines();
-        var tplConfig = iExt.form.field.ComboBox.ixGetItemTplConfig(
-            tpl, cols, lines
-        );
+        var tplConfig = iExt.util.View.ixGetItemTplConfig(tpl, cols, lines);
         me.listConfig = Ext.applyIf(me.listConfig, tplConfig);
         me.callParent();
+    },
+
+    onValueCollectionEndUpdate: function ()  {
+        var  me  =  this,
+            pickedRecords  =  me.valueCollection.items;
+        if  (me.isSelectionUpdating())  {
+            return;
+        } 
+        me.callParent();
+        var displayFields = me.getIxDisplayFields();
+        var refHoder = me.lookupReferenceHolder(true);
+        //<debug>
+        if (!refHoder) {
+            Ext.raise('未找到 ReferenceHolder ！');
+            return;
+        }
+        var refs = refHoder.getReferences();
+
+        iExt.util.View.ixSetDisplayValues(pickedRecords,
+            displayFields, refs, me.ixDelimiter);
     },
 
     applyIxFilters: function (filters) {

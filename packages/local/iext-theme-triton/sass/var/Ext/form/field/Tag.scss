@@ -1,8 +1,17 @@
+/* 标签项样式 */
+
 $tag-field-item-background-color: #f0eeee;
 $tag-field-item-border-color: #777777;
 $tag-field-item-border-radius: 2px;
+
+/* 鼠标移过的样式 */
+
 $tag-field-item-over-background-color: #e9e9f1;
 $tag-field-item-over-border-color: #777777;
+$tag-field-item-over-close-icon-glyph-color: #666;
+
+/* 已选择标签的样式 */
+
 $tag-field-item-selected-background-color: #e9e9f1;
 $tag-field-item-selected-border-color: #777777;
 $tag-field-item-selected-close-icon-glyph-color: #000;

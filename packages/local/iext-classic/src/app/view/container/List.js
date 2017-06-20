@@ -12,7 +12,7 @@ Ext.define('iExt.app.view.container.List', {
     cls: 'ix-list-container',
     bodyCls: 'ix-list-container-body',
 
-    ixDefaultTitle: '列表',
+    title: '列表',
 
     config: {
         /**
