@@ -9,8 +9,9 @@ Ext.define('iExt.meta.ixtype.Date', {
 
     ixBit: false,
     ixItems: [
-        { name: 'DATE', text: '日期', value: 1 },
-        { name: 'TIME', text: '时间', value: 2 },
-        { name: 'DATETIME', text: '日期时间', value: 4 }
+        { name: 'YM', text: '年月', value: 1 },
+        { name: 'DATE', text: '日期', value: 2 },
+        { name: 'TIME', text: '时间', value: 4 },
+        { name: 'DATETIME', text: '日期时间', value: 8 }
     ]
 });

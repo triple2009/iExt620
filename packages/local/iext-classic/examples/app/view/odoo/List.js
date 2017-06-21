@@ -126,7 +126,18 @@ Ext.define('app.view.odoo.List', {
     }, {
         text: 'Email',
         dataIndex: 'email',
+        ixType: 'text',
         flex: 1
+    }, {
+        text: 'dual',
+        dataIndex: 'dual',
+        xtype: 'ixboolcol',
+        ixType: 'dual'
+    }, {
+        text: 'triplet',
+        dataIndex: 'triplet',
+        xtype: 'ixboolcol',
+        ixType: 'triplet'
     }, {
         text: 'Phone',
         dataIndex: 'phone',

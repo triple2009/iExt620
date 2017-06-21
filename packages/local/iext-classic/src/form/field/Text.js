@@ -21,7 +21,9 @@ Ext.define('iExt.form.field.Text', {
         if (scale) {
             me.userCls = 'ix-' + scale;
         }
-
+        if (me.allowBlank === false && !me.emptyText && me.fieldLabel) {
+            me.emptyText = '请输入' + me.fieldLabel;
+        }
         me.callParent(arguments);
     },
 

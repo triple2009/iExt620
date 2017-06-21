@@ -3,10 +3,18 @@
 
     ixApiConfig: {
         ixAppId: 'huc',
-        ixApis: [
-            { ixCode: 'resetPassword', ixMethod: 'PUT' },
-            { ixCode: 'active', ixMethod: 'PUT' },
-            { ixCode: 'inactive', ixMethod: 'PUT' }
+        ixApis: [{
+                ixCode: 'resetPassword',
+                ixMethod: 'PUT'
+            },
+            {
+                ixCode: 'active',
+                ixMethod: 'PUT'
+            },
+            {
+                ixCode: 'inactive',
+                ixMethod: 'PUT'
+            }
         ]
     },
 
@@ -29,5 +37,12 @@
     }, {
         name: 'statusName',
         type: 'string'
+    }, {
+        name: 'dual',
+        type: 'bool'
+    }, {
+        name: 'triplet',
+        type: 'bool',
+        allowNull: true
     }]
 });

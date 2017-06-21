@@ -43,9 +43,9 @@ Ext.define('iExt.util.Format', {
      */
     ixDual: function (value) {
         if (value === true) {
-            return '■';
+            return '&#xf046';
         } else {
-            return '□';
+            return '&#xf096';
         }
     },
 
@@ -56,11 +56,11 @@ Ext.define('iExt.util.Format', {
      */
     ixTriplet: function (value) {
         if (value === true) {
-            return '■';
+            return '&#xf111';
         } else if (value === false) {
-            return '□';
+            return '&#xf10c';
         } else {
-            return '&nbsp;';
+            return '&#xf192';
         }
     }
 

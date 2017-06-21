@@ -80,6 +80,7 @@ Ext.define('iExt.form.field.ComboBox', {
         }
         me.listConfig = Ext.applyIf(me.listConfig || {}, listConfig);
 
+        // 设置数据项模板
         var tpl = me.getIxItemTpl();
         var cols = me.getIxColumns();
         var lines = me.getIxLines();
@@ -88,6 +89,9 @@ Ext.define('iExt.form.field.ComboBox', {
         me.callParent();
     },
 
+    /**
+     * 重载该方法。根据变更的数据设置参照的关联数据。
+     */
     onValueCollectionEndUpdate: function () {
         var  me  = this,
             selectedRecords  =  me.valueCollection.getRange(),
@@ -105,6 +109,9 @@ Ext.define('iExt.form.field.ComboBox', {
         iExt.util.View.ixSetDisplayValue(selectedRecord , displayFields, refs);
     },
 
+    /**
+     * 为远程查询设置参数。
+     */
     getParams: function (queryString) {
         var params = {},
             param = this.queryParam;
@@ -134,6 +141,9 @@ Ext.define('iExt.form.field.ComboBox', {
         return cols;
     },
 
+    /**
+     * 设置删选条件。
+     */
     applyIxFilters: function (filters) {
         if (filters) {
             this.queryMode = 'remote';

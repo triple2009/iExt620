@@ -82,6 +82,7 @@ Ext.define('iExt.form.field.TagField', {
         }
         me.listConfig = Ext.applyIf(me.listConfig || {}, listConfig);
 
+        // 设置数据项模板
         var tpl = me.getIxItemTpl(),
             cols = me.getIxColumns(),
             lines = me.getIxLines();
@@ -90,6 +91,9 @@ Ext.define('iExt.form.field.TagField', {
         me.callParent();
     },
 
+    /**
+     * 重载该方法。根据变更的数据设置参照的关联数据。
+     */
     onValueCollectionEndUpdate: function ()  {
         var  me  =  this,
             pickedRecords  =  me.valueCollection.items;

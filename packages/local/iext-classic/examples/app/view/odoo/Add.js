@@ -128,6 +128,29 @@ Ext.define('app.view.odoo.Add', {
             reference: 'name',
             allowBlank: false
         }, {
+            fieldLabel: 'PickerString',
+            xtype: 'ixpicker',
+            ixComponent: 'panel'
+        }, {
+            fieldLabel: 'PickerCmp',
+            xtype: 'ixpicker',
+            ixComponent: {
+                xtype: 'panel',
+                title: 'hello',
+                bbar: [{
+                    text: 'try it',
+                    listeners: {
+                        click: function () {
+                            iExt.Toast.ixInfo('picker component handler...');
+                        }
+                    }
+                }]
+            },
+            ixPickerConfig: {
+                minWidth: 300,
+                minHeight: 400
+            }
+        }, {
             fieldLabel: 'Columns',
             xtype: 'ixcombo',
             store: {

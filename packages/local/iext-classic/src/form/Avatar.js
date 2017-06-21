@@ -7,7 +7,9 @@ Ext.define('iExt.form.Avatar', {
     extend: 'Ext.Img',
     alias: 'widget.ixavatar',
 
-    requires: [],
+    requires: [
+        
+    ],
 
     imgCls: 'ix-avatar',
     alt: '头像'
