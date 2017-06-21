@@ -26,6 +26,7 @@ Ext.define('iExt.form.field.TagBase', {
     autoSelect: false,
     selectOnFocus: false,
     triggerOnClick: false,
+    forceSelection: false,
 
     defaultListConfig: {
         cls: 'ix-picker'
@@ -125,10 +126,15 @@ Ext.define('iExt.form.field.TagBase', {
             floating: true,
             header: false,
             shadow: false,
-            // hack some methods
+            // 传统意义上的 Tag，picker展示的是列表数据
+            // 但是用于下拉参照视图或搜索视图的情况下，
+            // 并不需要列表数据，而是由视图提供处理。
+            // Tag 在销毁时需要取消绑定 piker 的数据源，
+            // 因此需要提供piker的bindStore等虚方法hack原处理。
             refresh: Ext.emptyFn,
             getNavigationModel: Ext.emptyFn,
-            getSelectionModel: Ext.emptyFn
+            getSelectionModel: Ext.emptyFn,
+            bindStore: Ext.emptyFn
         });
         return Ext.apply(view, listConfig, me.defaultListConfig);
     }

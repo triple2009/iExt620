@@ -300,8 +300,8 @@ Ext.define('iExt.app.view.Tab', {
         },
 
         _ixWin: function (item, view, options) {
-            // ****组件在删除时要销毁 ixViewId 组件
-            var winId = item.ixViewId;
+            // ****组件在删除时要销毁 _$ixViewId 组件
+            var winId = item._$ixViewId;
             var win = Ext.getCmp(winId);
             if (!win) {
                 var me = this,
@@ -334,7 +334,7 @@ Ext.define('iExt.app.view.Tab', {
                 }
 
                 win = Ext.create(winConfig);
-                item.ixViewId = win.getId();
+                item._$ixViewId = win.getId();
             }
             win.show();
         }

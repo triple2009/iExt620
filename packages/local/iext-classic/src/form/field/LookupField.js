@@ -49,6 +49,14 @@ Ext.define('iExt.form.field.LookupField', {
         me.callParent(arguments);
     },
 
+    /**
+     * 点击参照事件处理，显示参照窗口。
+     * 目前打开的ixwin窗体进行了缓存，以便保留上次的状态
+     * 通过为打开视图的组件设置了 _$ixViewId 缓存视图标识
+     * 但是带来的问题是缓存的视图谁来销毁？
+     * 所以打开缓存视图的组件在销毁时需要检测 _$ixViewId 属性
+     * 如果指定的组件存在需要手动销毁。
+     */
     ixOnLookup: function (field, trigger, e) {
         var me = this,
             view = me.getIxView(),
@@ -74,8 +82,8 @@ Ext.define('iExt.form.field.LookupField', {
      * 销毁处理，清除缓存的视图
      */
     onDestroy: function () {
-        if (this.ixViewId){
-            var cmp=Ext.getCmp(this.ixViewId);
+        if (this._$ixViewId){
+            var cmp=Ext.getCmp(this._$ixViewId);
             if (cmp){
                 cmp.destroy();
             }
@@ -87,7 +95,7 @@ Ext.define('iExt.form.field.LookupField', {
     privates: {
 
         /**
-         * 数据选择事件处理
+         * 数据选择事件处理，根据选择数据设置值。
          */
         _ixOnSelection: function (item, records) {
             if (!records || !Ext.isArray(records)) {

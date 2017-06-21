@@ -19,6 +19,9 @@ Ext.define('iExt.form.field.TagSearch', {
      * 可以在主题包中进行重载
      */
     ixTheme: {
+        /**
+         * 参见 TagBase
+         */
         scales: {
             small: {
                 width: 240,
@@ -55,7 +58,7 @@ Ext.define('iExt.form.field.TagSearch', {
     // autoselect=true，会自动检索下拉列表的数据
     emptyText: '搜索 ···',
 
-    /*
+    /* 可配置的标签样式
     tagItemCls: 'ix-tagsearch-item',
     tagItemTextCls: 'ix-tagsearch-item-text',
     tagItemCloseCls: 'ix-tagsearch-item-close',
@@ -65,6 +68,9 @@ Ext.define('iExt.form.field.TagSearch', {
     tagSelectedCls: 'ix-tagsearch-item-selected',
     */
 
+    /**
+     * TODO：可以收藏常用的搜索条件。
+     */
     triggers: {
         favorite: {
             cls: 'x-fa fa-star',
@@ -75,6 +81,11 @@ Ext.define('iExt.form.field.TagSearch', {
         }
     },
 
+    /**
+     * 重载创建下拉框，使用搜索视图容器组件。
+     * 由于不能直接处理筛选条件的事件
+     * 所以必须使用搜索视图容器组件包装一下。
+     */
     createPicker: function () {
         var me = this,
             picker, pickerCfg ,
@@ -112,12 +123,12 @@ Ext.define('iExt.form.field.TagSearch', {
         }
         me.valueField = 'value';
         me.displayField = 'text';
-
         me.callParent(arguments);
     },
 
     /**
      * 重载关闭Tag时触发的处理过程，删除Store中的记录。
+     * 增加了不可删除条件的处理，用于必须具备的条件的情况。
      * @memberOf iExt.form.field.TagSearch#
      * @param {Element} itemEl 关闭的标签对象。
      */
@@ -183,12 +194,21 @@ Ext.define('iExt.form.field.TagSearch', {
         return me.ixMultiSelectItemTpl.apply(me.valueCollection.getRange());
     },
 
+    /**
+     * TODO：收藏搜索条件
+     * 需要使用 Meta 的元数据管理功能。
+     */
     ixFavorite: function () {
         iExt.Msg.ixInfo('可以收藏此搜索条件！');
     },
 
     privates: {
 
+        /**
+         * 参照视图关闭事件处理
+         * 可以通过判断 filters 来识别是否指定了新的搜索条件
+         * 如果为 null，表示用户点击了取消按钮。
+         */
         _ixOnClose: function (item, filters) {
             var me = this;
             if (filters) {

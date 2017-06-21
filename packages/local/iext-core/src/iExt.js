@@ -11,9 +11,19 @@ var iExt = iExt || {}; // jshint ignore:line
          * 接口虚方法
          */
         unimplFn: function () {
-            Ext.log('调用了未实现的方法... ');
+            var msgs = [],
+                msg;
+            msgs.push('调用了未实现的方法');
+            if (arguments && arguments.callee) {
+                msg = this.getMsgFrom(arguments.callee);
+                msgs.push(msg);
+            }
+            msg = msgs.join(' ... ');
+            Ext.log({
+                level: 'warn'
+            }, msg);
             // <debug>
-            Ext.raise('未实现该接口方法！');
+            Ext.raise(msg);
             // </debug>
         },
 
@@ -30,40 +40,57 @@ var iExt = iExt || {}; // jshint ignore:line
          *      The message to log (required unless specified in options object).
          */
         log: function () {
-            var msg = this.getMsg.apply(this, arguments);
-            Ext.log(msg);
+            //var msg = this.getMsg.apply(this, arguments);
+            var msgs = Array.prototype.slice.call(arguments) || [];
+            if (arguments && arguments.callee) {
+                var msg = this.getMsgFrom(arguments.callee);
+                msgs.push(msg);
+            }
+            Ext.log(msgs.join(' ... '));
         },
 
         /**
          * 输出提示信息
          */
         info: function () {
-            var msg = this.getMsg.apply(this, arguments);
+            var msgs = Array.prototype.slice.call(arguments) || [];
+            if (arguments && arguments.callee) {
+                var msg = this.getMsgFrom(arguments.callee);
+                msgs.push(msg);
+            }
             Ext.log({
                 level: 'info'
-            }, msg);
+            }, msgs.join(' ... '));
         },
 
         /**
          * 输出警告信息
          */
         warn: function () {
-            var msg = this.getMsg.apply(this, arguments);
+            var msgs = Array.prototype.slice.call(arguments) || [];
+            if (arguments && arguments.callee) {
+                var msg = this.getMsgFrom(arguments.callee);
+                msgs.push(msg);
+            }
             Ext.log({
                 level: 'warn'
-            }, msg);
+            }, msgs.join(' ... '));
+        },
+
+        getMsgFrom: function (callee) {
+            var msg = '';
+            if (callee.caller) {
+                callee = callee.caller;
+            }
+            if (callee && callee.$name) {
+                msg = '@[' + callee.$owner.$className + '-' + callee.$name + ']';
+            }
+            return msg;
         },
 
         getMsg: function () {
-            var msg = '';
-            if (arguments.length > 0) {
-                var msg = '';
-                for (var i = 0; i < arguments.length; i++) {
-                    var arg = arguments[i];
-                    msg += arg + ' ... ';
-                }
-            }
-            return msg;
+            var msgs = Array.prototype.slice.call(arguments) || [];
+            return msgs.join(' ... ');
         }
 
     });

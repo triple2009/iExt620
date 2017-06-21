@@ -55,6 +55,11 @@ Ext.define('iExt.form.field.TagLookup', {
      */
     ixDelimiter: ',',
 
+    /**
+     * 重载创建下拉框，使用参照视图组件。
+     * 由于可以直接监听参照组件的数据选择事件，
+     * 所以不需要外套参照视图容器。
+     */
     createPicker: function () {
         var me = this,
             picker, pickerCfg ,
@@ -92,7 +97,7 @@ Ext.define('iExt.form.field.TagLookup', {
     privates: {
 
         /**
-         * 数据选择事件处理
+         * 数据选择事件处理，根据选择的数据设置参照值。
          */
         _ixOnSelection: function (sm, records) {
             var me = this;

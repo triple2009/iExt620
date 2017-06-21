@@ -122,21 +122,16 @@ Ext.define('iExt.util.View', {
             });
         });
 
-        //</debug>
-        for (p in disps) {
-            if (disps.hasOwnProperty(p)) {
-                var ref = refs[p];
-                //<debug>
-                if (!ref) {
-                    Ext.raise('未找到引用的控件 [' + p + '] ！');
-                    return;
-                }
-                val = disps[p];
-                val = val.substr(0, val.length - delimiter.length);
-                ref.setValue(val);
+        Ext.Object.each(disps, function (key, value, myself) {
+            var ref = refs[key];
+            //<debug>
+            if (!ref) {
+                Ext.raise('未找到引用的控件 [' + key + '] ！');
+                return;
             }
-        }
-
+            value = value.substr(0, value.length - delimiter.length);
+            ref.setValue(value);
+        });
     }
 
 });

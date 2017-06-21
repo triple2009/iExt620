@@ -125,8 +125,8 @@ Ext.define('iExt.button.Button', {
      * 销毁处理，清除缓存的视图
      */
     onDestroy: function () {
-        if (this.ixViewId) {
-            var cmp = Ext.getCmp(this.ixViewId);
+        if (this._$ixViewId) {
+            var cmp = Ext.getCmp(this._$ixViewId);
             if (cmp) {
                 cmp.destroy();
             }
