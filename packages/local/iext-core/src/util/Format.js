@@ -38,6 +38,7 @@ Ext.define('iExt.util.Format', {
 
     /**
      * 双态bool数据格式化。
+     * 使用类似 checkbox 的形式。
      * @param {Boolean} 值。
      * @return {String} 根据数据对象格式化后的字符串。
      */
@@ -51,10 +52,27 @@ Ext.define('iExt.util.Format', {
 
     /**
      * 三态bool数据格式化。
+     * 使用类似 checkbox 和 '' 的形式。
      * @param {Boolean} 值。
      * @return {String} 根据数据对象格式化后的字符串。
      */
     ixTriplet: function (value) {
+        if (value === true) {
+            return '&#xf046';
+        } else if (value === false) {
+            return '&#xf096';
+        } else {
+            return '&nbsp;';
+        }
+    },
+
+    /**
+     * 三态bool数据格式化。
+     * 使用类似 radio button 的形式。
+     * @param {Boolean} 值。
+     * @return {String} 根据数据对象格式化后的字符串。
+     */
+    ixTriplet2: function (value) {
         if (value === true) {
             return '&#xf111';
         } else if (value === false) {
