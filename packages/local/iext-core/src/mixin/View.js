@@ -34,6 +34,7 @@ Ext.define('iExt.mixin.View', {
     ixOnInitComponent: function () {
         // <debug>
         iExt.log('视图初始化', this.$className, this.getId());
+        iExt._$views[this.getId()] = Ext.now();
         // </debug>
     },
 
@@ -43,6 +44,7 @@ Ext.define('iExt.mixin.View', {
     ixOnDestroy: function () {
         // <debug>
         iExt.log('视图销毁', this.$className, this.getId());
+        delete iExt._$views[this.getId()];
         // </debug>
     },
 

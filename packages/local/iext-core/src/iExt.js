@@ -5,7 +5,15 @@ var iExt = iExt || {}; // jshint ignore:line
 
     Ext.apply(iExt, {
 
-        messageTitle: 'iExt',
+        /**
+         * 视图调试信息，记录创建的视图，可以跟踪视图是否被销毁
+         */
+        _$views: {},
+
+        /**
+         * 系统标题
+         */
+        title: 'iExt',
 
         /**
          * 接口虚方法
@@ -77,6 +85,9 @@ var iExt = iExt || {}; // jshint ignore:line
             }, msgs.join(' ... '));
         },
 
+        /**
+         * 根据调用链获取调用方信息。
+         */
         getMsgFrom: function (callee) {
             var msg = '';
             if (callee.caller) {
@@ -86,11 +97,6 @@ var iExt = iExt || {}; // jshint ignore:line
                 msg = '@[' + callee.$owner.$className + '-' + callee.$name + ']';
             }
             return msg;
-        },
-
-        getMsg: function () {
-            var msgs = Array.prototype.slice.call(arguments) || [];
-            return msgs.join(' ... ');
         }
 
     });

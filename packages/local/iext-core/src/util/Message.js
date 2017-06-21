@@ -31,7 +31,7 @@ Ext.define('iExt.util.Message', {
             message: message,
             fn: fn,
             scope: scope,
-            title: iExt.messageTitle + '-警告信息',
+            title: iExt.title + '-警告信息',
             icon: Ext.MessageBox.ERROR,
             buttons: Ext.Msg.OK
         };
@@ -51,7 +51,7 @@ Ext.define('iExt.util.Message', {
             message: message,
             fn: fn,
             scope: scope,
-            title: iExt.messageTitle + '-提示信息',
+            title: iExt.title + '-提示信息',
             icon: Ext.MessageBox.INFO,
             buttons: Ext.Msg.OK
         };
@@ -71,7 +71,7 @@ Ext.define('iExt.util.Message', {
             message: message,
             fn: fn,
             scope: scope,
-            title: iExt.messageTitle + '-警告信息',
+            title: iExt.title + '-警告信息',
             icon: Ext.MessageBox.ERROR,
             buttons: Ext.Msg.OK
         };
@@ -91,7 +91,7 @@ Ext.define('iExt.util.Message', {
             message: message,
             callback: fn,
             scope: scope,
-            title: iExt.messageTitle + '-确认信息',
+            title: iExt.title + '-确认信息',
             icon: Ext.Msg.QUESTION,
             buttons: Ext.Msg.YESNO
         };
@@ -108,7 +108,7 @@ Ext.define('iExt.util.Message', {
      */
     ixProgress: function (message, progressText, config) {
         var cfg = {
-            title: iExt.messageTitle + '-执行中...',
+            title: iExt.title + '-执行中...',
             message: message,
             progressText: progressText,
             progress: true,
@@ -132,7 +132,7 @@ Ext.define('iExt.util.Message', {
             config.message = config.message.join('<br/>');
         }
         var cfg = {
-            title: iExt.messageTitle + '-提示信息'
+            title: iExt.title + '-提示信息'
         };
         Ext.apply(cfg, config);
         if (userConfig) {
