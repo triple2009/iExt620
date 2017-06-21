@@ -9,6 +9,10 @@ Ext.define('iExt.form.field.ComboBox', {
 
     cls: 'ix-combo',
 
+    mixins: [
+        'iExt.mixin.Linkable'
+    ],
+
     config: {
         /**
          * 使用模板形式。模板模式优先。
@@ -27,11 +31,6 @@ Ext.define('iExt.form.field.ComboBox', {
          * {String} 'all/col/row/none'
          */
         ixLines: 'none',
-        /**
-         * 显示属性集合
-         * {Object[]}: [{dataIndex:'', ref:''},{...}]
-         */
-        ixDisplayFields: [],
         /**
          * 缺省搜索条件
          */
@@ -64,6 +63,7 @@ Ext.define('iExt.form.field.ComboBox', {
     initComponent: function () {
         var me = this,
             listConfig = {};
+        me.setIxMulti(false);
 
         if (Ext.isEmpty(me.pageSize)) {
             me.pageSize = me.ixTheme.pageSize;
@@ -94,19 +94,10 @@ Ext.define('iExt.form.field.ComboBox', {
      */
     onValueCollectionEndUpdate: function () {
         var  me  = this,
-            selectedRecords  =  me.valueCollection.getRange(),
-            selectedRecord  = selectedRecords[0];
+            selectedRecords  =  me.valueCollection.getRange();
 
         me.callParent();
-        var displayFields = me.getIxDisplayFields();
-        var refHoder = me.lookupReferenceHolder(true);
-        //<debug>
-        if (!refHoder) {
-            Ext.raise('未找到 ReferenceHolder ！');
-            return;
-        }
-        var refs = refHoder.getReferences();
-        iExt.util.View.ixSetDisplayValue(selectedRecord , displayFields, refs);
+        me.ixSetValues(selectedRecords , true);
     },
 
     /**

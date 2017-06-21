@@ -1,6 +1,6 @@
-Ext.define('app.view.odoo.List', {
+Ext.define('app.view.odoo.View', {
     extend: 'iExt.grid.Panel',
-    xtype: 'app-odoo-list',
+    xtype: 'app-odoo-view',
 
     requires: [
         'iExt.grid.column.Column'
@@ -120,47 +120,23 @@ Ext.define('app.view.odoo.List', {
         }]
     },
 
-    columns: [{
-        text: 'Name',
-        dataIndex: 'name'
-    }, {
-        text: 'Email',
-        dataIndex: 'email',
-        ixType: 'text',
-        flex: 1
-    }, {
-        text: 'dual',
-        dataIndex: 'dual',
-        xtype: 'ixboolcol',
-        ixType: 'dual'
-    }, {
-        text: 'triplet',
-        dataIndex: 'triplet',
-        xtype: 'ixboolcol',
-        ixType: 'triplet'
-    }, {
-        text: 'Phone',
-        dataIndex: 'phone',
-        flex: 1
-    }],
-
-    features: [{
-        ftype: 'rowbody',
-        getAdditionalData: function (data, idx, record, orig) {
-            // Usually you would style the my-body-class in a CSS file
-            return {
-                rowBody: '<div>' + record.get("email") + '</div>',
-                rowBodyCls: "my-body-class"
-            };
-        }
-    }],
-
+    /*
+    viewConfig: {
+        itemTpl: '<div>{name}</div>'
+    },
+    */
+    
     initComponent: function () {
         var me = this;
         // itemclick 与数据选择有冲突
         me.on('itemdblclick', me.ixOnItemClick, me);
         me.callParent();
     },
+
+    columns: [{
+        text: 'Name',
+        dataIndex: 'name'
+    }],
 
     ixOnItemClick: function (view, record, item, index, e, eOpts) {
         var me = this;

@@ -21,6 +21,10 @@ Ext.define('iExt.view.View', {
          */
         ixMulti: true,
         /**
+         * 数据项是否使用边框
+         */
+        ixItemBorder: true,
+        /**
          * 列数
          */
         ixCols: 4,
@@ -48,6 +52,16 @@ Ext.define('iExt.view.View', {
 
     loadMask: {
         cls: 'ix-view-mask'
+    },
+
+    applyIxItemBorder: function (border) {
+        var me = this;
+        if (border === true) {
+            me.removeCls('ix-view-noborder');
+        } else {
+            me.addCls('ix-view-noborder');
+        }
+        return border;
     },
 
     constructor: function (config) {

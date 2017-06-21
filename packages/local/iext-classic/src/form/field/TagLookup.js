@@ -9,6 +9,10 @@ Ext.define('iExt.form.field.TagLookup', {
 
     cls: 'ix-tag-lookup',
 
+    mixins: [
+        'iExt.mixin.Linkable'
+    ],
+
     /**
      * 可配置主题
      * 可以在主题包中进行重载
@@ -32,11 +36,6 @@ Ext.define('iExt.form.field.TagLookup', {
          */
         ixScale: 'normal',
         /**
-         * 显示属性集合
-         * {Object[]}: [{dataIndex:'', ref:''},{...}]
-         */
-        ixDisplayFields: [],
-        /**
          * 缺省搜索条件
          */
         ixFilters: undefined
@@ -50,10 +49,6 @@ Ext.define('iExt.form.field.TagLookup', {
      * 缺省使用名称做为显示值
      */
     displayField: 'name',
-    /**
-     * 缺省分隔符
-     */
-    ixDelimiter: ',',
 
     /**
      * 重载创建下拉框，使用参照视图组件。
@@ -91,7 +86,21 @@ Ext.define('iExt.form.field.TagLookup', {
 
     initComponent: function () {
         var me = this;
+        me.setIxMulti(true);
         me.callParent();
+    },
+
+    /**
+     * 重载该方法。根据变更的数据设置参照的关联数据。
+     */
+    onValueCollectionEndUpdate: function ()  {
+        var  me  =  this,
+            pickedRecords  =  me.valueCollection.items;
+        if  (me.isSelectionUpdating())  {
+            return;
+        } 
+        me.callParent();
+        me.ixSetValues(pickedRecords , true);
     },
 
     privates: {
@@ -105,20 +114,6 @@ Ext.define('iExt.form.field.TagLookup', {
                 Ext.each(records, function (record) {
                     me.ixAddTag(record);
                 });
-
-                // 设置显示属性值
-                records = me.store.getRange();
-                var displayFields = me.getIxDisplayFields();
-                var refHoder = me.lookupReferenceHolder(true);
-                //<debug>
-                if (!refHoder) {
-                    Ext.raise('未找到 ReferenceHolder ！');
-                    return;
-                }
-                var refs = refHoder.getReferences();
-
-                iExt.util.View.ixSetDisplayValues(records,
-                    displayFields, refs, me.ixDelimiter);
             }
         }
     }

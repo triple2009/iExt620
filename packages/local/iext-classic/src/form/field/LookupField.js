@@ -1,6 +1,6 @@
 /**
  * @class iExt.form.field.LookupField
- * @extends {Ext.form.field.Picker}
+ * @extends {Ext.form.field.Text}
  * @classdesc iExt 参照文本框。
  */
 Ext.define('iExt.form.field.LookupField', {
@@ -8,6 +8,10 @@ Ext.define('iExt.form.field.LookupField', {
     alias: 'widget.ixlookupfield',
 
     cls: 'ix-lookup-field',
+
+    mixins: [
+        'iExt.mixin.Linkable'
+    ],
 
     config: {
         /**
@@ -17,23 +21,8 @@ Ext.define('iExt.form.field.LookupField', {
         /**
          * 视图规格
          */
-        ixScale: 'normal',
-        /**
-         * 是否复选
-         */
-        ixMulti: false,
-        /**
-         * 值属性名称
-         */
-        ixValueField: '',
-        /**
-         * 显示属性集合
-         * {Object[]}: [{dataIndex:'', ref:''},{...}]
-         */
-        ixDisplayFields: []
+        ixScale: 'normal'
     },
-
-    ixDelimiter: ',',
 
     initComponent: function () {
         var me = this;
@@ -82,9 +71,9 @@ Ext.define('iExt.form.field.LookupField', {
      * 销毁处理，清除缓存的视图
      */
     onDestroy: function () {
-        if (this._$ixViewId){
-            var cmp=Ext.getCmp(this._$ixViewId);
-            if (cmp){
+        if (this._$ixViewId) {
+            var cmp = Ext.getCmp(this._$ixViewId);
+            if (cmp) {
                 cmp.destroy();
             }
         }
@@ -98,42 +87,8 @@ Ext.define('iExt.form.field.LookupField', {
          * 数据选择事件处理，根据选择数据设置值。
          */
         _ixOnSelection: function (item, records) {
-            if (!records || !Ext.isArray(records)) {
-                return;
-            }
-            if (records.length === 0) {
-                return;
-            }
-            var me = this,
-                valueField = me.getIxValueField(),
-                displayFields = me.getIxDisplayFields() || [],
-                multi = me.getIxMulti();
-
-            // 设置显示属性值
-            var refHoder = me.lookupReferenceHolder(true);
-            //<debug>
-            if (!refHoder) {
-                Ext.raise('未找到 ReferenceHolder ！');
-                return;
-            }
-            //</debug>
-            var refs = refHoder.getReferences();
-
-            var val = '';
-            if (multi === false) {
-                var record = records[0];
-                val = record.get(valueField);
-                me.setValue(val);
-                iExt.util.View.ixSetDisplayValue(record, displayFields, refs);
-            } else {
-                Ext.each(records, function (record) {
-                    val += record.get(valueField) + me.ixDelimiter;
-                });
-                val = val.substr(0, val.length - me.ixDelimiter.length);
-                me.setValue(val);
-                iExt.util.View.ixSetDisplayValues(records,
-                    displayFields, refs, me.ixDelimiter);
-            }
+            var me = this;
+            me.ixSetValues(records, false);
         }
     }
 });

@@ -70,7 +70,7 @@ Ext.define('iExt.mixin.QuickSearch', {
 
     /**
      * 清除搜索条件事件处理。
-     * @memberOf iExt.toolbar.Search#
+     * @memberOf iExt.mixin.QuickSearch#
      * @param {Ext.Component} item 触发事件的控件。
      * @param {Event} e 事件。
      * @param {Object} eOpts 事件参数。

@@ -9,6 +9,10 @@ Ext.define('iExt.form.field.LookupPicker', {
 
     cls: 'ix-lookup-picker',
 
+    mixins: [
+        'iExt.mixin.Linkable'
+    ],
+
     config: {
         /**
          * 参照视图
@@ -17,16 +21,7 @@ Ext.define('iExt.form.field.LookupPicker', {
         /**
          * 视图规格
          */
-        ixScale: 'normal',
-        /**
-         * 值属性名称
-         */
-        ixValueField: '',
-        /**
-         * 显示属性集合
-         * {Object[]}: [{dataIndex:'', ref:''},{...}]
-         */
-        ixDisplayFields: []
+        ixScale: 'normal'
     },
 
     defaultListConfig: {
@@ -35,6 +30,7 @@ Ext.define('iExt.form.field.LookupPicker', {
 
     initComponent: function () {
         var me = this;
+        me.setIxMulti(false);
         me.callParent(arguments);
     },
 
@@ -88,30 +84,8 @@ Ext.define('iExt.form.field.LookupPicker', {
          * 数据选择事件处理
          */
         _ixOnSelection: function (sm, records) {
-            if (!records || !Ext.isArray(records)) {
-                return;
-            }
-            if (records.length === 0) {
-                return;
-            }
-            var me = this,
-                record = records[0],
-                valueField = me.getIxValueField(),
-                displayFields = me.getIxDisplayFields() || [];
-
-            var val = record.get(valueField);
-            me.setValue(val);
-
-            // 设置显示属性值
-            var refHoder = me.lookupReferenceHolder(true);
-            //<debug>
-            if (!refHoder) {
-                Ext.raise('未找到 ReferenceHolder ！');
-                return;
-            }
-            //</debug>
-            var refs = refHoder.getReferences();
-            iExt.util.View.ixSetDisplayValue(record, displayFields, refs);
+            var me = this;
+            me.ixSetValues(records, false);
         }
     }
 

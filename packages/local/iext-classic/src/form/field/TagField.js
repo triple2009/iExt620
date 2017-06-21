@@ -6,7 +6,12 @@
 Ext.define('iExt.form.field.TagField', {
     extend: 'Ext.form.field.Tag',
     alias: 'widget.ixtagfield',
+
     cls: 'ix-tag-field',
+
+    mixins: [
+        'iExt.mixin.Linkable'
+    ],
 
     /**
      * 可配置主题
@@ -36,11 +41,6 @@ Ext.define('iExt.form.field.TagField', {
          */
         ixLines: 'all',
         /**
-         * 显示属性集合
-         * {Object[]}: [{dataIndex:'', ref:''},{...}]
-         */
-        ixDisplayFields: [],
-        /**
          * 缺省搜索条件
          */
         ixFilters: undefined
@@ -58,14 +58,12 @@ Ext.define('iExt.form.field.TagField', {
      * 缺省使用名称做为显示值
      */
     displayField: 'name',
-    /**
-     * 缺省分隔符
-     */
-    ixDelimiter: ',',
 
     initComponent: function () {
         var me = this,
             listConfig = {};
+        me.setIxMulti(true);
+        me.ixDelimiter = me.getDelimiter() || me.ixDelimiter;
 
         if (Ext.isEmpty(me.pageSize)) {
             me.pageSize = me.ixTheme.pageSize;
@@ -101,17 +99,7 @@ Ext.define('iExt.form.field.TagField', {
             return;
         } 
         me.callParent();
-        var displayFields = me.getIxDisplayFields();
-        var refHoder = me.lookupReferenceHolder(true);
-        //<debug>
-        if (!refHoder) {
-            Ext.raise('未找到 ReferenceHolder ！');
-            return;
-        }
-        var refs = refHoder.getReferences();
-
-        iExt.util.View.ixSetDisplayValues(pickedRecords,
-            displayFields, refs, me.ixDelimiter);
+        me.ixSetValues(pickedRecords , true);
     },
 
     applyIxFilters: function (filters) {

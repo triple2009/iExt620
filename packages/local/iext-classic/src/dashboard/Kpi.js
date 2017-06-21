@@ -1,11 +1,11 @@
 /**
- * @class iExt.board.Kpi
+ * @class iExt.dashboard.Kpi
  * @extends {Ext.Component} 
- * @classdesc 表单工具栏控件。
+ * @classdesc 指标组件。
  */
-Ext.define('iExt.board.Kpi', {
+Ext.define('iExt.dashboard.Kpi', {
     extend: 'Ext.Component',
-    alias: 'widget.ixkpibtn',
+    alias: 'widget.ixkpi',
 
     requires: [],
 
@@ -21,14 +21,16 @@ Ext.define('iExt.board.Kpi', {
     tpl: [
         '<tpl for=".">' +
         '<span id="{id}-btnIconEl" data-ref="btnIconEl" role="presentation" ' +
-        'unselectable="on" class="{ixIconCls} ">{ixKpi}'  +
+        'unselectable="on" class="{ixIconCls} ">{ixKpi}'  +
         '</span>' +
         '</tpl>'
     ],
 
     initComponent: function () {
         var me = this;
-        me.renderData = { ixKpi: 'sdfsfdsf' };
+        me.renderData = {
+            ixKpi: 'sdfsfdsf'
+        };
         me.callParent();
     }
 

@@ -26,7 +26,7 @@ Ext.define("iExt.form.field.Picker", {
          * 下拉组件。注意组件的样式，picker本身已经配置了边框。
          * {String|Object} 组件类型名称或者组件对象
          */
-        ixComponent: null
+        ixWidget: null
     },
 
     /**
@@ -55,15 +55,15 @@ Ext.define("iExt.form.field.Picker", {
         me.callParent();
     },
 
-    applyIxComponent: function (component) {
+    applyIxWidget: function (widget) {
         var me = this;
-        if (me.picker && component) {
+        if (me.picker && widget) {
             if (me.picker.rendered) {
                 me.picker.removeAll(true);
-                me.picker.add(component);
+                me.picker.add(widget);
             }
         }
-        return component;
+        return widget;
     },
 
     /**
@@ -73,16 +73,21 @@ Ext.define("iExt.form.field.Picker", {
         var me = this,
             picker, pickerCfg,
             pickerConfig = me.ixPickerConfig || {},
-            cmp = me.getIxComponent();
-
-        if (Ext.isString(cmp)) {
+            cmp = me.getIxWidget();
+        if (!cmp) {
+            // 缺省使用 panel 组件
             pickerCfg = {
-                xtype: cmp
+                xtype: 'panel'
             };
-        } else if (Ext.isObject(cmp)) {
-            pickerCfg = cmp;
+        } else {
+            if (Ext.isString(cmp)) {
+                pickerCfg = {
+                    xtype: cmp
+                };
+            } else if (Ext.isObject(cmp)) {
+                pickerCfg = cmp;
+            }
         }
-
         pickerCfg = Ext.apply(pickerCfg, {
             renderTo: document.body,
             // 下拉组件可以通过该属性获取到本组件

@@ -26,6 +26,18 @@
     background-color: #ece9c2;
 }
 
+
+/* 去掉数据项的边框 */
+
+.ix-view-noborder {
+    .ix-view-item {
+        border: none;
+    }
+    .ix-view-item-selected {
+        border: none;
+    }
+}
+
 .ix-view-mask {
     background-color: #e8e8e8 !important;
 }

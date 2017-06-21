@@ -130,11 +130,11 @@ Ext.define('app.view.odoo.Add', {
         }, {
             fieldLabel: 'PickerString',
             xtype: 'ixpicker',
-            ixComponent: 'panel'
+            ixWidget: 'panel'
         }, {
             fieldLabel: 'PickerCmp',
             xtype: 'ixpicker',
-            ixComponent: {
+            ixWidget: {
                 xtype: 'panel',
                 title: 'hello',
                 bbar: [{
@@ -159,7 +159,7 @@ Ext.define('app.view.odoo.Add', {
             pageSize: 5,
             valueField: 'email',
             displayField: 'name',
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -179,7 +179,7 @@ Ext.define('app.view.odoo.Add', {
             store: {
                 type: 'user'
             },
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -199,7 +199,7 @@ Ext.define('app.view.odoo.Add', {
                 type: 'user'
             },
             pageSize: 5,
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -216,7 +216,7 @@ Ext.define('app.view.odoo.Add', {
         }, {
             fieldLabel: 'TagTpl',
             xtype: 'ixtagfield',
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -237,7 +237,7 @@ Ext.define('app.view.odoo.Add', {
             xtype: 'ixtaglookup',
             valueField: 'email',
             displayField: 'name',
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -250,7 +250,7 @@ Ext.define('app.view.odoo.Add', {
             xtype: 'ixlookuppicker',
             ixMulti: true,
             ixValueField: 'name',
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -294,7 +294,7 @@ Ext.define('app.view.odoo.Add', {
             xtype: 'ixlookupfield',
             ixMulti: true,
             ixValueField: 'name',
-            ixDisplayFields: [{
+            ixLinkItems: [{
                 dataIndex: 'name',
                 ref: 'userName'
             }, {
@@ -302,6 +302,52 @@ Ext.define('app.view.odoo.Add', {
                 ref: 'mobilePhone'
             }],
             ixView: 'app-user-lookup'
+        }]
+    }, {
+        xtype: 'tabpanel',
+        items: [{
+            xtype: 'panel',
+            title: 'controls',
+            layout: 'hbox',
+            defaults: {
+                margin: 10
+            },
+            items: [{
+                xtype: 'datepicker'
+            }, {
+                xtype: 'monthpicker'
+            }, {
+                xtype: 'fieldset',
+                title: 'Individual Checkboxes',
+                checkboxToggle: true,
+                defaultType: 'checkbox',
+                layout: 'vbox',
+                width: 400,
+                defaults: {
+                    labelWidth: 120,
+                    flex: 1,
+                    hideEmptyLabel: false
+                },
+                items: [{
+                    xtype: 'textfield',
+                    name: 'txt-test1',
+                    fieldLabel: 'Alignment Test'
+                }, {
+                    fieldLabel: 'Favorite',
+                    boxLabel: 'Dog',
+                    name: 'fav-animal-dog',
+                    inputValue: 'dog'
+                }, {
+                    boxLabel: 'Cat',
+                    name: 'fav-animal-cat',
+                    inputValue: 'cat'
+                }, {
+                    checked: true,
+                    boxLabel: 'Monkey',
+                    name: 'fav-animal-monkey',
+                    inputValue: 'monkey'
+                }]
+            }]
         }]
     }]
 
