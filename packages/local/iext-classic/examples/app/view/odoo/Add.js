@@ -7,7 +7,7 @@ Ext.define('app.view.odoo.Add', {
     title: '新建用户',
 
     tbar: {
-        xtype: 'toolbar',
+        xtype: 'ixacttbr',
         items: [{
             text: '保存',
             iconCls: 'x-fa fa-save',

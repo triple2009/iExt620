@@ -156,7 +156,7 @@ Ext.define('iExt.app.view.controller.Base', {
                 if (align !== null) {
                     // 获取组件的对齐引用
                     var ref = align.getIxTarget() || '',
-                        refId = '', refCmp;
+                        refCmp;
                     if (ref === '') {
                         refCmp = view;
                     } else {
@@ -169,7 +169,7 @@ Ext.define('iExt.app.view.controller.Base', {
                         }
                         // </debug>
                     }
-                    refId = refCmp.getId();
+                    var refId = refCmp.getId();
                     me._ixActionItems.push({
                         itemId: itemId,
                         targetId: refId

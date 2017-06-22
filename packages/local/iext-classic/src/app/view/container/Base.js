@@ -46,6 +46,12 @@ Ext.define('iExt.app.view.container.Base', {
     ixViewType: 'list',
 
     /**
+     * 操作工具栏组件{iExt.toolbar.*}标识集合
+     * {String[]}
+     */
+    __ixActionBarIds: null,
+
+    /**
      * 当前视图
      * 添加子组件后设置为当前视图
      */
@@ -82,8 +88,12 @@ Ext.define('iExt.app.view.container.Base', {
 
         // 设置工具栏
         me.ixSetToolbar();
-        // 监听事件处理
+        // 监听添加子组件事件处理
         me.on('add', me.ixOnAdd, me);
+        // 为了自动处理工具栏组件的可用性操作
+        // 需要监听工具栏的添加和删除事件处理
+        me.on('dockedadd', me.ixOnDockedAdd, me);
+        me.on('dockedremove', me.ixOnDockedRemove, me);
         me.callParent();
     },
 
@@ -112,11 +122,35 @@ Ext.define('iExt.app.view.container.Base', {
     },
 
     /**
+     * 添加工具栏处理
+     */
+    ixOnDockedAdd: function (panel, component, index, eOpts) {
+        // 具有获取操作组件标识的工具栏
+        if (component.isComponent === true && component.ixGetActionIds) {
+            var me = this,
+                id = component.getId();
+            me.__ixActionBarIds = me.__ixActionBarIds || {};
+            me.__ixActionBarIds[id] = id;
+        }
+    },
+
+    /**
+     * 删除工具栏处理
+     */
+    ixOnDockedRemove: function (panel, component, eOpts) {
+        if (component.isComponent === true && component.ixGetActionIds) {
+            var me = this,
+                id = component.getId();
+            delete me.__ixActionBarIds[id];
+        }
+    },
+
+    /**
      * 销毁处理，清除缓存的视图
      */
     onDestroy: function () {
         this.callParent();
-        Ext.destroyMembers(this, '__ixCurrentView');
+        Ext.destroyMembers(this, '__ixActionBarIds', '__ixCurrentView');
     }
 
 });

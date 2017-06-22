@@ -51,6 +51,24 @@ Ext.define('iExt.align.Base', {
     },
 
     /**
+     * 设置对齐组件引用
+     */
+    applyIxTarget: function (target) {
+        if (Ext.isEmpty(target)) {
+            this.ixAutoTarget = true;
+        }
+        return target;
+    },
+
+    /**
+     * 自动对齐的操作组件。
+     * 由于存在动态对齐操作组件的场景，例如列表视图
+     * 需要根据视图的变化自动设置对齐。
+     * 如果第一次设置后就无法识别下次的对齐处理。
+     */
+    ixAutoTarget: false,
+
+    /**
      * 是否可用
      * function (mode, data)
      */

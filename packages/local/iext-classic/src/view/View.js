@@ -32,7 +32,11 @@ Ext.define('iExt.view.View', {
          * 最小宽度
          * TODO: 自动调整列数
          */
-        ixMinWidth: null
+        ixMinWidth: null,
+        /**
+         * 快速查看视图名称
+         */
+        ixQuickView: null
     },
 
     /**
@@ -88,6 +92,11 @@ Ext.define('iExt.view.View', {
         var me = this;
         me.on('resize', me.ixOnResize, me);
         me.on('selectionchange', me.ixOnSelectionChange, me);
+        var qv = me.getIxQuickView();
+        if (qv) {
+            me.on('itemclick', me._ixOnItemClick, me);
+        }
+
         this.callParent();
     },
 
@@ -180,5 +189,24 @@ Ext.define('iExt.view.View', {
     ixOnResize: function (dataview, width, height, oldWidth, oldHeight, eOpts) {
         //Ext.defer(this.ixResizeItems, 100, this);
         this.ixResizeItems();
+    },
+
+    privates: {
+
+        /**
+         * 快速查看
+         */
+        _ixOnItemClick: function (view, record, item, index, e, eOpts) {
+            var me = this,
+                qv = me.getIxQuickView();
+            if (qv) {
+                me.fireEvent('ixopenview', me, qv, {
+                    target: iExt.action.ViewTarget.QUICK,
+                    viewConfig: {
+                        ixRecord: record
+                    }
+                });
+            }
+        }
     }
 });

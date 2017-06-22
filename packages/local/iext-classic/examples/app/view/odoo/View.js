@@ -11,6 +11,7 @@ Ext.define('app.view.odoo.View', {
         type: 'ixlist'
     },
 
+    ixQuickView: 'ixqvform',
     ixStore: {
         type: 'user'
     },

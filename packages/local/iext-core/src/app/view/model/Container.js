@@ -23,7 +23,15 @@ Ext.define('iExt.app.view.model.Container', {
             /**
              * 子标题
              */
-            subTitle: null
+            subTitle: null,
+            /**
+             * 当前视图的引用名称
+             */
+            viewRef: '',
+            /**
+             * 当前视图的标识
+             */
+            viewId: ''
         }
     },
 

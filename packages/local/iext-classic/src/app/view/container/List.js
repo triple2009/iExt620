@@ -45,8 +45,20 @@ Ext.define('iExt.app.view.container.List', {
          * 对于列表容器可以包含多个视图，共享工具栏和搜索
          * 
          */
-        ixView: null
+        ixView: null,
+        /**
+         *  缺省视图索引
+         */
+        ixDefaultIndex: 0
     },
+
+    /**
+     * 视图变更事件。
+     * @memberOf iExt.app.view.container.List#
+     * @event ixviewchanged
+     * @param {iExt.app.view.container.List} this 列表容器组件
+     * @param {Ext.Component} view 当前的视图。
+     */
 
     applyIxDomain: function (domain) {
         var me = this;
@@ -68,7 +80,26 @@ Ext.define('iExt.app.view.container.List', {
     },
 
     initComponent: function () {
-        var me = this;
+        var me = this,
+            title = me.getTitle();
+        if (title) {
+            me.setBind({
+                title: '{title}'
+            });
+            vm = me.getViewModel();
+            vm.ixSetTitle(title);
+        }
+        me.callParent();
+    },
+
+    afterRender: function () {
+        var me = this,
+            views = me.getIxView(),
+            idx = me.getIxDefaultIndex() || 0;
+        // 设置缺省视图
+        if (Ext.isArray(views) && views.length > idx) {
+            me._ixChangeView(idx);
+        }
         me.callParent();
     },
 
@@ -186,14 +217,15 @@ Ext.define('iExt.app.view.container.List', {
     ixGetViewButtons: function () {
         var me = this,
             listType, iconCls, name,
-            views = me.getIxView();
+            views = me.getIxView(),
+            idx = me.getIxDefaultIndex() || 0;
 
         var btnTypes = {
             xtype: 'ixactsbtn',
             allowToggle: true,
             listeners: {
                 toggle: {
-                    fn: me._ixChangeView,
+                    fn: me.ixChangeView,
                     scope: me
                 }
             },
@@ -205,7 +237,8 @@ Ext.define('iExt.app.view.container.List', {
                 listType = item.ixListType || 'list';
                 var enumItem = iExt.app.view.ListTypes.ixGetItem(listType);
                 var btnCfg = {
-                    value: index
+                    value: index,
+                    pressed: index === idx
                 };
                 if (enumItem) {
                     btnCfg.tooltip = enumItem[iExt.app.view.ListTypes.ixTextProperty];
@@ -221,22 +254,80 @@ Ext.define('iExt.app.view.container.List', {
                 });
             });
         }
+
         return btnTypes;
+    },
+
+    ixChangeView: function (item, button, isPressed, eOpts) {
+        var me = this,
+            idx = button.getValue();
+        me._ixChangeView(idx);
     },
 
     privates: {
 
-        _ixChangeView: function (item, button, isPressed, eOpts) {
-            var me = this,
-                idx = button.getValue();
-            me._ixSetView(idx);
+        _ixChangeView: function (index) {
+            var me = this;
+            me.__ixCurrentView = me._ixSetView(index);
+            // 设置ViewModel数据
+            var vm = me.getViewModel();
+            if (vm) {
+                vm.set('ixvc.viewRef', me.__ixCurrentView.getReference());
+                vm.set('ixvc.viewId', me.__ixCurrentView.getId());
+            }
+
+            if (me.__ixCurrentView.ixIsListView === true) {
+                if (me.__ixCurrentView.hasListeners.ixselection) {
+                    // 如果存在事件监听，在事件处理前插入处理
+                    me.__ixCurrentView.onBefore('ixselection', me._ixOnSelection, me);
+                } else {
+                    // 添加选择事件处理
+                    me.__ixCurrentView.addListener('ixselection', me._ixOnSelection, me);
+                }
+                me._ixOnSelection(me.__ixCurrentView, []);
+            }
+
+            // 触发视图变更事件
+            if (me.hasListeners.ixviewchanged) {
+                me.fireEvent('ixviewchanged', me, view);
+            }
+        },
+
+        /**
+         * 选择数据事件处理
+         * @param {Ext.Component} view 列表组件。
+         * @param {Ext.data.Model} data 选择的数据集合。
+         */
+        _ixOnSelection: function (view, data) {
+            var me = this;
+            if (!me.__ixActionBarIds) {
+                return;
+            }
+            var multi = data.length > 1;
+            Ext.Object.each(me.__ixActionBarIds, function (key, value) {
+                var tbr = Ext.getCmp(key);
+                if (!tbr) {
+                    return;
+                }
+                var ids = tbr.ixGetAlignIds(view);
+                Ext.each(ids, function (id) {
+                    var cmp = Ext.getCmp(id);
+                    if (cmp && cmp.ixIsAction === true) {
+                        var align = cmp.getIxAlign();
+                        if (align) {
+                            var enabled = align.ixIsEnabled(multi, data);
+                            cmp.setDisabled(!enabled);
+                        }
+                    }
+                });
+            });
         },
 
         _ixSetView: function (idx) {
             var me = this;
+            var views = me.getIxView();
             Ext.suspendLayouts();
             me.removeAll();
-            var views = me.getIxView();
             var view = me.add(views[idx]);
             var listType = view.ixListType || 'list';
             if (Ext.isString(listType)) {
@@ -260,6 +351,7 @@ Ext.define('iExt.app.view.container.List', {
                     break;
             }
             Ext.resumeLayouts(true);
+            return view;
         },
 
         _ixSetListAction: function () {

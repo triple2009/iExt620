@@ -61,6 +61,7 @@ Ext.define('iExt.panel.View', {
         var view = {
             xtype: 'ixdataview',
             store: ixstore,
+            ixQuickView: me.getIxQuickView(),
             listeners: {
                 ixselection: {
                     fn: me.ixOnSelectionChange,
@@ -68,6 +69,7 @@ Ext.define('iExt.panel.View', {
                 }
             }
         };
+
         var viewConfig = me.getIxViewConfig();
         if (viewConfig) {
             Ext.apply(view, viewConfig);

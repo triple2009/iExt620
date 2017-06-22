@@ -21,3 +21,9 @@
     /* box-shadow: 0px 0px 1px 1px #666666; */
     border: solid 1px #666666;
 }
+
+.ix-kanban-item-selected {
+    outline: none !important;
+    border-color: #515081;
+    background-color: #ece9c2;
+}

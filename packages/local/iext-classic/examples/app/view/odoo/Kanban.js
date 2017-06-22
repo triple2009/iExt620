@@ -11,6 +11,7 @@ Ext.define('app.view.odoo.Kanban', {
         type: 'ixlist'
     },
 
+    ixQuickView: 'ixqvform',
     ixStages: 'app.enums.UserStatus',
     /*
     ixStages: {
@@ -41,8 +42,8 @@ Ext.define('app.view.odoo.Kanban', {
         '</tpl>">{name}</div><div>{phone}</div><div>{email}</div></span>',
 
     listeners: {
-        ixitemclick: function (kanban, item, data) {
-            iExt.Toast.ixInfo(data.name);
+        ixitemclick: function (kanban, item, record) {
+            iExt.Toast.ixInfo(record.get('id') + '-' + record.get('name'));
         }
     }
 

@@ -12,6 +12,10 @@ Ext.define('iExt.panel.Kanban', {
     bodyCls: 'ix-kanban-body',
     referenceHolder: true,
 
+    mixins: [
+        'iExt.mixin.ListView'
+    ],
+
     /**
      * 可配置主题
      * 可以在主题包中进行重载
@@ -28,6 +32,10 @@ Ext.define('iExt.panel.Kanban', {
     },
 
     config: {
+        /**
+         * 目前不支持复选
+         */
+        ixMulti: false,
         /**
          * 阶段集合 {String|Object}
          * String：表示枚举类型
@@ -47,16 +55,16 @@ Ext.define('iExt.panel.Kanban', {
          */
         ixCollapsible: false,
         /**
-         * 数据源 {Object}
-         * 数据源对象{type: ''}
-         */
-        ixStore: null,
-        /**
          * 看板项模板
          * 使用 Ext.Component 做为组件显示
          */
         ixItemTpl: null
     },
+
+    /**
+     * 数据项选择样式
+     */
+    itemSelectedCls: 'ix-kanban-item-selected',
 
     /**
      * 分页大小
@@ -154,6 +162,10 @@ Ext.define('iExt.panel.Kanban', {
         me._ixRenderItems(records);
     },
 
+    applyIxMulti: function (multi) {
+        return false;
+    },
+
     applyIxStages: function (stages) {
         if (Ext.isString(stages)) {
             var enums = Ext.ClassManager.get(stages);
@@ -191,6 +203,26 @@ Ext.define('iExt.panel.Kanban', {
         return store;
     },
 
+    /**
+     * 获取选择的数据
+     */
+    ixGetSelectedData: function () {
+        var me = this,
+            data = [];
+        if (me.__ixSelectedItem) {
+            data.push(me.__ixSelectedItem.record);
+        }
+        return data;
+    },
+
+    /**
+     * 销毁处理，清除缓存的视图
+     */
+    onDestroy: function () {
+        Ext.destroyMembers(this, '__ixSelectedItem');
+        this.callParent();
+    },
+
     privates: {
 
         _ixOnDataLoad: function (store, records, successful, operation, eOpts) {
@@ -224,8 +256,8 @@ Ext.define('iExt.panel.Kanban', {
                         listeners: {
                             click: {
                                 element: 'el',
-                                fn: function () {
-                                    me._ixItemClick(this, record.data);
+                                fn: function (e, t, eOpts) {
+                                    me._ixItemClick(e, t, eOpts, record);
                                 },
                                 scope: me
                             }
@@ -235,12 +267,45 @@ Ext.define('iExt.panel.Kanban', {
                     stagePanel.add(cmp);
                 }
             });
+
+            // 清除已选择的数据
+            me.__ixSelectedItem = null;
+            if (me.hasListeners.ixselection) {
+                me.fireEvent('ixselection', me, []);
+            }
             Ext.resumeLayouts(true);
         },
 
-        _ixItemClick: function (item, data) {
+        _ixItemClick: function (e, t, eOpts, record) {
             var me = this;
-            me.fireEvent('ixitemclick', me, item, data);
+            var id = e.currentTarget.id;
+            var item = Ext.getCmp(id);
+            if (me.__ixSelectedItem) {
+                me.__ixSelectedItem.item.removeCls(me.itemSelectedCls);
+            }
+            item.addCls(me.itemSelectedCls);
+            me.__ixSelectedItem = {
+                item: item,
+                record: record
+            };
+
+            // 快速查看
+            var qv = me.getIxQuickView();
+            if (qv) {
+                me.fireEvent('ixopenview', me, qv, {
+                    target: iExt.action.ViewTarget.QUICK,
+                    viewConfig: {
+                        ixRecord: record
+                    }
+                });
+            }
+
+            if (me.hasListeners.ixitemclick) {
+                me.fireEvent('ixitemclick', me, item, record);
+            }
+            if (me.hasListeners.ixselection) {
+                me.fireEvent('ixselection', me, [record]);
+            }
         }
     }
 

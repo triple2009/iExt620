@@ -11,7 +11,7 @@ Ext.define('app.view.odoo.All', {
     initComponent: function () {
         var me = this;
         var tbar = {
-            xtype: 'ixacttbr',
+            xtype: 'ixlisttbr',
             items: [{
                 text: '新建',
                 iconCls: 'x-fa fa-plus',
@@ -23,12 +23,48 @@ Ext.define('app.view.odoo.All', {
                 listeners: {
                     click: function (item, e, eOpts) {
                         //var data = item.getIxAlign().ixGetAlignData();
-                        item.fireEvent('ixopenview', item, 'app-user-add', {
+                        item.fireEvent('ixopenview', item, 'app-odoo-add', {
                             target: iExt.action.ViewTarget.MAIN
                         });
                     }
                 },
                 ixViewName: 'app-user-add'
+            }, {
+                text: '详细',
+                iconCls: 'x-fa fa-file-o',
+                ixAuth: {
+                    ixOperation: 'detail'
+                },
+                ixAlign: {
+                    type: 'list',
+                    ixMode: false
+                },
+                listeners: {
+                    click: function (item, e, eOpts) {
+                        var data = item.getIxAlign().ixGetAlignData();
+                        iExt.View.ixOpenView(item, {
+                            xtype: 'ixqvform',
+                            ixRecord: data[0]
+                        }, 'quick');
+                    }
+                }
+            }, {
+                text: '删除',
+                iconCls: 'x-fa fa-trash',
+                ixAuth: {
+                    ixOperation: 'remove'
+                },
+                ixAlign: {
+                    type: 'list',
+                    ixMode: true,
+                    ixEnabledWhen: '"{name}"==="Worf"'
+                },
+                listeners: {
+                    click: function (item, e, eOpts) {
+                        var data = item.getIxAlign().ixGetAlignData();
+                        iExt.Toast.ixInfo(data.length);
+                    }
+                }
             }, '->', {
                 text: '操作',
                 menuAlign: 'tc-bc',
@@ -54,7 +90,7 @@ Ext.define('app.view.odoo.All', {
         tbar.items.push({
             xtype: 'ixtagsearch',
             ixView: 'app-user-search',
-            flex: 2,
+            flex: 3,
             store: {
                 type: 'ixenumsstore',
                 ixEnumType: 'iExt.meta.Types'
@@ -62,7 +98,6 @@ Ext.define('app.view.odoo.All', {
         });
         me.tbar = tbar;
         me.callParent();
-
     },
 
     ixView: [{
