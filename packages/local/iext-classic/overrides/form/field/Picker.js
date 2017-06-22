@@ -6,6 +6,7 @@
 Ext.define('Ext.overrides.form.field.Picker', {
     override: 'Ext.form.field.Picker',
 
-    pickerOffset: [0, 1]
+    pickerOffset: [0, 1],
+    pickerAlign: 'tl-bl'
 
 });

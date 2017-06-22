@@ -57,6 +57,7 @@ Ext.define('iExt.form.field.TagSearch', {
     triggerCls: 'x-fa fa-search-plus',
     // autoselect=true，会自动检索下拉列表的数据
     emptyText: '搜索 ···',
+    pickerAlign: 'tr-br',
 
     /* 可配置的标签样式
     tagItemCls: 'ix-tagsearch-item',

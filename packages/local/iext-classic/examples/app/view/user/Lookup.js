@@ -17,6 +17,27 @@ Ext.define('app.view.user.Lookup', {
     },
 
     tbar: [{
+        text: '搜索',
+        xtype: 'ixactbtn',
+        iconCls: 'x-fa fa-search',
+        ixAuth: {
+            ixService: 'menu',
+            ixOperation: 'edit'
+        },
+        ixAlign: {
+            type: 'list',
+            ixMode: null
+        },
+        listeners: {
+            click: function (item, e, eOpts) {
+                iExt.View.ixOpenView(item, 'app-user-search', 'ixwin');
+            }
+        }
+    }, {
+        text: '搜索',
+        xtype: 'ixsearchbtn',
+        ixView: 'app-user-search'
+    }, {
         xtype: 'ixtagsearch',
         ixView: 'app-user-search',
         flex: 1
