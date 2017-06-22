@@ -88,6 +88,9 @@ Ext.define('iExt.domain.Domain', {
 
         statics: {
 
+            /**
+             * 继承基类的操作信息。
+             */
             _ixInitActions: function (data, cls, proto) {
                 var actionsDefs = data.ixActions;
                 var superActions = proto.ixActions;

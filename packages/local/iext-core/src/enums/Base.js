@@ -57,19 +57,30 @@ Ext.define('iExt.enums.Base', {
     },
 
     /**
-     * 根据值获取枚举项。
+     * 根据枚举值或枚举名称获取枚举项。
      * @memberOf iExt.enums.Base#
-     * @param {Number} value 枚举值。
+     * @param {Number|String} value 枚举值或枚举名称。
      * @return {Object} 枚举项。
      */
     ixGetItem: function (value) {
-        var me = this, enumItem = null;
-        Ext.Array.findBy(me.ixItems, function (item) {
-            if (item[me.ixValueProperty] === value) {
-                enumItem = Ext.clone(item);
-                return true;
-            }
-        });
+        var me = this,
+            enumItem = null;
+        if (Ext.isString(value)) {
+            value = value.toUpperCase();
+            Ext.Array.findBy(me.ixItems, function (item) {
+                if (item[me.ixNameProperty] === value) {
+                    enumItem = Ext.clone(item);
+                    return true;
+                }
+            });
+        } else if (Ext.isNumber(value)) {
+            Ext.Array.findBy(me.ixItems, function (item) {
+                if (item[me.ixValueProperty] === value) {
+                    enumItem = Ext.clone(item);
+                    return true;
+                }
+            });
+        }
         return enumItem;
     },
 
@@ -80,7 +91,9 @@ Ext.define('iExt.enums.Base', {
      * @return {Object[]} 枚举项集合。
      */
     ixGetItems: function (values) {
-        var me = this, items = [], value;
+        var me = this,
+            items = [],
+            value;
         Ext.Array.findBy(me.ixItems, function (item) {
             value = item[me.ixValueProperty];
             if ((values & value) === value) {
@@ -98,7 +111,8 @@ Ext.define('iExt.enums.Base', {
      * @return {String} 枚举的值。
      */
     ixGetValue: function (name, delimiter) {
-        var me = this, value = 0;
+        var me = this,
+            value = 0;
         delimiter = delimiter || me.ixDelimiter;
         var names = name.split(delimiter);
         if (names.length > 1 && me.ixBit === true) {
@@ -119,7 +133,9 @@ Ext.define('iExt.enums.Base', {
      * @return {String} 枚举的名称。
      */
     ixGetName: function (value, delimiter) {
-        var me = this, x = 1, name = '';
+        var me = this,
+            x = 1,
+            name = '';
         delimiter = delimiter || me.ixDelimiter;
         if (me.ixBit === true) {
             while (x <= value) {
@@ -146,12 +162,14 @@ Ext.define('iExt.enums.Base', {
      * @return {String} 枚举的显示的文本。
      */
     ixGetText: function (item, delimiter) {
-        var me = this, name = item;
+        var me = this,
+            name = item;
         delimiter = delimiter || me.ixDelimiter;
         if (!Ext.isString(item)) {
             name = me.ixGetName(item);
         }
-        var texts = '', names = name.split(delimiter);
+        var texts = '',
+            names = name.split(delimiter);
         if (names.length > 1 && me.ixBit === true) {
             for (var i = 0; i < names.length; i++) {
                 name = names[i];
@@ -190,8 +208,11 @@ Ext.define('iExt.enums.Base', {
          * @return {String} 枚举的值。
          */
         _ixValue: function (name) {
-            var me = this, result = null;
-            if (name === '') { return result; }
+            var me = this,
+                result = null;
+            if (name === '') {
+                return result;
+            }
 
             result = me[name];
             if (!result) {
@@ -208,7 +229,8 @@ Ext.define('iExt.enums.Base', {
          * @return {String} 枚举的名称。
          */
         _ixName: function (value) {
-            var me = this, result = null;
+            var me = this,
+                result = null;
 
             for (var prop in me) {
                 if (value === me[prop]) {
@@ -230,7 +252,8 @@ Ext.define('iExt.enums.Base', {
          * @return {String} 枚举的显示的文本。
          */
         _ixText: function (name) {
-            var me = this, result = null;
+            var me = this,
+                result = null;
             Ext.Array.findBy(me.ixItems, function (item) {
                 if (item[me.ixNameProperty] === name) {
                     result = item[me.ixTextProperty];

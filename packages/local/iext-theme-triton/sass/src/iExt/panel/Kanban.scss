@@ -1,6 +1,14 @@
-.ix-kaban-body {
+.ix-kanban-body {
     border-top: solid 1px #adadad !important;
-    border-bottom: solid 1px #adadad !important;
+}
+
+
+/* 列表容器 */
+
+.ix-list-container-body {
+    .ix-kanban-body {
+        border-top-width: 0 !important;
+    }
 }
 
 .ix-kanban-item {

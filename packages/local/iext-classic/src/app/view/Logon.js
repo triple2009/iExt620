@@ -6,7 +6,7 @@
 Ext.define('iExt.app.view.Logon', {
     extend: 'Ext.container.Viewport',
     alias: 'widget.ixlogon',
-    cls: 'ix-logon',
+    cls: 'ix-app-logon',
 
     requires: [
         'iExt.form.Panel'
@@ -67,11 +67,13 @@ Ext.define('iExt.app.view.Logon', {
         me.items = [];
 
         var form = {
-            xtype: 'form',
+            xtype: 'ixform',
             bodyPadding: '10 20 20 20',
             defaultButton: 'btnLogon',
             referenceHolder: true,
             title: me.getIxTitle(),
+            minWidth: null,
+            minHeight: null,
             layout: {
                 type: 'vbox'
             },

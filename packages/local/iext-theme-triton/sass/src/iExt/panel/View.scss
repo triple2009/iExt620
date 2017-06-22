@@ -6,5 +6,10 @@
 
 .ix-view-body {
     border-top: solid 1px #adadad !important;
-    border-bottom: solid 1px #adadad !important;
+}
+
+.ix-list-container-body {
+    .ix-view-body {
+        border-top-width: 0 !important;
+    }
 }

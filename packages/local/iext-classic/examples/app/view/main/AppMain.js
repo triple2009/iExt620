@@ -11,7 +11,7 @@ Ext.define('app.view.main.AppMain', {
     viewModel: 'appmain',
     
     //ixHomeView: 'app-user',
-    ixHomeView: 'app-odoo-list',
+    ixHomeView: 'app-odoo-all',
     ixAppsStore: { type: 'apps' }
 
 });

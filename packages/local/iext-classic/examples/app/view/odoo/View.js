@@ -1,13 +1,12 @@
 Ext.define('app.view.odoo.View', {
-    extend: 'iExt.grid.Panel',
+    extend: 'iExt.panel.View',
     xtype: 'app-odoo-view',
 
     requires: [
-        'iExt.grid.column.Column'
+        'app.enums.UserStatus'
     ],
-    layout: 'fit',
 
-    title: 'Users',
+    title: '用户视图',
     controller: {
         type: 'ixlist'
     },
@@ -15,140 +14,23 @@ Ext.define('app.view.odoo.View', {
     ixStore: {
         type: 'user'
     },
-    //ixPreviewField: 'email',
-    ixQuickView: 'ixqvform',
-    tbar: {
-        xtype: 'ixacttbr',
-        ixAuthService: 'user',
-        items: [{
-            text: '新建',
-            iconCls: 'x-fa fa-plus',
-            ixAuth: 'add',
-            ixAlign: {
-                type: 'list',
-                ixMode: null
-            },
-            listeners: {
-                click: function (item, e, eOpts) {
-                    //var data = item.getIxAlign().ixGetAlignData();
-                    item.fireEvent('ixopenview', item, 'app-odoo-add', {
-                        target: iExt.action.ViewTarget.MAIN
-                    });
-                }
-            },
-            ixViewName: 'app-user-add'
-        }, {
-            xtype: 'tbspacer',
-            flex: 1
-        }, {
-            text: '操作',
-            menu: {
-                xtype: 'ixactmenu',
-                items: [{
-                    text: '详细',
-                    iconCls: 'x-fa fa-file-o',
-                    ixAuth: {
-                        ixOperation: 'detail'
-                    },
-                    ixAlign: {
-                        type: 'list',
-                        ixMode: false
-                    },
-                    listeners: {
-                        click: function (item, e, eOpts) {
-                            var data = item.getIxAlign().ixGetAlignData();
-                            iExt.View.ixOpenView(item, {
-                                xtype: 'ixqvform',
-                                ixRecord: data[0]
-                            }, 'quick');
-                        }
-                    }
-                }, {
-                    text: '删除',
-                    iconCls: 'x-fa fa-trash',
-                    ixAuth: {
-                        ixOperation: 'remove'
-                    },
-                    ixAlign: {
-                        type: 'list',
-                        ixMode: true,
-                        ixEnabledWhen: '"{name}"==="Worf"'
-                    },
-                    listeners: {
-                        click: function (item, e, eOpts) {
-                            var data = item.getIxAlign().ixGetAlignData();
-                            iExt.Toast.ixInfo(data.length);
-                        }
-                    }
-                }, '-', {
-                    text: '启用',
-                    ixAuth: {
-                        ixOperation: 'active'
-                    },
-                    ixAlign: {
-                        type: 'list',
-                        ixMode: null
-                    }
-                }, {
-                    text: '停用',
-                    ixAuth: {
-                        ixOperation: 'inactive'
-                    },
-                    ixAlign: {
-                        type: 'list',
-                        ixMode: true
-                    }
-                }, {
-                    text: '审批',
-                    ixAuth: {
-                        ixOperation: 'approve'
-                    },
-                    ixAlign: {
-                        type: 'list',
-                        ixMode: false
-                    }
-                }]
-            }
-        }, {
-            xtype: 'ixtagsearch',
-            ixView: 'app-user-search',
-            flex: 2,
-            store: {
-                type: 'ixenumsstore',
-                ixEnumType: 'iExt.meta.Types'
-            }
-        }]
+
+    ixViewConfig: {
+        ixCols: 3,
+        itemTpl: '<span style="float:left;"><img style="width:68px;height:68px;" /></span>' +
+            '<span style="float:left;margin-left:10px;">' +
+            '<div style="font-size:16px;font-weight:bold;margin-bottom:15px;' +
+            '<tpl if="status==1">color:#7a3737;' +
+            '<tpl elseif="status==2">color:#756832;' +
+            '<tpl elseif="status==4">color:#5d6937;' +
+            '<tpl elseif="status==8">color:#1a5d83;' +
+            '</tpl>">{name}</div><div>{phone}</div><div>{email}</div></span>'
     },
 
-    /*
-    viewConfig: {
-        itemTpl: '<div>{name}</div>'
-    },
-    */
-    
-    initComponent: function () {
-        var me = this;
-        // itemclick 与数据选择有冲突
-        me.on('itemdblclick', me.ixOnItemClick, me);
-        me.callParent();
-    },
-
-    columns: [{
-        text: 'Name',
-        dataIndex: 'name'
-    }],
-
-    ixOnItemClick: function (view, record, item, index, e, eOpts) {
-        var me = this;
-        /*
-        iExt.View.ixOpenView(me, {
-            xtype: 'ixqvform',
-            ixRecord: record
-        }, 'quick');
-        */
-        me.fireEvent('ixopenview', item, 'app-user-detail', {
-            target: iExt.action.ViewTarget.MAIN
-        });
+    listeners: {
+        ixselection: function (sm, selections) {
+            //iExt.Toast.ixInfo(selections.length);
+        }
     }
 
 });

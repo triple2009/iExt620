@@ -25,6 +25,11 @@ Ext.define('iExt.mixin.ListView', {
          */
         ixStore: null,
         /**
+         * 列表类型
+         * {iExt.app.view.ListTypes}
+         */
+        ixListType: 'list',
+        /**
          * 缺省搜索条件
          */
         ixFilters: null,
@@ -39,6 +44,17 @@ Ext.define('iExt.mixin.ListView', {
      * 0 表示不分页
      */
     ixPageSize: null,
+
+    /**
+     * 根据字符串解析枚举值
+     */
+    applyIxListType: function (listType) {
+        if (Ext.isString(listType)) {
+            listType = iExt.app.view.ListTypes.ixGetValue(
+                listType.toUpperCase());
+        }
+        return listType;
+    },
 
     /**
      * 数据选择事件。

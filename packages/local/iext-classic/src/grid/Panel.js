@@ -48,14 +48,6 @@ Ext.define('iExt.grid.Panel', {
         ixPreviewField: null
     },
 
-    /**
-     * 分页栏缺省配置
-     */
-    ixPagingConfig: {
-        displayInfo: true,
-        ixLastInfo: true
-    },
-
     columnLines: false,
     headerBorders: true,
     viewConfig: {
@@ -66,6 +58,16 @@ Ext.define('iExt.grid.Panel', {
     defaults: {
         xtype: 'ixcol'
     },
+
+    /**
+     * 分页栏缺省配置
+     */
+    ixPagingConfig: {
+        displayInfo: true,
+        ixLastInfo: true
+    },
+
+    ixListType: 'list',
 
     initComponent: function () {
         var me = this,
