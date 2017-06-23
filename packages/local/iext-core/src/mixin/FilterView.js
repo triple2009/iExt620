@@ -19,7 +19,7 @@ Ext.define('iExt.mixin.FilterView', {
 
     config: {
         /**
-         * 筛选条件配置
+         * 缺省的筛选条件配置。
          */
         ixFilters: null
     },
@@ -33,7 +33,7 @@ Ext.define('iExt.mixin.FilterView', {
     },
 
     /**
-     * 获取是否合法信息
+     * 获取是筛选条件否合法信息。
      */
     ixIsValid: iExt.unimplFn,
 
@@ -44,7 +44,7 @@ Ext.define('iExt.mixin.FilterView', {
      * @param {Event} e 事件。
      * @param {Object} eOpts 事件参数。
      */
-    ixClear: function (item, e, eOpts) {
+    ixClearFilters: function (item, e, eOpts) {
         var me = this;
         iExt.View.ixClearValues(me);
     },

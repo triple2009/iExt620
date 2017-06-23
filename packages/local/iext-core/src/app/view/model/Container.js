@@ -11,25 +11,25 @@ Ext.define('iExt.app.view.model.Container', {
 
     data: {
         /**
-         * 视图容器数据
-         * 其他视图定义的数据不能以ix开头
+         * 视图容器数据。
+         * 其他视图定义的数据不能以ix开头。
          */
         ixvc: {
             /**
-             * 标题
+             * 标题。
              */
             title: '',
 
             /**
-             * 子标题
+             * 子标题。
              */
             subTitle: null,
             /**
-             * 当前视图的引用名称
+             * 当前视图的引用名称。
              */
             viewRef: '',
             /**
-             * 当前视图的标识
+             * 当前视图的标识。
              */
             viewId: ''
         }
@@ -52,14 +52,14 @@ Ext.define('iExt.app.view.model.Container', {
     },
 
     /**
-     * 设置标题的快捷方式
+     * 设置标题的快捷方式。
      */
     ixSetTitle: function (title) {
         this.set('ixvc.title', title);
     },
 
     /**
-     * 设置子标题的快捷方式
+     * 设置子标题的快捷方式。
      */
     ixSetSubTitle: function (subTitle) {
         this.set('ixvc.subTitle', subTitle);

@@ -100,7 +100,7 @@ Ext.define('iExt.form.field.TagLookup', {
             return;
         } 
         me.callParent();
-        me.ixSetValues(pickedRecords , true);
+        me.ixSetLinkValues(pickedRecords , true);
     },
 
     privates: {

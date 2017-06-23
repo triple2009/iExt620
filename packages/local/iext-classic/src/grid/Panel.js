@@ -90,9 +90,15 @@ Ext.define('iExt.grid.Panel', {
                 ixstore = Ext.apply(ixstore, {
                     pageSize: me.ixPageSize
                 });
+                var filters = me.getIxFilters();
+                if (filters) {
+                    ixstore.filters = filters;
+                }
                 store = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
                 me.store = store;
             }
+
+            // 设置分页栏
             if (store && me.ixPageSize > 0) {
                 if (me.bbar) {
                     Ext.apply(me.bbar, {
@@ -196,8 +202,10 @@ Ext.define('iExt.grid.Panel', {
                 callback: function (records, operation, success) {
                     if (success === true) {
                         var selModel = me.getSelectionModel();
-                        var selections = me.getView().getSelection();
-                        me.ixOnSelectionChange(selModel, selections);
+                        //var selections = me.getView().getSelection();
+                        //me.ixOnSelectionChange(selModel, selections);
+                        selModel.clearSelections();
+                        me.ixOnSelectionChange(selModel, []);
                     }
                 }
             });
@@ -225,6 +233,9 @@ Ext.define('iExt.grid.Panel', {
             } else {
                 store.load();
             }
+            var selModel = me.getSelectionModel();
+            selModel.clearSelections();
+            me.ixOnSelectionChange(selModel, []);
         }
     },
 

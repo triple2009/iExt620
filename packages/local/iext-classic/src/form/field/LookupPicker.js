@@ -85,7 +85,7 @@ Ext.define('iExt.form.field.LookupPicker', {
          */
         _ixOnSelection: function (sm, records) {
             var me = this;
-            me.ixSetValues(records, false);
+            me.ixSetLinkValues(records, false);
         }
     }
 

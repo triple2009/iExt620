@@ -21,11 +21,8 @@ var iExt = iExt || {}; // jshint ignore:line
         unimplFn: function () {
             var msgs = [],
                 msg;
+            // 无法获取来源信息
             msgs.push('调用了未实现的方法');
-            if (arguments && arguments.callee) {
-                msg = this.getMsgFrom(arguments.callee);
-                msgs.push(msg);
-            }
             msg = msgs.join(' ... ');
             Ext.log({
                 level: 'warn'

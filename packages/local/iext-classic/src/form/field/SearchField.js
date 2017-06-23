@@ -23,7 +23,7 @@ Ext.define('iExt.form.field.SearchField', {
 
     initComponent: function () {
         var me = this,
-            target = me.getIxAlignTarget(),
+            target = me.getIxAlignTargetRef(),
             triggers = {
                 search: {
                     cls: 'x-fa fa-search',
@@ -35,7 +35,7 @@ Ext.define('iExt.form.field.SearchField', {
         me.setIxAlign({
             type: 'list',
             ixMode: null,
-            ixTarget: target
+            ixTargetRef: target
         });
 
         me.setTriggers(triggers);

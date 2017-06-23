@@ -88,7 +88,7 @@ Ext.define('iExt.form.field.LookupField', {
          */
         _ixOnSelection: function (item, records) {
             var me = this;
-            me.ixSetValues(records, false);
+            me.ixSetLinkValues(records, false);
         }
     }
 });

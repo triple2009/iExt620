@@ -11,11 +11,11 @@ Ext.define('iExt.app.view.controller.List', {
         component: {
             '*': {
                 /**
-                 * 搜索事件
+                 * 搜索事件。
                  */
                 ixsearch: 'ixOnSearch',
                 /**
-                 * 快速搜索事件
+                 * 快速搜索事件。
                  */
                 ixquicksearch: 'ixOnSearch'
             }
@@ -30,7 +30,7 @@ Ext.define('iExt.app.view.controller.List', {
      */
     ixOnViewInited: function (view, auths) {
         // <debug>
-        iExt.log('控制器完成视图初始化', view.$className, view.getId());
+        iExt.log('列表控制器完成视图初始化', view.$className, view.getId());
         // </debug>
 
         var me = this,
@@ -68,7 +68,6 @@ Ext.define('iExt.app.view.controller.List', {
             // 初始设置对齐组件
             me.ixOnSelection(view, []);
         }
-        me.callParent(arguments);
     },
 
     /**
@@ -80,7 +79,7 @@ Ext.define('iExt.app.view.controller.List', {
         var multi = data.length > 1;
         // 列表控件的对齐操作组件已经在
         // Base._ixInitActionItems() 方法中设置
-        var ids = item.ixAlignItemIds || [];
+        var ids = item._$ixAlignTargetIds || [];
         Ext.each(ids, function (id, index) {
             var cmp = Ext.getCmp(id);
             if (cmp && cmp.ixIsAction === true) {
@@ -102,8 +101,9 @@ Ext.define('iExt.app.view.controller.List', {
         var me = this,
             id = item.getId();
 
+        me._$ixLastFilter = filters;
         // 获取搜索组件对齐的列表组件
-        var actItems = me._ixActionItems.filter(function (element, index) {
+        var actItems = me._$ixActionTargetRefX.filter(function (element, index) {
             return element.itemId === id;
         });
         if (actItems.length > 0) {

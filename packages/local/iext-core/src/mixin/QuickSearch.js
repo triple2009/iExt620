@@ -22,26 +22,26 @@ Ext.define('iExt.mixin.QuickSearch', {
 
     config: {
         /**
-         * 筛选条件配置
+         * 筛选条件配置。
          */
         ixFilters: null,
 
         /**
-         * 对齐的目标控件引用标识
-         * 表示对齐的控件reference
+         * 对齐的目标控件引用标识。
+         * 表示对齐的控件reference。
          */
-        ixAlignTarget: null
+        ixAlignTargetRef: null
     },
 
     /**
-     * 设置自动搜索，例如text的回车事件处理
+     * 设置自动搜索，例如text的回车事件处理。
      */
     ixAutoSearch: true,
 
     /**
-     * 对于文本框等回车触发搜索的情况
-     * 需要传递实际的搜索按钮组件
-     * 通过该属性来设置需要触发的实际组件
+     * 对于文本框等回车触发搜索的情况，
+     * 需要传递实际的搜索按钮组件，
+     * 通过该属性来设置需要触发的实际组件。
      */
     ixEventItem: null,
 
@@ -54,7 +54,10 @@ Ext.define('iExt.mixin.QuickSearch', {
     },
 
     /**
-     * 触发快速搜索事件
+     * 触发快速搜索事件。
+     * @param {Ext.Component} item 触发事件的控件。
+     * @param {Event} e 事件。
+     * @param {Object} eOpts 事件参数。
      */
     ixOnQuickSearch: function (item, e, eOpts) {
         var me = this,
@@ -70,12 +73,13 @@ Ext.define('iExt.mixin.QuickSearch', {
 
     /**
      * 清除搜索条件事件处理。
+     * 由于存在多个mixin，为了避免方法冲突，尽量采用完整命名。
      * @memberOf iExt.mixin.QuickSearch#
      * @param {Ext.Component} item 触发事件的控件。
      * @param {Event} e 事件。
      * @param {Object} eOpts 事件参数。
      */
-    ixOnClear: function (item, e, eOpts) {
+    ixOnQuickClear: function (item, e, eOpts) {
         var me = this;
         iExt.View.ixClearValues(me);
         if (me.ixAutoSearch === true) {
@@ -84,7 +88,7 @@ Ext.define('iExt.mixin.QuickSearch', {
     },
 
     /**
-     * 开放此方法是为了可以由控件决定设置哪些子控件
+     * 开放此方法是为了可以由组件决定设置哪些子组件。
      */
     ixSetAutoSearch: function (items) {
         var me = this;
@@ -94,7 +98,7 @@ Ext.define('iExt.mixin.QuickSearch', {
     privates: {
 
         /**
-         * 设置自动快速搜索
+         * 设置自动快速搜索。
          */
         _ixSetAutoSearch: function (items) {
             var me = this;
@@ -124,11 +128,11 @@ Ext.define('iExt.mixin.QuickSearch', {
         },
 
         /**
-         * 回车自动搜索
-         * @param {Ext.Component} item 触发事件的组件
-         * 对于文本框等输入控件需要进行转换为搜索的动作按钮
-         * 因为在列表控制器的搜索事件监听处理中需要根据item
-         * 去搜索与之对齐的列表组件
+         * 回车自动搜索。
+         * @param {Ext.Component} item 触发事件的组件。
+         * 对于文本框等输入控件需要进行转换为搜索的动作按钮，
+         * 因为在列表控制器的搜索事件监听处理中，
+         * 需要根据item去搜索与之对齐的列表组件。
          */
         _ixOnKeyPress: function (item, e, eOpts) {
             if (e.getCharCode() === Ext.EventObject.ENTER) {

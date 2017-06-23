@@ -1,5 +1,6 @@
 ﻿/**
  * @class iExt.align.Form
+ * @extends {iExt.align.Base} 
  * @classdesc 用户操作动作组件表单对齐类。
  */
 Ext.define('iExt.align.Form', {
@@ -7,11 +8,12 @@ Ext.define('iExt.align.Form', {
     alias: 'ixalign.form',
 
     /**
-     * 是否可用
-     * @param {Boolean} isValid 数据是否有效
-     * @param {Ext.data.Model[]} data 数据
+     * 是否可用的方法，根据表单合法性验证。
+     * @param {Boolean} isValid 数据是否有效。
+     * @param {Ext.data.Model[]} records 数据（可以验证多条数据？）。
+     * @return {Boolean} 是否可用。
      */
-    ixIsEnabled: function (isValid, data) {
+    ixIsEnabled: function (isValid, records) {
         var me = this,
             enabled = true,
             mode = me.getIxMode();
@@ -33,8 +35,8 @@ Ext.define('iExt.align.Form', {
 
         var fn = me.getIxEnabledWhen();
         if (fn) {
-            for (var i = 0; i < data.length; i++) {
-                enabled = fn(data[i]);
+            for (var i = 0; i < records.length; i++) {
+                enabled = fn(records[i]);
                 if (!enabled) {
                     break;
                 }

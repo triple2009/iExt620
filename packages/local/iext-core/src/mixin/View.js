@@ -23,10 +23,10 @@ Ext.define('iExt.mixin.View', {
     ixHashCode: 0,
 
     /**
-     * 与该视图对齐的操作组件标识集合
-     * 在视图控制器加载时会自动设置
+     * 与该视图对齐的操作组件标识集合。
+     * 在视图控制器加载时会自动设置。
      */
-    ixAlignItemIds: null,
+    _$ixAlignTargetIds: null,
 
     /**
      * 初始化视图处理。

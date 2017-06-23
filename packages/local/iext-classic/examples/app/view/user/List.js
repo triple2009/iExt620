@@ -34,12 +34,11 @@ Ext.define('app.view.user.List', {
             listeners: {
                 click: function (item, e, eOpts) {
                     //var data = item.getIxAlign().ixGetAlignData();
-                    item.fireEvent('ixopenview', item, 'app-user-add', {
+                    item.fireEvent('ixopenview', item, 'app-odoo-add', {
                         target: iExt.action.ViewTarget.MAIN
                     });
                 }
-            },
-            ixViewName: 'app-user-add'
+            }
         }, {
             text: '编辑',
             iconCls: 'x-fa fa-edit',

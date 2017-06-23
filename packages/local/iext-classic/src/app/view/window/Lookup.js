@@ -12,12 +12,12 @@ Ext.define('iExt.app.view.window.Lookup', {
     bodyPadding: 0,
 
     /**
-     * 缺省标题
+     * 缺省标题。
      */
     title: '详细搜索',
 
     /**
-     * 设置容器的工具栏
+     * 设置容器的工具栏。
      */
     ixSetToolbar: function () {
         var me = this;
@@ -38,10 +38,18 @@ Ext.define('iExt.app.view.window.Lookup', {
         }
     },
 
+    /**
+     * 渲染后处理。
+     */
+    ixOnAfterRender: function (win, eOpts) {
+        var me = this;
+        me._ixOnIxSelection(null, []);
+    },
+
     privates: {
 
         /**
-         * 获取搜索的处理按钮
+         * 获取搜索的处理按钮。
          */
         _ixGetButtons: function () {
             var me = this;
@@ -85,10 +93,10 @@ Ext.define('iExt.app.view.window.Lookup', {
         },
 
         /**
-         * 搜索事件处理
-         * @param {Ext.Compomnent} item 触发事件的组件
-         * @param {Event} e 事件
-         * @param {Object} eOpts 事件选项
+         * 选择数据事件处理。
+         * @param {Ext.Compomnent} item 触发事件的组件。
+         * @param {Event} e 事件。
+         * @param {Object} eOpts 事件选项。
          */
         _ixOnOk: function (item, e, eOpts) {
             var me = this;

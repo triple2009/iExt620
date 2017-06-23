@@ -27,14 +27,20 @@ Ext.define('iExt.app.view.controller.Workspace', {
         me.listen({
             component: {
                 "*": {
+                    // 打开视图的事件监听
                     ixopenview: me.ixOnOpenView,
+                    // 打开页面的事件监听
                     ixopenpage: me.ixOnOpenPage,
+                    // 显示提示信息事件监听
+                    // 组件使用 ixshowtip 事件名称
                     ixshowtip: me.ixOnShowTip
                 }
             },
             controller: {
                 "*": {
-                    ixtip: me.ixOnTip
+                    // 显示提示信息事件监听
+                    // 控制器使用 ixtip 事件名称
+                    ixtip: me.ixOnShowTip
                 }
             }
         });
@@ -43,8 +49,8 @@ Ext.define('iExt.app.view.controller.Workspace', {
     },
 
     /**
-     * 打开视图
-     * 每种布局方案可以有不同的打开方式
+     * 打开视图。
+     * 每种布局方案可以有不同的打开方式。
      */
     ixOnOpenView: function () {
         var ws = this.getView();
@@ -52,8 +58,8 @@ Ext.define('iExt.app.view.controller.Workspace', {
     },
 
     /**
-     * 打开页面
-     * 每种布局方案可以有不同的打开方式
+     * 打开页面。
+     * 每种布局方案可以有不同的打开方式。
      */
     ixOpenPage: function () {
         var ws = this.getView();

@@ -14,6 +14,13 @@ Ext.define('app.view.odoo.List', {
 
     ixStore: {
         type: 'user'
+        /*,
+        filters: [{
+            "dataType": "STRING",
+            "operator": "like",
+            "property": "name",
+            "value": "w"
+        }]*/
     },
     //ixPreviewField: 'email',
     ixQuickView: 'ixqvform',

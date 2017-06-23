@@ -12,19 +12,19 @@ Ext.define('iExt.app.view.model.Main', {
 
     data: {
         /**
-         * 应用程序数据
-         * 其他视图定义的数据不能以ix开头
+         * 应用程序数据。
+         * 其他视图定义的数据不能以ix开头。
          */
         ixa: {
             /**
-             * 当前用户信息
+             * 当前用户信息。
              */
             user: {
                 code: 'Administrator',
                 name: '管理员'
             },
             /**
-             * 当前应用信息
+             * 当前应用信息。
              */
             app: {
                 id: '',
@@ -35,14 +35,10 @@ Ext.define('iExt.app.view.model.Main', {
     },
 
     /**
-     * 设置用户的快捷方式
+     * 设置用户的快捷方式。
      */
     ixSetUser: function (user) {
-        this.setData({
-            ixa: {
-                user: user
-            }
-        });
+        this.set('ixa.user', user);
     }
 
 });

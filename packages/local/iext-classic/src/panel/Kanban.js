@@ -100,9 +100,6 @@ Ext.define('iExt.panel.Kanban', {
 
     constructor: function (config) {
         var me = this;
-        if (Ext.isEmpty(me.ixPageSize)) {
-            me.ixPageSize = me.ixTheme.pageSize;
-        }
         if (Ext.isEmpty(me.ixItemConfig)) {
             me.ixItemConfig = me.ixTheme.itemConfig;
         } else {
@@ -114,7 +111,22 @@ Ext.define('iExt.panel.Kanban', {
 
     initComponent: function () {
         var me = this,
-            store = me.getIxStore();
+            ixstore = me.getIxStore();
+
+        if (Ext.isEmpty(me.ixPageSize)) {
+            me.ixPageSize = me.ixTheme.pageSize;
+        }
+        ixstore = Ext.apply(ixstore, {
+            pageSize: me.ixPageSize
+        });
+
+        var filters = me.getIxFilters();
+        if (filters) {
+            ixstore.filters = filters;
+        }
+
+        var store = me.store = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
+        store.on('load', me._ixOnDataLoad, me);
 
         if (store && me.ixPageSize > 0) {
             if (me.bbar) {
@@ -155,11 +167,11 @@ Ext.define('iExt.panel.Kanban', {
     },
 
     afterRender: function () {
-        var me = this,
-            store = me.getIxStore();
-        var records = store.getRange(0);
+        var me = this;
         me.callParent(arguments);
-        me._ixRenderItems(records);
+        if (me.store) {
+            me.store.load();
+        }
     },
 
     applyIxMulti: function (multi) {
@@ -190,19 +202,6 @@ Ext.define('iExt.panel.Kanban', {
         return stages;
     },
 
-    applyIxStore: function (store) {
-        var me = this;
-        if (Ext.isObject(store)) {
-            // 指定的数据源
-            store = Ext.apply(store, {
-                pageSize: me.ixPageSize
-            });
-            store = Ext.data.StoreManager.lookup(store || 'ext-empty-store');
-        }
-        store.on('load', me._ixOnDataLoad, me);
-        return store;
-    },
-
     /**
      * 获取选择的数据
      */
@@ -213,6 +212,48 @@ Ext.define('iExt.panel.Kanban', {
             data.push(me.__ixSelectedItem.record);
         }
         return data;
+    },
+
+    /**
+     * 执行搜索
+     * @param {Object}  filters 搜索条件
+     */
+    ixSearch: function (filters) {
+        var me = this,
+            store = me.getIxStore(),
+            _filters = null;
+
+        // 不支持本地搜索？
+        if (store) {
+            store.clearFilter(true);
+            // 需要处理缺省的搜索条件
+            _filters = filters;
+
+            if (Ext.isObject(_filters)) {
+                store.filter(_filters);
+            } else if (Ext.isArray(_filters) && _filters.length > 0) {
+                store.filter(_filters);
+            } else {
+                store.load();
+            }
+            me.__ixSelectedItem = null;
+            me.ixOnSelectionChange();
+        }
+    },
+
+    /**
+     * 数据选择变更事件处理
+     * 为了统一列表组件，触发自定义的事件
+     */
+    ixOnSelectionChange: function () {
+        var me = this;
+        if (me.hasListeners.ixselection) {
+            var selections = [];
+            if (me.__ixSelectedItem) {
+                selection.push(me.__ixSelectedItem);
+            }
+            me.fireEvent('ixselection', me, selections);
+        }
     },
 
     /**
@@ -270,9 +311,7 @@ Ext.define('iExt.panel.Kanban', {
 
             // 清除已选择的数据
             me.__ixSelectedItem = null;
-            if (me.hasListeners.ixselection) {
-                me.fireEvent('ixselection', me, []);
-            }
+            me.ixOnSelectionChange();
             Ext.resumeLayouts(true);
         },
 
@@ -303,9 +342,7 @@ Ext.define('iExt.panel.Kanban', {
             if (me.hasListeners.ixitemclick) {
                 me.fireEvent('ixitemclick', me, item, record);
             }
-            if (me.hasListeners.ixselection) {
-                me.fireEvent('ixselection', me, [record]);
-            }
+            me.ixOnSelectionChange();
         }
     }
 

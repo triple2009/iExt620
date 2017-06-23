@@ -41,15 +41,22 @@ Ext.define('iExt.app.view.container.List', {
 
     config: {
         /**
-         * 视图或视图集合
-         * 对于列表容器可以包含多个视图，共享工具栏和搜索
-         * 
+         * 视图或视图集合。
+         * 对于列表容器可以包含多个视图，共享工具栏和搜索。
          */
         ixView: null,
         /**
-         *  缺省视图索引
+         *  缺省视图索引。
          */
-        ixDefaultIndex: 0
+        ixDefaultIndex: 0,
+        /**
+         * 操作组件集合。
+         */
+        ixActionItems: [],
+        /**
+         * 搜索组件。
+         */
+        ixSearchItem: null
     },
 
     /**
@@ -89,6 +96,7 @@ Ext.define('iExt.app.view.container.List', {
             vm = me.getViewModel();
             vm.ixSetTitle(title);
         }
+
         me.callParent();
     },
 
@@ -104,117 +112,49 @@ Ext.define('iExt.app.view.container.List', {
     },
 
     /**
-     * 设置工具栏
+     * 设置容器的工具栏
+     */
     ixSetToolbar: function () {
-        var me = this;
+        var me = this,
+            items = [];
+
+        var actItems = me.getIxActionItems() || [];
+        if (actItems.length > 0) {
+            items = items.concat(actItems);
+        }
+
+        var viewItem = me.ixGetViewsButton();
+        if (viewItem) {
+            items.push(viewItem);
+        }
+
+        var searchItem = me.getIxSearchItem();
+        if (searchItem) {
+            Ext.apply(searchItem, {
+                listeners: {
+                    ixsearch: {
+                        fn: me._ixOnSearch,
+                        scope: me,
+                        options: {
+                            order: 'before'
+                        }
+                    }
+                }
+            });
+            items.push(searchItem);
+        }
 
         me.tbar = {
-            xtype: 'container',
-            layout: 'column',
-            items: []
+            xtype: 'ixacttbr',
+            items: items
         };
-
-        var tbrAction = {
-            xtype: 'toolbar',
-            reference: 'tbrAction',
-            columnWidth: 0.5,
-            items: []
-        };
-
-        var domain = me.getIxDomain();
-        if (domain.ixActions) {
-            var acts = domain.ixActions;
-            if (acts.add) {
-                tbrAction.items.push({
-                    text: acts.add.ixName,
-                    iconCls: acts.add.ixIconCls
-                });
-            }
-
-            var btnOthers = {
-                text: '操作',
-                iconCls: 'x-fa fa-bars',
-                menuAlign: 'tc-bc',
-                menu: {
-                    xtype: 'ixactmenu',
-                    items: []
-                }
-            };
-
-            for (var name in acts) {
-                if (acts.hasOwnProperty(name)) {
-                    var action = acts[name];
-                    btnOthers.menu.items.push({
-                        text: action.ixName,
-                        iconCls: action.ixIconCls
-                    });
-                }
-            }
-
-            if (btnOthers.menu.items.length > 0) {
-                tbrAction.items.push('->', btnOthers);
-            }
-
-        }
-
-        var btnTypes = {
-            xtype: 'segmentedbutton',
-            allowToggle: true,
-            listeners: {
-                toggle: {
-                    fn: me._ixChangeView,
-                    scope: me
-                }
-            },
-            items: []
-        };
-
-        var listType, iconCls, name;
-        if (Ext.isArray(me.getIxViews())) {
-            Ext.each(me.getIxViews(), function (item, index) {
-                listType = item.ixListType || 'list';
-                if (Ext.isString(listType)) {
-                    listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase());
-                }
-                name = iExt.app.view.ListTypes.ixGetName(listType);
-                iconCls = iExt.app.view.container.List.ixViewIconCls[name];
-                btnTypes.items.push({
-                    iconCls: iconCls,
-                    value: index,
-                    tooltip: iExt.app.view.ListTypes.ixGetText(listType)
-                });
-            });
-        }
-
-        // 缺省设置第一个视图
-        if (btnTypes.items.length > 1) {
-            btnTypes.items[0].pressed = true;
-            tbrAction.items.push('->', btnTypes);
-        }
-
-        var tbrSearch = {
-            xtype: 'toolbar',
-            reference: 'tbrSearch',
-            columnWidth: 0.5,
-            items: [{
-                xtype: 'ixtagfilter',
-                flex: 1,
-                store: {
-                    type: 'ixenumsstore',
-                    ixEnumType: 'iExt.meta.Types'
-                }
-            }]
-        };
-
-        me.tbar.items.push(tbrAction, tbrSearch);
     },
-     */
 
     /**
      * 获取列表视图的控制按钮。
      * @return {iExt.button.Segmented} 控制按钮
      */
-    ixGetViewButtons: function () {
+    ixGetViewsButton: function () {
         var me = this,
             listType, iconCls, name,
             views = me.getIxView(),
@@ -266,6 +206,11 @@ Ext.define('iExt.app.view.container.List', {
 
     privates: {
 
+        _ixOnSearch: function (item, filters) {
+            var me = this;
+            me._$ixLastFilters = filters;
+        },
+
         _ixChangeView: function (index) {
             var me = this;
             me.__ixCurrentView = me._ixSetView(index);
@@ -275,52 +220,8 @@ Ext.define('iExt.app.view.container.List', {
                 vm.set('ixvc.viewRef', me.__ixCurrentView.getReference());
                 vm.set('ixvc.viewId', me.__ixCurrentView.getId());
             }
-
-            if (me.__ixCurrentView.ixIsListView === true) {
-                if (me.__ixCurrentView.hasListeners.ixselection) {
-                    // 如果存在事件监听，在事件处理前插入处理
-                    me.__ixCurrentView.onBefore('ixselection', me._ixOnSelection, me);
-                } else {
-                    // 添加选择事件处理
-                    me.__ixCurrentView.addListener('ixselection', me._ixOnSelection, me);
-                }
-                me._ixOnSelection(me.__ixCurrentView, []);
-            }
-
             // 触发视图变更事件
-            if (me.hasListeners.ixviewchanged) {
-                me.fireEvent('ixviewchanged', me, view);
-            }
-        },
-
-        /**
-         * 选择数据事件处理
-         * @param {Ext.Component} view 列表组件。
-         * @param {Ext.data.Model} data 选择的数据集合。
-         */
-        _ixOnSelection: function (view, data) {
-            var me = this;
-            if (!me.__ixActionBarIds) {
-                return;
-            }
-            var multi = data.length > 1;
-            Ext.Object.each(me.__ixActionBarIds, function (key, value) {
-                var tbr = Ext.getCmp(key);
-                if (!tbr) {
-                    return;
-                }
-                var ids = tbr.ixGetAlignIds(view);
-                Ext.each(ids, function (id) {
-                    var cmp = Ext.getCmp(id);
-                    if (cmp && cmp.ixIsAction === true) {
-                        var align = cmp.getIxAlign();
-                        if (align) {
-                            var enabled = align.ixIsEnabled(multi, data);
-                            cmp.setDisabled(!enabled);
-                        }
-                    }
-                });
-            });
+            me.fireEvent('ixviewchanged', me, me.__ixCurrentView);
         },
 
         _ixSetView: function (idx) {
@@ -328,7 +229,13 @@ Ext.define('iExt.app.view.container.List', {
             var views = me.getIxView();
             Ext.suspendLayouts();
             me.removeAll();
-            var view = me.add(views[idx]);
+            var view = views[idx];
+            if (me._$ixLastFilters) {
+                Ext.apply(view, {
+                    ixFilters: me._$ixLastFilters
+                });
+            }
+            view = me.add(view);
             var listType = view.ixListType || 'list';
             if (Ext.isString(listType)) {
                 listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase());

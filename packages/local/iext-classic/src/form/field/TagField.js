@@ -99,7 +99,7 @@ Ext.define('iExt.form.field.TagField', {
             return;
         } 
         me.callParent();
-        me.ixSetValues(pickedRecords , true);
+        me.ixSetLinkValues(pickedRecords , true);
     },
 
     applyIxFilters: function (filters) {

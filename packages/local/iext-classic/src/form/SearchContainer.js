@@ -40,12 +40,12 @@ Ext.define('iExt.form.SearchContainer', {
 
     afterRender: function () {
         var me = this,
-            target = me.getIxAlignTarget();
+            target = me.getIxAlignTargetRef();
 
         var align = {
             type: 'list',
             ixMode: null,
-            ixTarget: target
+            ixTargetRef: target
         };
 
         me.ixEventItem = me.add({

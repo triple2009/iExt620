@@ -10,26 +10,34 @@ Ext.define('iExt.app.view.controller.Base', {
 
     config: {
         /**
-         * 需要进行授权控制的业务服务（集合）
-         * {Array|String}
+         * 需要进行授权控制的业务服务（集合）。
+         * {Array|String}。
          */
         ixServices: null
     },
 
     /**
-     * 缺省的标识参数名称
+     * 缺省的标识参数名称。
      */
     ixIdProperty: 'ixId',
 
     /**
-     * 获取参数标识的快捷方式
+     * 当前控制器对应视图的用户操作组件对齐组件交叉引用集合。
+     * 系统动态检索并设置。
+     * {操作组件id、对齐的组件id}。
+     * [{itemId: '', targetId:''}]
+     */
+    _$ixActionTargetRefX: null,
+
+    /**
+     * 获取标识参数值的快捷方式。
      */
     ixGetId: function () {
         return this.ixGetParamValue(this.ixIdProperty);
     },
 
     /**
-     * 获取参数对象
+     * 获取参数对象。
      */
     ixGetParams: function () {
         var view = this.getView();
@@ -40,22 +48,15 @@ Ext.define('iExt.app.view.controller.Base', {
     },
 
     /**
-     * 获取参数值
-     * @param {Stirng} paramName 参数名称
+     * 获取参数值。
+     * @param {Stirng} paramName 参数名称。
      */
     ixGetParamValue: function (paramName) {
-        var params = this.ixGetParams();
+        var params = this.getIxParams();
         if (params) {
             return params[paramName];
         }
         return undefined;
-    },
-
-    /**
-     * 获取用户操作组件集合
-     */
-    ixGetActionItems: function () {
-        return this._ixActionItems;
     },
 
     /**
@@ -65,10 +66,12 @@ Ext.define('iExt.app.view.controller.Base', {
      * @param {Object} auths 授权信息。
      */
     ixOnSetUserAuth: function (view, auths) {
-        var items = this.ixActionItems();
+        var items = _$ixActionTargetRefX;
+        /*
         Ext.each(items, function (item) {
             item.ixSetUserAuth(auths);
         });
+        */
     },
 
     /**
@@ -91,8 +94,10 @@ Ext.define('iExt.app.view.controller.Base', {
 
         // 初始化视图控制器，例如绑定事件等
         me._ixInitController(view);
-        // 视图已经渲染后，进行获取操作项和权限验证
-        view.onAfter('afterrender', me._ixInit, me);
+        // 视图已经渲染前，进行获取操作项
+        view.onAfter('afterrender', me._ixInitActionItems, me);
+        // 视图已经渲染后，进行权限验证
+        view.onAfter('afterrender', me._ixInitUserAuth, me);
 
         me.callParent(arguments);
     },
@@ -108,14 +113,7 @@ Ext.define('iExt.app.view.controller.Base', {
     privates: {
 
         /**
-         * 用户操作组件集合
-         * 操作组件id、对齐的组件id
-         * [{itemId: '', targetId:''}]
-         */
-        _ixActionItems: null,
-
-        /**
-         * 初始化视图控制器，例如绑定事件等
+         * 初始化视图控制器，例如绑定事件等。
          * @param {Ext.Component} view 视图对象。
          */
         _ixInitController: function (view) {
@@ -148,14 +146,14 @@ Ext.define('iExt.app.view.controller.Base', {
             }
             var me = this,
                 refs = me.getReferences();
-            me._ixActionItems = [];
+            me._$ixActionTargetRefX = [];
             Ext.each(actItems, function (item, index) {
                 var itemId = item.getId(),
                     align = item.getIxAlign();
                 // 如果设置了对齐信息
                 if (align !== null) {
                     // 获取组件的对齐引用
-                    var ref = align.getIxTarget() || '',
+                    var ref = align.getIxTargetRef() || '',
                         refCmp;
                     if (ref === '') {
                         refCmp = view;
@@ -170,17 +168,18 @@ Ext.define('iExt.app.view.controller.Base', {
                         // </debug>
                     }
                     var refId = refCmp.getId();
-                    me._ixActionItems.push({
+                    me._$ixActionTargetRefX.push({
                         itemId: itemId,
                         targetId: refId
                     });
 
                     // 为组件添加与之对齐的操作组件标识
-                    refCmp.ixAlignItemIds = refCmp.ixAlignItemIds || [];
-                    refCmp.ixAlignItemIds.push(itemId);
+                    // iExt.mixin.View 定义的配置
+                    refCmp._$ixAlignTargetIds = refCmp._$ixAlignTargetIds || [];
+                    refCmp._$ixAlignTargetIds.push(itemId);
 
                     // 为操作组件设置其对齐的组件标识
-                    align.setIxTargetId(refId);
+                    align._$ixTargetId = refId;
                 }
             });
         },
@@ -212,7 +211,7 @@ Ext.define('iExt.app.view.controller.Base', {
                     },
                     Ext.emptyFn,
                     me
-                    ).done();
+                ).done();
             } else {
                 me.ixOnViewInited(view, null);
             }

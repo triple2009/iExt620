@@ -17,19 +17,19 @@ Ext.define('iExt.mixin.FormView', {
 
     config: {
         /**
-         * 表单类型
+         * 表单类型。
          * {iExt.app.view.FormTypes}
          */
         ixFormType: 'detail',
         /**
-         * 表单规格
+         * 表单规格。
          * {iExt.app.view.Scales}
          */
         ixScale: 'normal'
     },
 
     /**
-     * 根据字符串解析枚举值
+     * 根据字符串解析枚举值。
      */
     applyIxFormType: function (formType) {
         if (Ext.isString(formType)) {
@@ -40,7 +40,7 @@ Ext.define('iExt.mixin.FormView', {
     },
 
     /**
-     * 根据字符串解析枚举值
+     * 根据字符串解析枚举值。
      */
     applyIxScale: function (scale) {
         if (Ext.isString(scale)) {
@@ -52,29 +52,29 @@ Ext.define('iExt.mixin.FormView', {
 
     /**
      * 取消事件。
-     * 关闭当前视图，可能是为获取到数据或者未经授权
+     * 关闭当前视图，可能是为获取到数据或者未经授权。
      * @memberOf iExt.mixin.FormView#
      * @event ixcancel
      * @param {iExt.mixin.FormView} this iExt.mixin.FormView 控件。
      */
 
     /**
-     * 获取表单数据
+     * 获取表单数据。
      */
     ixGetFormData: iExt.unimplFn,
 
     /**
-     * 获取是否合法信息
+     * 获取是否合法信息。
      */
     ixIsValid: iExt.unimplFn,
 
     /**
-     * 获取是否存在“脏数据”
+     * 获取是否存在“脏数据”。
      */
     ixIsDirty: iExt.unimplFn,
 
     /**
-     * 刷新数据
+     * 刷新数据。
      */
     ixRefresh: function (close) {
         // 数据经过处理并且成功后触发该事件
@@ -84,7 +84,10 @@ Ext.define('iExt.mixin.FormView', {
         }
     },
 
-    // 添加Form事件进行处理
+    /**
+     * 添加Form事件进行处理。
+     * 可以重载该方法设置自定义的事件监听。
+     */
     ixAddListeners: function () {
         var me = this;
         me.on('validitychange', me._ixOnValidityChange, me);
@@ -93,7 +96,7 @@ Ext.define('iExt.mixin.FormView', {
     privates: {
 
         /**
-         * 触发数据验证事件
+         * 触发数据验证事件。
          */
         _ixOnValidityChange: function (item, valid) {
             if (this.hasListeners.ixvaliditychange) {
@@ -102,7 +105,7 @@ Ext.define('iExt.mixin.FormView', {
         },
 
         /**
-         * 添加事件监听
+         * 添加事件监听。
          */
         _ixOnAfterRender: function () {
             var me = this;

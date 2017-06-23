@@ -8,15 +8,15 @@ Ext.define('iExt.grid.Lookup', {
     alias: 'widget.ixlookupgrid',
 
     /**
-     * 可配置主题
-     * 可以在主题包中进行重载
+     * 可配置主题。
+     * 可以在主题包中进行重载。
      */
     ixTheme: {
         pageSize: 10
     },
 
     /**
-     * 分页栏缺省配置
+     * 分页栏缺省配置。
      */
     ixPagingConfig: {
         displayInfo: true,
@@ -24,7 +24,7 @@ Ext.define('iExt.grid.Lookup', {
     },
 
     /**
-     * 对于参照组件单选方式不使用 checkbox
+     * 对于参照组件单选方式不使用 checkbox 。
      */
     applyIxMulti: function (multi) {
         var me = this;

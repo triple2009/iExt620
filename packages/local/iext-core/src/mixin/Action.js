@@ -41,7 +41,7 @@ Ext.define('iExt.mixin.Action', {
     ixGetText: iExt.unimplFn,
 
     /**
-     * 设置对齐信息
+     * 设置对齐信息。
      */
     applyIxAlign: function (align) {
         if (align) {
@@ -54,38 +54,11 @@ Ext.define('iExt.mixin.Action', {
 
     privates: {
 
-        /**
-         * 如果菜单的菜单项都不可用，则禁用菜单
-         */
-        _ixSetMenu: function () {
-            var me = this;
-            if (me.isMenuItem) {
-                var menu = me.parentMenu;
-                // 是否存在可用项
-                var b = false;
-                menu.items.each(function (item) {
-                    if (item.isDisabled() === false) {
-                        b = true;
-                        return false;
-                    }
-                });
-                if (b === false) {
-                    menu.ownerCmp.setDisabled(true);
-                } else {
-                    menu.ownerCmp.setDisabled(false);
-                }
-            }
-        },
-
         _ixOnDestroy: function () {
 
         },
 
         _ixOnAfterRender: function () {
-
-        },
-
-        _ixOnClick: function (item, e, eOpts) {
 
         }
     }

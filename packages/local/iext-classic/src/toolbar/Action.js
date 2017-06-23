@@ -18,18 +18,18 @@ Ext.define('iExt.toolbar.Action', {
 
     config: {
         /**
-         * 对齐的目标控件引用标识
+         * 对齐的目标控件引用标识。
          */
-        ixAlignTarget: null,
+        ixAlignTargetRef: null,
 
         /**
-         * 授权服务代码
+         * 授权服务代码。
          */
         ixAuthService: null
     },
 
     /**
-     * 获取工具栏的操作组件标识集合
+     * 获取工具栏的操作组件标识集合。
      * 自动查找该工具栏所有操作组件的标识，并且可以缓存。
      * 缓存的原理是对于没有改变组件结构的情况直接返回原集合。
      * @return {String[]} 所有操作组件的标识集合。
@@ -43,11 +43,11 @@ Ext.define('iExt.toolbar.Action', {
     },
 
     /**
-     * 获取工具栏与指定视图对齐的操作组件标识集合
-     * 一般来说，如果操作组件应该指定与其对齐视图的引用
+     * 获取工具栏与指定视图对齐的操作组件标识集合。
+     * 一般来说，如果操作组件应该指定与其对齐视图的引用。
      * 但是多数情况下，一个视图只有一个工具栏，
      * 不需要特殊指定，应该自动与该视图对齐。
-     * @param {Ext.Component} view 视图组件
+     * @param {Ext.Component} view 视图组件。
      * @return {String[]} 所有操作组件的标识集合。
      */
     ixGetAlignIds: function (view) {
@@ -84,7 +84,7 @@ Ext.define('iExt.toolbar.Action', {
                 bset = true;
             } else {
                 // 获取组件的对齐引用
-                var ref = align.getIxTarget() || '';
+                var ref = align.getIxTargetRef() || '';
                 // 如果指定的引用等于当前视图
                 if (ref === '') {
                     bset = true;
@@ -96,7 +96,7 @@ Ext.define('iExt.toolbar.Action', {
             if (bset) {
                 alignIds.push(id);
                 // 为操作组件设置其对齐的组件标识
-                align.setIxTargetId(viewId);
+                align._$ixTargetId = viewId;
             }
         });
 
@@ -166,7 +166,7 @@ Ext.define('iExt.toolbar.Action', {
         },
 
         /**
-         * 工具栏添加了新的组件，清除缓存的操作组件标识
+         * 工具栏添加了新的组件，清除缓存的操作组件标识。
          */
         _ixOnAdd: function (tbr, component, index, eOpts) {
             // 有新的组件添加后清除缓存的标识。
@@ -178,7 +178,7 @@ Ext.define('iExt.toolbar.Action', {
          * 获取所有操作组件的标识。
          * @memberOf iExt.toolbar.List#
          * @private
-         * @param {Obejct[]} items 工具栏项目集合
+         * @param {Obejct[]} items 工具栏项目集合。
          */
         _ixGetActionIds: function (items) {
             var me = this;
@@ -198,7 +198,7 @@ Ext.define('iExt.toolbar.Action', {
          * 根据用户授权设置工具栏项目，递归设置所有项目。
          * @memberOf iExt.toolbar.Action#
          * @private
-         * @param {Obejct[]} items 工具栏项目集合
+         * @param {Obejct[]} items 工具栏项目集合。
          * @param {Object} auths 用户授权信息。
          */
         _ixSetUserAuth: function (items, auths) {

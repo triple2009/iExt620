@@ -18,22 +18,25 @@ Ext.define('iExt.mixin.Linkable', {
 
     config: {
         /**
-         * 是否支持多条数据
+         * 是否支持多条数据。
          */
         ixMulti: false,
         /**
-         * 值属性名称
+         * 值属性名称。
          */
         ixValueField: '',
         /**
-         * 显示属性集合
+         * 关联设置集合。
+         * 目前是为了参照组件设置的关联显示属性设置，
+         * 未来考虑设置参照组件的关联条件等，
+         * 需要在对象定义中扩展linkMode的配置。
          * {Object[]}: [{dataIndex:'', ref:''},{...}]
          */
         ixLinkItems: []
     },
 
     /**
-     * 缺省分隔符
+     * 缺省分隔符。
      */
     ixDelimiter: ',',
 
@@ -41,7 +44,7 @@ Ext.define('iExt.mixin.Linkable', {
      * 清除关联组件。
      * @memberOf iExt.mixin.MultiLink#
      */
-    ixClearValues: function () {
+    ixClearLinkValues: function () {
         var me = this;
         me.setValue(null);
         // 设置显示属性值
@@ -77,7 +80,7 @@ Ext.define('iExt.mixin.Linkable', {
      * @param {Ext.data.Model[]} records 选择的数据记录
      * @param {Boolean} ignoreMe 忽略自身组件的值
      */
-    ixSetValues: function (records, ignoreMe) {
+    ixSetLinkValues: function (records, ignoreMe) {
         if (!records || !Ext.isArray(records)) {
             return;
         }

@@ -97,7 +97,7 @@ Ext.define('iExt.form.field.ComboBox', {
             selectedRecords  =  me.valueCollection.getRange();
 
         me.callParent();
-        me.ixSetValues(selectedRecords , true);
+        me.ixSetLinkValues(selectedRecords , true);
     },
 
     /**

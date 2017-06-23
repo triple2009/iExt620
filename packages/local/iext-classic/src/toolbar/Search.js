@@ -50,12 +50,12 @@ Ext.define('iExt.toolbar.Search', {
 
     afterRender: function () {
         var me = this,
-            target = me.getIxAlignTarget();
+            target = me.getIxAlignTargetRef();
 
         var align = {
             type: 'list',
             ixMode: null,
-            ixTarget: target
+            ixTargetRef: target
         };
         var btns = {
             xtype: 'ixactsbtn',
@@ -78,7 +78,7 @@ Ext.define('iExt.toolbar.Search', {
                 ixAlign: align,
                 listeners: {
                     click: {
-                        fn: me.ixOnClear,
+                        fn: me.ixOnQuickClear,
                         scope: me
                     }
                 }

@@ -37,30 +37,39 @@ Ext.define('iExt.panel.View', {
         var me = this,
             ixstore = me.getIxStore();
 
+        me.minWidth = me.minWidth || me.ixTheme.minWidth;
+
         if (Ext.isEmpty(me.ixPageSize)) {
             me.ixPageSize = me.ixTheme.pageSize;
         }
+        ixstore = Ext.apply(ixstore, {
+            pageSize: me.ixPageSize
+        });
 
-        me.minWidth = me.minWidth || me.ixTheme.minWidth;
-        ixstore = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
+        var filters = me.getIxFilters();
+        if (filters) {
+            ixstore.filters = filters;
+        }
+
+        var store = Ext.data.StoreManager.lookup(ixstore || 'ext-empty-store');
 
         if (me.ixPageSize > 0) {
             ixstore.pageSize = me.ixPageSize;
             if (me.bbar) {
                 Ext.apply(me.bbar, {
-                    ixStore: ixstore
+                    ixStore: store
                 });
             } else {
                 me.bbar = {
                     xtype: 'ixpagetbr',
-                    ixStore: ixstore
+                    ixStore: store
                 };
             }
         }
 
         var view = {
             xtype: 'ixdataview',
-            store: ixstore,
+            store: store,
             ixQuickView: me.getIxQuickView(),
             listeners: {
                 ixselection: {
