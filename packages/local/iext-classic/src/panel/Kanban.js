@@ -140,6 +140,7 @@ Ext.define('iExt.panel.Kanban', {
                 };
             }
         }
+        me.bindStore(store, true);
 
         var balt = false,
             stages = me.getIxStages(),
@@ -220,7 +221,7 @@ Ext.define('iExt.panel.Kanban', {
      */
     ixSearch: function (filters) {
         var me = this,
-            store = me.getIxStore(),
+            store = me.getStore(),
             _filters = null;
 
         // 不支持本地搜索？
