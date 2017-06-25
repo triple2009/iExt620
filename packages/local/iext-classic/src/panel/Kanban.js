@@ -140,7 +140,6 @@ Ext.define('iExt.panel.Kanban', {
                 };
             }
         }
-        me.bindStore(store, true);
 
         var balt = false,
             stages = me.getIxStages(),
