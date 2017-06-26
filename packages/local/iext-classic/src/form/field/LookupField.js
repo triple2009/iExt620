@@ -21,7 +21,11 @@ Ext.define('iExt.form.field.LookupField', {
         /**
          * 视图规格
          */
-        ixScale: 'normal'
+        ixScale: 'normal',
+        /**
+         * 
+         */
+        ixQuickView: null
     },
 
     initComponent: function () {
@@ -30,7 +34,12 @@ Ext.define('iExt.form.field.LookupField', {
             var triggers = {
                 lookup: {
                     cls: 'x-fa fa-ellipsis-h',
+                    tooltip: '选择数据...',
                     handler: me.ixOnLookup.bind(me)
+                },
+                extlink: {
+                    cls: 'x-fa fa-external-link',
+                    tooltip: '查看数据...'
                 }
             };
             me.setTriggers(triggers);
