@@ -42,7 +42,24 @@ Ext.define('iExt.form.Panel', {
         me.callParent();
     },
 
-        // 获取是否合法信息
+    ixGetFormData: function () {
+        return this.getRecord();
+    },
+
+    /**
+     * 获取是否存在“脏数据”
+     */
+    ixIsDirty: function () {
+        var record = this.ixGetFormData();
+        if (record) {
+            return record.dirty;
+        }
+        return false;
+    },
+
+    /**
+     * 获取是否合法信息
+     */
     ixIsValid: function () {
         return this.getForm().isValid();
     }

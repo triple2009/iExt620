@@ -94,10 +94,8 @@ Ext.define('iExt.app.view.controller.Base', {
 
         // 初始化视图控制器，例如绑定事件等
         me._ixInitController(view);
-        // 视图已经渲染前，进行获取操作项
-        view.onAfter('afterrender', me._ixInitActionItems, me);
         // 视图已经渲染后，进行权限验证
-        view.onAfter('afterrender', me._ixInitUserAuth, me);
+        view.onAfter('afterrender', me._ixInit, me);
 
         me.callParent(arguments);
     },

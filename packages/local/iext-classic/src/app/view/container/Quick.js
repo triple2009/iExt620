@@ -19,6 +19,24 @@ Ext.define('iExt.app.view.container.Quick', {
     ixViewType: 'quick',
 
     /**
+     * 快速查看视图容器直接设置视图
+     */
+    applyIxView: function (view) {
+        var me = this;
+        if (view) {
+            view = iExt.View.ixGetView(view);
+            if (me.rendered) {
+                me.removeAll();
+                me.add(view);
+            } else {
+                me.items = [];
+                me.items.push(view);
+            }
+        }
+        return view;
+    },
+
+    /**
      * 设置容器的工具栏
      */
     ixSetToolbar: function () {

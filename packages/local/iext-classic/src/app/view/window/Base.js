@@ -37,6 +37,14 @@ Ext.define('iExt.app.view.window.Base', {
     },
 
     /**
+     * 视图变更事件。
+     * @memberOf iExt.app.view.window.Base#
+     * @event ixviewchanged
+     * @param {iExt.app.view.window.Base} this 视图容器组件
+     * @param {Ext.Component} view 当前的视图。
+     */
+
+    /**
      * 视图数据模型。
      * 缺省值使用 {iExt.app.view.model.Container}
      */
@@ -50,12 +58,6 @@ Ext.define('iExt.app.view.window.Base', {
          */
         title: '{title}'
     },
-
-    /**
-     * 当前视图。
-     * 添加子组件后设置为当前视图。
-     */
-    __ixCurrentView: null,
 
     /**
      * 设置视图。
@@ -93,9 +95,22 @@ Ext.define('iExt.app.view.window.Base', {
     ixSetToolbar: Ext.emptyFn,
 
     /**
-     * 设置当前视图。
+     * 获取当前视图。
      */
-    ixSetView: Ext.emptyFn,
+    ixGetCurrentView: function () {
+        return this._ixCurrentView;
+    },
+
+    /**
+     * 当前视图变更模板方法
+     * @param {Ext.Component} view 变更的视图
+     */
+    ixOnViewChanged: function (view) {
+        var me = this;
+        if (me.hasListeners.ixviewchanged) {
+            me.fireEvent('ixviewchanged', me, view);
+        }
+    },
 
     /**
      * 渲染后处理。
@@ -113,8 +128,8 @@ Ext.define('iExt.app.view.window.Base', {
                 title = component.getTitle();
             var vm = this.getViewModel();
             vm.ixSetTitle(title);
-            me.__ixCurrentView = component;
-            me.ixSetView();
+            me._ixCurrentView = component;
+            me.ixOnViewChanged(component);
         }
     },
 
@@ -150,7 +165,7 @@ Ext.define('iExt.app.view.window.Base', {
      */
     onDestroy: function () {
         this.callParent();
-        Ext.destroyMembers(this, '__ixCurrentView');
+        Ext.destroyMembers(this, '_ixCurrentView');
     },
 
     /**
@@ -163,6 +178,16 @@ Ext.define('iExt.app.view.window.Base', {
         var me = this;
         me.setIxReturn(null);
         me.close();
+    },
+
+    privates: {
+
+        /**
+         * 当前视图。
+         * 添加子组件后设置为当前视图。
+         */
+        _ixCurrentView: null
+
     }
 
 });

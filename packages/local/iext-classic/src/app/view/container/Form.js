@@ -16,9 +16,15 @@ Ext.define('iExt.app.view.container.Form', {
     scrollable: 'y',
     title: '表单',
 
-    // view:
     config: {
-        ixForm: undefined
+        /**
+         * 表单视图。
+         */
+        ixView: null,
+        /**
+         * 操作组件集合。
+         */
+        ixActionItems: []
     },
 
     initComponent: function () {
@@ -32,6 +38,51 @@ Ext.define('iExt.app.view.container.Form', {
             vm.ixSetTitle(title);
         }
         me.callParent();
+    },
+
+    /**
+     * 设置容器的工具栏
+     */
+    ixSetToolbar: function () {
+        var me = this,
+            items = [];
+
+        var actItems = me.getIxActionItems() || [];
+        if (actItems.length > 0) {
+            items = items.concat(actItems);
+        }
+
+        me.tbar = {
+            xtype: 'ixacttbr',
+            items: items
+        };
+    },
+
+    /**
+     * 设置缺省视图
+     */
+    ixSetDefaultView: function () {
+        var me = this,
+            view = me.getIxView();
+        if (view) {
+            Ext.suspendLayouts();
+            me.removeAll();
+            me.add(view);
+            Ext.resumeLayouts(true);
+        }
+    },
+
+    /**
+     * 当前视图变更模板方法
+     */
+    ixOnViewChanged: function (view) {
+        var me = this;
+        if (view) {
+            if (view.ixIsFormView !== true) {
+                Ext.raise('指定的视图不是表单视图！');
+            }
+        }
+        me.callParent(arguments);
     }
 
 });

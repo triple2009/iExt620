@@ -27,14 +27,18 @@ Ext.define('iExt.app.view.window.Lookup', {
         };
     },
 
-    ixSetView: function () {
+    /**
+     * 当前视图变更模板方法
+     * @param {Ext.Component} view 变更的视图
+     */
+    ixOnViewChanged: function (view) {
         var me = this;
-        if (me.__ixCurrentView) {
-            if (me.__ixCurrentView.ixIsListView !== true) {
+        if (view) {
+            if (view.ixIsListView !== true) {
                 Ext.raise('指定的视图不是列表视图！');
             }
-            me.__ixCurrentView.on('ixselection', me._ixOnIxSelection, me);
-            me.__ixMulti = me.__ixCurrentView.getIxMulti();
+            view.on('ixselection', me._ixOnIxSelection, me);
+            me._ixMulti = view.getIxMulti();
         }
     },
 
@@ -48,6 +52,8 @@ Ext.define('iExt.app.view.window.Lookup', {
 
     privates: {
 
+        _ixMulti: false,
+
         /**
          * 获取搜索的处理按钮。
          */
@@ -57,7 +63,7 @@ Ext.define('iExt.app.view.window.Lookup', {
                 xtype: 'button',
                 text: '确定',
                 iconCls: 'x-fa fa-check',
-                reference: '__btnOk',
+                reference: '_btnOk',
                 listeners: {
                     click: {
                         fn: me._ixOnOk,
@@ -81,9 +87,9 @@ Ext.define('iExt.app.view.window.Lookup', {
             var me = this,
                 enable,
                 refs = me.getReferences(),
-                btnOk = refs.__btnOk;
+                btnOk = refs._btnOk;
             if (records && records.length > 0) {
-                if (records.length > 1 && me.__ixMulti === false) {
+                if (records.length > 1 && me._ixMulti === false) {
                     enable = false;
                 } else {
                     enable = true;
@@ -99,9 +105,10 @@ Ext.define('iExt.app.view.window.Lookup', {
          * @param {Object} eOpts 事件选项。
          */
         _ixOnOk: function (item, e, eOpts) {
-            var me = this;
-            if (me.__ixCurrentView) {
-                me.setIxReturn(me.__ixCurrentView.ixGetSelectedData());
+            var me = this,
+                view = me.ixGetCurrentView();
+            if (view) {
+                me.setIxReturn(view.ixGetSelectedData());
             }
             me.close();
         }

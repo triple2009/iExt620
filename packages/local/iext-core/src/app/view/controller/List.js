@@ -57,7 +57,6 @@ Ext.define('iExt.app.view.controller.List', {
 
         // 处理当前视图
         if (view.ixIsListView === true) {
-            view.addListener('ixselection', me.ixOnSelection, me);
             if (view.hasListeners.ixselection) {
                 // 如果存在事件监听，在事件处理前插入处理
                 view.onBefore('ixselection', me.ixOnSelection, me);
@@ -101,7 +100,7 @@ Ext.define('iExt.app.view.controller.List', {
         var me = this,
             id = item.getId();
 
-        me._$ixLastFilter = filters;
+        me._ixLastFilter = filters;
         // 获取搜索组件对齐的列表组件
         var actItems = me._$ixActionTargetRefX.filter(function (element, index) {
             return element.itemId === id;

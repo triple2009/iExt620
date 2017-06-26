@@ -4,80 +4,78 @@ Ext.define('app.view.odoo.Add', {
 
     requires: [],
 
-    title: '新建用户',
-
-    tbar: {
-        xtype: 'ixacttbr',
-        items: [{
-            text: '保存',
-            iconCls: 'x-fa fa-save',
-            listeners: {
-                click: function () {
-                    var win = Ext.create({
-                        xtype: 'ixwin',
-                        title: '常规',
-                        modal: true,
-                        maximizable: true,
-                        width: 600,
-                        height: 400,
-                        viewModel: true,
-                        buttons: [{
-                            text: '确定',
-                            listeners: {
-                                click: function (item, e, eOpts) {
-                                    var vm = this.ownerCt.ownerCt.getViewModel();
-                                }
-                            }
-                        }]
-                    });
-                    win.show();
-                }
-            }
-        }, {
-            text: '取消',
-            iconCls: 'x-fa fa-close',
-            listeners: {
-                click: function () {
-                    Ext.Msg.confirm('系统更新', '系统存在新的版本，是否重新加载？',
-                        function (choice) {
-                            if (choice === 'yes') {
-
-                            }
-                        }
-                    );
-                }
-            }
-        }, {
-            xtype: 'tbspacer',
-            flex: 1
-        }, {
-            text: '操作',
-            menuAlign: 'tc-bc',
-            menu: {
-                xtype: 'menu',
-                shadow: false,
-                items: [{
-                    text: '启用',
-                    listeners: {
-                        click: function () {
-                            iExt.Toast.ixInfo('hello ' + Ext.Number.randomInt(0, 100) + ' !');
-                        }
-                    }
-                }, {
-                    text: '停用'
-                }, {
-                    text: '审批'
-                }]
-            }
-        }, {
-            xtype: 'tbspacer',
-            flex: 2
-        }]
+    title: '用户维护',
+    controller: {
+        type: 'ixformcontainer'
     },
 
-    items: [{
+    ixActionItems: [{
+        text: '保存',
+        iconCls: 'x-fa fa-save',
+        ixAlign: {
+            type: 'form',
+            ixMode: true
+        },
+        listeners: {
+            click: function () {
+                var win = Ext.create({
+                    xtype: 'ixwin',
+                    title: '常规',
+                    modal: true,
+                    maximizable: true,
+                    width: 600,
+                    height: 400,
+                    viewModel: true,
+                    buttons: [{
+                        text: '确定',
+                        listeners: {
+                            click: function (item, e, eOpts) {
+                                var vm = this.ownerCt.ownerCt.getViewModel();
+                            }
+                        }
+                    }]
+                });
+                win.show();
+            }
+        }
+    }, {
+        text: '取消',
+        iconCls: 'x-fa fa-close',
+        listeners: {
+            click: function () {
+                Ext.Msg.confirm('系统更新', '系统存在新的版本，是否重新加载？',
+                    function (choice) {
+                        if (choice === 'yes') {
+
+                        }
+                    }
+                );
+            }
+        }
+    }, '->', {
+        text: '操作',
+        menuAlign: 'tc-bc',
+        menu: {
+            xtype: 'menu',
+            shadow: false,
+            items: [{
+                text: '启用',
+                listeners: {
+                    click: function () {
+                        iExt.Toast.ixInfo('hello ' + Ext.Number.randomInt(0, 100) + ' !');
+                    }
+                }
+            }, {
+                text: '停用'
+            }, {
+                text: '审批'
+            }]
+        }
+    }, '->', ],
+
+    ixView: {
         xtype: 'ixform',
-        ixFormType: 'edit',
+        ixFormType: 'add',
         width: 750,
 
         tbar: {
@@ -303,52 +301,6 @@ Ext.define('app.view.odoo.Add', {
             }],
             ixView: 'app-user-lookup'
         }]
-    }, {
-        xtype: 'tabpanel',
-        items: [{
-            xtype: 'panel',
-            title: 'controls',
-            layout: 'hbox',
-            defaults: {
-                margin: 10
-            },
-            items: [{
-                xtype: 'datepicker'
-            }, {
-                xtype: 'monthpicker'
-            }, {
-                xtype: 'fieldset',
-                title: 'Individual Checkboxes',
-                checkboxToggle: true,
-                defaultType: 'checkbox',
-                layout: 'vbox',
-                width: 400,
-                defaults: {
-                    labelWidth: 120,
-                    flex: 1,
-                    hideEmptyLabel: false
-                },
-                items: [{
-                    xtype: 'textfield',
-                    name: 'txt-test1',
-                    fieldLabel: 'Alignment Test'
-                }, {
-                    fieldLabel: 'Favorite',
-                    boxLabel: 'Dog',
-                    name: 'fav-animal-dog',
-                    inputValue: 'dog'
-                }, {
-                    boxLabel: 'Cat',
-                    name: 'fav-animal-cat',
-                    inputValue: 'cat'
-                }, {
-                    checked: true,
-                    boxLabel: 'Monkey',
-                    name: 'fav-animal-monkey',
-                    inputValue: 'monkey'
-                }]
-            }]
-        }]
-    }]
+    }
 
 });

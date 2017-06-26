@@ -78,14 +78,6 @@ Ext.define('iExt.app.view.container.List', {
         return domain;
     },
 
-    /**
-     * 重载设置视图
-     * 列表容器支持多个视图
-     */
-    applyIxView: function (view) {
-        return view;
-    },
-
     initComponent: function () {
         var me = this,
             title = me.getTitle();
@@ -95,18 +87,6 @@ Ext.define('iExt.app.view.container.List', {
             });
             vm = me.getViewModel();
             vm.ixSetTitle(title);
-        }
-
-        me.callParent();
-    },
-
-    afterRender: function () {
-        var me = this,
-            views = me.getIxView(),
-            idx = me.getIxDefaultIndex() || 0;
-        // 设置缺省视图
-        if (Ext.isArray(views) && views.length > idx) {
-            me._ixChangeView(idx);
         }
         me.callParent();
     },
@@ -201,84 +181,61 @@ Ext.define('iExt.app.view.container.List', {
     ixChangeView: function (item, button, isPressed, eOpts) {
         var me = this,
             idx = button.getValue();
-        me._ixChangeView(idx);
+        var views = me.getIxView();
+        Ext.suspendLayouts();
+        me.removeAll();
+        var view = views[idx];
+        if (me._ixLastFilters) {
+            Ext.apply(view, {
+                ixFilters: me._ixLastFilters
+            });
+        }
+        me.add(view);
+        Ext.resumeLayouts(true);
+    },
+
+    /**
+     * 设置缺省视图
+     */
+    ixSetDefaultView: function () {
+        var me = this,
+            views = me.getIxView(),
+            idx = me.getIxDefaultIndex() || 0;
+        if (Ext.isArray(views) && views.length > idx) {
+            Ext.suspendLayouts();
+            me.removeAll();
+            me.add(views[idx]);
+            Ext.resumeLayouts(true);
+        }
+    },
+
+    /**
+     * 当前视图变更模板方法
+     */
+    ixOnViewChanged: function (view) {
+        var me = this;
+        if (view) {
+            if (view.ixIsListView !== true) {
+                Ext.raise('指定的视图不是列表视图！');
+            }
+        }
+        me.callParent(arguments);
+    },
+
+    /**
+     * 获取上次的搜索条件
+     */
+    ixGetLastFilters: function () {
+        return _ixLastFilters;
     },
 
     privates: {
 
+        _ixLastFilters: null,
+
         _ixOnSearch: function (item, filters) {
             var me = this;
-            me._$ixLastFilters = filters;
-        },
-
-        _ixChangeView: function (index) {
-            var me = this;
-            me.__ixCurrentView = me._ixSetView(index);
-            // 设置ViewModel数据
-            var vm = me.getViewModel();
-            if (vm) {
-                vm.set('ixvc.viewRef', me.__ixCurrentView.getReference());
-                vm.set('ixvc.viewId', me.__ixCurrentView.getId());
-            }
-            // 触发视图变更事件
-            me.fireEvent('ixviewchanged', me, me.__ixCurrentView);
-        },
-
-        _ixSetView: function (idx) {
-            var me = this;
-            var views = me.getIxView();
-            Ext.suspendLayouts();
-            me.removeAll();
-            var view = views[idx];
-            if (me._$ixLastFilters) {
-                Ext.apply(view, {
-                    ixFilters: me._$ixLastFilters
-                });
-            }
-            view = me.add(view);
-            var listType = view.ixListType || 'list';
-            if (Ext.isString(listType)) {
-                listType = iExt.app.view.ListTypes.ixGetValue(listType.toUpperCase());
-            }
-            switch (listType) {
-                case iExt.app.view.ListTypes.KANBAN:
-                    me._ixSetKanbanAction();
-                    break;
-                case iExt.app.view.ListTypes.GRAPH:
-                    me._ixSetGraphAction();
-                    break;
-                case iExt.app.view.ListTypes.CALENDAR:
-                    me._ixSetCalendarAction();
-                    break;
-                case iExt.app.view.ListTypes.REPORT:
-                    me._ixSetReportAction();
-                    break;
-                default:
-                    me._ixSetListAction();
-                    break;
-            }
-            Ext.resumeLayouts(true);
-            return view;
-        },
-
-        _ixSetListAction: function () {
-
-        },
-
-        _ixSetKanbanAction: function () {
-
-        },
-
-        _ixSetGraphAction: function () {
-
-        },
-
-        _ixSetCalendarAction: function () {
-
-        },
-
-        _ixSetReportAction: function () {
-
+            me._ixLastFilters = filters;
         }
 
     }

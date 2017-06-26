@@ -20,14 +20,33 @@ Ext.define('iExt.app.view.container.Search', {
     ixViewType: 'search',
 
     /**
+     * 搜索视图容器直接设置视图
+     */
+    applyIxView: function (view) {
+        var me = this;
+        if (view) {
+            view = iExt.View.ixGetView(view);
+            if (me.rendered) {
+                me.removeAll();
+                me.add(view);
+            } else {
+                me.items = [];
+                me.items.push(view);
+            }
+        }
+        return view;
+    },
+
+    /**
      * TagSearch 同步删除条件
      * 删除搜索条件
      * @param {Object} filters 搜索条件
      */
     ixRemoveFilter: function (filter) {
-        var me = this;
-        if (me.__ixCurrentView) {
-            return me.__ixCurrentView.ixRemoveFilter(filter);
+        var me = this,
+            view = me.ixGetCurrentView();
+        if (view) {
+            return view.ixRemoveFilter(filter);
         }
     },
 
@@ -43,16 +62,17 @@ Ext.define('iExt.app.view.container.Search', {
     },
 
     /**
-     * 设置当前视图
+     * 当前视图变更模板方法
      */
-    ixSetView: function () {
+    ixOnViewChanged: function (view) {
         var me = this;
-        if (me.__ixCurrentView) {
-            if (me.__ixCurrentView.ixIsFilterView !== true) {
+        if (view) {
+            if (view.ixIsFilterView !== true) {
                 Ext.raise('指定的视图不是搜索视图！');
             }
-            me.__ixCurrentView.on('ixvaliditychange', me._ixOnIxValidityChange, me);
+            view.on('ixvaliditychange', me._ixOnIxValidityChange, me);
         }
+        me.callParent(arguments);
     },
 
     privates: {
@@ -95,7 +115,7 @@ Ext.define('iExt.app.view.container.Search', {
             }];
         },
 
-        _ixOnIxValidityChange: function (item, valid) {
+        _ixOnIxValidityChange: function (form, valid) {
             var me = this,
                 enable = valid,
                 refs = me.getReferences();
@@ -121,8 +141,11 @@ Ext.define('iExt.app.view.container.Search', {
          * @param {Object} eOpts 事件选项
          */
         _ixOnClear: function (item, e, eOpts) {
-            var me = this;
-            me.__ixCurrentView.ixClear();
+            var me = this,
+                view = me.ixGetCurrentView();
+            if (view) {
+                view.ixClear();
+            }
         },
 
         /**
@@ -133,9 +156,10 @@ Ext.define('iExt.app.view.container.Search', {
          */
         _ixOnOk: function (item, e, eOpts) {
             var me = this,
-                filters = null;
-            if (me.__ixCurrentView) {
-                filters = me.__ixCurrentView.ixGetFilters();
+                filters = null,
+                view = me.ixGetCurrentView();
+            if (view) {
+                filters = view.ixGetFilters();
             }
             me.fireEvent('ixclose', me, filters);
         }

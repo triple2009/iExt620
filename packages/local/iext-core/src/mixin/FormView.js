@@ -9,7 +9,7 @@ Ext.define('iExt.mixin.FormView', {
     mixinConfig: {
         id: 'iext-view-form',
         on: {
-            afterRender: 'ixOnAfterRender'
+            afterRender: '_ixOnAfterRender'
         }
     },
 
@@ -49,6 +49,14 @@ Ext.define('iExt.mixin.FormView', {
         }
         return scale;
     },
+
+    /**
+     * 合法性变更事件。
+     * @memberOf iExt.mixin.FormView#
+     * @event ixvaliditychange
+     * @param {iExt.mixin.FormView} this iExt.mixin.FormView 控件。
+     * @param {iExt.mixin.FormView} this iExt.mixin.FormView 控件。
+     */
 
     /**
      * 取消事件。
@@ -98,15 +106,12 @@ Ext.define('iExt.mixin.FormView', {
         /**
          * 触发数据验证事件。
          */
-        _ixOnValidityChange: function (item, valid) {
+        _ixOnValidityChange: function (form, valid) {
             if (this.hasListeners.ixvaliditychange) {
                 this.fireEvent('ixvaliditychange', this, valid);
             }
         },
 
-        /**
-         * 添加事件监听。
-         */
         _ixOnAfterRender: function () {
             var me = this;
             var valid = me.ixIsValid();

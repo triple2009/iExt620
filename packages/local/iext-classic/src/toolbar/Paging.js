@@ -13,7 +13,7 @@ Ext.define('iExt.toolbar.Paging', {
 
     cls: 'ix-page-tbr',
     dock: 'bottom',
-    displayInfo: false,
+    displayInfo: true,
 
     defaults: {
         tooltipType: 'title'

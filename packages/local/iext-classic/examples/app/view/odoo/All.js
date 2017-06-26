@@ -68,13 +68,25 @@ Ext.define('app.view.odoo.All', {
         text: '操作',
         menuAlign: 'tc-bc',
         menu: {
-            xtype: 'menu',
+            xtype: 'ixactmenu',
             shadow: false,
             items: [{
+                ixAlign: {
+                    type: 'list',
+                    ixMode: false
+                },
                 text: '启用'
             }, {
+                ixAlign: {
+                    type: 'list',
+                    ixMode: false
+                },
                 text: '停用'
             }, {
+                ixAlign: {
+                    type: 'list',
+                    ixMode: false
+                },
                 text: '审批'
             }]
         }
