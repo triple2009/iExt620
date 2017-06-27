@@ -317,7 +317,7 @@ Ext.define('iExt.app.view.Tab', {
                     closable: false,
                     modal: true,
                     listeners: {
-                        ixwinclose: {
+                        ixclose: {
                             fn: fn,
                             scope: item
                         }
