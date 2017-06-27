@@ -86,7 +86,7 @@ Ext.define('iExt.app.view.container.List', {
                 title: '{title}'
             });
             vm = me.getViewModel();
-            vm.ixSetTitle(title);
+            vm.set('ixvc.title', title);
         }
         me.callParent();
     },

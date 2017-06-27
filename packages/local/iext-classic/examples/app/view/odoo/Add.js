@@ -42,14 +42,9 @@ Ext.define('app.view.odoo.Add', {
         text: '取消',
         iconCls: 'x-fa fa-close',
         listeners: {
-            click: function () {
-                Ext.Msg.confirm('系统更新', '系统存在新的版本，是否重新加载？',
-                    function (choice) {
-                        if (choice === 'yes') {
-
-                        }
-                    }
-                );
+            click: function (item, e, eOpts) {
+                var panel = item.up('panel');
+                panel.close();
             }
         }
     }, '->', {

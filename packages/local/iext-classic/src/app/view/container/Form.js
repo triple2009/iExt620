@@ -21,10 +21,21 @@ Ext.define('iExt.app.view.container.Form', {
          * 表单视图。
          */
         ixView: null,
+
         /**
          * 操作组件集合。
          */
-        ixActionItems: []
+        ixActionItems: [],
+
+        /**
+         * 返回的数据。
+         */
+        ixReturn: null,
+
+        /**
+         * 是否检查脏数据。
+         */
+        ixDirtyCheck: true
     },
 
     initComponent: function () {
@@ -35,8 +46,9 @@ Ext.define('iExt.app.view.container.Form', {
                 title: '{title}'
             });
             vm = me.getViewModel();
-            vm.ixSetTitle(title);
+            vm.set('ixvc.title', title);
         }
+        me.on('beforeclose', me._ixOnBeforeClose, me);
         me.callParent();
     },
 
@@ -83,6 +95,55 @@ Ext.define('iExt.app.view.container.Form', {
             }
         }
         me.callParent(arguments);
+    },
+
+    privates: {
+
+        _ixOnClose: function () {
+            var me = this;
+            if (me.hasListeners.ixclose) {
+                me.fireEvent('ixclose', me, Ext.clone(me.getIxReturn()));
+            }
+        },
+
+        _ixOnBeforeClose: function () {
+            var me = this;
+            var view = me.ixGetCurrentView();
+            if (!view) {
+                return true;
+            }
+
+            // 确认后或者忽略检测时直接关闭
+            if (me.getIxDirtyCheck() === false || me._ixConfirmed === true) {
+                me._ixOnClose();
+                return true;
+            }
+
+            if (me._ixConfirmed !== true && view.ixIsDirty() === true) {
+                iExt.Msg.ixConfirm('存在未保存的信息，是否退出？', me._ixConfirm, me);
+                return false;
+            } else {
+                // 未存在脏数据时也需要触发关闭事件
+                me._ixOnClose();
+                return true;
+            }
+        },
+
+        /**
+         * 确认关闭处理。
+         * @memberOf iExt.app.view.container.Form#
+         * @private
+         * @param {String} btn 按钮标识。
+         */
+        _ixConfirm: function (btn) {
+            var me = this;
+            if (btn === 'yes') {
+                me._ixConfirmed = true;
+                me._ixOnClose();
+                me[me.closeAction]();
+            }
+        }
+
     }
 
 });

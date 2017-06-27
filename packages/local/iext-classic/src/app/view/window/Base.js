@@ -56,7 +56,7 @@ Ext.define('iExt.app.view.window.Base', {
         /**
          * 绑定标题 title。
          */
-        title: '{title}'
+        title: '{ixvc.title}'
     },
 
     /**
@@ -78,7 +78,16 @@ Ext.define('iExt.app.view.window.Base', {
     },
 
     initComponent: function () {
-        var me = this;
+        var me = this,
+            title = me.getTitle();
+
+        if (title) {
+            me.setBind({
+                title: '{ixvc.title}'
+            });
+            vm = me.getViewModel();
+            vm.set('ixvc.title', title);
+        }
         // 设置工具栏
         me.ixSetToolbar();
         // 监听事件处理
@@ -86,6 +95,11 @@ Ext.define('iExt.app.view.window.Base', {
         me.on('add', me.ixOnAdd, me);
         me.on('show', me.ixOnShow, me);
         me.on('beforeclose', me.ixOnBeforeClose, me);
+
+        // <debug>
+        iExt._$views[me.getId()] = Ext.now();
+        // </debug>
+
         me.callParent(arguments);
     },
 
@@ -127,7 +141,7 @@ Ext.define('iExt.app.view.window.Base', {
             var me = this,
                 title = component.getTitle();
             var vm = this.getViewModel();
-            vm.ixSetTitle(title);
+            vm.set('ixvc.title', title);
             me._ixCurrentView = component;
             me.ixOnViewChanged(component);
         }
@@ -155,8 +169,8 @@ Ext.define('iExt.app.view.window.Base', {
      */
     ixOnClose: function () {
         var me = this;
-        if (me.hasListeners.ixwinclose) {
-            me.fireEvent('ixwinclose', me, Ext.clone(me.getIxReturn()));
+        if (me.hasListeners.ixclose) {
+            me.fireEvent('ixclose', me, Ext.clone(me.getIxReturn()));
         }
     },
 
@@ -166,6 +180,9 @@ Ext.define('iExt.app.view.window.Base', {
     onDestroy: function () {
         this.callParent();
         Ext.destroyMembers(this, '_ixCurrentView');
+        // <debug>
+        delete iExt._$views[this.getId()];
+        // </debug>
     },
 
     /**

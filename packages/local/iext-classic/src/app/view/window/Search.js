@@ -9,7 +9,7 @@ Ext.define('iExt.app.view.window.Search', {
 
     maximizable: false,
     minimizable: false,
-    bodyPadding: '0 5 0 5',
+    closeAction: 'hide',
 
     /**
      * 缺省标题

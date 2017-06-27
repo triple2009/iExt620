@@ -18,8 +18,10 @@ Ext.define('iExt.form.Panel', {
     maxWidth: 860,
     minHeight: 400,
     trackResetOnLoad: true,
-    bodyPadding: 16,
+    bodyPadding: '16 5 16 5',
     layout: 'column',
+    scrollable: 'y',
+
     defaults: {
         columnWidth: 0.5,
         labelAlign: 'left',
@@ -50,11 +52,12 @@ Ext.define('iExt.form.Panel', {
      * 获取是否存在“脏数据”
      */
     ixIsDirty: function () {
+        /*
         var record = this.ixGetFormData();
         if (record) {
             return record.dirty;
-        }
-        return false;
+        }*/
+        return true;
     },
 
     /**

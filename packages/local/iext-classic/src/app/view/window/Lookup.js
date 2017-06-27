@@ -9,6 +9,7 @@ Ext.define('iExt.app.view.window.Lookup', {
 
     maximizable: true,
     minimizable: false,
+    closeAction: 'hide',
     bodyPadding: 0,
 
     /**

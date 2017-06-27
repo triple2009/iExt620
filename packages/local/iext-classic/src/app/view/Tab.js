@@ -308,13 +308,13 @@ Ext.define('iExt.app.view.Tab', {
                     itemId = item.getId(),
                     options = options || {},
                     scale = options.scale || 'normal',
-                    formType = options.formType || 'search',
-                    xtype = 'ix' + formType.toLowerCase() + 'win';
+                    formType = options.formType || 'search';
+                var cachable = me._ixFormWinTypes[formType].cachable,
+                    xtype = me._ixFormWinTypes[formType].xtype;
                 var fn = options.fn || Ext.emptyFn;
                 var winConfig = {
                     xtype: xtype,
                     closable: false,
-                    closeAction: 'hide',
                     modal: true,
                     listeners: {
                         ixwinclose: {
@@ -334,9 +334,35 @@ Ext.define('iExt.app.view.Tab', {
                 }
 
                 win = Ext.create(winConfig);
-                item._$ixViewId = win.getId();
+                // 是否缓存打开的窗体
+                if (cachable === true) {
+                    item._$ixViewId = win.getId();
+                }
             }
             win.show();
+        },
+
+        _ixFormWinTypes: {
+            'search': {
+                xtype: 'ixsearchwin',
+                cachable: true
+            },
+            'lookup': {
+                xtype: 'ixlookupwin',
+                cachable: true
+            },
+            'add': {
+                xtype: 'ixformwin',
+                cachable: false
+            },
+            'edit': {
+                xtype: 'ixformwin',
+                cachable: false
+            },
+            'detail': {
+                xtype: 'ixformwin',
+                cachable: false
+            }
         }
 
     }

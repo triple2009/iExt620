@@ -80,6 +80,11 @@ Ext.define('iExt.app.view.container.Base', {
         // 需要监听工具栏的添加和删除事件处理
         me.on('dockedadd', me.ixOnDockedAdd, me);
         me.on('dockedremove', me.ixOnDockedRemove, me);
+
+        // <debug>
+        iExt._$views[me.getId()] = Ext.now();
+        // </debug>
+
         me.callParent();
     },
 
@@ -121,7 +126,7 @@ Ext.define('iExt.app.view.container.Base', {
             var me = this,
                 title = component.getTitle();
             var vm = this.getViewModel();
-            vm.ixSetSubTitle(title);
+            vm.set('ixvc.subTitle', title);
             vm.set('ixvc.viewRef', component.getReference());
             vm.set('ixvc.viewId', component.getId());
             me._ixCurrentView = component;
@@ -159,6 +164,9 @@ Ext.define('iExt.app.view.container.Base', {
     onDestroy: function () {
         this.callParent();
         Ext.destroyMembers(this, '_ixActionBarIds', '_ixCurrentView');
+        // <debug>
+        delete iExt._$views[this.getId()];
+        // </debug>
     },
 
     privates: {

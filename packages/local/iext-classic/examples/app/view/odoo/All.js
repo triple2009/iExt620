@@ -29,6 +29,23 @@ Ext.define('app.view.odoo.All', {
         },
         ixViewName: 'app-user-add'
     }, {
+        text: '新建WIN',
+        iconCls: 'x-fa fa-plus',
+        ixAuth: 'add',
+        ixAlign: {
+            type: 'list',
+            ixMode: null
+        },
+        listeners: {
+            click: function (item, e, eOpts) {
+                //var data = item.getIxAlign().ixGetAlignData();
+                item.fireEvent('ixopenview', item, 'app-odoo-add2', {
+                    target: iExt.action.ViewTarget.IXWIN,
+                    formType: 'add'
+                });
+            }
+        }
+    }, {
         text: '详细',
         iconCls: 'x-fa fa-file-o',
         ixAuth: {
