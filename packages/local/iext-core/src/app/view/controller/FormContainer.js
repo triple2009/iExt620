@@ -62,6 +62,9 @@ Ext.define('iExt.app.view.controller.FormContainer', {
                 var valid = formView.ixIsValid();
                 me.ixOnValidityChange(formView, valid);
             }
+
+            // 加载数据
+            me.ixLoadRecord(formView);
         }
     }
 

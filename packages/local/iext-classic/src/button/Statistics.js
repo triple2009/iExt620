@@ -17,6 +17,9 @@ Ext.define('iExt.button.Statistics', {
         value: null
     },
 
+    // 使用cls和userCls，class添加的位置不同
+    // cls：添加在 x-btn 后面
+    // userCls：添加在 x-btn-default-toolbar-small 前面
     cls: 'ix-stat-btn',
     textAlign: 'left',
 

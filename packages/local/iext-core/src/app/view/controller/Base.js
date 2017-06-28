@@ -17,47 +17,12 @@ Ext.define('iExt.app.view.controller.Base', {
     },
 
     /**
-     * 缺省的标识参数名称。
-     */
-    ixIdProperty: 'ixId',
-
-    /**
      * 当前控制器对应视图的用户操作组件对齐组件交叉引用集合。
      * 系统动态检索并设置。
      * {操作组件id、对齐的组件id}。
      * [{itemId: '', targetId:''}]
      */
     _$ixActionTargetRefX: null,
-
-    /**
-     * 获取标识参数值的快捷方式。
-     */
-    ixGetId: function () {
-        return this.ixGetParamValue(this.ixIdProperty);
-    },
-
-    /**
-     * 获取参数对象。
-     */
-    ixGetParams: function () {
-        var view = this.getView();
-        if (view.ixIsView === true) {
-            return view.getIxParams();
-        }
-        return undefined;
-    },
-
-    /**
-     * 获取参数值。
-     * @param {Stirng} paramName 参数名称。
-     */
-    ixGetParamValue: function (paramName) {
-        var params = this.getIxParams();
-        if (params) {
-            return params[paramName];
-        }
-        return undefined;
-    },
 
     /**
      * 用户授权处理。

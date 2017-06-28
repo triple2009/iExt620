@@ -2,6 +2,8 @@
  * @class iExt.app.view.container.Base
  * @extends {Ext.panel.Panel} 
  * @classdesc 视图容器。
+ * 该容器的作用是根据domain的配置信息，
+ * 自动生成相关的操作组件，保证领域功能操作的一致性。
  */
 Ext.define('iExt.app.view.container.Base', {
     extend: 'Ext.panel.Panel',
@@ -9,9 +11,14 @@ Ext.define('iExt.app.view.container.Base', {
 
     requires: [],
 
+    mixins: [
+        'iExt.mixin.View'
+    ],
+
     border: false,
     layout: 'fit',
     referenceHolder: true,
+    
     /**
      * 视图数据模型
      * 缺省值使用 {iExt.app.container.ViewModel}
@@ -75,6 +82,7 @@ Ext.define('iExt.app.view.container.Base', {
         // 设置工具栏
         me.ixSetToolbar();
         // 监听添加子组件事件处理
+        me.on('beforeadd', me.ixOnBeforeAdd, me);
         me.on('add', me.ixOnAdd, me);
         // 为了自动处理工具栏组件的可用性操作
         // 需要监听工具栏的添加和删除事件处理
@@ -116,6 +124,10 @@ Ext.define('iExt.app.view.container.Base', {
         if (me.hasListeners.ixviewchanged) {
             me.fireEvent('ixviewchanged', me, view);
         }
+    },
+
+    ixOnBeforeAdd: function (panel , component , index , eOpts) {
+
     },
 
     /**

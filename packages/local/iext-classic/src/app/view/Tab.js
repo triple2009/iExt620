@@ -150,7 +150,7 @@ Ext.define('iExt.app.view.Tab', {
                 me._ixWin(item, view, options);
                 break;
             case iExt.action.ViewTarget.SELF:
-                //me._ixSelf(item, view, options);
+                me._ixSelf(item, view, options);
                 break;
             default:
                 break;
@@ -280,6 +280,21 @@ Ext.define('iExt.app.view.Tab', {
                 main = refs.ixAppMain,
                 view = me._ixGetView(view, options.viewConfig);
             if (view) {
+                main.ixAddView(view);
+            }
+        },
+
+        /**
+         * 在当前容器中打开视图
+         */
+        _ixSelf: function (item, view, options) {
+            var me = this,
+                refs = me.getReferences(),
+                main = refs.ixAppMain,
+                view = me._ixGetView(view, options.viewConfig);
+            if (view) {
+                var self = main.getActiveTab();
+                self.close();
                 main.ixAddView(view);
             }
         },

@@ -80,8 +80,8 @@ Ext.define('iExt.app.view.window.Form', {
             var me = this;
             return ['->', {
                 xtype: 'button',
-                text: '确定',
-                iconCls: 'x-fa fa-filter',
+                text: '保存',
+                iconCls: 'x-fa fa-save',
                 reference: '_btnOk',
                 listeners: {
                     click: {

@@ -47,7 +47,7 @@ Ext.define('iExt.tab.Panel', {
      * @param {Object} config 标签配置信息。
      * @return {Ext.Component} 新建的或已经存在的视图对象。
      */
-    ixAddView: function (view, config) {
+    ixAddView: function (view, tabConfig) {
         //<debug>
         if (view.isComponent !== true) {
             Ext.raise('指定的参数 [view] 不是有效的组件！');
@@ -60,7 +60,9 @@ Ext.define('iExt.tab.Panel', {
 
         hash = view.ixHashCode;
         if (!hash) {
-            hash = iExt.Util.ixGetHashCode(view.$className);
+            var params = view.ixParams;
+            // 使用类名称和参数计算hash值
+            hash = iExt.Util.ixGetHashCode(view.$className, params);
         }
         Ext.apply(view, {
             ixHashCode: hash
@@ -70,12 +72,12 @@ Ext.define('iExt.tab.Panel', {
 
         Ext.suspendLayouts();
         if (!item) {
-            config = Ext.clone(config) || {};
-            Ext.applyIf(config, {
+            tabConfig = Ext.clone(tabConfig) || {};
+            Ext.applyIf(tabConfig, {
                 title: view.title,
                 closable: true
             });
-            Ext.apply(view, config);
+            Ext.apply(view, tabConfig);
             item = me.add(view);
         }
         layout.setActiveItem(item);

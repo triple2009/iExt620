@@ -58,10 +58,14 @@ Ext.define('app.view.odoo.All', {
         listeners: {
             click: function (item, e, eOpts) {
                 var data = item.getIxAlign().ixGetAlignData();
-                iExt.View.ixOpenView(item, {
-                    xtype: 'ixqvform',
-                    ixRecord: data[0]
-                }, 'quick');
+                item.fireEvent('ixopenview', item, 'app-odoo-detail', {
+                    formType: 'detail',
+                    viewConfig: {
+                        ixParams: {
+                            ixRecord: data[0]
+                        }
+                    }
+                });
             }
         }
     }, {
@@ -81,7 +85,7 @@ Ext.define('app.view.odoo.All', {
                 iExt.Toast.ixInfo(data.length);
             }
         }
-    }, '->', {
+    }, {
         text: '操作',
         menuAlign: 'tc-bc',
         menu: {
@@ -107,12 +111,12 @@ Ext.define('app.view.odoo.All', {
                 text: '审批'
             }]
         }
-    }, '->'],
+    }],
 
     ixSearchItem: {
         xtype: 'ixtagsearch',
         ixView: 'app-user-search',
-        flex: 3,
+        flex: 1,
         store: {
             type: 'ixenumsstore',
             ixEnumType: 'iExt.meta.Types'

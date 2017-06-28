@@ -97,6 +97,12 @@ Ext.define('iExt.app.view.container.Form', {
         me.callParent(arguments);
     },
 
+    ixOnBeforeAdd: function (panel, component, index, eOpts) {
+        var me = this;
+        var params = me.getIxParams();
+        component.setIxParams(params);
+    },
+
     privates: {
 
         _ixOnClose: function () {

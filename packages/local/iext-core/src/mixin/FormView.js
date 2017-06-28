@@ -25,7 +25,12 @@ Ext.define('iExt.mixin.FormView', {
          * 表单规格。
          * {iExt.app.view.Scales}
          */
-        ixScale: 'normal'
+        ixScale: 'normal',
+        /**
+         * 标题字段名称。
+         * {iExt.app.view.Scales}
+         */
+        ixTitleField: ''
     },
 
     /**

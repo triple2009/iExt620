@@ -12,7 +12,7 @@ Ext.define('iExt.toolbar.FormHeader', {
     cls: 'ix-form-header',
     
     defaults: {
-        scale: 'medium'
+        scale: 'small'
     }
 
 });
