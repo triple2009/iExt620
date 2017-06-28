@@ -11,6 +11,9 @@ Ext.define('app.view.odoo.All', {
         type: 'ixlistcontainer'
     },
 
+    ixDomain: 'app.domain.User',
+
+    /*
     ixActionItems: [{
         text: '新建',
         iconCls: 'x-fa fa-plus',
@@ -112,6 +115,7 @@ Ext.define('app.view.odoo.All', {
             }]
         }
     }],
+    */
 
     ixSearchItem: {
         xtype: 'ixtagsearch',
@@ -123,11 +127,7 @@ Ext.define('app.view.odoo.All', {
         }
     },
 
-    initComponent: function () {
-        var me = this;
-        me.callParent();
-    },
-
+    /*
     ixView: [{
         ixListType: 'list',
         xtype: 'app-odoo-list'
@@ -137,6 +137,12 @@ Ext.define('app.view.odoo.All', {
     }, {
         ixListType: 'graph',
         xtype: 'app-odoo-view'
-    }]
+    }],
+    */
+
+    initComponent: function () {
+        var me = this;
+        me.callParent();
+    }
 
 });

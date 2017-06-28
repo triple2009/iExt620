@@ -52,7 +52,7 @@ Ext.define('iExt.app.view.container.List', {
         /**
          * 操作组件集合。
          */
-        ixActionItems: [],
+        ixActionItems: null,
         /**
          * 搜索组件。
          */
@@ -72,8 +72,13 @@ Ext.define('iExt.app.view.container.List', {
         if (Ext.isString(domain)) {
             domain = Ext.create(domain);
         }
-        if (domain && me.getIxView() === null) {
-            me.setIxView(domain.ixListViews);
+        if (domain) {
+            if (me.getIxView() === null) {
+                me.setIxView(domain.ixListViews);
+            }
+            if (me.getIxActionItems() === null) {
+                me.setIxActionItems(iExt.util.Domain.ixGetListActionItems(domain));
+            }
         }
         return domain;
     },

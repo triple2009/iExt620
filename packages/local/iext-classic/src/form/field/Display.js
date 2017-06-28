@@ -46,9 +46,9 @@ Ext.define('iExt.form.field.Display', {
     /**
      * 设置快速查看
      */
-    applyValue: function (value) {
-        value = value || '&#160;';
-        return value;
+    setValue: function (value) {
+        value = value || '&nbsp;';
+        this.callParent(arguments);
     }
 
 });

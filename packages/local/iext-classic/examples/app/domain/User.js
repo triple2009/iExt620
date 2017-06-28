@@ -9,7 +9,8 @@
             ixName: '测试'
         },
         add: {
-            ixName: '新增'
+            ixName: '新增',
+            ixView: 'app-odoo-add'
         },
         active: {
             type: 'api',
@@ -31,23 +32,13 @@
 
     ixListViews: [{
         ixListType: 'list',
-        xtype: 'app-user-list'
+        xtype: 'app-odoo-list'
     }, {
         ixListType: 'kanban',
-        xtype: 'panel',
-        title: 'kanban'
+        xtype: 'app-odoo-kanban'
     }, {
         ixListType: 'graph',
-        xtype: 'panel',
-        title: 'graph'
-    }, {
-        ixListType: 'calendar',
-        xtype: 'panel',
-        title: 'calendar'
-    }, {
-        ixListType: 'report',
-        xtype: 'panel',
-        title: 'report'
+        xtype: 'app-odoo-view'
     }]
 
 });

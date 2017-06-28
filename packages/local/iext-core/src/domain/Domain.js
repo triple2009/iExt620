@@ -53,7 +53,7 @@ Ext.define('iExt.domain.Domain', {
         },
         edit: {
             type: 'view',
-            ixName: 'edit',
+            ixCode: 'edit',
             ixName: '修改',
             ixIconCls: 'x-fa fa-edit'
         },

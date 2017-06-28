@@ -132,7 +132,6 @@ Ext.define('iExt.app.view.controller.Form', {
                 callback: function (record, operation, success) {
                     mask.destroy();
                     if (success) {
-                        vm.set(dataName, record);
                         me._ixSetViewModelData(view, vm, dataName, record);
                     } else {
                         iExt.Msg.ixInfo('未找到指定的数据！',
@@ -144,6 +143,14 @@ Ext.define('iExt.app.view.controller.Form', {
                     }
                 }
             });
+        } else {
+            /*
+            if (!dataName) {
+                Ext.raise('未指定视图数据属性名称！');
+                return;
+            }
+            */
+            vm.set('user', {});
         }
 
     },

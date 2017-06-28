@@ -36,10 +36,10 @@ Ext.define('iExt.toolbar.Action', {
      */
     ixGetActionIds: function () {
         var me = this;
-        if (!me.__ixIds) {
+        if (!me._ixIds) {
             me._ixGetActionIds(this.items);
         }
-        return me.__ixIds;
+        return me._ixIds;
     },
 
     /**
@@ -58,9 +58,9 @@ Ext.define('iExt.toolbar.Action', {
             viewKey = view.getReference() || viewId;
 
         // 检查是否存在缓存的id集合，如果存在直接返回
-        me.__ixAlignIds = me.__ixAlignIds || {};
-        if (me.__ixAlignIds[viewKey]) {
-            return me.__ixAlignIds[viewKey]
+        me._ixAlignIds = me._ixAlignIds || {};
+        if (me._ixAlignIds[viewKey]) {
+            return me._ixAlignIds[viewKey]
         }
 
         // 获取对齐的操作组件标识集合
@@ -101,7 +101,7 @@ Ext.define('iExt.toolbar.Action', {
         });
 
         // 缓存标识集合并返回
-        me.__ixAlignIds[viewKey] = alignIds;
+        me._ixAlignIds[viewKey] = alignIds;
         return alignIds;
     },
 
@@ -142,7 +142,7 @@ Ext.define('iExt.toolbar.Action', {
      * 销毁处理，清除缓存的视图
      */
     onDestroy: function () {
-        Ext.destroyMembers(this, '__ixIds', '__ixAlignIds');
+        Ext.destroyMembers(this, '_ixIds', '_ixAlignIds');
         this.callParent();
     },
 
@@ -170,8 +170,8 @@ Ext.define('iExt.toolbar.Action', {
          */
         _ixOnAdd: function (tbr, component, index, eOpts) {
             // 有新的组件添加后清除缓存的标识。
-            this.__ixIds = null;
-            this.__ixAlignIds = null;
+            this._ixIds = null;
+            this._ixAlignIds = null;
         },
 
         /**
@@ -186,8 +186,8 @@ Ext.define('iExt.toolbar.Action', {
                 if (item.ixIsAction !== true) {
                     return;
                 }
-                me.__ixIds = me.__ixIds || [];
-                me.__ixIds.push(item.getId());
+                me._ixIds = me._ixIds || [];
+                me._ixIds.push(item.getId());
                 if (item.menu) {
                     me._ixGetActionIds(item.menu.items);
                 }

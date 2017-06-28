@@ -56,8 +56,10 @@ Ext.define('iExt.form.Panel', {
         var record = this.ixGetFormData();
         if (record) {
             return record.dirty;
-        }*/
-        return true;
+        }
+        return false;
+        */
+        return this.getForm().isDirty();
     },
 
     /**

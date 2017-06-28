@@ -110,7 +110,7 @@ Ext.define('app.view.odoo.Detail', {
         },
 
         items: [{
-            ixScale: 'large',
+            ixScale: 'medium',
             fieldLabel: '代码',
             bind: '{user.code}',
             value: 'code',
